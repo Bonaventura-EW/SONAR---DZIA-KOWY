@@ -42,12 +42,19 @@ jobs:
           cd src
           python map_generator.py || echo "::warning::Map generator failed but continuing..."
 
+      - name: Generate API
+        if: always()
+        continue-on-error: true
+        run: |
+          cd src
+          python api_generator.py || echo "::warning::API generator failed but continuing..."
+
       - name: Commit and push changes
         if: always()
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git add data/ docs/data.json || true
+          git add data/ docs/data.json docs/api/ || true
 
           if git diff --staged --quiet; then
             echo "No changes to commit"

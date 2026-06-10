@@ -186,23 +186,51 @@ class SonarDzialkowy:
             except (ValueError, KeyError):
                 offer['days_active'] = 0
 
+    @staticmethod
+    def _distance_km(c1: Dict, c2: Dict) -> float:
+        """Przybliżona odległość (równoodległościowa) — wystarcza do dedup."""
+        import math
+        lat1, lon1 = math.radians(c1['lat']), math.radians(c1['lon'])
+        lat2, lon2 = math.radians(c2['lat']), math.radians(c2['lon'])
+        x = (lon2 - lon1) * math.cos((lat1 + lat2) / 2)
+        return math.hypot(x, lat2 - lat1) * 6371
+
     def _tag_cross_portal_duplicates(self):
-        """Ta sama działka wystawiona na OLX i Otodom: identyczna cena
-        i powierzchnia (±1%) → linkujemy oferty polem `also_at`."""
+        """Ta sama działka wystawiona na OLX i Otodom: identyczna cena,
+        powierzchnia ±1% i (gdy oba mają GPS) odległość <5 km.
+
+        Oferta OLX dostaje `duplicate_of` wskazujące na ID oferty Otodom —
+        map_generator chowa ją z mapy (Otodom ma dokładniejszą lokalizację),
+        a oba ogłoszenia są dostępne przez `also_at` w popupie.
+        """
         active = [o for o in self.database['offers'] if o.get('active')]
         olx = [o for o in active if o['source'] == 'olx' and o.get('area_m2')]
         otodom = [o for o in active if o['source'] == 'otodom' and o.get('area_m2')]
         tagged = 0
+        paired_otodom = set()  # jedna oferta Otodom = max jeden duplikat OLX
         for a in olx:
+            a.pop('duplicate_of', None)  # przelicz od zera przy każdym skanie
             for b in otodom:
-                if a['price']['current'] == b['price']['current'] and \
-                   abs(a['area_m2'] - b['area_m2']) <= 0.01 * max(a['area_m2'], b['area_m2']):
-                    a['also_at'] = b['url']
-                    b['also_at'] = a['url']
-                    tagged += 1
-                    break
+                if b['id'] in paired_otodom:
+                    continue
+                if a['price']['current'] != b['price']['current']:
+                    continue
+                if abs(a['area_m2'] - b['area_m2']) > 0.01 * max(a['area_m2'], b['area_m2']):
+                    continue
+                ca = (a.get('location') or {}).get('coords')
+                cb = (b.get('location') or {}).get('coords')
+                # OLX rozmywa pinezkę ~1 km; >5 km to inna działka mimo zgodnej ceny
+                if ca and cb and self._distance_km(ca, cb) > 5:
+                    continue
+                a['also_at'] = b['url']
+                a['duplicate_of'] = b['id']
+                b['also_at'] = a['url']
+                paired_otodom.add(b['id'])
+                tagged += 1
+                break
         if tagged:
-            print(f"   🔗 Powiązano {tagged} par ofert OLX↔Otodom (ta sama działka)")
+            print(f"   🔗 Powiązano {tagged} par ofert OLX↔Otodom (ta sama działka) "
+                  f"— na mapie zostaje pinezka Otodom")
 
     def _cleanup_old(self, max_age_days: int = 548):
         cutoff = datetime.now(self.tz) - timedelta(days=max_age_days)

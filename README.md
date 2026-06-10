@@ -31,6 +31,19 @@ więc nie ma parsowania HTML kart ani geokodowania adresów.
 - wykrywanie tej samej działki na obu portalach (ta sama cena + powierzchnia → link „Druga oferta")
 - nieaktywne oferty zostają w bazie jako historia
 
+## API (statyczne, GitHub Pages)
+
+| Endpoint | Zawartość |
+|----------|-----------|
+| `api/status.json` | statystyki: liczba ofert, mediana ceny/m², podział wg źródła i typu |
+| `api/offers.json` | wszystkie aktywne oferty (po deduplikacji OLX↔Otodom) |
+| `api/history.json` | historia ostatnich 50 skanów |
+| `api/health.json` | healthcheck (świeżość ostatniego skanu) |
+
+Deduplikacja: ta sama działka wystawiona na obu portalach (identyczna cena,
+powierzchnia ±1%, odległość <5 km) liczona jest raz — zostaje wpis z Otodom
+(dokładniejsza lokalizacja) z linkiem `also_at` do ogłoszenia OLX.
+
 ## Uruchomienie lokalne
 
 ```bash
@@ -39,6 +52,7 @@ pip install -r requirements.txt
 cd src
 python main.py            # pełny skan (~1,5 min)
 python map_generator.py   # generuje docs/data.json
+python api_generator.py   # generuje docs/api/*.json
 
 cd ../docs && python -m http.server 8000   # podgląd: http://localhost:8000
 ```

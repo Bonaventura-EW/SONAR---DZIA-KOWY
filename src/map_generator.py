@@ -51,7 +51,17 @@ def generate():
     with open(paths.OFFERS_JSON, 'r', encoding='utf-8') as f:
         db = json.load(f)
 
-    offers = [build_map_offer(o) for o in db.get('offers', [])]
+    all_offers = db.get('offers', [])
+    # Deduplikacja OLX↔Otodom: ukrywamy ofertę OLX gdy jej odpowiednik z Otodom
+    # (duplicate_of) jest aktywny — na mapie zostaje jedna pinezka z oboma linkami
+    active_ids = {o['id'] for o in all_offers if o.get('active')}
+    deduped = [o for o in all_offers
+               if not (o.get('duplicate_of') and o['duplicate_of'] in active_ids)]
+    hidden = len(all_offers) - len(deduped)
+    if hidden:
+        print(f"🔗 Ukryto {hidden} duplikatów OLX (ta sama działka na Otodom)")
+
+    offers = [build_map_offer(o) for o in deduped]
     active = [o for o in offers if o['active']]
     per_m2_values = sorted(o['price_per_m2'] for o in active if o['price_per_m2'])
 

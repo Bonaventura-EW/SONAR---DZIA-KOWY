@@ -1,6 +1,6 @@
 {
- "last_scan": "2026-06-10T19:55:43.794461+02:00",
- "next_scan": "2026-06-10T20:00:00+02:00",
+ "last_scan": "2026-06-10T20:06:18.327197+02:00",
+ "next_scan": "2026-06-11T08:00:00+02:00",
  "offers": [
   {
    "id": "olx:CID3-ID17aH9w",
@@ -31,10 +31,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539288+02:00",
-   "last_seen": "2026-06-10T19:56:59.539288+02:00",
+   "last_seen": "2026-06-10T20:06:31.454502+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-hale-produkcyjna-magazyn-z-mediami-2-1-ha-lub-5x4000-m2-ID4xPeE"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-hale-produkcyjna-magazyn-z-mediami-2-1-ha-lub-5x4000-m2-ID4xPeE",
+   "duplicate_of": "otodom:67167120"
   },
   {
    "id": "olx:CID3-ID1aRoZK",
@@ -65,10 +66,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539407+02:00",
-   "last_seen": "2026-06-10T19:56:59.539407+02:00",
+   "last_seen": "2026-06-10T20:06:31.454568+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-z-wydana-wz-lublin-ul-kreznicka-ID4tkL7"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-z-wydana-wz-lublin-ul-kreznicka-ID4tkL7",
+   "duplicate_of": "otodom:66096657"
   },
   {
    "id": "olx:CID3-ID1aTumd",
@@ -99,10 +101,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539440+02:00",
-   "last_seen": "2026-06-10T19:56:59.539440+02:00",
+   "last_seen": "2026-06-10T20:06:31.454589+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/2-dzialki-budowlane-lublin-h-i-m-sachsow-ID4BAI9"
+   "also_at": "https://www.otodom.pl/pl/oferta/2-dzialki-budowlane-lublin-h-i-m-sachsow-ID4BAI9",
+   "duplicate_of": "otodom:68064601"
   },
   {
    "id": "olx:CID3-ID16Qsn2",
@@ -133,10 +136,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539470+02:00",
-   "last_seen": "2026-06-10T19:56:59.539470+02:00",
+   "last_seen": "2026-06-10T20:06:31.454605+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-lublin-ul-kreznicka-ID4xwiw"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-lublin-ul-kreznicka-ID4xwiw",
+   "duplicate_of": "otodom:67090479"
   },
   {
    "id": "olx:CID3-ID17QimL",
@@ -167,10 +171,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539502+02:00",
-   "last_seen": "2026-06-10T19:56:59.539502+02:00",
+   "last_seen": "2026-06-10T20:06:31.454618+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-1144-m2-okolice-ikei-ID4yz6N"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-1144-m2-okolice-ikei-ID4yz6N",
+   "duplicate_of": "otodom:67343457"
   },
   {
    "id": "olx:CID3-ID19fP9S",
@@ -201,10 +206,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539531+02:00",
-   "last_seen": "2026-06-10T19:56:59.539531+02:00",
+   "last_seen": "2026-06-10T20:06:31.454628+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/super-inwestycja-mozliwosc-platnosci-na-raty-ID4zWCE"
+   "also_at": "https://www.otodom.pl/pl/oferta/super-inwestycja-mozliwosc-platnosci-na-raty-ID4zWCE",
+   "duplicate_of": "otodom:67668328"
   },
   {
    "id": "olx:CID3-ID1aRwIn",
@@ -235,10 +241,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539562+02:00",
-   "last_seen": "2026-06-10T19:56:59.539562+02:00",
+   "last_seen": "2026-06-10T20:06:31.454636+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/atrakcyjna-dzialka-pod-aktywnosc-gospodarcza-ID4qWsW"
+   "also_at": "https://www.otodom.pl/pl/oferta/atrakcyjna-dzialka-pod-aktywnosc-gospodarcza-ID4qWsW",
+   "duplicate_of": "otodom:65522773"
   },
   {
    "id": "olx:CID3-IDNu9Ao",
@@ -269,10 +276,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539600+02:00",
-   "last_seen": "2026-06-10T19:56:59.539600+02:00",
+   "last_seen": "2026-06-10T20:06:31.454654+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-3000-m2-ul-kreznicka-ID4eZZM"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-3000-m2-ul-kreznicka-ID4eZZM",
+   "duplicate_of": "otodom:62680250"
   },
   {
    "id": "olx:CID3-ID1aKPAx",
@@ -303,10 +311,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539638+02:00",
-   "last_seen": "2026-06-10T19:56:59.539638+02:00",
+   "last_seen": "2026-06-10T20:06:31.454663+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-585-m2-szerokie-idealna-pod-dom-ID4A4Vb"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-585-m2-szerokie-idealna-pod-dom-ID4A4Vb",
+   "duplicate_of": "otodom:67704135"
   },
   {
    "id": "olx:CID3-ID13Rs7s",
@@ -337,10 +346,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539668+02:00",
-   "last_seen": "2026-06-10T19:56:59.539668+02:00",
+   "last_seen": "2026-06-10T20:06:31.454674+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialki-pod-zabudowe-jednorodzinna-w-lublinie-ID4r10c"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialki-pod-zabudowe-jednorodzinna-w-lublinie-ID4r10c",
+   "duplicate_of": "otodom:65544056"
   },
   {
    "id": "olx:CID3-ID1aOAxc",
@@ -371,10 +381,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539697+02:00",
-   "last_seen": "2026-06-10T19:56:59.539697+02:00",
+   "last_seen": "2026-06-10T20:06:31.454682+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-515m2-ul-kosynierow-dzielnicaponikwoda-lublin-ID4BwqQ"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-515m2-ul-kosynierow-dzielnicaponikwoda-lublin-ID4BwqQ",
+   "duplicate_of": "otodom:68044308"
   },
   {
    "id": "olx:CID3-ID1aFaEw",
@@ -405,10 +416,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539726+02:00",
-   "last_seen": "2026-06-10T19:56:59.539726+02:00",
+   "last_seen": "2026-06-10T20:06:31.454691+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1425-m-lublin-abramowice-mpzp-ID4BmBP"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1425-m-lublin-abramowice-mpzp-ID4BmBP",
+   "duplicate_of": "otodom:68010393"
   },
   {
    "id": "olx:CID3-ID1aPfvS",
@@ -439,7 +451,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539756+02:00",
-   "last_seen": "2026-06-10T19:56:59.539756+02:00",
+   "last_seen": "2026-06-10T20:06:31.454699+02:00",
    "active": true,
    "days_active": 0
   },
@@ -472,10 +484,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539785+02:00",
-   "last_seen": "2026-06-10T19:56:59.539785+02:00",
+   "last_seen": "2026-06-10T20:06:31.454707+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-26-93-ar-pod-produkcje-uslugi-i-magazyny-ID4yZyo"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-26-93-ar-pod-produkcje-uslugi-i-magazyny-ID4yZyo",
+   "duplicate_of": "otodom:67445112"
   },
   {
    "id": "olx:CID3-ID1aPMhi",
@@ -506,7 +519,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539816+02:00",
-   "last_seen": "2026-06-10T19:56:59.539816+02:00",
+   "last_seen": "2026-06-10T20:06:31.454715+02:00",
    "active": true,
    "days_active": 0
   },
@@ -539,10 +552,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539845+02:00",
-   "last_seen": "2026-06-10T19:56:59.539845+02:00",
+   "last_seen": "2026-06-10T20:06:31.454723+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-w-spokojnej-okolicy-lublin-ul-folwarczn-ID4Afxf"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-w-spokojnej-okolicy-lublin-ul-folwarczn-ID4Afxf",
+   "duplicate_of": "otodom:67744873"
   },
   {
    "id": "olx:CID3-ID1aUkWZ",
@@ -573,10 +587,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539874+02:00",
-   "last_seen": "2026-06-10T19:56:59.539874+02:00",
+   "last_seen": "2026-06-10T20:06:31.454732+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-wielorodzinke-na-ponikwodzie-ID4BCa4"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-wielorodzinke-na-ponikwodzie-ID4BCa4",
+   "duplicate_of": "otodom:68070176"
   },
   {
    "id": "olx:CID3-ID19L0Kq",
@@ -607,10 +622,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539904+02:00",
-   "last_seen": "2026-06-10T19:56:59.539904+02:00",
+   "last_seen": "2026-06-10T20:06:31.454741+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowalne-w-lublinie-ID4Atyp"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowalne-w-lublinie-ID4Atyp",
+   "duplicate_of": "otodom:67798761"
   },
   {
    "id": "olx:CID3-ID178D0H",
@@ -641,10 +657,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539933+02:00",
-   "last_seen": "2026-06-10T19:56:59.539933+02:00",
+   "last_seen": "2026-06-10T20:06:31.454749+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-zabudowe-jednorodzinna-lub-uslugowa-ID4xNN8"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-zabudowe-jednorodzinna-lub-uslugowa-ID4xNN8",
+   "duplicate_of": "otodom:67161570"
   },
   {
    "id": "olx:CID3-ID1318wU",
@@ -675,10 +692,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539962+02:00",
-   "last_seen": "2026-06-10T19:56:59.539962+02:00",
+   "last_seen": "2026-06-10T20:06:31.454759+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-blizniaka-w-poblizu-lasu-ID4tt6U"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-blizniaka-w-poblizu-lasu-ID4tt6U",
+   "duplicate_of": "otodom:66128760"
   },
   {
    "id": "olx:CID3-ID1amf9K",
@@ -709,10 +727,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540013+02:00",
-   "last_seen": "2026-06-10T19:56:59.540013+02:00",
+   "last_seen": "2026-06-10T20:06:31.454768+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-25-arow-wszystkie-media-asfaltowy-dojazd-ID4B4Lw"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-25-arow-wszystkie-media-asfaltowy-dojazd-ID4B4Lw",
+   "duplicate_of": "otodom:67941801"
   },
   {
    "id": "olx:CID3-ID183Vxc",
@@ -743,10 +762,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540042+02:00",
-   "last_seen": "2026-06-10T19:56:59.540042+02:00",
+   "last_seen": "2026-06-10T20:06:31.454776+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/najtansza-dzialka-budowlana-w-lublinie-ul-gluska-ID4yMWu"
+   "also_at": "https://www.otodom.pl/pl/oferta/najtansza-dzialka-budowlana-w-lublinie-ul-gluska-ID4yMWu",
+   "duplicate_of": "otodom:67396572"
   },
   {
    "id": "olx:CID3-ID1aeDtD",
@@ -777,7 +797,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540072+02:00",
-   "last_seen": "2026-06-10T19:56:59.540072+02:00",
+   "last_seen": "2026-06-10T20:06:31.454785+02:00",
    "active": true,
    "days_active": 0
   },
@@ -810,7 +830,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540100+02:00",
-   "last_seen": "2026-06-10T19:56:59.540100+02:00",
+   "last_seen": "2026-06-10T20:06:31.454793+02:00",
    "active": true,
    "days_active": 0
   },
@@ -843,7 +863,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540129+02:00",
-   "last_seen": "2026-06-10T19:56:59.540129+02:00",
+   "last_seen": "2026-06-10T20:06:31.454801+02:00",
    "active": true,
    "days_active": 0
   },
@@ -876,10 +896,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540158+02:00",
-   "last_seen": "2026-06-10T19:56:59.540158+02:00",
+   "last_seen": "2026-06-10T20:06:31.454809+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/sprzedam-dzialke-budowlana-ul-debowa-lublin-ID4uWdS"
+   "also_at": "https://www.otodom.pl/pl/oferta/sprzedam-dzialke-budowlana-ul-debowa-lublin-ID4uWdS",
+   "duplicate_of": "otodom:66475152"
   },
   {
    "id": "olx:CID3-ID1349Av",
@@ -910,7 +931,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540188+02:00",
-   "last_seen": "2026-06-10T19:56:59.540188+02:00",
+   "last_seen": "2026-06-10T20:06:31.454818+02:00",
    "active": true,
    "days_active": 0
   },
@@ -943,10 +964,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540217+02:00",
-   "last_seen": "2026-06-10T19:56:59.540217+02:00",
+   "last_seen": "2026-06-10T20:06:31.454827+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-inwestycje-5-budynkow-dwulokalowych-ID4BGog"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-inwestycje-5-budynkow-dwulokalowych-ID4BGog",
+   "duplicate_of": "otodom:68086432"
   },
   {
    "id": "olx:CID3-ID161Dc5",
@@ -977,7 +999,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540254+02:00",
-   "last_seen": "2026-06-10T19:56:59.540254+02:00",
+   "last_seen": "2026-06-10T20:06:31.454835+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1010,10 +1032,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540285+02:00",
-   "last_seen": "2026-06-10T19:56:59.540285+02:00",
+   "last_seen": "2026-06-10T20:06:31.454843+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/ul-gdanska-dzialka-roztocze-weglinek-czuby-obok-poznanska-rzeszowska-ID4tGLS"
+   "also_at": "https://www.otodom.pl/pl/oferta/ul-gdanska-dzialka-roztocze-weglinek-czuby-obok-poznanska-rzeszowska-ID4tGLS",
+   "duplicate_of": "otodom:66181272"
   },
   {
    "id": "olx:CID3-ID183Vrt",
@@ -1044,10 +1067,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540315+02:00",
-   "last_seen": "2026-06-10T19:56:59.540315+02:00",
+   "last_seen": "2026-06-10T20:06:31.454853+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/ul-gluska-najtansze-dzialki-budowlane-w-lublini-ID4yMZA"
+   "also_at": "https://www.otodom.pl/pl/oferta/ul-gluska-najtansze-dzialki-budowlane-w-lublini-ID4yMZA",
+   "duplicate_of": "otodom:67396826"
   },
   {
    "id": "olx:CID3-ID1a8GG1",
@@ -1078,10 +1102,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540344+02:00",
-   "last_seen": "2026-06-10T19:56:59.540344+02:00",
+   "last_seen": "2026-06-10T20:06:31.454861+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-slawin-szerokie-ID4AQOu"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-slawin-szerokie-ID4AQOu",
+   "duplicate_of": "otodom:67888170"
   },
   {
    "id": "olx:CID3-ID1aOUax",
@@ -1112,10 +1137,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540377+02:00",
-   "last_seen": "2026-06-10T19:56:59.540377+02:00",
+   "last_seen": "2026-06-10T20:06:31.454869+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-inwestycje-w-lublinie-2651-m-ID4Bv3B"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-inwestycje-w-lublinie-2651-m-ID4Bv3B",
+   "duplicate_of": "otodom:68046711"
   },
   {
    "id": "olx:CID3-ID1aHx2y",
@@ -1146,10 +1172,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540410+02:00",
-   "last_seen": "2026-06-10T19:56:59.540410+02:00",
+   "last_seen": "2026-06-10T20:06:31.454878+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-28-ar-ID4tcZ5"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-28-ar-ID4tcZ5",
+   "duplicate_of": "otodom:66066771"
   },
   {
    "id": "olx:CID3-ID1aIYRc",
@@ -1180,10 +1207,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540439+02:00",
-   "last_seen": "2026-06-10T19:56:59.540439+02:00",
+   "last_seen": "2026-06-10T20:06:31.454888+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/duza-zielona-dzialka-2824m-twoj-dom-pod-lublinem-ID4BoRN"
+   "also_at": "https://www.otodom.pl/pl/oferta/duza-zielona-dzialka-2824m-twoj-dom-pod-lublinem-ID4BoRN",
+   "duplicate_of": "otodom:68019071"
   },
   {
    "id": "olx:CID3-ID17gt2K",
@@ -1214,10 +1242,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540469+02:00",
-   "last_seen": "2026-06-10T19:56:59.540469+02:00",
+   "last_seen": "2026-06-10T20:06:31.454897+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-ul-turystyczna-pierwsza-linia-zabudowy-ID4xUYh"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-ul-turystyczna-pierwsza-linia-zabudowy-ID4xUYh",
+   "duplicate_of": "otodom:67189169"
   },
   {
    "id": "olx:CID3-ID19wDgA",
@@ -1248,10 +1277,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540498+02:00",
-   "last_seen": "2026-06-10T19:56:59.540498+02:00",
+   "last_seen": "2026-06-10T20:06:31.454906+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-ul-szafranowa-lublin-ID4AdO2"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-ul-szafranowa-lublin-ID4AdO2",
+   "duplicate_of": "otodom:67738226"
   },
   {
    "id": "olx:CID3-ID1aoYgu",
@@ -1282,10 +1312,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540527+02:00",
-   "last_seen": "2026-06-10T19:56:59.540527+02:00",
+   "last_seen": "2026-06-10T20:06:31.454914+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-w-miescie-ul-naleczowska-ID4B6Nj"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-w-miescie-ul-naleczowska-ID4B6Nj",
+   "duplicate_of": "otodom:67949601"
   },
   {
    "id": "olx:CID3-ID19mn4b",
@@ -1316,7 +1347,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540556+02:00",
-   "last_seen": "2026-06-10T19:56:59.540556+02:00",
+   "last_seen": "2026-06-10T20:06:31.454922+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1349,7 +1380,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540587+02:00",
-   "last_seen": "2026-06-10T19:56:59.540587+02:00",
+   "last_seen": "2026-06-10T20:06:31.454968+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1382,10 +1413,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540616+02:00",
-   "last_seen": "2026-06-10T19:56:59.540616+02:00",
+   "last_seen": "2026-06-10T20:06:31.454989+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-mieszkaniowo-uslugowa1569-m2-ul-zorzy-ID4jyQF"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-mieszkaniowo-uslugowa1569-m2-ul-zorzy-ID4jyQF",
+   "duplicate_of": "otodom:63767537"
   },
   {
    "id": "olx:CID3-ID12m3uu",
@@ -1416,10 +1448,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540651+02:00",
-   "last_seen": "2026-06-10T19:56:59.540651+02:00",
+   "last_seen": "2026-06-10T20:06:31.455004+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/lublin-uslugi-przemysl-magazyny-pow-88ar-ID4sSBW"
+   "also_at": "https://www.otodom.pl/pl/oferta/lublin-uslugi-przemysl-magazyny-pow-88ar-ID4sSBW",
+   "duplicate_of": "otodom:65988455"
   },
   {
    "id": "olx:CID3-ID16xftp",
@@ -1450,10 +1483,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540682+02:00",
-   "last_seen": "2026-06-10T19:56:59.540682+02:00",
+   "last_seen": "2026-06-10T20:06:31.455014+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1-ha-wyzwolenia-mozliwosc-zabudowy-szeregowej-ID4xbWZ"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1-ha-wyzwolenia-mozliwosc-zabudowy-szeregowej-ID4xbWZ",
+   "duplicate_of": "otodom:67016047"
   },
   {
    "id": "olx:CID3-ID1aW4gV",
@@ -1484,7 +1518,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540712+02:00",
-   "last_seen": "2026-06-10T19:56:59.540712+02:00",
+   "last_seen": "2026-06-10T20:06:31.455024+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1517,10 +1551,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540742+02:00",
-   "last_seen": "2026-06-10T19:56:59.540742+02:00",
+   "last_seen": "2026-06-10T20:06:31.455033+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/inwestycyjna-dzialka-przemyslowo-budowlana-lublin-ID4qLIo"
+   "also_at": "https://www.otodom.pl/pl/oferta/inwestycyjna-dzialka-przemyslowo-budowlana-lublin-ID4qLIo",
+   "duplicate_of": "otodom:65485292"
   },
   {
    "id": "olx:CID3-ID19FkFy",
@@ -1551,10 +1586,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540772+02:00",
-   "last_seen": "2026-06-10T19:56:59.540772+02:00",
+   "last_seen": "2026-06-10T20:06:31.455042+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-3000-m2-turystyczna-sasiaduje-z-centrum-handlowym-ID4Ao8b"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-3000-m2-turystyczna-sasiaduje-z-centrum-handlowym-ID4Ao8b",
+   "duplicate_of": "otodom:67777915"
   },
   {
    "id": "olx:CID3-ID16R9Jf",
@@ -1585,10 +1621,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540802+02:00",
-   "last_seen": "2026-06-10T19:56:59.540802+02:00",
+   "last_seen": "2026-06-10T20:06:31.455052+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-lublin-ul-makowa-swietochowskiego-ID4xcS7"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-lublin-ul-makowa-swietochowskiego-ID4xcS7",
+   "duplicate_of": "otodom:67019651"
   },
   {
    "id": "olx:CID3-ID1aGZfG",
@@ -1619,7 +1656,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540832+02:00",
-   "last_seen": "2026-06-10T19:56:59.540832+02:00",
+   "last_seen": "2026-06-10T20:06:31.455061+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1652,10 +1689,11 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540861+02:00",
-   "last_seen": "2026-06-10T19:56:59.540861+02:00",
+   "last_seen": "2026-06-10T20:06:31.455070+02:00",
    "active": true,
    "days_active": 0,
-   "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-lublin-ul-rudnicka-ID4vZuL"
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-lublin-ul-rudnicka-ID4vZuL",
+   "duplicate_of": "otodom:66968231"
   },
   {
    "id": "olx:CID3-ID17Fk4y",
@@ -1686,7 +1724,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540891+02:00",
-   "last_seen": "2026-06-10T19:56:59.540891+02:00",
+   "last_seen": "2026-06-10T20:06:31.455079+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1719,7 +1757,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540920+02:00",
-   "last_seen": "2026-06-10T19:56:59.540920+02:00",
+   "last_seen": "2026-06-10T20:06:31.455088+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1752,7 +1790,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540950+02:00",
-   "last_seen": "2026-06-10T19:56:59.540950+02:00",
+   "last_seen": "2026-06-10T20:06:31.455097+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1785,7 +1823,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540989+02:00",
-   "last_seen": "2026-06-10T19:56:59.540989+02:00",
+   "last_seen": "2026-06-10T20:06:31.455106+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1818,7 +1856,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541019+02:00",
-   "last_seen": "2026-06-10T19:56:59.541019+02:00",
+   "last_seen": "2026-06-10T20:06:31.455116+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1828,7 +1866,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-ul-turystyczna-70-ar-lublin-ID4BHgX",
    "title": "Działka inwestycyjna ul.Turystyczna 70 ar Lublin",
    "area_m2": 7023.0,
-   "price_per_m2": 283.0,
+   "price_per_m2": 283.35,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -1851,7 +1889,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541059+02:00",
-   "last_seen": "2026-06-10T19:56:59.541059+02:00",
+   "last_seen": "2026-06-10T20:06:31.455127+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1861,7 +1899,7 @@
    "url": "https://www.otodom.pl/pl/oferta/ul-gdanska-dzialka-roztocze-weglinek-czuby-obok-poznanska-rzeszowska-ID4tGLS",
    "title": "ul. Gdańska działka Roztocze Węglinek Czuby obok Poznańska Rzeszowska",
    "area_m2": 381.0,
-   "price_per_m2": 1047.0,
+   "price_per_m2": 1047.24,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -1884,7 +1922,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541092+02:00",
-   "last_seen": "2026-06-10T19:56:59.541092+02:00",
+   "last_seen": "2026-06-10T20:06:31.455136+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/ul-gdanska-dzialka-roztocze-weglinek-czuby-obok-poznanska-rzeszowska-CID3-ID13emRE.html"
@@ -1895,7 +1933,7 @@
    "url": "https://www.otodom.pl/pl/oferta/do-sprzedazy-40-arowa-dzialka-przy-naleczowskiej-ID4BH4K",
    "title": "Do sprzedaży 40 arowa działka przy Nałęczowskiej",
    "area_m2": 4000.0,
-   "price_per_m2": 323.0,
+   "price_per_m2": 322.5,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -1918,7 +1956,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541144+02:00",
-   "last_seen": "2026-06-10T19:56:59.541144+02:00",
+   "last_seen": "2026-06-10T20:06:31.455145+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1928,7 +1966,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-z-mediami-dziesiata-ID4AS7R",
    "title": "Działka inwestycyjna z mediami – Dziesiąta",
    "area_m2": 371.0,
-   "price_per_m2": 660.0,
+   "price_per_m2": 660.38,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -1951,7 +1989,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541213+02:00",
-   "last_seen": "2026-06-10T19:56:59.541213+02:00",
+   "last_seen": "2026-06-10T20:06:31.455154+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1984,7 +2022,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541230+02:00",
-   "last_seen": "2026-06-10T19:56:59.541230+02:00",
+   "last_seen": "2026-06-10T20:06:31.455164+02:00",
    "active": true,
    "days_active": 0
   },
@@ -1994,7 +2032,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-466-m2-5mn-ul-firlejowska-bronowice-ID4Bd6I",
    "title": "Działka 466 m2, 5mn,  ul. Firlejowska, Bronowice",
    "area_m2": 466.0,
-   "price_per_m2": 901.0,
+   "price_per_m2": 901.29,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -2017,7 +2055,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541240+02:00",
-   "last_seen": "2026-06-10T19:56:59.541240+02:00",
+   "last_seen": "2026-06-10T20:06:31.455174+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2027,7 +2065,7 @@
    "url": "https://www.otodom.pl/pl/oferta/super-inwestycja-mozliwosc-platnosci-na-raty-ID4zWCE",
    "title": "SUPER INWESTYCJA! Możliwość płatności na raty",
    "area_m2": 40000.0,
-   "price_per_m2": 9.0,
+   "price_per_m2": 8.75,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2050,7 +2088,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541264+02:00",
-   "last_seen": "2026-06-10T19:56:59.541264+02:00",
+   "last_seen": "2026-06-10T20:06:31.455183+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/super-inwestycja-mozliwosc-platnosci-na-raty-CID3-ID19fP9S.html"
@@ -2061,7 +2099,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-inwestycje-5-budynkow-dwulokalowych-ID4BGog",
    "title": "Działka pod inwestycje 5 budynków dwulokalowych",
    "area_m2": 7542.0,
-   "price_per_m2": 198.0,
+   "price_per_m2": 198.22,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2084,7 +2122,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541297+02:00",
-   "last_seen": "2026-06-10T19:56:59.541297+02:00",
+   "last_seen": "2026-06-10T20:06:31.455192+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-pod-inwestycje-5-budynkow-dwulokalowych-CID3-ID1b0dvS.html"
@@ -2095,7 +2133,7 @@
    "url": "https://www.otodom.pl/pl/oferta/sprzedam-dzialke-uslugowo-mieszkaniowa-lublin-konopnica-ID4BnjY",
    "title": "Sprzedam działkę usługowo-mieszkaniową – Lublin/Konopnica",
    "area_m2": 3138.0,
-   "price_per_m2": 700.0,
+   "price_per_m2": 699.81,
    "plot_type": "budowlana",
    "location": {
     "city": "Konopnica",
@@ -2118,7 +2156,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541336+02:00",
-   "last_seen": "2026-06-10T19:56:59.541336+02:00",
+   "last_seen": "2026-06-10T20:06:31.455202+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2128,7 +2166,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-w-malowniczej-okolicy-ul-folwarczna-ID4BFEw",
    "title": "Działka w malowniczej okolicy - ul. Folwarczna",
    "area_m2": 2480.0,
-   "price_per_m2": 363.0,
+   "price_per_m2": 362.5,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2151,7 +2189,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541369+02:00",
-   "last_seen": "2026-06-10T19:56:59.541369+02:00",
+   "last_seen": "2026-06-10T20:06:31.455211+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2161,7 +2199,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-1-05-ha-ul-melgiewska-ID4BFrx",
    "title": "Działka inwestycyjna 1,05 ha – ul. Mełgiewska",
    "area_m2": 10544.0,
-   "price_per_m2": 246.0,
+   "price_per_m2": 246.49,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -2184,7 +2222,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541400+02:00",
-   "last_seen": "2026-06-10T19:56:59.541400+02:00",
+   "last_seen": "2026-06-10T20:06:31.455221+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2194,7 +2232,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-ul-wyzwolenia-49a-ID4A1fQ",
    "title": "Działka budowlana ul Wyzwolenia 49a",
    "area_m2": 986.0,
-   "price_per_m2": 350.0,
+   "price_per_m2": 349.9,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2217,7 +2255,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541460+02:00",
-   "last_seen": "2026-06-10T19:56:59.541460+02:00",
+   "last_seen": "2026-06-10T20:06:31.455231+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2227,7 +2265,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1425-m-lublin-abramowice-mpzp-ID4BmBP",
    "title": "Działka budowlana 1425 m² | Lublin Abramowice | MPZP",
    "area_m2": 1425.0,
-   "price_per_m2": 295.0,
+   "price_per_m2": 294.67,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2250,7 +2288,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541491+02:00",
-   "last_seen": "2026-06-10T19:56:59.541491+02:00",
+   "last_seen": "2026-06-10T20:06:31.455240+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-1425-m-lublin-abramowice-mpzp-CID3-ID1aFaEw.html"
@@ -2261,7 +2299,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-w-miescie-ul-naleczowska-ID4B6Nj",
    "title": "Działka budowlana w mieście ul. Nałęczowska",
    "area_m2": 857.0,
-   "price_per_m2": 910.0,
+   "price_per_m2": 910.15,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2284,7 +2322,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541521+02:00",
-   "last_seen": "2026-06-10T19:56:59.541521+02:00",
+   "last_seen": "2026-06-10T20:06:31.455249+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-w-miescie-ul-naleczowska-CID3-ID1aoYgu.html"
@@ -2295,7 +2333,7 @@
    "url": "https://www.otodom.pl/pl/oferta/mala-powierzchnia-duzy-potencjal-biznesowy-ID4BEts",
    "title": "Mała powierzchnia, duży potencjał biznesowy",
    "area_m2": 124.0,
-   "price_per_m2": 1492.0,
+   "price_per_m2": 1491.94,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -2318,7 +2356,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541552+02:00",
-   "last_seen": "2026-06-10T19:56:59.541552+02:00",
+   "last_seen": "2026-06-10T20:06:31.455264+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2351,7 +2389,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541582+02:00",
-   "last_seen": "2026-06-10T19:56:59.541582+02:00",
+   "last_seen": "2026-06-10T20:06:31.455273+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialki-budowlane-ul-szafranowa-lublin-CID3-ID19wDgA.html"
@@ -2362,7 +2400,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-z-wz-na-16-lokali-lublin-ul-makowa-ID4BDr5",
    "title": "Działka z WZ na 16 lokali | Lublin, ul. Makowa",
    "area_m2": 9799.0,
-   "price_per_m2": 502.0,
+   "price_per_m2": 502.44,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2385,7 +2423,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541613+02:00",
-   "last_seen": "2026-06-10T19:56:59.541613+02:00",
+   "last_seen": "2026-06-10T20:06:31.455282+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2395,7 +2433,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-25-arow-wszystkie-media-asfaltowy-dojazd-ID4B4Lw",
    "title": "Działka budowlana, 25 arów, wszystkie media , asfaltowy dojazd",
    "area_m2": 2561.0,
-   "price_per_m2": 350.0,
+   "price_per_m2": 349.86,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2418,7 +2456,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541648+02:00",
-   "last_seen": "2026-06-10T19:56:59.541648+02:00",
+   "last_seen": "2026-06-10T20:06:31.455292+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-25-arow-wszystkie-media-asfaltowy-dojazd-CID3-ID1amf9K.html"
@@ -2429,7 +2467,7 @@
    "url": "https://www.otodom.pl/pl/oferta/do-sprzedazy-22-arowa-dzialka-przy-kreznickiej-ID4BCJt",
    "title": "Do sprzedaży 22 arowa działka przy Krężnickiej",
    "area_m2": 2190.0,
-   "price_per_m2": 137.0,
+   "price_per_m2": 136.99,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2452,7 +2490,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541679+02:00",
-   "last_seen": "2026-06-10T19:56:59.541679+02:00",
+   "last_seen": "2026-06-10T20:06:31.455301+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2462,7 +2500,7 @@
    "url": "https://www.otodom.pl/pl/oferta/do-sprzedazy-10-arowa-dzialka-ID4BCyB",
    "title": "Do sprzedaży 10 arowa działka",
    "area_m2": 945.0,
-   "price_per_m2": 85.0,
+   "price_per_m2": 84.66,
    "plot_type": "rekreacyjna",
    "location": {
     "city": "Lublin",
@@ -2485,7 +2523,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541710+02:00",
-   "last_seen": "2026-06-10T19:56:59.541710+02:00",
+   "last_seen": "2026-06-10T20:06:31.455312+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2518,7 +2556,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541805+02:00",
-   "last_seen": "2026-06-10T19:56:59.541805+02:00",
+   "last_seen": "2026-06-10T20:06:31.455322+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-585-m2-szerokie-idealna-pod-dom-CID3-ID1aKPAx.html"
@@ -2529,7 +2567,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-wielorodzinke-na-ponikwodzie-ID4BCa4",
    "title": "Działka pod wielorodzinkę na Ponikwodzie",
    "area_m2": 2817.0,
-   "price_per_m2": 704.0,
+   "price_per_m2": 704.3,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2552,7 +2590,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541837+02:00",
-   "last_seen": "2026-06-10T19:56:59.541837+02:00",
+   "last_seen": "2026-06-10T20:06:31.455332+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-pod-wielorodzinke-na-ponikwodzie-CID3-ID1aUkWZ.html"
@@ -2563,7 +2601,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-0-5ha-z-projektem-hali-2000m-ID4jHv3",
    "title": "Działka inwestycyjna 0,5ha z projektem hali 2000m",
    "area_m2": 4959.0,
-   "price_per_m2": 403.0,
+   "price_per_m2": 403.31,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -2586,7 +2624,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541868+02:00",
-   "last_seen": "2026-06-10T19:56:59.541868+02:00",
+   "last_seen": "2026-06-10T20:06:31.455341+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2596,7 +2634,7 @@
    "url": "https://www.otodom.pl/pl/oferta/2-dzialki-budowlane-lublin-h-i-m-sachsow-ID4BAI9",
    "title": "2 działki budowlane Lublin H. i M. Sachsów",
    "area_m2": 1327.0,
-   "price_per_m2": 181.0,
+   "price_per_m2": 180.86,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2619,7 +2657,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541899+02:00",
-   "last_seen": "2026-06-10T19:56:59.541899+02:00",
+   "last_seen": "2026-06-10T20:06:31.455350+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/2-dzialki-budowlane-lublin-h-i-m-sachsow-CID3-ID1aTumd.html"
@@ -2630,7 +2668,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-w-dzielnicy-weglin-ID4AIkM",
    "title": "Działka w dzielnicy Węglin",
    "area_m2": 919.0,
-   "price_per_m2": 392.0,
+   "price_per_m2": 391.73,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2653,7 +2691,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541930+02:00",
-   "last_seen": "2026-06-10T19:56:59.541930+02:00",
+   "last_seen": "2026-06-10T20:06:31.455360+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2663,7 +2701,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-z-warunkami-zabudowy-ID4BAuO",
    "title": "Działka z warunkami zabudowy",
    "area_m2": 371.0,
-   "price_per_m2": 671.0,
+   "price_per_m2": 671.16,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2686,7 +2724,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541962+02:00",
-   "last_seen": "2026-06-10T19:56:59.541962+02:00",
+   "last_seen": "2026-06-10T20:06:31.455370+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2696,7 +2734,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-z-potencjalem-ID4BAuL",
    "title": "Działka z potencjałem",
    "area_m2": 6360.0,
-   "price_per_m2": 236.0,
+   "price_per_m2": 235.53,
    "plot_type": "budowlana",
    "location": {
     "city": "Konopnica",
@@ -2719,7 +2757,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542023+02:00",
-   "last_seen": "2026-06-10T19:56:59.542023+02:00",
+   "last_seen": "2026-06-10T20:06:31.455380+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2729,7 +2767,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-zabudowe-jednorodzinna-ID4BAuF",
    "title": "Działka pod zabudowę jednorodzinną",
    "area_m2": 949.0,
-   "price_per_m2": 659.0,
+   "price_per_m2": 658.59,
    "plot_type": null,
    "location": {
     "city": "Lublin",
@@ -2752,7 +2790,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542054+02:00",
-   "last_seen": "2026-06-10T19:56:59.542054+02:00",
+   "last_seen": "2026-06-10T20:06:31.455388+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2762,7 +2800,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-hale-produkcyjna-magazyn-z-mediami-2-1-ha-lub-5x4000-m2-ID4xPeE",
    "title": "Działka pod hale produkcyjną/magazyn z mediami - 2,1 ha lub 5x4000 m2",
    "area_m2": 21000.0,
-   "price_per_m2": 310.0,
+   "price_per_m2": 309.52,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -2785,7 +2823,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542085+02:00",
-   "last_seen": "2026-06-10T19:56:59.542085+02:00",
+   "last_seen": "2026-06-10T20:06:31.455398+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-pod-hale-produkcyjna-magazyn-z-mediami-2-1-ha-lub-5x4000-m2-CID3-ID17aH9w.html"
@@ -2796,7 +2834,7 @@
    "url": "https://www.otodom.pl/pl/oferta/gotowiec-inwestycyjny-grunt-projekt-pnb-blok-8-mieszkan-centrum-ID4AVJX",
    "title": "Gotowiec Inwestycyjny Grunt + Projekt + PnB: Blok, 8 Mieszkań, Centrum",
    "area_m2": 633.0,
-   "price_per_m2": 2133.0,
+   "price_per_m2": 2132.7,
    "plot_type": null,
    "location": {
     "city": "Lublin",
@@ -2819,7 +2857,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542116+02:00",
-   "last_seen": "2026-06-10T19:56:59.542116+02:00",
+   "last_seen": "2026-06-10T20:06:31.455408+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2829,7 +2867,7 @@
    "url": "https://www.otodom.pl/pl/oferta/piekna-dzialka-w-malowniczej-okolicy-ID4BzqO",
    "title": "Piękna działka w malowniczej okolicy!",
    "area_m2": 3134.0,
-   "price_per_m2": 478.0,
+   "price_per_m2": 478.3,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2852,7 +2890,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542149+02:00",
-   "last_seen": "2026-06-10T19:56:59.542149+02:00",
+   "last_seen": "2026-06-10T20:06:31.455417+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2862,7 +2900,7 @@
    "url": "https://www.otodom.pl/pl/oferta/na-sprzedaz-miejsce-postojowe-z-piwnica-w-wiktoryn-ID4BzqC",
    "title": "Na sprzedaż miejsce postojowe z piwnicą w Wiktoryn",
    "area_m2": 15.0,
-   "price_per_m2": 3333.0,
+   "price_per_m2": 3333.33,
    "plot_type": null,
    "location": {
     "city": "Lublin",
@@ -2885,7 +2923,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542188+02:00",
-   "last_seen": "2026-06-10T19:56:59.542188+02:00",
+   "last_seen": "2026-06-10T20:06:31.455427+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2895,7 +2933,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-zabudowe-szeregowa-ID4BziB",
    "title": "Działka pod zabudowę szeregową",
    "area_m2": 2677.88,
-   "price_per_m2": 472.0,
+   "price_per_m2": 472.39,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2918,7 +2956,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542223+02:00",
-   "last_seen": "2026-06-10T19:56:59.542223+02:00",
+   "last_seen": "2026-06-10T20:06:31.455437+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2928,7 +2966,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-zemborzyce-podlesne-ID4Bzdc",
    "title": "Działka budowlana Zemborzyce Podleśne",
    "area_m2": 3000.0,
-   "price_per_m2": 133.0,
+   "price_per_m2": 133.33,
    "plot_type": "budowlana",
    "location": {
     "city": "Zemborzyce Podleśne",
@@ -2951,7 +2989,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542277+02:00",
-   "last_seen": "2026-06-10T19:56:59.542277+02:00",
+   "last_seen": "2026-06-10T20:06:31.455446+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2961,7 +2999,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-615-m-wz-na-blizniaka-lublin-ID4yvm5",
    "title": "Działka 615 m² | WZ na bliźniaka | Lublin",
    "area_m2": 615.0,
-   "price_per_m2": 486.0,
+   "price_per_m2": 486.18,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -2984,7 +3022,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542308+02:00",
-   "last_seen": "2026-06-10T19:56:59.542308+02:00",
+   "last_seen": "2026-06-10T20:06:31.455455+02:00",
    "active": true,
    "days_active": 0
   },
@@ -2994,7 +3032,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-z-warunkami-zabudowy-ID4Bxbo",
    "title": "Działka budowlana z warunkami zabudowy",
    "area_m2": 1392.0,
-   "price_per_m2": 287.0,
+   "price_per_m2": 286.64,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3017,7 +3055,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542340+02:00",
-   "last_seen": "2026-06-10T19:56:59.542340+02:00",
+   "last_seen": "2026-06-10T20:06:31.455466+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3050,7 +3088,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542370+02:00",
-   "last_seen": "2026-06-10T19:56:59.542370+02:00",
+   "last_seen": "2026-06-10T20:06:31.455475+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3060,7 +3098,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-uslugowa-ul-tarninowa-20a-ID4BvKZ",
    "title": "Działka budowlana / usługowa ul. Tarninowa 20a",
    "area_m2": 1220.0,
-   "price_per_m2": 737.0,
+   "price_per_m2": 736.89,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3083,7 +3121,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542402+02:00",
-   "last_seen": "2026-06-10T19:56:59.542402+02:00",
+   "last_seen": "2026-06-10T20:06:31.455485+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3093,7 +3131,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-inwestycje-w-lublinie-2651-m-ID4Bv3B",
    "title": "Działka pod inwestycję w Lublinie – 2651 m²",
    "area_m2": 2651.0,
-   "price_per_m2": 279.0,
+   "price_per_m2": 279.14,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -3116,7 +3154,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542433+02:00",
-   "last_seen": "2026-06-10T19:56:59.542433+02:00",
+   "last_seen": "2026-06-10T20:06:31.455495+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-pod-inwestycje-w-lublinie-2651-m-CID3-ID1aOUax.html"
@@ -3127,7 +3165,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-515m2-ul-kosynierow-dzielnicaponikwoda-lublin-ID4BwqQ",
    "title": "Działka budowlana 515m2 ul. Kosynierów. Dzielnica:Ponikwoda, Lublin",
    "area_m2": 515.0,
-   "price_per_m2": 775.0,
+   "price_per_m2": 774.76,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3150,7 +3188,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542464+02:00",
-   "last_seen": "2026-06-10T19:56:59.542464+02:00",
+   "last_seen": "2026-06-10T20:06:31.455504+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-515m2-ul-kosynierow-dzielnicaponikwoda-lublin-CID3-ID1aOAxc.html"
@@ -3161,7 +3199,7 @@
    "url": "https://www.otodom.pl/pl/oferta/slawinek-ul-bukszpanowa-3-dzialki-inwestycyjne-pod-blizniaki-3129m2-ID4BsBh",
    "title": "SŁAWINEK ul. Bukszpanowa| 3 DZIAŁKI INWESTYCYJNE pod bliźniaki |3129m2",
    "area_m2": 3129.0,
-   "price_per_m2": 719.0,
+   "price_per_m2": 719.08,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -3184,7 +3222,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542496+02:00",
-   "last_seen": "2026-06-10T19:56:59.542496+02:00",
+   "last_seen": "2026-06-10T20:06:31.455514+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3194,7 +3232,7 @@
    "url": "https://www.otodom.pl/pl/oferta/atrakcyjnie-zlokalizowana-dzialka-budowlana-ID4BqR6",
    "title": "Atrakcyjnie zlokalizowana działka budowlana",
    "area_m2": 1162.0,
-   "price_per_m2": 383.0,
+   "price_per_m2": 382.96,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3217,7 +3255,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542527+02:00",
-   "last_seen": "2026-06-10T19:56:59.542527+02:00",
+   "last_seen": "2026-06-10T20:06:31.455524+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3227,7 +3265,7 @@
    "url": "https://www.otodom.pl/pl/oferta/ladna-uzbrojona-dzialka-pod-lasem-33a-wilczopole-ID4Bp5L",
    "title": "Ładna, uzbrojona działka pod lasem-33a-Wilczopole",
    "area_m2": 3300.0,
-   "price_per_m2": 242.0,
+   "price_per_m2": 242.42,
    "plot_type": "siedliskowa",
    "location": {
     "city": "Lublin",
@@ -3250,7 +3288,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542559+02:00",
-   "last_seen": "2026-06-10T19:56:59.542559+02:00",
+   "last_seen": "2026-06-10T20:06:31.455534+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3260,7 +3298,7 @@
    "url": "https://www.otodom.pl/pl/oferta/duza-zielona-dzialka-2824m-twoj-dom-pod-lublinem-ID4BoRN",
    "title": "Duża zielona działka 2824m², Twój dom pod Lublinem",
    "area_m2": 2824.0,
-   "price_per_m2": 351.0,
+   "price_per_m2": 350.57,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3283,7 +3321,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542590+02:00",
-   "last_seen": "2026-06-10T19:56:59.542590+02:00",
+   "last_seen": "2026-06-10T20:06:31.455544+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/duza-zielona-dzialka-2824m-twoj-dom-pod-lublinem-CID3-ID1aIYRc.html"
@@ -3294,7 +3332,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-produkcyjna-z-projektem-budynku-ID4BouU",
    "title": "Działka usługowa- produkcyjna z projektem budynku",
    "area_m2": 2541.0,
-   "price_per_m2": 531.0,
+   "price_per_m2": 531.29,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -3317,7 +3355,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542628+02:00",
-   "last_seen": "2026-06-10T19:56:59.542628+02:00",
+   "last_seen": "2026-06-10T20:06:31.455553+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3327,7 +3365,7 @@
    "url": "https://www.otodom.pl/pl/oferta/rudnik-dzialka-budowlana-8815-m2-mn-ID4B1se",
    "title": "Rudnik- działka budowlana 8815 m2-Mn",
    "area_m2": 8815.0,
-   "price_per_m2": 193.0,
+   "price_per_m2": 192.85,
    "plot_type": null,
    "location": {
     "city": "Rudnik",
@@ -3350,7 +3388,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542660+02:00",
-   "last_seen": "2026-06-10T19:56:59.542660+02:00",
+   "last_seen": "2026-06-10T20:06:31.455564+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3360,7 +3398,7 @@
    "url": "https://www.otodom.pl/pl/oferta/sprzedam-dzialke-budowlana-ul-debowa-lublin-ID4uWdS",
    "title": "Sprzedam działkę budowlaną, ul. Dębowa, Lublin",
    "area_m2": 1496.0,
-   "price_per_m2": 434.0,
+   "price_per_m2": 434.49,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3383,7 +3421,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542691+02:00",
-   "last_seen": "2026-06-10T19:56:59.542691+02:00",
+   "last_seen": "2026-06-10T20:06:31.455574+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/sprzedam-dzialke-budowlana-ul-debowa-lublin-CID3-ID1aGnGA.html"
@@ -3394,7 +3432,7 @@
    "url": "https://www.otodom.pl/pl/oferta/piekna-dzialka-budowlana-lublin-ul-narcyzowa-ID4Awoa",
    "title": "Piękna działka budowlana – Lublin, ul. Narcyzowa",
    "area_m2": 2300.0,
-   "price_per_m2": 565.0,
+   "price_per_m2": 565.22,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3417,7 +3455,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542723+02:00",
-   "last_seen": "2026-06-10T19:56:59.542723+02:00",
+   "last_seen": "2026-06-10T20:06:31.455584+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3427,7 +3465,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-w-lublinie-pod-uslugi-oswiaty-ID4Bju7",
    "title": "Działka w Lublinie pod usługi oświaty",
    "area_m2": 3250.0,
-   "price_per_m2": 553.0,
+   "price_per_m2": 553.38,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -3450,7 +3488,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542754+02:00",
-   "last_seen": "2026-06-10T19:56:59.542754+02:00",
+   "last_seen": "2026-06-10T20:06:31.455595+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3460,7 +3498,7 @@
    "url": "https://www.otodom.pl/pl/oferta/lublin-mieczykowa-12-ar-budowlana-ID4BfmA",
    "title": "Lublin| Mieczykowa | ~12 ar| budowlana",
    "area_m2": 1174.0,
-   "price_per_m2": 613.0,
+   "price_per_m2": 613.29,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -3483,7 +3521,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542786+02:00",
-   "last_seen": "2026-06-10T19:56:59.542786+02:00",
+   "last_seen": "2026-06-10T20:06:31.455605+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3493,7 +3531,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-mieszkaniowo-uslugowa1569-m2-ul-zorzy-ID4jyQF",
    "title": "Działka inwestycyjna mieszkaniowo -usługowa1569 m2 ul. Zorzy",
    "area_m2": 1569.0,
-   "price_per_m2": 535.0,
+   "price_per_m2": 535.37,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3516,7 +3554,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542818+02:00",
-   "last_seen": "2026-06-10T19:56:59.542818+02:00",
+   "last_seen": "2026-06-10T20:06:31.455615+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-inwestycyjna-mieszkaniowo-uslugowa1569-m2-ul-zorzy-CID3-IDSgvwp.html"
@@ -3527,7 +3565,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-lublin-ul-makowa-swietochowskiego-ID4xcS7",
    "title": "Działki budowlane Lublin ul. Makowa / Świętochowskiego",
    "area_m2": 1040.0,
-   "price_per_m2": 586.0,
+   "price_per_m2": 585.58,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3550,7 +3588,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542850+02:00",
-   "last_seen": "2026-06-10T19:56:59.542850+02:00",
+   "last_seen": "2026-06-10T20:06:31.455625+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialki-przy-ulicy-makowej-w-lublinie-wydane-wz-CID3-ID16R9Jf.html"
@@ -3561,7 +3599,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-przemyslowa-ul-brzegowa-4117-m2-ID45MMN",
    "title": "Działka przemysłowa ul. Brzegowa 4117 m2",
    "area_m2": 4117.0,
-   "price_per_m2": 204.0,
+   "price_per_m2": 204.27,
    "plot_type": null,
    "location": {
     "city": "Lublin",
@@ -3584,7 +3622,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542882+02:00",
-   "last_seen": "2026-06-10T19:56:59.542882+02:00",
+   "last_seen": "2026-06-10T20:06:31.455635+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3594,7 +3632,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-pow-817-m-konstantynow-ul-frankowskiego-ID4zQVr",
    "title": "Działka budowlana pow. 817 m² Konstantynów ul. Frankowskiego",
    "area_m2": 817.0,
-   "price_per_m2": 1016.0,
+   "price_per_m2": 1015.91,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3617,7 +3655,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542913+02:00",
-   "last_seen": "2026-06-10T19:56:59.542913+02:00",
+   "last_seen": "2026-06-10T20:06:31.455645+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3627,7 +3665,7 @@
    "url": "https://www.otodom.pl/pl/oferta/mozliwosc-zakupu-1-ha-obrzeza-lublina-przeznaczenie-1u-ID4Anj5",
    "title": "możliwość zakupu 1 ha, obrzeża Lublina, przeznaczenie 1U",
    "area_m2": 4467.0,
-   "price_per_m2": 269.0,
+   "price_per_m2": 268.64,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Świdnik",
@@ -3650,7 +3688,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542965+02:00",
-   "last_seen": "2026-06-10T19:56:59.542965+02:00",
+   "last_seen": "2026-06-10T20:06:31.455655+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3683,7 +3721,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543362+02:00",
-   "last_seen": "2026-06-10T19:56:59.543362+02:00",
+   "last_seen": "2026-06-10T20:06:31.455665+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3693,7 +3731,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-z-pozwoleniem-na-budowe-ID4B3Lp",
    "title": "Działka z pozwoleniem na budowę",
    "area_m2": 2800.0,
-   "price_per_m2": 178.0,
+   "price_per_m2": 178.21,
    "plot_type": "budowlana",
    "location": {
     "city": "Konopnica",
@@ -3716,7 +3754,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543403+02:00",
-   "last_seen": "2026-06-10T19:56:59.543403+02:00",
+   "last_seen": "2026-06-10T20:06:31.455676+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3726,7 +3764,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-lublin-ul-folwarczna-ID4B29h",
    "title": "Działka budowlana Lublin ul. Folwarczna",
    "area_m2": 1448.0,
-   "price_per_m2": 329.0,
+   "price_per_m2": 328.73,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3749,7 +3787,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543437+02:00",
-   "last_seen": "2026-06-10T19:56:59.543437+02:00",
+   "last_seen": "2026-06-10T20:06:31.455687+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3759,7 +3797,7 @@
    "url": "https://www.otodom.pl/pl/oferta/slawin-dzialka-budowlana-wz-i-media-ID4B1LZ",
    "title": "Sławin/ działka budowlana/ wz i media",
    "area_m2": 1194.0,
-   "price_per_m2": 566.0,
+   "price_per_m2": 566.16,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3782,7 +3820,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543471+02:00",
-   "last_seen": "2026-06-10T19:56:59.543471+02:00",
+   "last_seen": "2026-06-10T20:06:31.455698+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3792,7 +3830,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-12-2-ary-czechow-ID4B1DW",
    "title": "Działka budowlana 12,2 ary Czechów",
    "area_m2": 1220.0,
-   "price_per_m2": 566.0,
+   "price_per_m2": 565.57,
    "plot_type": "budowlana",
    "location": {
     "city": "Jakubowice Konińskie",
@@ -3815,7 +3853,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543503+02:00",
-   "last_seen": "2026-06-10T19:56:59.543503+02:00",
+   "last_seen": "2026-06-10T20:06:31.455708+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3848,7 +3886,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543535+02:00",
-   "last_seen": "2026-06-10T19:56:59.543535+02:00",
+   "last_seen": "2026-06-10T20:06:31.455719+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3858,7 +3896,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-na-ul-wapiennej-ID4AV3U",
    "title": "Działka budowlana na ul. Wapiennej",
    "area_m2": 1200.0,
-   "price_per_m2": 458.0,
+   "price_per_m2": 458.33,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3881,7 +3919,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543567+02:00",
-   "last_seen": "2026-06-10T19:56:59.543567+02:00",
+   "last_seen": "2026-06-10T20:06:31.455729+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3891,7 +3929,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-blisko-zalewu-zemborzyckiego-ID4AWJZ",
    "title": "Działka budowlana blisko Zalewu Zemborzyckiego!!!",
    "area_m2": 1200.0,
-   "price_per_m2": 358.0,
+   "price_per_m2": 358.25,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3914,7 +3952,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543598+02:00",
-   "last_seen": "2026-06-10T19:56:59.543598+02:00",
+   "last_seen": "2026-06-10T20:06:31.455739+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3924,7 +3962,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-13a-oraz-16a-mpzp-ID4AWEn",
    "title": "Działki budowlane 13a oraz 16a MPZP",
    "area_m2": 1590.0,
-   "price_per_m2": 188.0,
+   "price_per_m2": 188.05,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3947,7 +3985,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543646+02:00",
-   "last_seen": "2026-06-10T19:56:59.543646+02:00",
+   "last_seen": "2026-06-10T20:06:31.455750+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3957,7 +3995,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-zabudowe-uslugowa-z-koncepcja-zagospodarowania-puu-934m-ID4AUxf",
    "title": "Działka pod zabudowę usługową z koncepcją zagospodarowania, PUU 934m²",
    "area_m2": 658.0,
-   "price_per_m2": 1489.0,
+   "price_per_m2": 1489.36,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -3980,7 +4018,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543678+02:00",
-   "last_seen": "2026-06-10T19:56:59.543678+02:00",
+   "last_seen": "2026-06-10T20:06:31.455763+02:00",
    "active": true,
    "days_active": 0
   },
@@ -3990,7 +4028,7 @@
    "url": "https://www.otodom.pl/pl/oferta/atrakcyjna-dzialka-w-swietnej-lokalizacji-ID4AU6w",
    "title": "Atrakcyjna działka w świetnej lokalizacji",
    "area_m2": 1194.0,
-   "price_per_m2": 536.0,
+   "price_per_m2": 535.68,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4013,7 +4051,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543710+02:00",
-   "last_seen": "2026-06-10T19:56:59.543710+02:00",
+   "last_seen": "2026-06-10T20:06:31.455773+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4023,7 +4061,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-slawin-szerokie-ID4AQOu",
    "title": "Działka usługowa Sławin/Szerokie",
    "area_m2": 4227.0,
-   "price_per_m2": 591.0,
+   "price_per_m2": 591.44,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -4046,7 +4084,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543742+02:00",
-   "last_seen": "2026-06-10T19:56:59.543742+02:00",
+   "last_seen": "2026-06-10T20:06:31.455784+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-uslugowa-slawin-szerokie-CID3-ID1a8GG1.html"
@@ -4080,7 +4118,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543774+02:00",
-   "last_seen": "2026-06-10T19:56:59.543774+02:00",
+   "last_seen": "2026-06-10T20:06:31.455795+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4090,7 +4128,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-ul-kijanska-ID4AQli",
    "title": "Działka inwestycyjna - ul. Kijańska",
    "area_m2": 1113.0,
-   "price_per_m2": 224.0,
+   "price_per_m2": 224.17,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4113,7 +4151,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543809+02:00",
-   "last_seen": "2026-06-10T19:56:59.543809+02:00",
+   "last_seen": "2026-06-10T20:06:31.455807+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4123,7 +4161,7 @@
    "url": "https://www.otodom.pl/pl/oferta/atrakcyjna-dzialka-inwestycyjna-ul-kijanska-ID4AQlh",
    "title": "Atrakcyjna działka inwestycyjna - ul. Kijańska",
    "area_m2": 1113.0,
-   "price_per_m2": 224.0,
+   "price_per_m2": 224.17,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4146,7 +4184,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543841+02:00",
-   "last_seen": "2026-06-10T19:56:59.543841+02:00",
+   "last_seen": "2026-06-10T20:06:31.455818+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4179,7 +4217,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543873+02:00",
-   "last_seen": "2026-06-10T19:56:59.543873+02:00",
+   "last_seen": "2026-06-10T20:06:31.455829+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4189,7 +4227,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-w-lublinie-ul-zadebie-ID4AQ6q",
    "title": "Działki budowlane w Lublinie ul. Zadębie",
    "area_m2": 825.0,
-   "price_per_m2": 339.0,
+   "price_per_m2": 338.79,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4212,7 +4250,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543905+02:00",
-   "last_seen": "2026-06-10T19:56:59.543905+02:00",
+   "last_seen": "2026-06-10T20:06:31.455840+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4222,7 +4260,7 @@
    "url": "https://www.otodom.pl/pl/oferta/zadrzewiona-dzialka-pod-dom-na-szerokim-ID4AQ6p",
    "title": "Zadrzewiona działka pod dom na Szerokim",
    "area_m2": 2059.0,
-   "price_per_m2": 475.0,
+   "price_per_m2": 475.47,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4245,7 +4283,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543937+02:00",
-   "last_seen": "2026-06-10T19:56:59.543937+02:00",
+   "last_seen": "2026-06-10T20:06:31.455851+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4255,7 +4293,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-1-028-m-lublin-ID4APPI",
    "title": "Działka, 1 028 m², Lublin",
    "area_m2": 1028.0,
-   "price_per_m2": 1654.0,
+   "price_per_m2": 1653.7,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -4278,7 +4316,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543994+02:00",
-   "last_seen": "2026-06-10T19:56:59.543994+02:00",
+   "last_seen": "2026-06-10T20:06:31.455863+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4288,7 +4326,7 @@
    "url": "https://www.otodom.pl/pl/oferta/slawin-dzialka-budowlana-warunki-zabudowy-ID4Au1V",
    "title": "Sławin/ działka budowlana/ warunki zabudowy",
    "area_m2": 1247.0,
-   "price_per_m2": 480.0,
+   "price_per_m2": 480.35,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4311,7 +4349,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544032+02:00",
-   "last_seen": "2026-06-10T19:56:59.544032+02:00",
+   "last_seen": "2026-06-10T20:06:31.455874+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4344,7 +4382,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544065+02:00",
-   "last_seen": "2026-06-10T19:56:59.544065+02:00",
+   "last_seen": "2026-06-10T20:06:31.455885+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4354,7 +4392,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-5200-m2-ID4xDGv",
    "title": "Działka inwestycyjna 5200 m2",
    "area_m2": 5200.0,
-   "price_per_m2": 1152.0,
+   "price_per_m2": 1151.92,
    "plot_type": null,
    "location": {
     "city": "Lublin",
@@ -4377,7 +4415,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544098+02:00",
-   "last_seen": "2026-06-10T19:56:59.544098+02:00",
+   "last_seen": "2026-06-10T20:06:31.455896+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4387,7 +4425,7 @@
    "url": "https://www.otodom.pl/pl/oferta/sprzedam-dzialke-12-arow-lublin-czewchow-polnocny-ulica-poligonowa-ID4ACNc",
    "title": "Sprzedam działkę 12 arów - Lublin Czewchów północny - ulica Poligonowa",
    "area_m2": 1200.0,
-   "price_per_m2": 567.0,
+   "price_per_m2": 566.67,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4410,7 +4448,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544132+02:00",
-   "last_seen": "2026-06-10T19:56:59.544132+02:00",
+   "last_seen": "2026-06-10T20:06:31.455908+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4420,7 +4458,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-lublin-ul-kreznicka-ID4xwiw",
    "title": "Działka budowlana Lublin, ul. Krężnicka",
    "area_m2": 1542.0,
-   "price_per_m2": 194.0,
+   "price_per_m2": 193.9,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4443,7 +4481,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544166+02:00",
-   "last_seen": "2026-06-10T19:56:59.544166+02:00",
+   "last_seen": "2026-06-10T20:06:31.455920+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-lublin-ul-kreznicka-CID3-ID16Qsn2.html"
@@ -4454,7 +4492,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-z-pozwoleniem-na-budowe-ID4Az6X",
    "title": "Działka inwestycyjna z pozwoleniem na budowę",
    "area_m2": 2436.0,
-   "price_per_m2": 2323.0,
+   "price_per_m2": 2322.66,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -4477,7 +4515,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544199+02:00",
-   "last_seen": "2026-06-10T19:56:59.544199+02:00",
+   "last_seen": "2026-06-10T20:06:31.455965+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4487,7 +4525,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-zabudowe-jednorodzinna-lub-uslugowa-ID4xNN8",
    "title": "Działka pod zabudowę jednorodzinną lub usługową",
    "area_m2": 847.0,
-   "price_per_m2": 577.0,
+   "price_per_m2": 577.33,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4510,7 +4548,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544231+02:00",
-   "last_seen": "2026-06-10T19:56:59.544231+02:00",
+   "last_seen": "2026-06-10T20:06:31.455988+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-pod-zabudowe-jednorodzinna-lub-uslugowa-CID3-ID178D0H.html"
@@ -4521,7 +4559,7 @@
    "url": "https://www.otodom.pl/pl/oferta/ul-polnocna-w-lublinie-dzialka-budowlana-11-ar-ID4AuO2",
    "title": "ul. Północna w Lublinie. Działka budowlana ~ 11 ar",
    "area_m2": 1069.0,
-   "price_per_m2": 719.0,
+   "price_per_m2": 719.36,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4544,7 +4582,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544264+02:00",
-   "last_seen": "2026-06-10T19:56:59.544264+02:00",
+   "last_seen": "2026-06-10T20:06:31.456001+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4554,7 +4592,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-budowalne-w-lublinie-ID4Atyp",
    "title": "Działki budowalne w Lublinie",
    "area_m2": 267.0,
-   "price_per_m2": 895.0,
+   "price_per_m2": 895.13,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4577,7 +4615,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544297+02:00",
-   "last_seen": "2026-06-10T19:56:59.544297+02:00",
+   "last_seen": "2026-06-10T20:06:31.456013+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialki-budowalne-w-lublinie-CID3-ID19L0Kq.html"
@@ -4588,7 +4626,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-4-lokale-mieszkalne-lublin-weglin-pn-ID4Arxc",
    "title": "Działka pod 4 lokale mieszkalne Lublin Węglin-Pn.",
    "area_m2": 2766.0,
-   "price_per_m2": 687.0,
+   "price_per_m2": 686.55,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4611,7 +4649,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544329+02:00",
-   "last_seen": "2026-06-10T19:56:59.544329+02:00",
+   "last_seen": "2026-06-10T20:06:31.456025+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4621,7 +4659,7 @@
    "url": "https://www.otodom.pl/pl/oferta/2-dzialki-na-sprzedaz-ID4Arkw",
    "title": "2 działki na sprzedaż",
    "area_m2": 998.0,
-   "price_per_m2": 770.0,
+   "price_per_m2": 769.99,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4644,7 +4682,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544362+02:00",
-   "last_seen": "2026-06-10T19:56:59.544362+02:00",
+   "last_seen": "2026-06-10T20:06:31.456037+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4654,7 +4692,7 @@
    "url": "https://www.otodom.pl/pl/oferta/lublin-zemborzyce-dzialka-budowlana-z-wz-1862m-ID4AqA1",
    "title": "Lublin - Zemborzyce/ działka budowlana z wz/ 1862m",
    "area_m2": 1862.0,
-   "price_per_m2": 348.0,
+   "price_per_m2": 348.01,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4677,7 +4715,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544395+02:00",
-   "last_seen": "2026-06-10T19:56:59.544395+02:00",
+   "last_seen": "2026-06-10T20:06:31.456049+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4687,7 +4725,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-3000-m2-turystyczna-sasiaduje-z-centrum-handlowym-ID4Ao8b",
    "title": "Działka 3000 m2 Turystyczna sąsiaduje z Centrum Handlowym",
    "area_m2": 3000.0,
-   "price_per_m2": 633.0,
+   "price_per_m2": 633.33,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4710,7 +4748,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544428+02:00",
-   "last_seen": "2026-06-10T19:56:59.544428+02:00",
+   "last_seen": "2026-06-10T20:06:31.456060+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-3000-m2-turystyczna-sasiaduje-z-centrum-handlowym-CID3-ID19FkFy.html"
@@ -4721,7 +4759,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-przemyslowa-lublin-ul-zadebie-ID4Annr",
    "title": "Działka przemysłowa - Lublin, ul. Zadębie",
    "area_m2": 1364.0,
-   "price_per_m2": 161.0,
+   "price_per_m2": 160.56,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4744,7 +4782,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544461+02:00",
-   "last_seen": "2026-06-10T19:56:59.544461+02:00",
+   "last_seen": "2026-06-10T20:06:31.456071+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4754,7 +4792,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1040-m-lublin-ID4AlQb",
    "title": "Działka budowlana 1040 m² – Lublin",
    "area_m2": 1040.0,
-   "price_per_m2": 327.0,
+   "price_per_m2": 326.92,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4777,7 +4815,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544493+02:00",
-   "last_seen": "2026-06-10T19:56:59.544493+02:00",
+   "last_seen": "2026-06-10T20:06:31.456083+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4787,7 +4825,7 @@
    "url": "https://www.otodom.pl/pl/oferta/duza-dzialka-budowlana-w-lublinie-1503-m-ID4AlLM",
    "title": "Duża działka budowlana w Lublinie 1503 m²",
    "area_m2": 1503.0,
-   "price_per_m2": 199.0,
+   "price_per_m2": 198.94,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4810,7 +4848,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544526+02:00",
-   "last_seen": "2026-06-10T19:56:59.544526+02:00",
+   "last_seen": "2026-06-10T20:06:31.456095+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4820,7 +4858,7 @@
    "url": "https://www.otodom.pl/pl/oferta/lublin-uslugi-przemysl-magazyny-pow-88ar-ID4sSBW",
    "title": "Lublin -usługi,przemysł,magazyny- pow.88ar",
    "area_m2": 8809.0,
-   "price_per_m2": 538.0,
+   "price_per_m2": 537.52,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -4843,7 +4881,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544559+02:00",
-   "last_seen": "2026-06-10T19:56:59.544559+02:00",
+   "last_seen": "2026-06-10T20:06:31.456109+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/lublin-uslugi-przemysl-magazyny-pow-88ar-CID3-ID12m3uu.html"
@@ -4854,7 +4892,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycjna-przy-glownej-trasie-lublin-ID4zp41",
    "title": "Działka inwestycjna przy głównej trasie-Lublin",
    "area_m2": 3817.0,
-   "price_per_m2": 594.0,
+   "price_per_m2": 594.05,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -4877,7 +4915,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544591+02:00",
-   "last_seen": "2026-06-10T19:56:59.544591+02:00",
+   "last_seen": "2026-06-10T20:06:31.456123+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4887,7 +4925,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-pod-wiele-dzialalnosci-ID4AgYO",
    "title": "Działka usługowa pod wiele działalności.",
    "area_m2": 600.0,
-   "price_per_m2": 437.0,
+   "price_per_m2": 436.67,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -4910,7 +4948,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544628+02:00",
-   "last_seen": "2026-06-10T19:56:59.544628+02:00",
+   "last_seen": "2026-06-10T20:06:31.456135+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4920,7 +4958,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-w-spokojnej-okolicy-lublin-ul-folwarczn-ID4Afxf",
    "title": "Działka w spokojnej okolicy -Lublin ul. Folwarczn",
    "area_m2": 1240.0,
-   "price_per_m2": 363.0,
+   "price_per_m2": 362.9,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4943,7 +4981,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544661+02:00",
-   "last_seen": "2026-06-10T19:56:59.544661+02:00",
+   "last_seen": "2026-06-10T20:06:31.456152+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-w-spokojnej-okolicy-lublin-ul-folwarczn-CID3-ID19vQ5d.html"
@@ -4954,7 +4992,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-przemyslowo-budowlana-63a-lublin-zadebie-ID4Afiq",
    "title": "Działka przemysłowo budowlana 63a Lublin Zadębie",
    "area_m2": 6296.0,
-   "price_per_m2": 318.0,
+   "price_per_m2": 317.66,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -4977,7 +5015,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544694+02:00",
-   "last_seen": "2026-06-10T19:56:59.544694+02:00",
+   "last_seen": "2026-06-10T20:06:31.456169+02:00",
    "active": true,
    "days_active": 0
   },
@@ -4987,7 +5025,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-w-lublinie-z-przylaczami-ID4AejB",
    "title": "Działka usługowa w Lublinie z przyłączami",
    "area_m2": 2159.0,
-   "price_per_m2": 268.0,
+   "price_per_m2": 268.18,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -5010,7 +5048,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544727+02:00",
-   "last_seen": "2026-06-10T19:56:59.544727+02:00",
+   "last_seen": "2026-06-10T20:06:31.456186+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5043,7 +5081,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544760+02:00",
-   "last_seen": "2026-06-10T19:56:59.544760+02:00",
+   "last_seen": "2026-06-10T20:06:31.456202+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5053,7 +5091,7 @@
    "url": "https://www.otodom.pl/pl/oferta/3467m-przy-s17-plan-ogolny-nawet-4400-m-zabudow-ID4A8H0",
    "title": "3467m² przy S17 Plan Ogólny nawet 4400 m² zabudow",
    "area_m2": 3467.0,
-   "price_per_m2": 417.0,
+   "price_per_m2": 416.79,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -5076,7 +5114,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544793+02:00",
-   "last_seen": "2026-06-10T19:56:59.544793+02:00",
+   "last_seen": "2026-06-10T20:06:31.456219+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5086,7 +5124,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-515m2-ul-kosynierow-dzielnicaponikwoda-lublin-ID4A7Ke",
    "title": "Działka budowlana 515m2 ul. Kosynierów. Dzielnica:Ponikwoda, Lublin",
    "area_m2": 515.0,
-   "price_per_m2": 775.0,
+   "price_per_m2": 774.76,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5109,7 +5147,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544827+02:00",
-   "last_seen": "2026-06-10T19:56:59.544827+02:00",
+   "last_seen": "2026-06-10T20:06:31.456231+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5119,7 +5157,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-spokojna-okolica-blisko-centrum-ID4xtO0",
    "title": "Działka budowlana, spokojna okolica,blisko Centrum",
    "area_m2": 1162.0,
-   "price_per_m2": 383.0,
+   "price_per_m2": 382.96,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5142,7 +5180,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544859+02:00",
-   "last_seen": "2026-06-10T19:56:59.544859+02:00",
+   "last_seen": "2026-06-10T20:06:31.456243+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5175,7 +5213,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544892+02:00",
-   "last_seen": "2026-06-10T19:56:59.544892+02:00",
+   "last_seen": "2026-06-10T20:06:31.456259+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5185,7 +5223,7 @@
    "url": "https://www.otodom.pl/pl/oferta/1269-m2-dzialka-w-ok-zalewu-zemborzyckiego-ID4z8SD",
    "title": "1269 m2, działka w ok. Zalewu Zemborzyckiego",
    "area_m2": 1269.0,
-   "price_per_m2": 260.0,
+   "price_per_m2": 260.05,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -5208,7 +5246,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544925+02:00",
-   "last_seen": "2026-06-10T19:56:59.544925+02:00",
+   "last_seen": "2026-06-10T20:06:31.456271+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5218,7 +5256,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-13a-oraz-16a-mpzp-ID4z4NW",
    "title": "Działki budowlane 13a oraz 16a MPZP",
    "area_m2": 1275.0,
-   "price_per_m2": 220.0,
+   "price_per_m2": 219.61,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5241,7 +5279,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544958+02:00",
-   "last_seen": "2026-06-10T19:56:59.544958+02:00",
+   "last_seen": "2026-06-10T20:06:31.456282+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5251,7 +5289,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-26-93-ar-pod-produkcje-uslugi-i-magazyny-ID4yZyo",
    "title": "Działka 26,93 ar pod produkcję, usługi i magazyny",
    "area_m2": 2693.0,
-   "price_per_m2": 204.0,
+   "price_per_m2": 203.86,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -5274,7 +5312,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545015+02:00",
-   "last_seen": "2026-06-10T19:56:59.545015+02:00",
+   "last_seen": "2026-06-10T20:06:31.456294+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-26-93-ar-pod-produkcje-uslugi-i-magazyny-CID3-ID18gqwU.html"
@@ -5308,7 +5346,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545048+02:00",
-   "last_seen": "2026-06-10T19:56:59.545048+02:00",
+   "last_seen": "2026-06-10T20:06:31.456309+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5341,7 +5379,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545082+02:00",
-   "last_seen": "2026-06-10T19:56:59.545082+02:00",
+   "last_seen": "2026-06-10T20:06:31.456321+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/ul-gluska-najtansze-dzialki-budowlane-w-lublini-CID3-ID183Vrt.html"
@@ -5375,7 +5413,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545115+02:00",
-   "last_seen": "2026-06-10T19:56:59.545115+02:00",
+   "last_seen": "2026-06-10T20:06:31.456332+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5385,7 +5423,7 @@
    "url": "https://www.otodom.pl/pl/oferta/najtansza-dzialka-budowlana-w-lublinie-ul-gluska-ID4yMWu",
    "title": "Najtańsza działka budowlana w Lublinie ul. Głuska",
    "area_m2": 332.0,
-   "price_per_m2": 419.0,
+   "price_per_m2": 418.67,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5408,7 +5446,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545151+02:00",
-   "last_seen": "2026-06-10T19:56:59.545151+02:00",
+   "last_seen": "2026-06-10T20:06:31.456345+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/najtansza-dzialka-budowlana-w-lublinie-ul-gluska-CID3-ID183Vxc.html"
@@ -5442,7 +5480,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545185+02:00",
-   "last_seen": "2026-06-10T19:56:59.545185+02:00",
+   "last_seen": "2026-06-10T20:06:31.456357+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5452,7 +5490,7 @@
    "url": "https://www.otodom.pl/pl/oferta/interesujaca-dzialka-lublin-ul-gluska-ID4yzPX",
    "title": "Interesująca Działka Lublin ul. Głuska",
    "area_m2": 1740.0,
-   "price_per_m2": 216.0,
+   "price_per_m2": 215.52,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5475,7 +5513,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545218+02:00",
-   "last_seen": "2026-06-10T19:56:59.545218+02:00",
+   "last_seen": "2026-06-10T20:06:31.456373+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5485,7 +5523,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-1144-m2-okolice-ikei-ID4yz6N",
    "title": "Działka 1144 M2 okolice Ikei",
    "area_m2": 1144.0,
-   "price_per_m2": 436.0,
+   "price_per_m2": 436.19,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5508,7 +5546,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545251+02:00",
-   "last_seen": "2026-06-10T19:56:59.545251+02:00",
+   "last_seen": "2026-06-10T20:06:31.456386+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-1144-m2-okolice-ikei-CID3-ID17QimL.html"
@@ -5519,7 +5557,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-ul-narcyzowa-ponikwoda-ID4w6kd",
    "title": "Działka budowlana, ul. Narcyzowa, Ponikwoda",
    "area_m2": 956.0,
-   "price_per_m2": 396.0,
+   "price_per_m2": 396.44,
    "plot_type": null,
    "location": {
     "city": "Lublin",
@@ -5542,7 +5580,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545284+02:00",
-   "last_seen": "2026-06-10T19:56:59.545284+02:00",
+   "last_seen": "2026-06-10T20:06:31.456399+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5552,7 +5590,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-rekreacyjna-przy-ul-gluskiej-w-lublinie-ID4ymZ7",
    "title": "Działka rekreacyjna przy ul. Głuskiej w Lublinie",
    "area_m2": 336.0,
-   "price_per_m2": 59.0,
+   "price_per_m2": 59.23,
    "plot_type": "rekreacyjna",
    "location": {
     "city": "Lublin",
@@ -5575,7 +5613,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545317+02:00",
-   "last_seen": "2026-06-10T19:56:59.545317+02:00",
+   "last_seen": "2026-06-10T20:06:31.456411+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5585,7 +5623,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-pod-blizniaki-aleja-warszawska-ID4yiVy",
    "title": "Działki pod bliźniaki, Aleja Warszawska",
    "area_m2": 1275.0,
-   "price_per_m2": 340.0,
+   "price_per_m2": 340.39,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5608,7 +5646,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545350+02:00",
-   "last_seen": "2026-06-10T19:56:59.545350+02:00",
+   "last_seen": "2026-06-10T20:06:31.456424+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5618,7 +5656,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-2444-m2-weglin-poludniowy-lublin-ID4ydgc",
    "title": "Działka 2444 m2 Węglin Południowy Lublin!",
    "area_m2": 2444.0,
-   "price_per_m2": 363.0,
+   "price_per_m2": 363.34,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5641,7 +5679,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545383+02:00",
-   "last_seen": "2026-06-10T19:56:59.545383+02:00",
+   "last_seen": "2026-06-10T20:06:31.456437+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5651,7 +5689,7 @@
    "url": "https://www.otodom.pl/pl/oferta/al-warszawska-dzialka-budowlana-z-wz-3173-m2-ID4yas8",
    "title": "al. Warszawska/ działka budowlana z Wz/ 3173 m2",
    "area_m2": 3173.0,
-   "price_per_m2": 268.0,
+   "price_per_m2": 267.89,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5674,7 +5712,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545417+02:00",
-   "last_seen": "2026-06-10T19:56:59.545417+02:00",
+   "last_seen": "2026-06-10T20:06:31.456450+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5684,7 +5722,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-mozliwosc-28-domkow-okazj-ID4xY83",
    "title": "Działka inwestycyjna ! Możliwość 28 domków ! Okazj",
    "area_m2": 29915.0,
-   "price_per_m2": 104.0,
+   "price_per_m2": 103.63,
    "plot_type": null,
    "location": {
     "city": "Pliszczyn",
@@ -5707,7 +5745,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545450+02:00",
-   "last_seen": "2026-06-10T19:56:59.545450+02:00",
+   "last_seen": "2026-06-10T20:06:31.456462+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5717,7 +5755,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-ponikwoda-ID4xFpC",
    "title": "Działka Budowlana Ponikwoda",
    "area_m2": 1414.0,
-   "price_per_m2": 388.0,
+   "price_per_m2": 388.26,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5740,7 +5778,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545483+02:00",
-   "last_seen": "2026-06-10T19:56:59.545483+02:00",
+   "last_seen": "2026-06-10T20:06:31.456475+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5773,7 +5811,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545517+02:00",
-   "last_seen": "2026-06-10T19:56:59.545517+02:00",
+   "last_seen": "2026-06-10T20:06:31.456487+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-uslugowa-ul-turystyczna-pierwsza-linia-zabudowy-CID3-ID17gt2K.html"
@@ -5784,7 +5822,7 @@
    "url": "https://www.otodom.pl/pl/oferta/atrakcyjna-dzialka-budowlano-rolna-w-stasinie-ID4xSLQ",
    "title": "Atrakcyjna działka budowlano-rolna w Stasinie",
    "area_m2": 5550.0,
-   "price_per_m2": 90.0,
+   "price_per_m2": 89.91,
    "plot_type": "budowlana",
    "location": {
     "city": "Stasin",
@@ -5807,7 +5845,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545551+02:00",
-   "last_seen": "2026-06-10T19:56:59.545551+02:00",
+   "last_seen": "2026-06-10T20:06:31.456500+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5817,7 +5855,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-w-lublinie-ul-folwarczna-ID4xQ7B",
    "title": "Działki budowlane w Lublinie ul. Folwarczna",
    "area_m2": 900.0,
-   "price_per_m2": 343.0,
+   "price_per_m2": 343.33,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5840,7 +5878,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545584+02:00",
-   "last_seen": "2026-06-10T19:56:59.545584+02:00",
+   "last_seen": "2026-06-10T20:06:31.456513+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5850,7 +5888,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1553m2-zemborzyce-media-w-d-ID4xMIk",
    "title": "Działka budowlana, 1553m2, Zemborzyce | media w d",
    "area_m2": 1553.0,
-   "price_per_m2": 193.0,
+   "price_per_m2": 193.17,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5873,7 +5911,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545618+02:00",
-   "last_seen": "2026-06-10T19:56:59.545618+02:00",
+   "last_seen": "2026-06-10T20:06:31.456526+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5883,7 +5921,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-przy-ulicy-makowej-w-lublinie-wydane-wz-ID4xv45",
    "title": "Działki przy ulicy Makowej w Lublinie - wydane WZ",
    "area_m2": 1040.0,
-   "price_per_m2": 586.0,
+   "price_per_m2": 585.58,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5906,7 +5944,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545657+02:00",
-   "last_seen": "2026-06-10T19:56:59.545657+02:00",
+   "last_seen": "2026-06-10T20:06:31.456539+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5916,7 +5954,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-pod-blizniaki-aleja-warszawska-ID4wZKU",
    "title": "Działki pod bliźniaki, Aleja Warszawska",
    "area_m2": 5520.0,
-   "price_per_m2": 341.0,
+   "price_per_m2": 340.58,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5939,7 +5977,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545690+02:00",
-   "last_seen": "2026-06-10T19:56:59.545690+02:00",
+   "last_seen": "2026-06-10T20:06:31.456552+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5949,7 +5987,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-w-spokojnej-okolicy-na-obrzezach-lublina-ul-h-dziubinkiej-ID4xs3z",
    "title": "Działka w spokojnej okolicy na obrzeżach Lublina - ul.H.Dziubińkiej",
    "area_m2": 1442.0,
-   "price_per_m2": 166.0,
+   "price_per_m2": 166.44,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -5972,7 +6010,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545725+02:00",
-   "last_seen": "2026-06-10T19:56:59.545725+02:00",
+   "last_seen": "2026-06-10T20:06:31.456565+02:00",
    "active": true,
    "days_active": 0
   },
@@ -5982,7 +6020,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlano-inwestycyjna-okolice-ul-choiny-ID4xhjN",
    "title": "Działka budowlano-inwestycyjna okolice ul. Choiny",
    "area_m2": 1200.0,
-   "price_per_m2": 316.0,
+   "price_per_m2": 315.83,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6005,7 +6043,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545802+02:00",
-   "last_seen": "2026-06-10T19:56:59.545802+02:00",
+   "last_seen": "2026-06-10T20:06:31.456579+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6038,7 +6076,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545837+02:00",
-   "last_seen": "2026-06-10T19:56:59.545837+02:00",
+   "last_seen": "2026-06-10T20:06:31.456592+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6071,7 +6109,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545872+02:00",
-   "last_seen": "2026-06-10T19:56:59.545872+02:00",
+   "last_seen": "2026-06-10T20:06:31.456605+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-1-ha-wyzwolenia-mozliwosc-zabudowy-szeregowej-CID3-ID16xftp.html"
@@ -6082,7 +6120,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-rolno-inwestycyjna-lublin-ul-blawatkowa-ID4x04w",
    "title": "Działka rolno/inwestycyjna Lublin ul.Bławatkowa",
    "area_m2": 5945.0,
-   "price_per_m2": 25.0,
+   "price_per_m2": 24.73,
    "plot_type": "rolna",
    "location": {
     "city": "Lublin",
@@ -6105,7 +6143,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545906+02:00",
-   "last_seen": "2026-06-10T19:56:59.545906+02:00",
+   "last_seen": "2026-06-10T20:06:31.456618+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6115,7 +6153,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-lublin-ul-rudnicka-ID4vZuL",
    "title": "Działki budowlane - Lublin ul. Rudnicka",
    "area_m2": 2942.0,
-   "price_per_m2": 741.0,
+   "price_per_m2": 740.99,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6138,7 +6176,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545940+02:00",
-   "last_seen": "2026-06-10T19:56:59.545940+02:00",
+   "last_seen": "2026-06-10T20:06:31.456632+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialki-budowlane-lublin-ul-rudnicka-CID3-ID16n0VO.html"
@@ -6149,7 +6187,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-w-lublinie-ul-skowronkowa-ID4vZ5H",
    "title": "Działka inwestycyjna w Lublinie ul. Skowronkowa",
    "area_m2": 6900.0,
-   "price_per_m2": 719.0,
+   "price_per_m2": 718.84,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6172,7 +6210,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545991+02:00",
-   "last_seen": "2026-06-10T19:56:59.545991+02:00",
+   "last_seen": "2026-06-10T20:06:31.456645+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6182,7 +6220,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-lublin-ul-dereckiego-ID4vYXG",
    "title": "Działka budowlana - Lublin ul. Dereckiego",
    "area_m2": 2886.0,
-   "price_per_m2": 518.0,
+   "price_per_m2": 518.02,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6205,7 +6243,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546026+02:00",
-   "last_seen": "2026-06-10T19:56:59.546026+02:00",
+   "last_seen": "2026-06-10T20:06:31.456658+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6215,7 +6253,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-o-pow-371-m2-dziesiata-ID4vSYh",
    "title": "Działka budowlana o pow. 371 m2/Dziesiąta",
    "area_m2": 371.0,
-   "price_per_m2": 660.0,
+   "price_per_m2": 660.38,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6238,7 +6276,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546060+02:00",
-   "last_seen": "2026-06-10T19:56:59.546060+02:00",
+   "last_seen": "2026-06-10T20:06:31.456671+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6248,7 +6286,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-przy-ul-poligonowej-ID4vCCf",
    "title": "Działka usługowa przy ul. Poligonowej",
    "area_m2": 9661.0,
-   "price_per_m2": 808.0,
+   "price_per_m2": 808.4,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -6271,7 +6309,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546094+02:00",
-   "last_seen": "2026-06-10T19:56:59.546094+02:00",
+   "last_seen": "2026-06-10T20:06:31.456684+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6281,7 +6319,7 @@
    "url": "https://www.otodom.pl/pl/oferta/1220-m2-lublin-ul-poligonowa-ID4vw5h",
    "title": "1220 m2 - Lublin, ul. Poligonowa",
    "area_m2": 1220.0,
-   "price_per_m2": 602.0,
+   "price_per_m2": 602.46,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6304,7 +6342,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546130+02:00",
-   "last_seen": "2026-06-10T19:56:59.546130+02:00",
+   "last_seen": "2026-06-10T20:06:31.456697+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6314,7 +6352,7 @@
    "url": "https://www.otodom.pl/pl/oferta/3230-m2-pod-inwestycje-deweloperska-lublin-ID4ve0P",
    "title": "3230 m2 - pod inwestycję deweloperską - Lublin",
    "area_m2": 3230.0,
-   "price_per_m2": 604.0,
+   "price_per_m2": 603.72,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6337,7 +6375,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546165+02:00",
-   "last_seen": "2026-06-10T19:56:59.546165+02:00",
+   "last_seen": "2026-06-10T20:06:31.456711+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6370,7 +6408,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546199+02:00",
-   "last_seen": "2026-06-10T19:56:59.546199+02:00",
+   "last_seen": "2026-06-10T20:06:31.456724+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6380,7 +6418,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-lublin-630m2-ID4vadH",
    "title": "Działka budowlana/Lublin/ 630m2",
    "area_m2": 630.0,
-   "price_per_m2": 951.0,
+   "price_per_m2": 950.79,
    "plot_type": "budowlana",
    "location": {
     "city": "Konopnica",
@@ -6403,7 +6441,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546233+02:00",
-   "last_seen": "2026-06-10T19:56:59.546233+02:00",
+   "last_seen": "2026-06-10T20:06:31.456737+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6413,7 +6451,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-w-swietnej-lokalizacji-z-wydanymi-wz-ID4qU5o",
    "title": "Działka W Świetnej Lokalizacji Z Wydanymi Wz",
    "area_m2": 865.0,
-   "price_per_m2": 960.0,
+   "price_per_m2": 959.54,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6436,7 +6474,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546268+02:00",
-   "last_seen": "2026-06-10T19:56:59.546268+02:00",
+   "last_seen": "2026-06-10T20:06:31.456750+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6446,7 +6484,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-ujeta-w-studium-pod-aktywnosc-gospodarcza-ID4wART",
    "title": "Działka ujęta w studium pod aktywność gospodarczą",
    "area_m2": 2427.0,
-   "price_per_m2": 556.0,
+   "price_per_m2": 556.24,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6469,7 +6507,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546302+02:00",
-   "last_seen": "2026-06-10T19:56:59.546302+02:00",
+   "last_seen": "2026-06-10T20:06:31.456765+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6479,7 +6517,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-komercyjna-przy-ul-wyzynnej-ID4wl0r",
    "title": "Działka komercyjna przy ul. Wyżynnej",
    "area_m2": 11093.0,
-   "price_per_m2": 288.0,
+   "price_per_m2": 288.47,
    "plot_type": "inwestycyjna",
    "location": {
     "city": "Lublin",
@@ -6502,7 +6540,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546337+02:00",
-   "last_seen": "2026-06-10T19:56:59.546337+02:00",
+   "last_seen": "2026-06-10T20:06:31.456779+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6535,7 +6573,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546371+02:00",
-   "last_seen": "2026-06-10T19:56:59.546371+02:00",
+   "last_seen": "2026-06-10T20:06:31.456792+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6545,7 +6583,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-z-widokiem-na-stare-miasto-w-lublinie-ID4usEp",
    "title": "Działka z widokiem na Stare Miasto w Lublinie!",
    "area_m2": 3304.0,
-   "price_per_m2": 278.0,
+   "price_per_m2": 278.45,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6568,7 +6606,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546406+02:00",
-   "last_seen": "2026-06-10T19:56:59.546406+02:00",
+   "last_seen": "2026-06-10T20:06:31.456805+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6578,7 +6616,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-w-lublinie-ul-zadebie-ID4AQ6q",
    "title": "Działki budowlane w Lublinie ul. Zadębie",
    "area_m2": 825.0,
-   "price_per_m2": 339.0,
+   "price_per_m2": 338.79,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6601,7 +6639,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546440+02:00",
-   "last_seen": "2026-06-10T19:56:59.546440+02:00",
+   "last_seen": "2026-06-10T20:06:31.456819+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6611,7 +6649,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-pod-ag-w-lublinie-129000zl-ID4tFTN",
    "title": "Działka inwestycyjna pod AG w Lublinie-129000ZŁ",
    "area_m2": 1148.0,
-   "price_per_m2": 112.0,
+   "price_per_m2": 112.37,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -6634,7 +6672,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546474+02:00",
-   "last_seen": "2026-06-10T19:56:59.546474+02:00",
+   "last_seen": "2026-06-10T20:06:31.456833+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6644,7 +6682,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-w-lublinie-zadebie-ID4tFTK",
    "title": "Działka inwestycyjna w Lublinie-Zadębie",
    "area_m2": 1288.0,
-   "price_per_m2": 112.0,
+   "price_per_m2": 111.8,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -6667,7 +6705,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546508+02:00",
-   "last_seen": "2026-06-10T19:56:59.546508+02:00",
+   "last_seen": "2026-06-10T20:06:31.456846+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6677,7 +6715,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-blizniaka-w-poblizu-lasu-ID4tt6U",
    "title": "Działka pod bliźniaka w pobliżu lasu",
    "area_m2": 988.0,
-   "price_per_m2": 890.0,
+   "price_per_m2": 889.68,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6700,7 +6738,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546543+02:00",
-   "last_seen": "2026-06-10T19:56:59.546543+02:00",
+   "last_seen": "2026-06-10T20:06:31.456859+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-pod-blizniaka-w-poblizu-lasu-CID3-ID1318wU.html"
@@ -6711,7 +6749,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-z-wydana-wz-lublin-ul-kreznicka-ID4tkL7",
    "title": "Działka z wydaną WZ- Lublin, ul. Krężnicka",
    "area_m2": 1500.0,
-   "price_per_m2": 183.0,
+   "price_per_m2": 182.67,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -6734,7 +6772,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546577+02:00",
-   "last_seen": "2026-06-10T19:56:59.546577+02:00",
+   "last_seen": "2026-06-10T20:06:31.456873+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-z-wydana-wz-lublin-ul-kreznicka-CID3-ID1aRoZK.html"
@@ -6745,7 +6783,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-28-ar-ID4tcZ5",
    "title": "Działka 28 ar",
    "area_m2": 2800.0,
-   "price_per_m2": 143.0,
+   "price_per_m2": 142.86,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6768,7 +6806,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546612+02:00",
-   "last_seen": "2026-06-10T19:56:59.546612+02:00",
+   "last_seen": "2026-06-10T20:06:31.456886+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-28-ar-CID3-ID1aHx2y.html"
@@ -6802,7 +6840,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546651+02:00",
-   "last_seen": "2026-06-10T19:56:59.546651+02:00",
+   "last_seen": "2026-06-10T20:06:31.456900+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6812,7 +6850,7 @@
    "url": "https://www.otodom.pl/pl/oferta/szerokie-dzialka-bud-uslugowa-3851m2-ID4r7nI",
    "title": "Szerokie - działka bud.-usługowa - 3851m2",
    "area_m2": 3851.0,
-   "price_per_m2": 675.0,
+   "price_per_m2": 675.15,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6835,7 +6873,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546686+02:00",
-   "last_seen": "2026-06-10T19:56:59.546686+02:00",
+   "last_seen": "2026-06-10T20:06:31.456913+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6845,7 +6883,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-1400-m2-zawieprzycka-ID4oUde",
    "title": "Działka usługowa 1400 m2 Zawieprzycka",
    "area_m2": 1400.0,
-   "price_per_m2": 457.0,
+   "price_per_m2": 457.14,
    "plot_type": null,
    "location": {
     "city": "Lublin",
@@ -6868,7 +6906,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546720+02:00",
-   "last_seen": "2026-06-10T19:56:59.546720+02:00",
+   "last_seen": "2026-06-10T20:06:31.456926+02:00",
    "active": true,
    "days_active": 0
   },
@@ -6878,7 +6916,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialki-pod-zabudowe-jednorodzinna-w-lublinie-ID4r10c",
    "title": "Działki pod zabudowę jednorodzinną w Lublinie",
    "area_m2": 756.0,
-   "price_per_m2": 396.0,
+   "price_per_m2": 395.5,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6901,7 +6939,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546755+02:00",
-   "last_seen": "2026-06-10T19:56:59.546755+02:00",
+   "last_seen": "2026-06-10T20:06:31.456968+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialki-pod-zabudowe-jednorodzinna-w-lublinie-CID3-ID13Rs7s.html"
@@ -6912,7 +6950,7 @@
    "url": "https://www.otodom.pl/pl/oferta/atrakcyjna-dzialka-pod-aktywnosc-gospodarcza-ID4qWsW",
    "title": "Atrakcyjna działka pod aktywność gospodarczą",
    "area_m2": 1703.0,
-   "price_per_m2": 117.0,
+   "price_per_m2": 116.85,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6935,7 +6973,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546789+02:00",
-   "last_seen": "2026-06-10T19:56:59.546789+02:00",
+   "last_seen": "2026-06-10T20:06:31.456984+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/atrakcyjna-dzialka-pod-aktywnosc-gospodarcza-CID3-ID1aRwIn.html"
@@ -6946,7 +6984,7 @@
    "url": "https://www.otodom.pl/pl/oferta/inwestycyjna-dzialka-przemyslowo-budowlana-lublin-ID4qLIo",
    "title": "Inwestycyjna działka przemysłowo-budowlana Lublin",
    "area_m2": 7188.0,
-   "price_per_m2": 104.0,
+   "price_per_m2": 104.2,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -6969,7 +7007,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546824+02:00",
-   "last_seen": "2026-06-10T19:56:59.546824+02:00",
+   "last_seen": "2026-06-10T20:06:31.456998+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/inwestycyjna-dzialka-przemyslowo-budowlana-lublin-CID3-ID10l5rl.html"
@@ -6980,7 +7018,7 @@
    "url": "https://www.otodom.pl/pl/oferta/teren-inwestycyjny-lublin-ul-kijanska-ID4qJCw",
    "title": "Teren inwestycyjny, Lublin - ul. Kijańska",
    "area_m2": 2226.0,
-   "price_per_m2": 224.0,
+   "price_per_m2": 224.17,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -7003,7 +7041,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546859+02:00",
-   "last_seen": "2026-06-10T19:56:59.546859+02:00",
+   "last_seen": "2026-06-10T20:06:31.457012+02:00",
    "active": true,
    "days_active": 0
   },
@@ -7013,7 +7051,7 @@
    "url": "https://www.otodom.pl/pl/oferta/kreznicka-3-km-od-zalewu-zemborzyckiego-15ar-ID4j6Nx",
    "title": "Krężnicka, 3 km od Zalewu Zemborzyckiego, 15ar",
    "area_m2": 1463.0,
-   "price_per_m2": 189.0,
+   "price_per_m2": 189.34,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -7036,7 +7074,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546894+02:00",
-   "last_seen": "2026-06-10T19:56:59.546894+02:00",
+   "last_seen": "2026-06-10T20:06:31.457026+02:00",
    "active": true,
    "days_active": 0
   },
@@ -7069,7 +7107,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546928+02:00",
-   "last_seen": "2026-06-10T19:56:59.546928+02:00",
+   "last_seen": "2026-06-10T20:06:31.457040+02:00",
    "active": true,
    "days_active": 0,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-3000-m2-ul-kreznicka-CID3-IDNu9Ao.html"
@@ -7080,7 +7118,7 @@
    "url": "https://www.otodom.pl/pl/oferta/kreznicka-3-km-od-zalewu-zemborzyckiego-49ar-ID4j6Q0",
    "title": "Krężnicka, 3 km od Zalewu Zemborzyckiego, 49ar",
    "area_m2": 4900.0,
-   "price_per_m2": 153.0,
+   "price_per_m2": 153.06,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -7103,7 +7141,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546963+02:00",
-   "last_seen": "2026-06-10T19:56:59.546963+02:00",
+   "last_seen": "2026-06-10T20:06:31.457053+02:00",
    "active": true,
    "days_active": 0
   },
@@ -7113,7 +7151,7 @@
    "url": "https://www.otodom.pl/pl/oferta/42ar-budowlano-rolne-w-lublinie-ID4i29d",
    "title": "42ar budowlano-rolne w Lublinie",
    "area_m2": 4204.0,
-   "price_per_m2": 58.0,
+   "price_per_m2": 58.28,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -7136,7 +7174,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547022+02:00",
-   "last_seen": "2026-06-10T19:56:59.547022+02:00",
+   "last_seen": "2026-06-10T20:06:31.457067+02:00",
    "active": true,
    "days_active": 0
   },
@@ -7146,7 +7184,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-rolna-w-lubelskiej-strefie-ekonomicznej-ID4ej0Z",
    "title": "Działka rolna w lubelskiej strefie ekonomicznej",
    "area_m2": 1001.0,
-   "price_per_m2": 24.0,
+   "price_per_m2": 24.48,
    "plot_type": "rolna",
    "location": {
     "city": "Lublin",
@@ -7169,7 +7207,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547057+02:00",
-   "last_seen": "2026-06-10T19:56:59.547057+02:00",
+   "last_seen": "2026-06-10T20:06:31.457081+02:00",
    "active": true,
    "days_active": 0
   },
@@ -7179,7 +7217,7 @@
    "url": "https://www.otodom.pl/pl/oferta/atrakcyjna-dzialka-rolna-na-terenie-lublina-ID4ej12",
    "title": "Atrakcyjna działka rolna na terenie Lublina",
    "area_m2": 817.0,
-   "price_per_m2": 24.0,
+   "price_per_m2": 24.48,
    "plot_type": "rolna",
    "location": {
     "city": "Lublin",
@@ -7202,7 +7240,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547092+02:00",
-   "last_seen": "2026-06-10T19:56:59.547092+02:00",
+   "last_seen": "2026-06-10T20:06:31.457095+02:00",
    "active": true,
    "days_active": 0
   },
@@ -7212,7 +7250,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dys-dzialka-inwestycja-dom-spokojnej-starosci-dps-ID43lkU",
    "title": "Dys,Działka inwestycja,dom spokojnej starości,Dps.",
    "area_m2": 5134.0,
-   "price_per_m2": 380.0,
+   "price_per_m2": 379.93,
    "plot_type": null,
    "location": {
     "city": "Lublin",
@@ -7235,7 +7273,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547128+02:00",
-   "last_seen": "2026-06-10T19:56:59.547128+02:00",
+   "last_seen": "2026-06-10T20:06:31.457108+02:00",
    "active": true,
    "days_active": 0
   },
@@ -7268,7 +7306,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547164+02:00",
-   "last_seen": "2026-06-10T19:56:59.547164+02:00",
+   "last_seen": "2026-06-10T20:06:31.457122+02:00",
    "active": true,
    "days_active": 0
   },
@@ -7278,7 +7316,7 @@
    "url": "https://www.otodom.pl/pl/oferta/sprzedam-dzialke-na-ulicy-wyzwolenia-w-lublinie-ID4BsXP",
    "title": "Sprzedam działkę na ulicy Wyzwolenia w lublinie",
    "area_m2": 1262.0,
-   "price_per_m2": 238.0,
+   "price_per_m2": 237.72,
    "plot_type": "budowlana",
    "location": {
     "city": "Lublin",
@@ -7301,7 +7339,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547184+02:00",
-   "last_seen": "2026-06-10T19:56:59.547184+02:00",
+   "last_seen": "2026-06-10T20:06:31.457136+02:00",
    "active": true,
    "days_active": 0
   },
@@ -7311,7 +7349,7 @@
    "url": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-pod-ag-w-lublinie-129000zl-ID4tFTN",
    "title": "Działka inwestycyjna pod AG w Lublinie-129000ZŁ",
    "area_m2": 1148.0,
-   "price_per_m2": 112.0,
+   "price_per_m2": 112.37,
    "plot_type": "inna",
    "location": {
     "city": "Lublin",
@@ -7334,7 +7372,7 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547212+02:00",
-   "last_seen": "2026-06-10T19:56:59.547212+02:00",
+   "last_seen": "2026-06-10T20:06:31.457150+02:00",
    "active": true,
    "days_active": 0
   }

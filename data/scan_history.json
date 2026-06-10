@@ -10,6 +10,17 @@
    "skipped_removed": 0,
    "active": 220,
    "total_in_db": 220
+  },
+  {
+   "timestamp": "2026-06-10T20:06:18.327197+02:00",
+   "duration_s": 13.1,
+   "scraped_olx": 52,
+   "scraped_otodom": 168,
+   "new": 0,
+   "updated": 220,
+   "skipped_removed": 0,
+   "active": 220,
+   "total_in_db": 220
   }
  ]
 }

@@ -119,3 +119,36 @@ def test_plot_type_fallback():
 def test_offer_id_helpers():
     assert olx_offer_id('x-CID3-ID9z.html') == 'olx:CID3-ID9z'
     assert otodom_offer_id(123) == 'otodom:123'
+
+
+def _offer(id_, source, price, area, coords=None, active=True):
+    return {
+        'id': id_, 'source': source, 'active': active, 'area_m2': area,
+        'price': {'current': price},
+        'url': f'https://example.com/{id_}',
+        'location': {'coords': coords},
+        'first_seen': '2026-06-01T10:00:00+02:00',
+        'last_seen': '2026-06-10T10:00:00+02:00',
+    }
+
+
+def test_cross_portal_dedup_tagging(tmp_path):
+    from main import SonarDzialkowy
+    sonar = SonarDzialkowy(data_file=str(tmp_path / 'offers.json'),
+                           removed_file=str(tmp_path / 'removed.json'))
+    near = {'lat': 51.25, 'lon': 22.56}
+    near2 = {'lat': 51.26, 'lon': 22.57}      # ~1.3 km
+    far = {'lat': 51.35, 'lon': 22.80}        # ~20 km
+    sonar.database['offers'] = [
+        _offer('olx:CID3-ID1', 'olx', 300000, 1500, near),
+        _offer('otodom:1', 'otodom', 300000, 1505, near2),   # duplikat (±1%, blisko)
+        _offer('olx:CID3-ID2', 'olx', 300000, 1500, near),
+        _offer('otodom:2', 'otodom', 300000, 1500, far),     # za daleko — nie duplikat
+    ]
+    sonar._tag_cross_portal_duplicates()
+    offers = {o['id']: o for o in sonar.database['offers']}
+    assert offers['olx:CID3-ID1']['duplicate_of'] == 'otodom:1'
+    assert offers['otodom:1']['also_at'] == offers['olx:CID3-ID1']['url']
+    # otodom:1 jest już sparowany (max 1 duplikat), a otodom:2 odpada po
+    # dystansie (>5 km) — więc ID2 zostaje na mapie bez duplicate_of
+    assert 'duplicate_of' not in offers['olx:CID3-ID2']
