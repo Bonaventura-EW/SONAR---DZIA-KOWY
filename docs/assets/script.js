@@ -1,5 +1,12 @@
 /* SONAR DZIAŁKOWY — frontend mapy (Leaflet).
- * Czyta data.json wygenerowany przez src/map_generator.py. */
+ * Czyta data.json wygenerowany przez src/map_generator.py.
+ *
+ * Kształty pinezek przeniesione z SONAR-POKOJOWY:
+ *  - dokładny adres (coords_precision == 'exact')  → pinezka-kropla 40×50
+ *  - przybliżony (coords_precision == 'approx')    → kwadrat 34×34 z przerywaną ramką
+ *  - nieaktywne → × (białe koło w pinezce / × na kwadracie)
+ *  - badge N (nowa) i 💲↓/↑ (zmiana ceny)
+ */
 
 const LUBLIN_CENTER = [51.2465, 22.5684];
 const NEW_OFFER_DAYS = 7;
@@ -61,6 +68,10 @@ function isNew(offer) {
     return (Date.now() - new Date(offer.first_seen).getTime()) < NEW_OFFER_DAYS * 86400000;
 }
 
+function isApprox(offer) {
+    return offer.coords_precision !== 'exact';
+}
+
 function colorFor(offer) {
     if (!offer.active) return INACTIVE_COLOR;
     const v = offer.price_per_m2;
@@ -104,8 +115,10 @@ function buildLegend() {
 }
 
 function bindFilterEvents() {
-    ['src-olx', 'src-otodom', 'layer-active', 'layer-inactive', 'only-new', 'only-private']
+    ['src-olx', 'src-otodom', 'layer-active', 'layer-active-approx',
+     'layer-inactive', 'layer-inactive-approx', 'only-new', 'only-private']
         .forEach(id => document.getElementById(id).addEventListener('change', render));
+    document.getElementById('time-filter').addEventListener('change', render);
     ['price-min', 'price-max', 'area-min', 'area-max']
         .forEach(id => document.getElementById(id).addEventListener('input', debounce(render, 300)));
 }
@@ -121,10 +134,19 @@ function passesFilters(o) {
     if (o.source === 'olx' && !srcOlx) return false;
     if (o.source === 'otodom' && !srcOtodom) return false;
 
-    const showActive = document.getElementById('layer-active').checked;
-    const showInactive = document.getElementById('layer-inactive').checked;
-    if (o.active && !showActive) return false;
-    if (!o.active && !showInactive) return false;
+    // warstwy: aktywne/nieaktywne × dokładne/przybliżone
+    const approx = isApprox(o);
+    const layerId = o.active
+        ? (approx ? 'layer-active-approx' : 'layer-active')
+        : (approx ? 'layer-inactive-approx' : 'layer-inactive');
+    if (!document.getElementById(layerId).checked) return false;
+
+    // 📅 filtr "z ostatnich X dni" (po first_seen)
+    const timeDays = document.getElementById('time-filter').value;
+    if (timeDays !== 'all') {
+        const cutoff = Date.now() - parseInt(timeDays, 10) * 86400000;
+        if (!o.first_seen || new Date(o.first_seen).getTime() < cutoff) return false;
+    }
 
     if (document.getElementById('only-new').checked && !isNew(o)) return false;
     if (document.getElementById('only-private').checked && !o.is_private_owner) return false;
@@ -144,6 +166,71 @@ function passesFilters(o) {
     return true;
 }
 
+/* ===== Ikony markerów (kształty z SONAR-POKOJOWY) ===== */
+
+function badgesHtml(o) {
+    const hasPriceChange = o.previous_price && o.price_trend;
+    let html = '';
+    if (hasPriceChange) {
+        const down = o.price_trend === 'down';
+        html += `<div style="position:absolute;top:-8px;right:-8px;background:${down ? '#28a745' : '#dc3545'};color:white;border-radius:10px;min-width:28px;height:20px;font-size:11px;font-weight:bold;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.3);padding:0 4px;border:2px solid white;">💲${down ? '↓' : '↑'}</div>`;
+    } else if (isNew(o)) {
+        html += `<div style="position:absolute;top:-5px;right:-5px;background:#ff0000;color:white;border-radius:50%;width:16px;height:16px;font-size:10px;font-weight:bold;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,0.3);">N</div>`;
+    }
+    return html;
+}
+
+function makeIcon(o) {
+    const color = colorFor(o);
+    const fresh = isNew(o);
+    const tooltip = `${escapeHtml(o.title || '')} — ${fmtPrice(o.price)}`;
+
+    if (isApprox(o)) {
+        // KWADRAT 34×34 z przerywaną obwódką (przybliżony adres), anchor w środku
+        const s = 34;
+        const cross = !o.active
+            ? `<text x="17" y="17" text-anchor="middle" dominant-baseline="central" font-size="22" font-weight="700" fill="white" font-family="-apple-system, sans-serif" style="paint-order: stroke; stroke: rgba(0,0,0,0.5); stroke-width: 2px;">×</text>`
+            : '';
+        return L.divIcon({
+            className: 'square-marker',
+            html: `<div style="position:relative;width:${s}px;height:${s}px;" title="${tooltip}">
+                <svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
+                    <rect x="3" y="3" width="${s - 6}" height="${s - 6}"
+                          fill="${color}" fill-opacity="0.85"
+                          stroke="${fresh ? '#ff0000' : 'white'}"
+                          stroke-width="3" stroke-dasharray="4 3"/>
+                    ${cross}
+                </svg>
+                ${badgesHtml(o)}
+            </div>`,
+            iconSize: [s, s],
+            iconAnchor: [s / 2, s / 2],
+            popupAnchor: [0, -s / 2],
+        });
+    }
+
+    // PINEZKA-KROPLA 40×50 (dokładny adres)
+    const inner = !o.active
+        ? `<circle cx="20" cy="18" r="9" fill="white"/><text x="20" y="18" text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="700" fill="#1f2937" font-family="-apple-system, sans-serif">×</text>`
+        : `<circle cx="20" cy="18" r="7" fill="white" fill-opacity="0.9"/>`;
+    return L.divIcon({
+        className: 'pin-marker',
+        html: `<div style="position:relative;width:40px;height:50px;" title="${tooltip}">
+            <svg width="40" height="50" viewBox="0 0 40 50">
+                <path d="M20 0 C9 0 0 9 0 20 C0 35 20 50 20 50 C20 50 40 35 40 20 C40 9 31 0 20 0 Z"
+                      fill="${color}"
+                      stroke="${fresh ? '#ff0000' : 'white'}"
+                      stroke-width="${fresh ? 3 : 2}"/>
+                ${inner}
+            </svg>
+            ${badgesHtml(o)}
+        </div>`,
+        iconSize: [40, 50],
+        iconAnchor: [20, 50],
+        popupAnchor: [0, -50],
+    });
+}
+
 function popupHtml(o) {
     const newBadge = isNew(o) ? ' <span class="badge-new">NOWA</span>' : '';
     const trend = o.price_trend === 'down'
@@ -152,7 +239,7 @@ function popupHtml(o) {
             ? ` <span class="trend-up">↑ było ${fmtPrice(o.previous_price)}</span>` : '';
     const img = o.image ? `<img class="popup-img" src="${o.image}" loading="lazy" alt="">` : '';
     const where = [o.street, o.district].filter(Boolean).join(', ');
-    const precision = o.coords_precision === 'approx' ? ' (lokalizacja przybliżona)' : '';
+    const precision = isApprox(o) ? ' (lokalizacja przybliżona ~1 km)' : '';
     const alsoAt = o.also_at
         ? `<a class="secondary" href="${o.also_at}" target="_blank" rel="noopener">Druga oferta ↗</a>` : '';
     const status = o.active ? '' : '<div style="color:#dc2626;font-weight:700;font-size:12px;">⏸ OFERTA NIEAKTYWNA</div>';
@@ -163,7 +250,7 @@ function popupHtml(o) {
         <div class="popup-meta">
             📐 ${fmtArea(o.area_m2)} • ${o.price_per_m2 ? fmtPrice(o.price_per_m2) + '/m²' : '—'}<br>
             🏷️ ${o.plot_type || 'inna'} • ${o.source.toUpperCase()}${o.is_private_owner ? ' • od właściciela' : ''}<br>
-            ${where ? '📍 ' + escapeHtml(where) + precision + '<br>' : ''}
+            ${where ? '📍 ' + escapeHtml(where) + precision + '<br>' : (precision ? '📍 ' + precision.trim() + '<br>' : '')}
             🗓️ w bazie od ${o.first_seen ? new Date(o.first_seen).toLocaleDateString('pl-PL') : '—'} (${o.days_active} dni)
         </div>
         <div class="popup-desc">${escapeHtml(o.description || '')}</div>
@@ -183,16 +270,12 @@ function render() {
     const located = visible.filter(o => o.coords);
 
     located.forEach(o => {
-        const exact = o.coords_precision === 'exact';
-        const marker = L.circleMarker([o.coords.lat, o.coords.lon], {
-            radius: exact ? 9 : 11,
-            color: colorFor(o),
-            weight: exact ? 1.5 : 3,
-            fillColor: colorFor(o),
-            fillOpacity: exact ? 0.85 : 0.25,
-            opacity: o.active ? 1 : 0.6,
+        const marker = L.marker([o.coords.lat, o.coords.lon], {
+            icon: makeIcon(o),
+            // dokładne pinezki nad kwadratami, nieaktywne pod aktywnymi
+            zIndexOffset: (isApprox(o) ? 0 : 200) + (o.active ? 100 : 0),
         });
-        marker.bindPopup(popupHtml(o), { maxWidth: 320 });
+        marker.bindPopup(() => popupHtml(o), { maxWidth: 330 });
         markersLayer.addLayer(marker);
     });
 
@@ -212,8 +295,10 @@ function renderCounts() {
     const c = (pred) => allOffers.filter(pred).length;
     document.getElementById('count-olx').textContent = `(${c(o => o.source === 'olx')})`;
     document.getElementById('count-otodom').textContent = `(${c(o => o.source === 'otodom')})`;
-    document.getElementById('count-active').textContent = `(${c(o => o.active)})`;
-    document.getElementById('count-inactive').textContent = `(${c(o => !o.active)})`;
+    document.getElementById('count-active').textContent = `(${c(o => o.active && !isApprox(o))})`;
+    document.getElementById('count-active-approx').textContent = `(${c(o => o.active && isApprox(o))})`;
+    document.getElementById('count-inactive').textContent = `(${c(o => !o.active && !isApprox(o))})`;
+    document.getElementById('count-inactive-approx').textContent = `(${c(o => !o.active && isApprox(o))})`;
     document.getElementById('count-new').textContent = `(${c(o => o.active && isNew(o))})`;
     document.getElementById('count-private').textContent = `(${c(o => o.active && o.is_private_owner)})`;
 }
