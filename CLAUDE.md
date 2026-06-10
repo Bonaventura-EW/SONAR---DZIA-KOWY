@@ -23,12 +23,30 @@ otodom_scraper.py  → listing Otodom (__NEXT_DATA__) + strony szczegółów
                      TYLKO dla nowych ofert (coords, pełny opis, typ działki)
   ↓
 main.py            → aktualizacja data/offers.json (historia cen, dezaktywacja,
-                     reaktywacja, parowanie OLX↔Otodom, scan_history)
+                     reaktywacja, deduplikacja OLX↔Otodom, scan_history)
   ↓
-map_generator.py   → docs/data.json (kompaktowe oferty + kwantyle ceny/m²)
+map_generator.py   → docs/data.json   (mapa: oferty po dedup + kwantyle ceny/m²)
+api_generator.py   → docs/api/*.json  (status / offers / history / health)
   ↓
-docs/index.html + assets/script.js → mapa Leaflet
+docs/index.html + assets/script.js → mapa Leaflet (GitHub Pages)
 ```
+
+## Workflowy GitHub Actions
+
+| Plik | Co robi |
+|------|---------|
+| `scanner.yml` | skan 2×/dzień (8:37, 18:37 PL) + `workflow_dispatch`; commituje `data/` i `docs/` na `main` |
+| `pages.yml` | deploy `docs/` na GitHub Pages po pushu na `main` dotykającym `docs/**` |
+| `tests.yml` | pytest na push/PR dotykającym `src/`, `tests/` |
+
+> 🏷️ **„Uruchom scan" (polecenie użytkownika) = odpal workflow `scanner.yml`
+> na `main`** (manualny `workflow_dispatch`), NIE lokalne `python main.py`.
+> Lokalnie uruchamiaj tylko gdy użytkownik wprost poprosi.
+
+> ⚠️ **GitHub Pages musi być raz włączone ręcznie** (Settings → Pages →
+> Source: **GitHub Actions**) — domyślny token Actions nie może utworzyć
+> site'u Pages (`Resource not accessible by integration`). Po włączeniu
+> `pages.yml` działa już automatycznie.
 
 ## Jak uruchomić
 
@@ -38,8 +56,9 @@ docs/index.html + assets/script.js → mapa Leaflet
 ```bash
 pip install -r requirements.txt
 cd src
-python main.py             # pełny skan (~1,5 min, ~220 ofert)
+python main.py             # pełny skan (~1,5 min pierwszy, ~15 s kolejne)
 python map_generator.py    # docs/data.json
+python api_generator.py    # docs/api/*.json
 cd ../docs && python -m http.server 8000
 ```
 
@@ -63,7 +82,13 @@ Testy: `pytest` z roota repo (konfiguracja w `pytest.ini`, `pythonpath = src`).
    `_update_existing` (precision `exact` > `approx`).
 6. **OLX dokleja wyniki „z okolicy"** na końcu listingu — filtrujemy po
    `cityNormalizedName == 'lublin'`.
-7. **Parowanie OLX↔Otodom**: ta sama cena + powierzchnia ±1% → pole `also_at`.
+7. **Deduplikacja OLX↔Otodom** (`main.py::_tag_cross_portal_duplicates`):
+   ta sama cena + powierzchnia ±1% + dystans <5 km (gdy oba mają GPS) →
+   oferta OLX dostaje `duplicate_of` (ID oferty Otodom) i oba dostają
+   `also_at` (URL drugiego ogłoszenia). Jedna oferta Otodom paruje się z
+   maksymalnie jednym OLX. `map_generator` i `api_generator` **chowają**
+   oferty z aktywnym `duplicate_of` — na mapie zostaje pinezka Otodom
+   (dokładniejsza lokalizacja) z linkiem do OLX w popupie.
 8. **Nie modyfikuj ręcznie `data/offers.json`** — plik generowany przez skan.
 9. Zmiany oznaczaj datowanym komentarzem `# FIX YYYY-MM-DD: opis`, a istotne
    wpisuj do `CHANGELOG.md` (konwencja z siostrzanych sonarów).

@@ -5,6 +5,12 @@ Automatyczny agent monitorujący oferty sprzedaży **działek w Lublinie**
 Trzeci z rodziny sonarów (obok [SONAR-POKOJOWY](https://github.com/Bonaventura-EW/SONAR-POKOJOWY)
 i [SONAR-MIESZKANIOWY](https://github.com/Bonaventura-EW/SONAR-MIESZKANIOWY)).
 
+**🌍 Strona:** <https://bonaventura-ew.github.io/SONAR---DZIA-KOWY/>
+
+> ⚙️ Jednorazowa konfiguracja po utworzeniu repo: **Settings → Pages →
+> Source: GitHub Actions** — potem workflow `pages.yml` publikuje stronę
+> automatycznie przy każdej zmianie w `docs/`.
+
 ## Jak działa
 
 - **GitHub Actions** uruchamia skan 2×/dzień (`.github/workflows/scanner.yml`)
@@ -39,6 +45,8 @@ więc nie ma parsowania HTML kart ani geokodowania adresów.
 | `api/offers.json` | wszystkie aktywne oferty (po deduplikacji OLX↔Otodom) |
 | `api/history.json` | historia ostatnich 50 skanów |
 | `api/health.json` | healthcheck (świeżość ostatniego skanu) |
+
+Szczegóły i przykłady odpowiedzi: [docs/API.md](docs/API.md).
 
 Deduplikacja: ta sama działka wystawiona na obu portalach (identyczna cena,
 powierzchnia ±1%, odległość <5 km) liczona jest raz — zostaje wpis z Otodom
