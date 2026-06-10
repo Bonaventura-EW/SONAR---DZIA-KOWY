@@ -1,0 +1,78 @@
+name: SONAR DZIAŁKOWY Scanner
+
+on:
+  schedule:
+    # 2 scany dziennie (rynek działek zmienia się wolniej niż najem):
+    # 8:37 i 18:37 CEST (offset minutowy: mniejsze ryzyko throttlingu GH + nie
+    # koliduje z harmonogramami SONAR-POKOJOWY/MIESZKANIOWY)
+    - cron: '37 6,16 * * *'
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || github.token }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run SONAR DZIAŁKOWY scanner
+        continue-on-error: true
+        run: |
+          cd src
+          python main.py || echo "::warning::Scanner failed but continuing..."
+
+      - name: Generate map data
+        if: always()
+        continue-on-error: true
+        run: |
+          cd src
+          python map_generator.py || echo "::warning::Map generator failed but continuing..."
+
+      - name: Commit and push changes
+        if: always()
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add data/ docs/data.json || true
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "🤖 Automatyczny scan: $(TZ='Europe/Warsaw' date +'%Y-%m-%d %H:%M')" || true
+
+          # pull --rebase + retry: skan może kolidować z manualnymi commitami
+          for attempt in 1 2 3; do
+            echo "📤 Push attempt #$attempt..."
+            if ! git pull --rebase origin main; then
+              echo "::warning::Rebase #$attempt nie powiódł się. Próbuję ponownie."
+              git rebase --abort 2>/dev/null || true
+              sleep 5
+              continue
+            fi
+            if git push origin main; then
+              echo "✅ Push successful (attempt #$attempt)"
+              exit 0
+            else
+              echo "::warning::Push #$attempt odrzucony. Retry za 10s..."
+              sleep 10
+            fi
+          done
+
+          echo "::error::Push failed po 3 próbach"
+          exit 1

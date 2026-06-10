@@ -1,0 +1,90 @@
+"""Generator danych mapy: data/offers.json → docs/data.json.
+
+Frontend (docs/index.html + assets/script.js) czyta docs/data.json
+serwowany przez GitHub Pages.
+"""
+
+import json
+from datetime import datetime
+from pathlib import Path
+
+import pytz
+
+import paths
+
+DESCRIPTION_LIMIT = 1200  # frontend pokazuje skrót, pełny opis jest pod linkiem
+
+
+def build_map_offer(offer: dict) -> dict:
+    """Kompaktowa wersja oferty dla frontendu."""
+    loc = offer.get('location') or {}
+    price = offer.get('price') or {}
+    description = (offer.get('description') or '')[:DESCRIPTION_LIMIT]
+    return {
+        'id': offer['id'],
+        'source': offer.get('source'),
+        'url': offer.get('url'),
+        'title': offer.get('title'),
+        'price': price.get('current'),
+        'previous_price': price.get('previous_price'),
+        'price_trend': price.get('price_trend'),
+        'price_history': price.get('history', []),
+        'area_m2': offer.get('area_m2'),
+        'price_per_m2': offer.get('price_per_m2'),
+        'plot_type': offer.get('plot_type') or 'inna',
+        'district': loc.get('district'),
+        'street': loc.get('street'),
+        'coords': loc.get('coords'),
+        'coords_precision': loc.get('coords_precision'),
+        'description': description,
+        'is_private_owner': offer.get('is_private_owner'),
+        'image': offer.get('image'),
+        'first_seen': offer.get('first_seen'),
+        'last_seen': offer.get('last_seen'),
+        'active': offer.get('active', False),
+        'days_active': offer.get('days_active', 0),
+        'also_at': offer.get('also_at'),
+    }
+
+
+def generate():
+    with open(paths.OFFERS_JSON, 'r', encoding='utf-8') as f:
+        db = json.load(f)
+
+    offers = [build_map_offer(o) for o in db.get('offers', [])]
+    active = [o for o in offers if o['active']]
+    per_m2_values = sorted(o['price_per_m2'] for o in active if o['price_per_m2'])
+
+    def percentile(values, p):
+        if not values:
+            return None
+        idx = min(len(values) - 1, int(round(p * (len(values) - 1))))
+        return values[idx]
+
+    tz = pytz.timezone('Europe/Warsaw')
+    data = {
+        'generated_at': datetime.now(tz).isoformat(),
+        'last_scan': db.get('last_scan'),
+        'next_scan': db.get('next_scan'),
+        'stats': {
+            'total': len(offers),
+            'active': len(active),
+            'active_with_coords': sum(1 for o in active if o['coords']),
+            'median_price_per_m2': percentile(per_m2_values, 0.5),
+            # progi kwantylowe do kolorowania pinezek wg ceny za m²
+            'per_m2_quantiles': [percentile(per_m2_values, q)
+                                 for q in (0.2, 0.4, 0.6, 0.8)],
+        },
+        'offers': offers,
+    }
+
+    out = Path(paths.DOCS_DATA_JSON)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with open(out, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, separators=(',', ':'))
+
+    print(f"🗺️ Wygenerowano {out} ({len(active)} aktywnych / {len(offers)} łącznie)")
+
+
+if __name__ == "__main__":
+    generate()

@@ -1,0 +1,15 @@
+{
+ "scans": [
+  {
+   "timestamp": "2026-06-10T19:55:43.794461+02:00",
+   "duration_s": 75.8,
+   "scraped_olx": 52,
+   "scraped_otodom": 168,
+   "new": 220,
+   "updated": 0,
+   "skipped_removed": 0,
+   "active": 220,
+   "total_in_db": 220
+  }
+ ]
+}
