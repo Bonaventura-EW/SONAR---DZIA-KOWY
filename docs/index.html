@@ -63,6 +63,14 @@
                     <label><input type="checkbox" id="src-otodom" checked> <span class="src-badge src-otodom">Otodom</span> <span class="count" id="count-otodom">(0)</span></label>
                 </div>
 
+                <div class="filter-group agency-group" id="agency-group" style="display:none;">
+                    <h3><label style="display:flex;align-items:center;gap:6px;margin:0;padding:0;">
+                        <input type="checkbox" id="agency-master" checked>
+                        🏢 Firmy / Agencje <span class="count" id="count-agencies">(0)</span>
+                    </label></h3>
+                    <div id="agency-filters"></div>
+                </div>
+
                 <div class="filter-group">
                     <h3>Typ działki</h3>
                     <div id="type-filters"></div>
@@ -93,6 +101,7 @@
                         📍 pinezka = dokładny adres (Otodom)<br>
                         ▢ kwadrat (przerywana ramka) = lokalizacja przybliżona<br>
                         &nbsp;&nbsp;&nbsp;(ulica z ogłoszenia albo rozmycie OLX ~1 km)<br>
+                        <span style="display:inline-block;width:11px;height:11px;border:3px solid #FFD700;border-radius:50%;vertical-align:-2px;"></span> złota obwódka = oferta agencji<br>
                         <span class="badge-new">N</span> nowa oferta · 💲↓/↑ zmiana ceny · × nieaktywna
                     </p>
                 </div>

@@ -147,8 +147,10 @@ def test_cross_portal_dedup_tagging(tmp_path):
     ]
     sonar._tag_cross_portal_duplicates()
     offers = {o['id']: o for o in sonar.database['offers']}
+    # otodom:1 (kanoniczna) wchłania OBA OLX-y — identyczna cena/powierzchnia
+    # blisko siebie to ta sama działka (repost); otodom:2 odpada po dystansie
     assert offers['olx:CID3-ID1']['duplicate_of'] == 'otodom:1'
-    assert offers['otodom:1']['also_at'] == offers['olx:CID3-ID1']['url']
-    # otodom:1 jest już sparowany (max 1 duplikat), a otodom:2 odpada po
-    # dystansie (>5 km) — więc ID2 zostaje na mapie bez duplicate_of
-    assert 'duplicate_of' not in offers['olx:CID3-ID2']
+    assert offers['olx:CID3-ID2']['duplicate_of'] == 'otodom:1'
+    assert offers['otodom:1']['also_at'] in (
+        offers['olx:CID3-ID1']['url'], offers['olx:CID3-ID2']['url'])
+    assert 'duplicate_of' not in offers['otodom:2']

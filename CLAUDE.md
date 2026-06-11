@@ -21,6 +21,9 @@ wzorowana na `SONAR-MIESZKANIOWY`, ale **celowo prostsza**:
 olx_scraper.py     → listing OLX → __PRERENDERED_STATE__ → znormalizowane oferty
 otodom_scraper.py  → listing Otodom (__NEXT_DATA__) + strony szczegółów
                      TYLKO dla nowych ofert (coords, pełny opis, typ działki)
+agency_scrapers.py → strony agencji: ANMA + Pasjonaci (CMS Galactica Virgo,
+                     dane w slugu URL) i Alternatywne BN (WordPress);
+                     tylko Lublin, bez coords (uzupełnia location_refiner)
   ↓
 main.py            → aktualizacja data/offers.json (historia cen, dezaktywacja,
                      reaktywacja, deduplikacja OLX↔Otodom, scan_history)
@@ -93,13 +96,17 @@ Testy: `pytest` z roota repo (konfiguracja w `pytest.ini`, `pythonpath = src`).
    `class=highway` (inaczej śmieciowa nazwa dopasowuje samo miasto).
 7. **OLX dokleja wyniki „z okolicy"** na końcu listingu — filtrujemy po
    `cityNormalizedName == 'lublin'`.
-8. **Deduplikacja OLX↔Otodom** (`main.py::_tag_cross_portal_duplicates`):
-   ta sama cena + powierzchnia ±1% + dystans <5 km (gdy oba mają GPS) →
-   oferta OLX dostaje `duplicate_of` (ID oferty Otodom) i oba dostają
-   `also_at` (URL drugiego ogłoszenia). Jedna oferta Otodom paruje się z
-   maksymalnie jednym OLX. `map_generator` i `api_generator` **chowają**
-   oferty z aktywnym `duplicate_of` — na mapie zostaje pinezka Otodom
-   (dokładniejsza lokalizacja) z linkiem do OLX w popupie.
+8. **Deduplikacja między WSZYSTKIMI źródłami** (`main.py::
+   _tag_cross_portal_duplicates`): ta sama cena + powierzchnia ±1% + dystans
+   <5 km (gdy oba mają GPS) → duplikat dostaje `duplicate_of`, obie strony
+   `also_at`. Kanoniczna zostaje oferta z najlepszą precyzją coords
+   (exact > street > approx), przy remisie Otodom. Kanoniczna może wchłonąć
+   WIELE duplikatów (reposty + agencje). `map_generator` i `api_generator`
+   **chowają** oferty z aktywnym `duplicate_of`. Agencje wystawiają ~95%
+   ofert także na portalach — bez tej deduplikacji mapa by się dublowała.
+8a. **Scrapery agencji bywają blokowane** (Virgo: HTTP 503 po kilku
+   requestach z jednego IP) — scraper toleruje błędy i zwraca 0 ofert,
+   a ochrona z pkt. 4 zapobiega wtedy masowej dezaktywacji tego źródła.
 9. **Nie modyfikuj ręcznie `data/offers.json`** — plik generowany przez skan.
 10. Zmiany oznaczaj datowanym komentarzem `# FIX YYYY-MM-DD: opis`, a istotne
    wpisuj do `CHANGELOG.md` (konwencja z siostrzanych sonarów).

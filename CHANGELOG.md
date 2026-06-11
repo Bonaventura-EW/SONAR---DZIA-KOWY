@@ -21,3 +21,13 @@
   z OLX (działki budowlane/inwestycyjne/rolno-budowlane) i Otodom (wszystkie),
   baza `data/offers.json` z historią cen i dezaktywacją, mapa Leaflet na
   GitHub Pages (`docs/`), workflow skanera 2×/dzień i testy pytest.
+
+### Dodane (2026-06-11, agencje)
+- Scrapery agencji nieruchomości: ANMA i Pasjonaci (CMS Galactica Virgo —
+  wspólny parser, dane w slugu URL) oraz Alternatywne BN (WordPress).
+  Oferty agencji mają złotą obwódkę i osobne warstwy "Firmy / Agencje"
+  (per agencja, jak w SONAR-POKOJOWY).
+- Deduplikacja uogólniona na wszystkie źródła (agencje wystawiają te same
+  działki na Otodom) — kanoniczna zostaje oferta z najlepszą lokalizacją.
+- location_refiner: fallback geokodowania dzielnicy dla ofert agencji
+  bez współrzędnych i bez ulicy w opisie.

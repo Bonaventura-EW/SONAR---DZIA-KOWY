@@ -38,6 +38,8 @@ def build_map_offer(offer: dict) -> dict:
         'coords_precision': loc.get('coords_precision'),
         'description': description,
         'is_private_owner': offer.get('is_private_owner'),
+        'is_agency': offer.get('is_agency', False),
+        'agency_name': offer.get('agency_name'),
         'image': offer.get('image'),
         'first_seen': offer.get('first_seen'),
         'last_seen': offer.get('last_seen'),
@@ -59,7 +61,7 @@ def generate():
                if not (o.get('duplicate_of') and o['duplicate_of'] in active_ids)]
     hidden = len(all_offers) - len(deduped)
     if hidden:
-        print(f"🔗 Ukryto {hidden} duplikatów OLX (ta sama działka na Otodom)")
+        print(f"🔗 Ukryto {hidden} duplikatów (ta sama działka w kilku źródłach)")
 
     offers = [build_map_offer(o) for o in deduped]
     active = [o for o in offers if o['active']]

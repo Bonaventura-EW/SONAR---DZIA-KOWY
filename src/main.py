@@ -16,7 +16,11 @@ import pytz
 import paths
 from olx_scraper import OLXDzialkiScraper
 from otodom_scraper import OtodomDzialkiScraper
+from agency_scrapers import AGENCY_SCRAPERS
 from location_refiner import StreetGeocoder, refine_offer_location
+
+# Ranking precyzji coords — przy deduplikacji zostaje oferta z najlepszą lokalizacją
+PRECISION_RANK = {'exact': 3, 'street': 2, 'approx': 1, None: 0}
 
 # Maksymalna wiarygodna zmiana ceny między skanami (ochrona przed błędami parsowania)
 MAX_PRICE_CHANGE_PERCENT = 70
@@ -53,6 +57,19 @@ class SonarDzialkowy:
         with open(self.data_file, 'w', encoding='utf-8') as f:
             json.dump(self.database, f, ensure_ascii=False, indent=1)
         print(f"💾 Baza zapisana: {self.data_file}")
+
+    def _known_agency_offers(self, source: str) -> Dict:
+        """Indeks znanych ofert agencji — scraper pomija strony szczegółów."""
+        known = {}
+        for offer in self.database['offers']:
+            if offer.get('source') != source:
+                continue
+            known[offer['id']] = {
+                'description': offer.get('description'),
+                'title': offer.get('title'),
+                'image': offer.get('image'),
+            }
+        return known
 
     def _known_otodom_offers(self) -> Dict:
         """Indeks znanych ofert Otodom — pozwala scraperowi pominąć strony szczegółów."""
@@ -229,41 +246,54 @@ class SonarDzialkowy:
                   f"(generyczny centroid dzielnicy)")
 
     def _tag_cross_portal_duplicates(self):
-        """Ta sama działka wystawiona na OLX i Otodom: identyczna cena,
-        powierzchnia ±1% i (gdy oba mają GPS) odległość <5 km.
+        """Ta sama działka wystawiona w kilku źródłach (OLX/Otodom/agencje):
+        identyczna cena, powierzchnia ±1% i (gdy oba mają GPS) odległość <5 km.
 
-        Oferta OLX dostaje `duplicate_of` wskazujące na ID oferty Otodom —
-        map_generator chowa ją z mapy (Otodom ma dokładniejszą lokalizację),
-        a oba ogłoszenia są dostępne przez `also_at` w popupie.
+        FIX 2026-06-11: uogólnione z pary OLX↔Otodom na WSZYSTKIE źródła —
+        agencje wystawiają te same działki także na portalach. Kanoniczna
+        zostaje oferta z najlepszą precyzją coords (exact > street > approx),
+        przy remisie Otodom. Duplikaty dostają `duplicate_of` (map_generator
+        je chowa), wszystkie strony linkują się przez `also_at`.
         """
-        active = [o for o in self.database['offers'] if o.get('active')]
-        olx = [o for o in active if o['source'] == 'olx' and o.get('area_m2')]
-        otodom = [o for o in active if o['source'] == 'otodom' and o.get('area_m2')]
+        active = [o for o in self.database['offers']
+                  if o.get('active') and o.get('area_m2')]
+
+        def rank(o):
+            precision = (o.get('location') or {}).get('coords_precision')
+            return (PRECISION_RANK.get(precision, 0), o['source'] == 'otodom')
+
+        ordered = sorted(active, key=rank, reverse=True)
+        for o in ordered:
+            o.pop('duplicate_of', None)  # przelicz od zera przy każdym skanie
+
+        absorbed = set()
         tagged = 0
-        paired_otodom = set()  # jedna oferta Otodom = max jeden duplikat OLX
-        for a in olx:
-            a.pop('duplicate_of', None)  # przelicz od zera przy każdym skanie
-            for b in otodom:
-                if b['id'] in paired_otodom:
+        for canonical in ordered:
+            if canonical['id'] in absorbed:
+                continue
+            for other in ordered:
+                if other['id'] == canonical['id'] or other['id'] in absorbed:
                     continue
-                if a['price']['current'] != b['price']['current']:
+                if other['source'] == canonical['source']:
+                    continue  # duplikaty w obrębie źródła to inny problem
+                if other['price']['current'] != canonical['price']['current']:
                     continue
-                if abs(a['area_m2'] - b['area_m2']) > 0.01 * max(a['area_m2'], b['area_m2']):
+                if abs(other['area_m2'] - canonical['area_m2']) > \
+                   0.01 * max(other['area_m2'], canonical['area_m2']):
                     continue
-                ca = (a.get('location') or {}).get('coords')
-                cb = (b.get('location') or {}).get('coords')
-                # OLX rozmywa pinezkę ~1 km; >5 km to inna działka mimo zgodnej ceny
+                ca = (canonical.get('location') or {}).get('coords')
+                cb = (other.get('location') or {}).get('coords')
+                # rozmycie pinezek ~1 km; >5 km to inna działka mimo zgodnej ceny
                 if ca and cb and self._distance_km(ca, cb) > 5:
                     continue
-                a['also_at'] = b['url']
-                a['duplicate_of'] = b['id']
-                b['also_at'] = a['url']
-                paired_otodom.add(b['id'])
+                other['duplicate_of'] = canonical['id']
+                other['also_at'] = canonical['url']
+                canonical['also_at'] = other['url']
+                absorbed.add(other['id'])
                 tagged += 1
-                break
         if tagged:
-            print(f"   🔗 Powiązano {tagged} par ofert OLX↔Otodom (ta sama działka) "
-                  f"— na mapie zostaje pinezka Otodom")
+            print(f"   🔗 Powiązano {tagged} duplikatów między źródłami "
+                  f"— na mapie zostaje oferta z najlepszą lokalizacją")
 
     def _cleanup_old(self, max_age_days: int = 548):
         cutoff = datetime.now(self.tz) - timedelta(days=max_age_days)
@@ -315,6 +345,17 @@ class SonarDzialkowy:
         except Exception as e:
             print(f"❌ Otodom: scraping nieudany: {e}")
             scraped_by_source['otodom'] = []
+        # agencje nieruchomości (ANMA, Pasjonaci, Alternatywne BN) — awaria
+        # lub blokada antybotowa jednej nie przerywa skanu (per-source ochrona
+        # przed masową dezaktywacją obejmuje też te źródła)
+        for scraper_cls in AGENCY_SCRAPERS:
+            scraper = scraper_cls()
+            try:
+                scraped_by_source[scraper.agency_key] = scraper.scrape(
+                    known_offers=self._known_agency_offers(scraper.agency_key))
+            except Exception as e:
+                print(f"❌ {scraper.agency_name}: scraping nieudany: {e}")
+                scraped_by_source[scraper.agency_key] = []
 
         # 2. Aktualizacja bazy
         print("💾 Aktualizacja bazy danych...")
@@ -378,6 +419,8 @@ class SonarDzialkowy:
             'duration_s': round(duration, 1),
             'scraped_olx': len(scraped_by_source['olx']),
             'scraped_otodom': len(scraped_by_source['otodom']),
+            'scraped_agencies': sum(len(v) for k, v in scraped_by_source.items()
+                                    if k not in ('olx', 'otodom')),
             'new': new_count,
             'updated': updated_count,
             'skipped_removed': skipped_removed,

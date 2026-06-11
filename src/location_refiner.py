@@ -133,6 +133,47 @@ class StreetGeocoder:
             return {'lat': lat, 'lon': lon, 'name': res.get('name') or street}
         return None
 
+    def geocode_district(self, district: str) -> Optional[Dict]:
+        """Geokoduje dzielnicę/część miasta (np. 'Zemborzyce') na centroid.
+
+        Dla ofert agencji bez współrzędnych i bez ulicy w opisie — lepszy
+        przybliżony punkt niż brak pinezki. Wynik klasy place/boundary.
+        """
+        key = f"district:{district.lower()}"
+        if key in self.cache:
+            entry = self.cache[key]
+            if entry.get('result'):
+                return entry['result']
+            if time.time() - entry.get('ts', 0) < NEGATIVE_TTL_S:
+                return None
+
+        wait = self.delay_s - (time.time() - self._last_request)
+        if wait > 0:
+            time.sleep(wait)
+        result = None
+        try:
+            r = requests.get(NOMINATIM_URL, params={
+                'q': f'{district}, Lublin, Polska', 'format': 'json', 'limit': 3,
+            }, headers=HEADERS, timeout=15)
+            self._last_request = time.time()
+            self.live_requests += 1
+            r.raise_for_status()
+            for res in r.json():
+                lat, lon = float(res['lat']), float(res['lon'])
+                if res.get('class') not in ('place', 'boundary'):
+                    continue
+                if 'Lublin' not in res.get('display_name', ''):
+                    continue
+                if not (LUBLIN_BBOX['lat_min'] <= lat <= LUBLIN_BBOX['lat_max']
+                        and LUBLIN_BBOX['lon_min'] <= lon <= LUBLIN_BBOX['lon_max']):
+                    continue
+                result = {'lat': lat, 'lon': lon, 'name': res.get('name') or district}
+                break
+        except (requests.RequestException, ValueError) as e:
+            print(f"      ⚠️ Nominatim błąd dla dzielnicy '{district}': {e}")
+        self.cache[key] = {'result': result, 'ts': time.time()}
+        return result
+
     def geocode_street(self, street: str) -> Optional[Dict]:
         """Geokoduje ulicę (z wariantami odmiany). Zwraca {'lat','lon','name'} lub None."""
         key = street.lower()
@@ -174,6 +215,14 @@ def refine_offer_location(offer: Dict, geocoder: StreetGeocoder) -> bool:
             loc['coords'] = {'lat': result['lat'], 'lon': result['lon']}
             loc['coords_precision'] = 'street'
             loc['street'] = loc.get('street') or f"ul. {result['name']}"
+            return True
+
+    # fallback: oferta BEZ żadnych coords (agencje) → centroid dzielnicy (approx)
+    if not loc.get('coords') and loc.get('district'):
+        result = geocoder.geocode_district(loc['district'])
+        if result:
+            loc['coords'] = {'lat': result['lat'], 'lon': result['lon']}
+            loc['coords_precision'] = 'approx'
             return True
     return False
 

@@ -17,7 +17,8 @@ const INACTIVE_COLOR = '#9ca3af';
 let map, markersLayer;
 let allOffers = [];
 let quantiles = [];
-let typeFilterState = {}; // plot_type -> bool
+let typeFilterState = {};   // plot_type -> bool
+let agencyFilterState = {}; // agency_name -> bool
 
 init();
 
@@ -48,6 +49,7 @@ async function init() {
     document.getElementById('median-per-m2').textContent = med ? fmtPrice(med) + '/m²' : '—';
 
     buildTypeFilters();
+    buildAgencyFilters();
     buildLegend();
     bindFilterEvents();
     render();
@@ -97,6 +99,37 @@ function buildTypeFilters() {
     });
 }
 
+function buildAgencyFilters() {
+    // osobne warstwy per agencja (jak w SONAR-POKOJOWY: grupa "Firmy / Agencje")
+    const agencies = {};
+    allOffers.forEach(o => {
+        if (o.is_agency && o.agency_name) {
+            agencies[o.agency_name] = (agencies[o.agency_name] || 0) + (o.active ? 1 : 0);
+        }
+    });
+    const names = Object.keys(agencies).sort();
+    if (!names.length) return;
+    document.getElementById('agency-group').style.display = 'block';
+    const container = document.getElementById('agency-filters');
+    names.forEach(name => {
+        agencyFilterState[name] = true;
+        const label = document.createElement('label');
+        label.innerHTML = `<input type="checkbox" checked> ${name} <span class="count">(${agencies[name]})</span>`;
+        label.querySelector('input').addEventListener('change', e => {
+            agencyFilterState[name] = e.target.checked;
+            render();
+        });
+        container.appendChild(label);
+    });
+    document.getElementById('count-agencies').textContent =
+        `(${Object.values(agencies).reduce((a, b) => a + b, 0)})`;
+    document.getElementById('agency-master').addEventListener('change', e => {
+        container.querySelectorAll('input').forEach(cb => { cb.checked = e.target.checked; });
+        names.forEach(n => { agencyFilterState[n] = e.target.checked; });
+        render();
+    });
+}
+
 function buildLegend() {
     const container = document.getElementById('legend');
     if (!quantiles.length) { container.textContent = 'brak danych'; return; }
@@ -129,10 +162,16 @@ function debounce(fn, ms) {
 }
 
 function passesFilters(o) {
-    const srcOlx = document.getElementById('src-olx').checked;
-    const srcOtodom = document.getElementById('src-otodom').checked;
-    if (o.source === 'olx' && !srcOlx) return false;
-    if (o.source === 'otodom' && !srcOtodom) return false;
+    if (o.is_agency) {
+        // oferty agencji sterowane grupą "Firmy / Agencje"
+        if (!document.getElementById('agency-master').checked) return false;
+        if (o.agency_name && agencyFilterState[o.agency_name] === false) return false;
+    } else {
+        const srcOlx = document.getElementById('src-olx').checked;
+        const srcOtodom = document.getElementById('src-otodom').checked;
+        if (o.source === 'olx' && !srcOlx) return false;
+        if (o.source === 'otodom' && !srcOtodom) return false;
+    }
 
     // warstwy: aktywne/nieaktywne × dokładne/przybliżone
     const approx = isApprox(o);
@@ -183,6 +222,9 @@ function badgesHtml(o) {
 function makeIcon(o) {
     const color = colorFor(o);
     const fresh = isNew(o);
+    // priorytet obwódki: nowa (czerwona) > agencja (złota) > standard (biała)
+    const stroke = fresh ? '#ff0000' : (o.is_agency ? '#FFD700' : 'white');
+    const strokeW = fresh ? 3 : (o.is_agency ? 4 : 2);
     const tooltip = `${escapeHtml(o.title || '')} — ${fmtPrice(o.price)}`;
 
     if (isApprox(o)) {
@@ -197,7 +239,7 @@ function makeIcon(o) {
                 <svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
                     <rect x="3" y="3" width="${s - 6}" height="${s - 6}"
                           fill="${color}" fill-opacity="0.85"
-                          stroke="${fresh ? '#ff0000' : 'white'}"
+                          stroke="${stroke}"
                           stroke-width="3" stroke-dasharray="4 3"/>
                     ${cross}
                 </svg>
@@ -219,8 +261,8 @@ function makeIcon(o) {
             <svg width="40" height="50" viewBox="0 0 40 50">
                 <path d="M20 0 C9 0 0 9 0 20 C0 35 20 50 20 50 C20 50 40 35 40 20 C40 9 31 0 20 0 Z"
                       fill="${color}"
-                      stroke="${fresh ? '#ff0000' : 'white'}"
-                      stroke-width="${fresh ? 3 : 2}"/>
+                      stroke="${stroke}"
+                      stroke-width="${strokeW}"/>
                 ${inner}
             </svg>
             ${badgesHtml(o)}
@@ -251,7 +293,7 @@ function popupHtml(o) {
         <div class="popup-price">${fmtPrice(o.price)}${trend}</div>
         <div class="popup-meta">
             📐 ${fmtArea(o.area_m2)} • ${o.price_per_m2 ? fmtPrice(o.price_per_m2) + '/m²' : '—'}<br>
-            🏷️ ${o.plot_type || 'inna'} • ${o.source.toUpperCase()}${o.is_private_owner ? ' • od właściciela' : ''}<br>
+            🏷️ ${o.plot_type || 'inna'} • ${o.is_agency ? '🏢 ' + escapeHtml(o.agency_name || 'agencja') : o.source.toUpperCase()}${o.is_private_owner ? ' • od właściciela' : ''}<br>
             ${where ? '📍 ' + escapeHtml(where) + precision + '<br>' : (precision ? '📍 ' + precision.trim() + '<br>' : '')}
             🗓️ w bazie od ${o.first_seen ? new Date(o.first_seen).toLocaleDateString('pl-PL') : '—'} (${o.days_active} dni)
         </div>

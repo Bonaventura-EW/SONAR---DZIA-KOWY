@@ -522,5 +522,189 @@
    "name": "Aleja Kraśnicka"
   },
   "ts": 1781176346.8846745
+ },
+ "generała witolda urbanowicza": {
+  "result": {
+   "lat": 51.2170988,
+   "lon": 22.6273332,
+   "name": "Generała Witolda Urbanowicza"
+  },
+  "ts": 1781204128.6446042
+ },
+ "wyżynna": {
+  "result": {
+   "lat": 51.2216968,
+   "lon": 22.5303157,
+   "name": "Wyżynna"
+  },
+  "ts": 1781204130.2698793
+ },
+ "błogosławionego księdza ignacego kłopotowskiego": {
+  "result": {
+   "lat": 51.269641,
+   "lon": 22.5865323,
+   "name": "Błogosławionego Księdza Ignacego Kłopotowskiego"
+  },
+  "ts": 1781204131.8148122
+ },
+ "poziomkowa": {
+  "result": {
+   "lat": 51.2684194,
+   "lon": 22.5892481,
+   "name": "Poziomkowa"
+  },
+  "ts": 1781204133.3478286
+ },
+ "orzechowa": {
+  "result": {
+   "lat": 51.2767457,
+   "lon": 22.6015267,
+   "name": "Orzechowa"
+  },
+  "ts": 1781204134.9226804
+ },
+ "jeżynowa": {
+  "result": {
+   "lat": 51.2641839,
+   "lon": 22.6002479,
+   "name": "Jeżynowa"
+  },
+  "ts": 1781204136.348384
+ },
+ "feliksa skubiszewskiego": {
+  "result": {
+   "lat": 51.2346345,
+   "lon": 22.4770212,
+   "name": "Feliksa Skubiszewskiego"
+  },
+  "ts": 1781204137.7210073
+ },
+ "imbirowa": {
+  "result": {
+   "lat": 51.2796822,
+   "lon": 22.5867124,
+   "name": "Imbirowa"
+  },
+  "ts": 1781204139.2011867
+ },
+ "ziołowa": {
+  "result": {
+   "lat": 51.1955851,
+   "lon": 22.5153704,
+   "name": "Ziołowa"
+  },
+  "ts": 1781204140.7419498
+ },
+ "generała stanisława skalskiego": {
+  "result": {
+   "lat": 51.2160289,
+   "lon": 22.6286119,
+   "name": "Generała Stanisława Skalskiego"
+  },
+  "ts": 1781204142.1631947
+ },
+ "kasprowicza. dojazd": {
+  "result": null,
+  "ts": 1781204143.4601529
+ },
+ "południowej": {
+  "result": {
+   "lat": 51.2057064,
+   "lon": 22.5687881,
+   "name": "Południowa"
+  },
+  "ts": 1781204146.50194
+ },
+ "woda": {
+  "result": null,
+  "ts": 1781204147.8499224
+ },
+ "kanalizacja": {
+  "result": null,
+  "ts": 1781204149.1701033
+ },
+ "dodatkowe": {
+  "result": null,
+  "ts": 1781204150.5628898
+ },
+ "laury. prezentowana": {
+  "result": null,
+  "ts": 1781204152.079127
+ },
+ "kraśnickiej": {
+  "result": {
+   "lat": 51.2414295,
+   "lon": 22.5041967,
+   "name": "Aleja Kraśnicka"
+  },
+  "ts": 1781204154.9968624
+ },
+ "powojowej": {
+  "result": {
+   "lat": 51.1950528,
+   "lon": 22.5744942,
+   "name": "Powojowa"
+  },
+  "ts": 1781204157.5520294
+ },
+ "mełgiewskiej": {
+  "result": {
+   "lat": 51.243513,
+   "lon": 22.6488208,
+   "name": "Mełgiewska"
+  },
+  "ts": 1781204160.1190884
+ },
+ "sobótki": {
+  "result": {
+   "lat": 51.2574231,
+   "lon": 22.4969184,
+   "name": "Sobótki"
+  },
+  "ts": 1781204161.4323473
+ },
+ "paprociowa marzysz": {
+  "result": null,
+  "ts": 1781204162.9295855
+ },
+ "choiny": {
+  "result": {
+   "lat": 51.2780173,
+   "lon": 22.5538361,
+   "name": "Choiny"
+  },
+  "ts": 1781204164.4738188
+ },
+ "bławatkowa": {
+  "result": {
+   "lat": 51.2502686,
+   "lon": 22.6609419,
+   "name": "Bławatkowa"
+  },
+  "ts": 1781204166.0473046
+ },
+ "dereckiego": {
+  "result": {
+   "lat": 51.2795368,
+   "lon": 22.5406936,
+   "name": "Mirosława Dereckiego"
+  },
+  "ts": 1781204167.4201543
+ },
+ "poligonowej": {
+  "result": {
+   "lat": 51.2747372,
+   "lon": 22.5293355,
+   "name": "Poligonowa"
+  },
+  "ts": 1781204170.3709316
+ },
+ "gen. urbanowicza": {
+  "result": {
+   "lat": 51.2170988,
+   "lon": 22.6273332,
+   "name": "Generała Witolda Urbanowicza"
+  },
+  "ts": 1781204171.787105
  }
 }
