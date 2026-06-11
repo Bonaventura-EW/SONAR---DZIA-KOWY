@@ -52,7 +52,7 @@ class BaseAgencyScraper:
     agency_name = ''    # np. 'ANMA' (etykieta na mapie)
     base_url = ''
 
-    def __init__(self, delay_range=(2.0, 4.0)):
+    def __init__(self, delay_range=(1.2, 2.2)):
         self.delay_min, self.delay_max = delay_range
         self.session = requests.Session()
         self.session.headers.update(HEADERS)

@@ -59,6 +59,12 @@
 <script src="assets/logo.js?v=1"></script>
 <script>
 const PALETTE = ['#15803d', '#84cc16', '#eab308', '#f97316', '#dc2626', '#0284c7', '#7c3aed', '#64748b'];
+// stałe kolory typów — wspólne z checkboxami i legendą na mapie (script.js)
+const TYPE_COLORS = {
+    'budowlana': '#15803d', 'inna': '#84cc16', 'inwestycyjna': '#eab308',
+    'rekreacyjna': '#f97316', 'rolna': '#dc2626', 'siedliskowa': '#0284c7',
+    'rolno-budowlana': '#7c3aed', 'leśna': '#0d9488',
+};
 
 const fmtZl = v => Math.round(v).toLocaleString('pl-PL') + ' zł';
 const median = arr => {
@@ -152,7 +158,8 @@ async function init() {
         type: 'doughnut',
         data: {
             labels: typeKeys,
-            datasets: [{ data: typeKeys.map(k => byType[k]), backgroundColor: PALETTE }]
+            datasets: [{ data: typeKeys.map(k => byType[k]),
+                         backgroundColor: typeKeys.map(k => TYPE_COLORS[k] || '#64748b') }]
         },
         options: { ...common, plugins: { legend: { position: 'right' } } }
     });

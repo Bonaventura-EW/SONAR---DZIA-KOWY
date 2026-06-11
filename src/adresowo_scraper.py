@@ -62,7 +62,7 @@ def _num(text: str) -> Optional[float]:
 
 
 class AdresowoScraper:
-    def __init__(self, delay_range=(1.0, 2.0)):
+    def __init__(self, delay_range=(0.6, 1.2)):
         self.delay_min, self.delay_max = delay_range
         self.session = requests.Session()
         self.session.headers.update(HEADERS)

@@ -13,6 +13,17 @@ const NEW_OFFER_DAYS = 7;
 // kolory kwantyli ceny za m²: tani (zielony) → drogi (czerwony)
 const QUANTILE_COLORS = ['#15803d', '#84cc16', '#eab308', '#f97316', '#dc2626'];
 const INACTIVE_COLOR = '#9ca3af';
+// stałe kolory typów działek — wspólne z wykresem w analytics.html
+const TYPE_COLORS = {
+    'budowlana': '#15803d',
+    'inna': '#84cc16',
+    'inwestycyjna': '#eab308',
+    'rekreacyjna': '#f97316',
+    'rolna': '#dc2626',
+    'siedliskowa': '#0284c7',
+    'rolno-budowlana': '#7c3aed',
+    'leśna': '#0d9488',
+};
 
 let map, markersLayer;
 let allOffers = [];
@@ -74,8 +85,16 @@ function isApprox(offer) {
     return offer.coords_precision !== 'exact';
 }
 
+function colorMode() {
+    const radio = document.querySelector('input[name="color-mode"]:checked');
+    return radio ? radio.value : 'price';
+}
+
 function colorFor(offer) {
     if (!offer.active) return INACTIVE_COLOR;
+    if (colorMode() === 'type') {
+        return TYPE_COLORS[offer.plot_type || 'inna'] || '#64748b';
+    }
     const v = offer.price_per_m2;
     if (v == null || !quantiles.length) return QUANTILE_COLORS[2];
     let i = 0;
@@ -89,8 +108,11 @@ function buildTypeFilters() {
     const container = document.getElementById('type-filters');
     Object.keys(types).sort().forEach(t => {
         typeFilterState[t] = true;
+        const color = TYPE_COLORS[t] || '#64748b';
         const label = document.createElement('label');
-        label.innerHTML = `<input type="checkbox" checked data-type="${t}"> ${t} <span class="count">(${types[t]})</span>`;
+        label.innerHTML = `<input type="checkbox" checked data-type="${t}"> ` +
+            `<span class="type-swatch" style="background:${color}"></span> ` +
+            `${t} <span class="count">(${types[t]})</span>`;
         label.querySelector('input').addEventListener('change', e => {
             typeFilterState[t] = e.target.checked;
             render();
@@ -132,6 +154,19 @@ function buildAgencyFilters() {
 
 function buildLegend() {
     const container = document.getElementById('legend');
+    container.innerHTML = '';
+    if (colorMode() === 'type') {
+        // legenda typów — kolory wspólne z checkboxami i analityką
+        const present = new Set(allOffers.map(o => o.plot_type || 'inna'));
+        Object.entries(TYPE_COLORS).forEach(([t, color]) => {
+            if (!present.has(t)) return;
+            const row = document.createElement('div');
+            row.className = 'legend-row';
+            row.innerHTML = `<span class="legend-dot" style="background:${color}"></span> ${t}`;
+            container.appendChild(row);
+        });
+        return;
+    }
     if (!quantiles.length) { container.textContent = 'brak danych'; return; }
     const bounds = [null, ...quantiles, null];
     for (let i = 0; i < QUANTILE_COLORS.length; i++) {
@@ -152,6 +187,8 @@ function bindFilterEvents() {
      'layer-inactive', 'layer-inactive-approx', 'only-new', 'only-private']
         .forEach(id => document.getElementById(id).addEventListener('change', render));
     document.getElementById('time-filter').addEventListener('change', render);
+    document.querySelectorAll('input[name="color-mode"]').forEach(r =>
+        r.addEventListener('change', () => { buildLegend(); render(); }));
     ['price-min', 'price-max', 'area-min', 'area-max']
         .forEach(id => document.getElementById(id).addEventListener('input', debounce(render, 300)));
 }

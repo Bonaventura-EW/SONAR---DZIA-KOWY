@@ -145,6 +145,7 @@ body {
 .legend-row { display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 2px 0; }
 .legend-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.25); }
 .legend-note { font-size: 11px; color: var(--muted); margin-top: 8px; line-height: 1.55; }
+.type-swatch { display: inline-block; width: 22px; height: 11px; border-radius: 3px; vertical-align: -1px; border: 1px solid rgba(0,0,0,0.15); }
 
 /* ===== Popup ===== */
 .leaflet-popup-content-wrapper { border-radius: 14px; }

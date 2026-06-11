@@ -40,3 +40,10 @@
   do sekcji "bez lokalizacji GPS" zamiast sztucznego stosu pinezek w centrum.
 - Audyt paginacji wszystkich scraperów: strona z samymi powtórkami (karuzele
   Virgo, promowane) nie ucina już kolejnych stron.
+
+### Dodane (2026-06-11, kolory typów + szybkość)
+- Checkboxy typów działek z kolorowymi swatchami (kolory wspólne z wykresem
+  w analityce) + przełącznik koloru pinezek: cena/m² (kwantyle) lub typ
+  działki; legenda przełącza się automatycznie.
+- Scraping wszystkich 6 źródeł równolegle (ThreadPoolExecutor) — skan
+  z ~5 min do ~45 s (szczegóły ofert i tak tylko dla nowych, known_offers).

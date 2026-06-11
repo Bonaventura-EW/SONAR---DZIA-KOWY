@@ -7,6 +7,7 @@ ale bez parsera adresów i geokodera — oba portale dają współrzędne w JSON
 
 import json
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List
@@ -356,36 +357,35 @@ class SonarDzialkowy:
         start = time.time()
         now = datetime.now(self.tz)
 
-        # 1. Scraping obu źródeł (awaria jednego nie blokuje drugiego)
-        scraped_by_source: Dict[str, List[Dict]] = {}
-        try:
-            scraped_by_source['olx'] = OLXDzialkiScraper().scrape(max_pages=max_pages)
-        except Exception as e:
-            print(f"❌ OLX: scraping nieudany: {e}")
-            scraped_by_source['olx'] = []
-        try:
-            scraped_by_source['otodom'] = OtodomDzialkiScraper().scrape(
-                max_pages=max_pages, known_offers=self._known_otodom_offers())
-        except Exception as e:
-            print(f"❌ Otodom: scraping nieudany: {e}")
-            scraped_by_source['otodom'] = []
-        try:
-            scraped_by_source['adresowo'] = AdresowoScraper().scrape(
-                max_pages=max_pages, known_offers=self._known_adresowo_offers())
-        except Exception as e:
-            print(f"❌ Adresowo: scraping nieudany: {e}")
-            scraped_by_source['adresowo'] = []
-        # agencje nieruchomości (ANMA, Pasjonaci, Alternatywne BN) — awaria
-        # lub blokada antybotowa jednej nie przerywa skanu (per-source ochrona
-        # przed masową dezaktywacją obejmuje też te źródła)
+        # 1. Scraping wszystkich źródeł RÓWNOLEGLE (każde źródło to inna
+        # domena z własnym rate limitem, więc równoległość jest bezpieczna).
+        # OPTYMALIZACJA 2026-06-11: sekwencyjny scraping 6 źródeł trwał sumą
+        # ich czasów (~5 min); równolegle = czas najwolniejszego źródła.
+        # Awaria/blokada jednego źródła nie przerywa pozostałych; szczegóły
+        # ofert i tak pobierane są TYLKO dla nowych (known_offers).
+        scrape_tasks = {
+            'olx': lambda: OLXDzialkiScraper().scrape(max_pages=max_pages),
+            'otodom': lambda: OtodomDzialkiScraper().scrape(
+                max_pages=max_pages, known_offers=self._known_otodom_offers()),
+            'adresowo': lambda: AdresowoScraper().scrape(
+                max_pages=max_pages, known_offers=self._known_adresowo_offers()),
+        }
         for scraper_cls in AGENCY_SCRAPERS:
             scraper = scraper_cls()
-            try:
-                scraped_by_source[scraper.agency_key] = scraper.scrape(
-                    known_offers=self._known_agency_offers(scraper.agency_key))
-            except Exception as e:
-                print(f"❌ {scraper.agency_name}: scraping nieudany: {e}")
-                scraped_by_source[scraper.agency_key] = []
+            scrape_tasks[scraper.agency_key] = (
+                lambda s=scraper: s.scrape(
+                    known_offers=self._known_agency_offers(s.agency_key)))
+
+        scraped_by_source: Dict[str, List[Dict]] = {}
+        with ThreadPoolExecutor(max_workers=len(scrape_tasks)) as executor:
+            futures = {executor.submit(fn): key for key, fn in scrape_tasks.items()}
+            for future in as_completed(futures):
+                key = futures[future]
+                try:
+                    scraped_by_source[key] = future.result()
+                except Exception as e:
+                    print(f"❌ [{key}]: scraping nieudany: {e}")
+                    scraped_by_source[key] = []
 
         # 2. Aktualizacja bazy
         print("💾 Aktualizacja bazy danych...")
