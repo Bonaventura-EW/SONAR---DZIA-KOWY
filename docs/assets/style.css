@@ -127,6 +127,7 @@ body {
 .src-badge { display: inline-block; padding: 1px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; color: white; }
 .src-olx { background: #0284c7; }
 .src-otodom { background: #65a30d; }
+.src-adresowo { background: #e11d48; }
 
 /* miniatury kształtów pinezek w warstwach */
 .shape-pin, .shape-square {

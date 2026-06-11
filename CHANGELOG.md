@@ -31,3 +31,12 @@
   działki na Otodom) — kanoniczna zostaje oferta z najlepszą lokalizacją.
 - location_refiner: fallback geokodowania dzielnicy dla ofert agencji
   bez współrzędnych i bez ulicy w opisie.
+
+### Dodane (2026-06-11, adresowo.pl)
+- Czwarte źródło: adresowo.pl (192 oferty działek w Lublinie, coords ze stron
+  szczegółów, ulica z tytułu, znacznik "bez pośredników"). Checkbox Adresowo
+  w filtrze Źródło.
+- Oferty Adresowo bez realnej lokalizacji (centroid miasta) trafiają uczciwie
+  do sekcji "bez lokalizacji GPS" zamiast sztucznego stosu pinezek w centrum.
+- Audyt paginacji wszystkich scraperów: strona z samymi powtórkami (karuzele
+  Virgo, promowane) nie ucina już kolejnych stron.

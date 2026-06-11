@@ -33,6 +33,32 @@
    "skipped_removed": 0,
    "active": 270,
    "total_in_db": 276
+  },
+  {
+   "timestamp": "2026-06-11T21:31:09.596942+02:00",
+   "duration_s": 552.3,
+   "scraped_olx": 53,
+   "scraped_otodom": 171,
+   "scraped_adresowo": 192,
+   "scraped_agencies": 238,
+   "new": 194,
+   "updated": 268,
+   "skipped_removed": 0,
+   "active": 462,
+   "total_in_db": 470
+  },
+  {
+   "timestamp": "2026-06-11T21:42:25.614445+02:00",
+   "duration_s": 279.9,
+   "scraped_olx": 53,
+   "scraped_otodom": 171,
+   "scraped_adresowo": 192,
+   "scraped_agencies": 262,
+   "new": 24,
+   "updated": 462,
+   "skipped_removed": 0,
+   "active": 486,
+   "total_in_db": 494
   }
  ]
 }

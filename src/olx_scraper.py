@@ -203,10 +203,16 @@ class OLXDzialkiScraper:
                 offers.append(offer)
                 new_on_page += 1
 
-            # koniec paginacji: pusta strona albo same powtórki/okolice
-            if not ads or new_on_page == 0:
+            # FIX 2026-06-11: koniec paginacji TYLKO gdy strona jest pusta —
+            # strona z samymi powtórkami/wynikami "z okolicy" nie może ucinać
+            # kolejnych stron (limit max_pages i tak zamyka pętlę)
+            if not ads:
                 break
             if total and len(seen_ids) >= total:
+                break
+            if new_on_page == 0 and page > 1:
+                # strona 2+ bez żadnej nowej oferty = koniec (OLX powtarza
+                # ostatnią stronę dla page > max)
                 break
 
             time.sleep(random.uniform(self.delay_min, self.delay_max))

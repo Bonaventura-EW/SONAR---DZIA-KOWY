@@ -148,7 +148,7 @@ function buildLegend() {
 }
 
 function bindFilterEvents() {
-    ['src-olx', 'src-otodom', 'layer-active', 'layer-active-approx',
+    ['src-olx', 'src-otodom', 'src-adresowo', 'layer-active', 'layer-active-approx',
      'layer-inactive', 'layer-inactive-approx', 'only-new', 'only-private']
         .forEach(id => document.getElementById(id).addEventListener('change', render));
     document.getElementById('time-filter').addEventListener('change', render);
@@ -167,10 +167,8 @@ function passesFilters(o) {
         if (!document.getElementById('agency-master').checked) return false;
         if (o.agency_name && agencyFilterState[o.agency_name] === false) return false;
     } else {
-        const srcOlx = document.getElementById('src-olx').checked;
-        const srcOtodom = document.getElementById('src-otodom').checked;
-        if (o.source === 'olx' && !srcOlx) return false;
-        if (o.source === 'otodom' && !srcOtodom) return false;
+        const srcCheckbox = document.getElementById('src-' + o.source);
+        if (srcCheckbox && !srcCheckbox.checked) return false;
     }
 
     // warstwy: aktywne/nieaktywne × dokładne/przybliżone
@@ -339,6 +337,7 @@ function renderCounts() {
     const c = (pred) => allOffers.filter(pred).length;
     document.getElementById('count-olx').textContent = `(${c(o => o.source === 'olx')})`;
     document.getElementById('count-otodom').textContent = `(${c(o => o.source === 'otodom')})`;
+    document.getElementById('count-adresowo').textContent = `(${c(o => o.source === 'adresowo')})`;
     document.getElementById('count-active').textContent = `(${c(o => o.active && !isApprox(o))})`;
     document.getElementById('count-active-approx').textContent = `(${c(o => o.active && isApprox(o))})`;
     document.getElementById('count-inactive').textContent = `(${c(o => !o.active && !isApprox(o))})`;

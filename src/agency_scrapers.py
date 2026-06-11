@@ -154,12 +154,16 @@ class VirgoAgencyScraper(BaseAgencyScraper):
             html = self._fetch(url)
             if html is None:
                 break
-            page_offers = [o for o in self._parse_listing(html) if o['id'] not in seen_ids]
-            if not page_offers:
+            # FIX 2026-06-11: przerywamy dopiero gdy strona nie ma ŻADNYCH
+            # slugów ofert — strona z samymi powtórkami (karuzele "oferty
+            # specjalne" na każdej stronie) nie może ucinać paginacji
+            raw_offers = self._parse_listing(html)
+            if not _VIRGO_SLUG_RE.search(html):
                 break
-            for o in page_offers:
+            new_offers = [o for o in raw_offers if o['id'] not in seen_ids]
+            for o in new_offers:
                 seen_ids.add(o['id'])
-            offers.extend(page_offers)
+            offers.extend(new_offers)
             self._sleep()
 
         new = [o for o in offers if o['id'] not in known_offers]

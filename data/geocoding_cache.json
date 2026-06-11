@@ -706,5 +706,277 @@
    "name": "Generała Witolda Urbanowicza"
   },
   "ts": 1781204171.787105
+ },
+ "wita stwosza": {
+  "result": {
+   "lat": 51.2087457,
+   "lon": 22.5905431,
+   "name": "Wita Stwosza"
+  },
+  "ts": 1781206782.5315516
+ },
+ "storczykowa": {
+  "result": {
+   "lat": 51.2626005,
+   "lon": 22.5762463,
+   "name": "Storczykowa"
+  },
+  "ts": 1781206784.088928
+ },
+ "aleje tysiąclecia": {
+  "result": {
+   "lat": 51.2513745,
+   "lon": 22.5727039,
+   "name": "Aleje Tysiąclecia"
+  },
+  "ts": 1781206785.439679
+ },
+ "dożynkowa": {
+  "result": {
+   "lat": 51.2788398,
+   "lon": 22.5912024,
+   "name": "Dożynkowa"
+  },
+  "ts": 1781206787.0422096
+ },
+ "aleja warszawska": {
+  "result": {
+   "lat": 51.2573038,
+   "lon": 22.5151193,
+   "name": "Aleja Warszawska"
+  },
+  "ts": 1781206788.4792328
+ },
+ "południowa": {
+  "result": {
+   "lat": 51.2057064,
+   "lon": 22.5687881,
+   "name": "Południowa"
+  },
+  "ts": 1781206789.6573317
+ },
+ "tęczowa": {
+  "result": {
+   "lat": 51.1876428,
+   "lon": 22.5220206,
+   "name": "Tęczowa"
+  },
+  "ts": 1781206791.1651957
+ },
+ "działkowa": {
+  "result": {
+   "lat": 51.2483673,
+   "lon": 22.5861203,
+   "name": "Działkowa"
+  },
+  "ts": 1781206792.5878792
+ },
+ "zawilcowa": {
+  "result": {
+   "lat": 51.2572265,
+   "lon": 22.6001243,
+   "name": "Zawilcowa"
+  },
+  "ts": 1781206794.106064
+ },
+ "zemborzycka": {
+  "result": {
+   "lat": 51.206478,
+   "lon": 22.5661004,
+   "name": "Zemborzycka"
+  },
+  "ts": 1781206795.6598914
+ },
+ "nałęczowskiej": {
+  "result": {
+   "lat": 51.2552101,
+   "lon": 22.4837321,
+   "name": "Nałęczowska"
+  },
+  "ts": 1781206798.6712472
+ },
+ "macieja rataja": {
+  "result": {
+   "lat": 51.2312572,
+   "lon": 22.6431504,
+   "name": "Macieja Rataja"
+  },
+  "ts": 1781206800.202978
+ },
+ "szerokie": {
+  "result": {
+   "lat": 51.2575959,
+   "lon": 22.4840606,
+   "name": "Szerokie"
+  },
+  "ts": 1781206801.7251415
+ },
+ "osmolicka": {
+  "result": {
+   "lat": 51.160827,
+   "lon": 22.5291032,
+   "name": "Osmolicka"
+  },
+  "ts": 1781206803.1243842
+ },
+ "wilcza": {
+  "result": {
+   "lat": 51.2248382,
+   "lon": 22.5903041,
+   "name": "Wilcza"
+  },
+  "ts": 1781206804.396473
+ },
+ "hajdowska": {
+  "result": {
+   "lat": 51.251634,
+   "lon": 22.624995,
+   "name": "Hajdowska"
+  },
+  "ts": 1781206805.800328
+ },
+ "modrej": {
+  "result": {
+   "lat": 51.1889122,
+   "lon": 22.5184235,
+   "name": "Modra"
+  },
+  "ts": 1781206808.8031683
+ },
+ "mełgiewskiej. na": {
+  "result": null,
+  "ts": 1781206810.2903395
+ },
+ "stary gaj": {
+  "result": {
+   "lat": 51.2081402,
+   "lon": 22.5239379,
+   "name": "Stary Gaj"
+  },
+  "ts": 1781206811.6400483
+ },
+ "jutrzenki": {
+  "result": {
+   "lat": 51.229526,
+   "lon": 22.5206196,
+   "name": "Jutrzenki"
+  },
+  "ts": 1781206813.0406032
+ },
+ "majerankowa": {
+  "result": {
+   "lat": 51.277343,
+   "lon": 22.5919279,
+   "name": "Majerankowa"
+  },
+  "ts": 1781206814.574636
+ },
+ "stroma": {
+  "result": {
+   "lat": 51.2576124,
+   "lon": 22.4732474,
+   "name": "Stroma"
+  },
+  "ts": 1781206816.106958
+ },
+ "parafialna": {
+  "result": {
+   "lat": 51.1949325,
+   "lon": 22.6014705,
+   "name": "Parafialna"
+  },
+  "ts": 1781206817.6645553
+ },
+ "ptasia": {
+  "result": {
+   "lat": 51.1574251,
+   "lon": 22.4817462,
+   "name": "Ptasia"
+  },
+  "ts": 1781206819.2205207
+ },
+ "krwawicza": {
+  "result": {
+   "lat": 51.2379257,
+   "lon": 22.4776888,
+   "name": "Tadeusza Krwawicza"
+  },
+  "ts": 1781206820.596429
+ },
+ "ksawerego dunikowskiego": {
+  "result": {
+   "lat": 51.2158014,
+   "lon": 22.5713803,
+   "name": "Ksawerego Dunikowskiego"
+  },
+  "ts": 1781206821.878967
+ },
+ "district:zemborzyce": {
+  "result": {
+   "lat": 51.1773978,
+   "lon": 22.5086285,
+   "name": "Zemborzyce"
+  },
+  "ts": 1781207210.6754112
+ },
+ "turystycznej": {
+  "result": {
+   "lat": 51.2625055,
+   "lon": 22.6284197,
+   "name": "Turystyczna"
+  },
+  "ts": 1781207213.6894348
+ },
+ "district:dziesiata": {
+  "result": {
+   "lat": 51.2158786,
+   "lon": 22.5797114,
+   "name": "Dziesiąta"
+  },
+  "ts": 1781207215.1031678
+ },
+ "kraśnicka": {
+  "result": {
+   "lat": 51.2410635,
+   "lon": 22.503617,
+   "name": "Aleja Kraśnicka"
+  },
+  "ts": 1781207216.649663
+ },
+ "district:czechow polnocny": {
+  "result": {
+   "lat": 51.2734944,
+   "lon": 22.5494357,
+   "name": "Czechów Północny"
+  },
+  "ts": 1781207218.2944129
+ },
+ "district:weglin": {
+  "result": {
+   "lat": 51.2313889,
+   "lon": 22.4916667,
+   "name": "Węglin"
+  },
+  "ts": 1781207219.8532178
+ },
+ "lubartowskiej": {
+  "result": {
+   "lat": 51.2538576,
+   "lon": 22.5693483,
+   "name": "Lubartowska"
+  },
+  "ts": 1781207222.6581454
+ },
+ "district:bursaki": {
+  "result": {
+   "lat": 51.2730556,
+   "lon": 22.5697222,
+   "name": "Bursaki"
+  },
+  "ts": 1781207223.9689593
+ },
+ "district:zadebie": {
+  "result": null,
+  "ts": 1781207225.5046642
  }
 }

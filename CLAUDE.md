@@ -21,6 +21,8 @@ wzorowana na `SONAR-MIESZKANIOWY`, ale **celowo prostsza**:
 olx_scraper.py     → listing OLX → __PRERENDERED_STATE__ → znormalizowane oferty
 otodom_scraper.py  → listing Otodom (__NEXT_DATA__) + strony szczegółów
                      TYLKO dla nowych ofert (coords, pełny opis, typ działki)
+adresowo_scraper.py→ listing adresowo.pl (paginacja /_l2, /_l3...) + strony
+                     szczegółów dla nowych ofert (coords, ulica z tytułu)
 agency_scrapers.py → strony agencji: ANMA + Pasjonaci (CMS Galactica Virgo,
                      dane w slugu URL) i Alternatywne BN (WordPress);
                      tylko Lublin, bez coords (uzupełnia location_refiner)
@@ -87,13 +89,20 @@ Testy: `pytest` z roota repo (konfiguracja w `pytest.ini`, `pythonpath = src`).
    `exact` (Otodom) > `street` (geokodowana ulica z tekstu) > `approx`
    (rozmycie OLX ~1 km). Logika w `_update_existing` i `location_refiner.py`
    (`refine_offer_location` nie rusza `exact` ani `street`).
-6. **Coords Otodom NIE zawsze są dokładne!** Gdy ogłoszeniodawca nie wskaże
-   punktu, Otodom wstawia centroid dzielnicy (np. plac Zamkowy) — dlatego:
+6. **Coords portali NIE zawsze są dokładne!** Gdy ogłoszeniodawca nie wskaże
+   punktu, Otodom wstawia centroid dzielnicy (np. plac Zamkowy), a Adresowo
+   centroid CAŁEGO miasta — dlatego:
    (a) `mapDetails.radius > 0` na stronie szczegółów ⇒ precision `approx`
    (`otodom_scraper.fetch_details`); (b) `main.py::_flag_generic_otodom_coords`
    flaguje klastry ≥3 ofert w promieniu 250 m jako `approx`. Potem refiner
    próbuje podnieść je do `street`. Geokoder przyjmuje wyłącznie wyniki
    `class=highway` (inaczej śmieciowa nazwa dopasowuje samo miasto).
+   Nierozwiązane oferty Adresowo tracą coords (centroid miasta = dezinformacja)
+   i trafiają do sekcji „bez lokalizacji GPS" pod mapą.
+6a. **Paginacja: nie przerywaj na stronie z samymi powtórkami** — karuzele
+   (Virgo) i ogłoszenia promowane powtarzają oferty na każdej stronie;
+   scrapery przerywają dopiero przy stronie BEZ żadnych ogłoszeń (plus limit
+   max_pages).
 7. **OLX dokleja wyniki „z okolicy"** na końcu listingu — filtrujemy po
    `cityNormalizedName == 'lublin'`.
 8. **Deduplikacja między WSZYSTKIMI źródłami** (`main.py::

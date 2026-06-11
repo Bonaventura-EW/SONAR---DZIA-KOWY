@@ -16,6 +16,7 @@ import pytz
 import paths
 from olx_scraper import OLXDzialkiScraper
 from otodom_scraper import OtodomDzialkiScraper
+from adresowo_scraper import AdresowoScraper
 from agency_scrapers import AGENCY_SCRAPERS
 from location_refiner import StreetGeocoder, refine_offer_location
 
@@ -57,6 +58,28 @@ class SonarDzialkowy:
         with open(self.data_file, 'w', encoding='utf-8') as f:
             json.dump(self.database, f, ensure_ascii=False, indent=1)
         print(f"💾 Baza zapisana: {self.data_file}")
+
+    def _known_adresowo_offers(self) -> Dict:
+        """Indeks znanych ofert Adresowo — scraper pomija strony szczegółów.
+
+        Uwaga: oferty BEZ coords też są "znane" (centroid miasta został im
+        celowo usunięty) — bez tego scraper refetchowałby je co skan.
+        """
+        known = {}
+        for offer in self.database['offers']:
+            if offer.get('source') != 'adresowo':
+                continue
+            loc = offer.get('location') or {}
+            known[offer['id']] = {
+                'coords': loc.get('coords'),
+                'coords_precision': loc.get('coords_precision'),
+                'street': loc.get('street'),
+                'description': offer.get('description'),
+                'title': offer.get('title'),
+                'plot_type': offer.get('plot_type'),
+                'image': offer.get('image'),
+            }
+        return known
 
     def _known_agency_offers(self, source: str) -> Dict:
         """Indeks znanych ofert agencji — scraper pomija strony szczegółów."""
@@ -214,18 +237,18 @@ class SonarDzialkowy:
         return math.hypot(x, lat2 - lat1) * 6371
 
     def _flag_generic_otodom_coords(self, min_cluster: int = 3, radius_km: float = 0.25):
-        """Wykrywa 'fałszywie dokładne' pinezki Otodom stojące w generycznym
-        centroidzie dzielnicy (np. plac Zamkowy / Śródmieście).
+        """Wykrywa 'fałszywie dokładne' pinezki portali stojące w generycznym
+        centroidzie (np. plac Zamkowy / Śródmieście / centrum Lublina).
 
         FIX 2026-06-11: gdy ogłoszeniodawca nie wskaże punktu, Otodom wstawia
-        centroid dzielnicy — wiele różnych ofert ląduje w tym samym miejscu.
-        Heurystyka: >= min_cluster aktywnych ofert Otodom w promieniu radius_km
-        → wszystkie w klastrze dostają precision 'approx' (a refiner spróbuje
-        podnieść je do 'street' z ulicy w tytule/opisie). Dzielnica z reverse
-        geokodowania fałszywego punktu jest czyszczona.
+        centroid dzielnicy, a Adresowo centroid miasta — wiele różnych ofert
+        ląduje w tym samym miejscu. Heurystyka: >= min_cluster aktywnych ofert
+        z coords 'exact' w promieniu radius_km → wszystkie w klastrze dostają
+        precision 'approx' (a refiner spróbuje podnieść je do 'street' z ulicy
+        w tytule/opisie). Dzielnica z reverse geokodowania jest czyszczona.
         """
         active = [o for o in self.database['offers']
-                  if o.get('active') and o.get('source') == 'otodom'
+                  if o.get('active') and o.get('source') in ('otodom', 'adresowo')
                   and (o.get('location') or {}).get('coords')]
         flagged = 0
         for offer in active:
@@ -239,11 +262,12 @@ class SonarDzialkowy:
             )  # liczy też samą ofertę
             if neighbours >= min_cluster:
                 loc['coords_precision'] = 'approx'
+                loc['generic_centroid'] = True  # ślad dla kroku po refinerze
                 loc['district'] = None  # dzielnica pochodziła z fałszywego punktu
                 flagged += 1
         if flagged:
-            print(f"   🎯 Oznaczono {flagged} pinezek Otodom jako przybliżone "
-                  f"(generyczny centroid dzielnicy)")
+            print(f"   🎯 Oznaczono {flagged} pinezek portali jako przybliżone "
+                  f"(generyczny centroid)")
 
     def _tag_cross_portal_duplicates(self):
         """Ta sama działka wystawiona w kilku źródłach (OLX/Otodom/agencje):
@@ -345,6 +369,12 @@ class SonarDzialkowy:
         except Exception as e:
             print(f"❌ Otodom: scraping nieudany: {e}")
             scraped_by_source['otodom'] = []
+        try:
+            scraped_by_source['adresowo'] = AdresowoScraper().scrape(
+                max_pages=max_pages, known_offers=self._known_adresowo_offers())
+        except Exception as e:
+            print(f"❌ Adresowo: scraping nieudany: {e}")
+            scraped_by_source['adresowo'] = []
         # agencje nieruchomości (ANMA, Pasjonaci, Alternatywne BN) — awaria
         # lub blokada antybotowa jednej nie przerywa skanu (per-source ochrona
         # przed masową dezaktywacją obejmuje też te źródła)
@@ -398,6 +428,22 @@ class SonarDzialkowy:
         if refined_count:
             print(f"   ✅ Doprecyzowano {refined_count} ofert (approx → ulica)")
 
+        # 3c. Adresowo wstawia centroid CAŁEGO MIASTA gdy brak lokalizacji —
+        # jeśli refiner nie znalazł ulicy, taka pinezka to dezinformacja
+        # (dziesiątki ofert w jednym punkcie w centrum). Uczciwiej: bez coords
+        # → oferta trafia do sekcji "bez lokalizacji GPS" pod mapą.
+        stripped = 0
+        for offer in self.database['offers']:
+            loc = offer.get('location') or {}
+            if offer.get('active') and offer.get('source') == 'adresowo' \
+               and loc.get('generic_centroid') and loc.get('coords_precision') == 'approx':
+                loc['coords'] = None
+                loc['coords_precision'] = None
+                stripped += 1
+        if stripped:
+            print(f"   📭 {stripped} ofert Adresowo bez realnej lokalizacji "
+                  f"→ sekcja 'bez GPS' (centroid miasta usunięty)")
+
         # 4. Dezaktywacja + porządki
         self._mark_inactive(scraped_by_source)
         self._update_days_active()
@@ -419,6 +465,7 @@ class SonarDzialkowy:
             'duration_s': round(duration, 1),
             'scraped_olx': len(scraped_by_source['olx']),
             'scraped_otodom': len(scraped_by_source['otodom']),
+            'scraped_adresowo': len(scraped_by_source.get('adresowo', [])),
             'scraped_agencies': sum(len(v) for k, v in scraped_by_source.items()
                                     if k not in ('olx', 'otodom')),
             'new': new_count,
