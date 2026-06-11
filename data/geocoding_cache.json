@@ -278,5 +278,249 @@
    "name": "Rudnicka"
   },
   "ts": 1781174519.6539943
+ },
+ "ochotnicza": {
+  "result": {
+   "lat": 51.2394112,
+   "lon": 22.5538893,
+   "name": "Ochotnicza"
+  },
+  "ts": 1781176230.7515981
+ },
+ "nadbystrzycka": {
+  "result": {
+   "lat": 51.2310823,
+   "lon": 22.5377588,
+   "name": "Nadbystrzycka"
+  },
+  "ts": 1781176232.2856293
+ },
+ "makowa": {
+  "result": {
+   "lat": 51.2003226,
+   "lon": 22.5755377,
+   "name": "Makowa"
+  },
+  "ts": 1781176233.4393516
+ },
+ "lublin": {
+  "result": {
+   "lat": 51.231292,
+   "lon": 22.5689637,
+   "name": "Lublin Główny"
+  },
+  "ts": 1781176234.7831855
+ },
+ "głuskiej": {
+  "result": {
+   "lat": 51.2074871,
+   "lon": 22.5894131,
+   "name": "Głuska"
+  },
+  "ts": 1781176237.3649206
+ },
+ "raszyńskiej": {
+  "result": {
+   "lat": 51.2311444,
+   "lon": 22.4746723,
+   "name": "Raszyńska"
+  },
+  "ts": 1781176240.174998
+ },
+ "jaspisowej": {
+  "result": {
+   "lat": 51.2252811,
+   "lon": 22.4893603,
+   "name": "Jaspisowa"
+  },
+  "ts": 1781176243.0724123
+ },
+ "metalurgiczna": {
+  "result": {
+   "lat": 51.2432793,
+   "lon": 22.6324685,
+   "name": "Metalurgiczna"
+  },
+  "ts": 1781176244.5672297
+ },
+ "trześniowskiej": {
+  "result": {
+   "lat": 51.2693003,
+   "lon": 22.6018611,
+   "name": "Trześniowska"
+  },
+  "ts": 1781176247.525749
+ },
+ "warszawskiej. malownicza": {
+  "result": null,
+  "ts": 1781176249.0464864
+ },
+ "jana kasprowicza": {
+  "result": {
+   "lat": 51.2557504,
+   "lon": 22.634313,
+   "name": "Jana Kasprowicza"
+  },
+  "ts": 1781176250.4181592
+ },
+ "zemborzyckiej": {
+  "result": {
+   "lat": 51.206478,
+   "lon": 22.5661004,
+   "name": "Zemborzycka"
+  },
+  "ts": 1781176253.3826716
+ },
+ "mieczykowa": {
+  "result": {
+   "lat": 51.2757575,
+   "lon": 22.5121313,
+   "name": "Mieczykowa"
+  },
+  "ts": 1781176254.9180977
+ },
+ "brzegowa": {
+  "result": null,
+  "ts": 1781176256.437367
+ },
+ "mełgiewska": {
+  "result": {
+   "lat": 51.243513,
+   "lon": 22.6488208,
+   "name": "Mełgiewska"
+  },
+  "ts": 1781176257.8643858
+ },
+ "folwarczna": {
+  "result": {
+   "lat": 51.2162822,
+   "lon": 22.4642839,
+   "name": "Folwarczna"
+  },
+  "ts": 1781176259.018821
+ },
+ "lub;in": {
+  "result": null,
+  "ts": 1781176260.406764
+ },
+ "narcyzowa": {
+  "result": {
+   "lat": 51.2760144,
+   "lon": 22.5935248,
+   "name": "Narcyzowa"
+  },
+  "ts": 1781176261.953957
+ },
+ "kijańska": {
+  "result": {
+   "lat": 51.2600727,
+   "lon": 22.6226259,
+   "name": "Kijańska"
+  },
+  "ts": 1781176263.25914
+ },
+ "spółdzielczości pracy": {
+  "result": {
+   "lat": 51.2707103,
+   "lon": 22.5733799,
+   "name": "Aleja Spółdzielczości Pracy"
+  },
+  "ts": 1781176264.5534039
+ },
+ "skowronkowa": {
+  "result": {
+   "lat": 51.2745524,
+   "lon": 22.5002368,
+   "name": "Skowronkowa"
+  },
+  "ts": 1781176265.7098703
+ },
+ "tęczowej": {
+  "result": {
+   "lat": 51.173621,
+   "lon": 22.5058194,
+   "name": "Tęczowa"
+  },
+  "ts": 1781176268.5429087
+ },
+ "krótka": {
+  "result": {
+   "lat": 51.2481447,
+   "lon": 22.5531765,
+   "name": "Krótka"
+  },
+  "ts": 1781176269.9110548
+ },
+ "warszawska dębówka": {
+  "result": null,
+  "ts": 1781176271.218585
+ },
+ "warszawskiej": {
+  "result": {
+   "lat": 51.2604009,
+   "lon": 22.5048135,
+   "name": "Warszawska"
+  },
+  "ts": 1781176274.148889
+ },
+ "warszawska": {
+  "result": {
+   "lat": 51.2604009,
+   "lon": 22.5048135,
+   "name": "Warszawska"
+  },
+  "ts": 1781176275.3135624
+ },
+ "palmowa": {
+  "result": {
+   "lat": 51.273719,
+   "lon": 22.6027446,
+   "name": "Palmowa"
+  },
+  "ts": 1781176276.8501933
+ },
+ "poligonowa": {
+  "result": {
+   "lat": 51.2656299,
+   "lon": 22.5285776,
+   "name": "Poligonowa"
+  },
+  "ts": 1781176278.2040362
+ },
+ "nałkowskich": {
+  "result": {
+   "lat": 51.2120016,
+   "lon": 22.5442769,
+   "name": "Wacława i Zofii Nałkowskich"
+  },
+  "ts": 1781176279.698318
+ },
+ "biskupińskiej": {
+  "result": {
+   "lat": 51.2513179,
+   "lon": 22.4916791,
+   "name": "Biskupińska"
+  },
+  "ts": 1781176282.6810021
+ },
+ "zawieprzycka": {
+  "result": {
+   "lat": 51.2610853,
+   "lon": 22.6255379,
+   "name": "Zawieprzycka"
+  },
+  "ts": 1781176284.110655
+ },
+ "gołębiej": {
+  "result": null,
+  "ts": 1781176345.524842
+ },
+ "kraśnicką": {
+  "result": {
+   "lat": 51.2414295,
+   "lon": 22.5041967,
+   "name": "Aleja Kraśnicka"
+  },
+  "ts": 1781176346.8846745
  }
 }

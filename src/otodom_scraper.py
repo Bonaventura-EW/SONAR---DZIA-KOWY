@@ -193,7 +193,11 @@ class OtodomDzialkiScraper:
             offer['location']['coords'] = {
                 'lat': coords['latitude'], 'lon': coords['longitude']
             }
-            offer['location']['coords_precision'] = 'exact'
+            # FIX 2026-06-11: radius > 0 w mapDetails = ogłoszeniodawca NIE wskazał
+            # dokładnego punktu (Otodom pokazuje okrąg). Takie coords to często
+            # centroid dzielnicy (np. plac Zamkowy) — nie udawajmy, że są dokładne.
+            radius = (location.get('mapDetails') or {}).get('radius') or 0
+            offer['location']['coords_precision'] = 'exact' if radius == 0 else 'approx'
 
         description = strip_html(ad.get('description') or '')
         if len(description) > len(offer.get('description') or ''):

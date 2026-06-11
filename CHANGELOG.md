@@ -2,6 +2,13 @@
 
 ## [Niewydane]
 
+### Naprawione
+- Fałszywie dokładne pinezki Otodom (centroidy dzielnic, np. plac Zamkowy):
+  `mapDetails.radius > 0` ⇒ precyzja `approx`; klastry ≥3 ofert w promieniu
+  250 m flagowane jako `approx`; geokoder przyjmuje tylko `class=highway`.
+  Efekt: 96 exact / 93 street / 31 approx (wcześniej 168 „exact", z czego
+  ~70 stało w generycznych punktach).
+
 ### Dodane
 - Doprecyzowanie lokalizacji (`location_refiner.py`): ulica z tytułu/opisu →
   geokodowanie Nominatim (cache, limit 100/skan), precyzja `approx`→`street`.

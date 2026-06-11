@@ -92,3 +92,9 @@ def test_geocoder_negative_cache(tmp_path):
     g.cache['nieistniejąca'] = {'result': None, 'ts': 9e12}  # świeży negatyw
     assert g.geocode_street('Nieistniejąca') is None
     assert g.live_requests == 0  # nie strzelał do Nominatim
+
+
+def test_stop_words_block_city_as_street():
+    # 'Lublinie'/'Lublin' nie mogą być kandydatem na ulicę
+    assert extract_street_candidates("Działka przy ul. Lublinie atrakcyjna") == []
+    assert extract_street_candidates("ulica Lublin bez sensu") == []

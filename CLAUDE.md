@@ -84,17 +84,24 @@ Testy: `pytest` z roota repo (konfiguracja w `pytest.ini`, `pythonpath = src`).
    `exact` (Otodom) > `street` (geokodowana ulica z tekstu) > `approx`
    (rozmycie OLX ~1 km). Logika w `_update_existing` i `location_refiner.py`
    (`refine_offer_location` nie rusza `exact` ani `street`).
-6. **OLX dokleja wyniki „z okolicy"** na końcu listingu — filtrujemy po
+6. **Coords Otodom NIE zawsze są dokładne!** Gdy ogłoszeniodawca nie wskaże
+   punktu, Otodom wstawia centroid dzielnicy (np. plac Zamkowy) — dlatego:
+   (a) `mapDetails.radius > 0` na stronie szczegółów ⇒ precision `approx`
+   (`otodom_scraper.fetch_details`); (b) `main.py::_flag_generic_otodom_coords`
+   flaguje klastry ≥3 ofert w promieniu 250 m jako `approx`. Potem refiner
+   próbuje podnieść je do `street`. Geokoder przyjmuje wyłącznie wyniki
+   `class=highway` (inaczej śmieciowa nazwa dopasowuje samo miasto).
+7. **OLX dokleja wyniki „z okolicy"** na końcu listingu — filtrujemy po
    `cityNormalizedName == 'lublin'`.
-7. **Deduplikacja OLX↔Otodom** (`main.py::_tag_cross_portal_duplicates`):
+8. **Deduplikacja OLX↔Otodom** (`main.py::_tag_cross_portal_duplicates`):
    ta sama cena + powierzchnia ±1% + dystans <5 km (gdy oba mają GPS) →
    oferta OLX dostaje `duplicate_of` (ID oferty Otodom) i oba dostają
    `also_at` (URL drugiego ogłoszenia). Jedna oferta Otodom paruje się z
    maksymalnie jednym OLX. `map_generator` i `api_generator` **chowają**
    oferty z aktywnym `duplicate_of` — na mapie zostaje pinezka Otodom
    (dokładniejsza lokalizacja) z linkiem do OLX w popupie.
-8. **Nie modyfikuj ręcznie `data/offers.json`** — plik generowany przez skan.
-9. Zmiany oznaczaj datowanym komentarzem `# FIX YYYY-MM-DD: opis`, a istotne
+9. **Nie modyfikuj ręcznie `data/offers.json`** — plik generowany przez skan.
+10. Zmiany oznaczaj datowanym komentarzem `# FIX YYYY-MM-DD: opis`, a istotne
    wpisuj do `CHANGELOG.md` (konwencja z siostrzanych sonarów).
 
 ## Konwencja commitów

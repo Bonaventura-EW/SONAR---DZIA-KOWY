@@ -196,6 +196,38 @@ class SonarDzialkowy:
         x = (lon2 - lon1) * math.cos((lat1 + lat2) / 2)
         return math.hypot(x, lat2 - lat1) * 6371
 
+    def _flag_generic_otodom_coords(self, min_cluster: int = 3, radius_km: float = 0.25):
+        """Wykrywa 'fałszywie dokładne' pinezki Otodom stojące w generycznym
+        centroidzie dzielnicy (np. plac Zamkowy / Śródmieście).
+
+        FIX 2026-06-11: gdy ogłoszeniodawca nie wskaże punktu, Otodom wstawia
+        centroid dzielnicy — wiele różnych ofert ląduje w tym samym miejscu.
+        Heurystyka: >= min_cluster aktywnych ofert Otodom w promieniu radius_km
+        → wszystkie w klastrze dostają precision 'approx' (a refiner spróbuje
+        podnieść je do 'street' z ulicy w tytule/opisie). Dzielnica z reverse
+        geokodowania fałszywego punktu jest czyszczona.
+        """
+        active = [o for o in self.database['offers']
+                  if o.get('active') and o.get('source') == 'otodom'
+                  and (o.get('location') or {}).get('coords')]
+        flagged = 0
+        for offer in active:
+            loc = offer['location']
+            if loc.get('coords_precision') != 'exact':
+                continue
+            c = loc['coords']
+            neighbours = sum(
+                1 for other in active
+                if self._distance_km(c, other['location']['coords']) <= radius_km
+            )  # liczy też samą ofertę
+            if neighbours >= min_cluster:
+                loc['coords_precision'] = 'approx'
+                loc['district'] = None  # dzielnica pochodziła z fałszywego punktu
+                flagged += 1
+        if flagged:
+            print(f"   🎯 Oznaczono {flagged} pinezek Otodom jako przybliżone "
+                  f"(generyczny centroid dzielnicy)")
+
     def _tag_cross_portal_duplicates(self):
         """Ta sama działka wystawiona na OLX i Otodom: identyczna cena,
         powierzchnia ±1% i (gdy oba mają GPS) odległość <5 km.
@@ -302,7 +334,10 @@ class SonarDzialkowy:
                     new_count += 1
                     print(f"   🆕 [{source}] {offer['title'][:60]} — {price} zł")
 
-        # 3. Doprecyzowanie lokalizacji: ulica z tytułu/opisu → coords (Nominatim)
+        # 3a. Fałszywie dokładne pinezki Otodom (centroidy dzielnic) → approx
+        self._flag_generic_otodom_coords()
+
+        # 3b. Doprecyzowanie lokalizacji: ulica z tytułu/opisu → coords (Nominatim)
         # FIX 2026-06-11: OLX rozmywa pinezki (~1 km, czasem centroid miasta);
         # geokodujemy ulicę z tekstu — precision approx → street. Cache sprawia,
         # że kolejne skany robią live zapytania tylko dla nowych ulic.

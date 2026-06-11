@@ -40,8 +40,9 @@ _STREET_RE = re.compile(
 
 # słowa, które NIE są nazwą ulicy (ucinamy je z końca dopasowania)
 _STOP_WORDS = {
-    'dzielnica', 'oferta', 'lublin', 'działka', 'działki', 'cena', 'nr',
-    'obok', 'blisko', 'oraz', 'czyli', 'gmina', 'okolice', 'najważniejsze',
+    'dzielnica', 'oferta', 'lublin', 'lublinie', 'lublina', 'działka',
+    'działki', 'cena', 'nr', 'obok', 'blisko', 'oraz', 'czyli', 'gmina',
+    'okolice', 'najważniejsze',
 }
 
 
@@ -119,6 +120,11 @@ class StreetGeocoder:
 
         for res in results:
             lat, lon = float(res['lat']), float(res['lon'])
+            # FIX 2026-06-11: tylko realne ulice (class=highway) — bez tego
+            # zapytanie o śmieciową nazwę (np. 'Lublinie') dopasowywało samo
+            # miasto i pinezka lądowała w generycznym punkcie
+            if res.get('class') != 'highway':
+                continue
             if 'Lublin' not in res.get('display_name', ''):
                 continue
             if not (LUBLIN_BBOX['lat_min'] <= lat <= LUBLIN_BBOX['lat_max']
