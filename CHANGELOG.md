@@ -3,6 +3,9 @@
 ## [Niewydane]
 
 ### Dodane
+- Doprecyzowanie lokalizacji (`location_refiner.py`): ulica z tytułu/opisu →
+  geokodowanie Nominatim (cache, limit 100/skan), precyzja `approx`→`street`.
+  Pierwszy przebieg poprawił 38/52 pinezek OLX (max korekta 8,2 km).
 - Deduplikacja OLX↔Otodom: ta sama działka (cena identyczna, powierzchnia ±1%,
   dystans <5 km) pokazywana raz — zostaje pinezka Otodom z linkiem do OLX.
 - Statyczne API `docs/api/` (status, offers, history, health) + `docs/API.md`.

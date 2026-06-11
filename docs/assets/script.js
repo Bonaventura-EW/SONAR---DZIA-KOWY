@@ -239,7 +239,9 @@ function popupHtml(o) {
             ? ` <span class="trend-up">↑ było ${fmtPrice(o.previous_price)}</span>` : '';
     const img = o.image ? `<img class="popup-img" src="${o.image}" loading="lazy" alt="">` : '';
     const where = [o.street, o.district].filter(Boolean).join(', ');
-    const precision = isApprox(o) ? ' (lokalizacja przybliżona ~1 km)' : '';
+    const precision = o.coords_precision === 'street'
+        ? ' (lokalizacja: ulica)'
+        : isApprox(o) ? ' (lokalizacja przybliżona ~1 km)' : '';
     const alsoAt = o.also_at
         ? `<a class="secondary" href="${o.also_at}" target="_blank" rel="noopener">Druga oferta ↗</a>` : '';
     const status = o.active ? '' : '<div style="color:#dc2626;font-weight:700;font-size:12px;">⏸ OFERTA NIEAKTYWNA</div>';

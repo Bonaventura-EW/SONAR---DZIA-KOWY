@@ -24,6 +24,8 @@ otodom_scraper.py  → listing Otodom (__NEXT_DATA__) + strony szczegółów
   ↓
 main.py            → aktualizacja data/offers.json (historia cen, dezaktywacja,
                      reaktywacja, deduplikacja OLX↔Otodom, scan_history)
+location_refiner.py→ ulica z tytułu/opisu → Nominatim → precision approx→street
+                     (cache: data/geocoding_cache.json, limit 100 zapytań/skan)
   ↓
 map_generator.py   → docs/data.json   (mapa: oferty po dedup + kwantyle ceny/m²)
 api_generator.py   → docs/api/*.json  (status / offers / history / health)
@@ -78,8 +80,10 @@ Testy: `pytest` z roota repo (konfiguracja w `pytest.ini`, `pythonpath = src`).
    PER ŹRÓDŁO — jeśli scraper źródła zwróci 0 ofert albo <30% liczby aktywnych,
    dezaktywacja tego źródła jest pomijana (blokada portalu ≠ zniknięcie ofert).
    Nie usuwaj tej ochrony.
-5. **Nie nadpisuj dokładnych coords przybliżonymi** — logika w
-   `_update_existing` (precision `exact` > `approx`).
+5. **Nie nadpisuj dokładnych coords przybliżonymi** — hierarchia precyzji:
+   `exact` (Otodom) > `street` (geokodowana ulica z tekstu) > `approx`
+   (rozmycie OLX ~1 km). Logika w `_update_existing` i `location_refiner.py`
+   (`refine_offer_location` nie rusza `exact` ani `street`).
 6. **OLX dokleja wyniki „z okolicy"** na końcu listingu — filtrujemy po
    `cityNormalizedName == 'lublin'`.
 7. **Deduplikacja OLX↔Otodom** (`main.py::_tag_cross_portal_duplicates`):

@@ -16,6 +16,7 @@ import pytz
 import paths
 from olx_scraper import OLXDzialkiScraper
 from otodom_scraper import OtodomDzialkiScraper
+from location_refiner import StreetGeocoder, refine_offer_location
 
 # Maksymalna wiarygodna zmiana ceny między skanami (ochrona przed błędami parsowania)
 MAX_PRICE_CHANGE_PERCENT = 70
@@ -301,18 +302,38 @@ class SonarDzialkowy:
                     new_count += 1
                     print(f"   🆕 [{source}] {offer['title'][:60]} — {price} zł")
 
-        # 3. Dezaktywacja + porządki
+        # 3. Doprecyzowanie lokalizacji: ulica z tytułu/opisu → coords (Nominatim)
+        # FIX 2026-06-11: OLX rozmywa pinezki (~1 km, czasem centroid miasta);
+        # geokodujemy ulicę z tekstu — precision approx → street. Cache sprawia,
+        # że kolejne skany robią live zapytania tylko dla nowych ulic.
+        print("📍 Doprecyzowanie lokalizacji (ulice z tytułów/opisów)...")
+        MAX_LIVE_GEOCODES = 100  # limit Nominatim per skan (1 req/s)
+        geocoder = StreetGeocoder()
+        refined_count = 0
+        for offer in self.database['offers']:
+            if not offer.get('active'):
+                continue
+            if geocoder.live_requests >= MAX_LIVE_GEOCODES:
+                print(f"   ⚠️ Limit {MAX_LIVE_GEOCODES} geokodowań osiągnięty — reszta w kolejnym skanie")
+                break
+            if refine_offer_location(offer, geocoder):
+                refined_count += 1
+        geocoder.save_cache()
+        if refined_count:
+            print(f"   ✅ Doprecyzowano {refined_count} ofert (approx → ulica)")
+
+        # 4. Dezaktywacja + porządki
         self._mark_inactive(scraped_by_source)
         self._update_days_active()
         self._tag_cross_portal_duplicates()
         self._cleanup_old()
 
-        # 4. Metadane + zapis
+        # 5. Metadane + zapis
         self.database['last_scan'] = now.isoformat()
         self.database['next_scan'] = self._next_scan_time()
         self._save_database()
 
-        # 5. Statystyki
+        # 6. Statystyki
         active = sum(1 for o in self.database['offers'] if o.get('active'))
         with_coords = sum(1 for o in self.database['offers']
                           if o.get('active') and (o.get('location') or {}).get('coords'))

@@ -5,15 +5,15 @@ przenoś do `CHANGELOG.md`.
 
 ## Do zrobienia
 
-- [ ] **Bardziej precyzyjne lokalizacje.** Część ogłoszeń ma w tytule/opisie
-  nazwę ulicy (np. „Działka ul. Wólczańska"), a pinezka stoi w centroidzie
-  dzielnicy / przybliżonym punkcie OLX (~1 km). Pomysł: wyciągać ulicę
-  regexem z tytułu+opisu i geokodować (Nominatim z cache, jak w
-  SONAR-MIESZKANIOWY — `geocoder.py` z polską fleksją), ale TYLKO gdy
-  poprawia to precyzję (`approx` → `street`); nie nadpisywać dokładnych
-  coords z Otodom (`exact`).
+(pusto — dopisuj kolejne pomysły tutaj)
 
 ## Zrobione
+
+- [x] **Bardziej precyzyjne lokalizacje** (2026-06-11): `location_refiner.py`
+  wyciąga ulicę z tytułu/opisu (regex + polska odmiana) i geokoduje przez
+  Nominatim (cache w `data/geocoding_cache.json`); precyzja `approx` →
+  `street`, coords `exact` z Otodom nieruszane. Pierwsze uruchomienie
+  doprecyzowało 38/52 ofert OLX (największa korekta: 8,2 km).
 
 - [x] Mapa + scraping OLX/Otodom z deduplikacją (2026-06-10)
 - [x] Monitoring, analityka, nowe logo i szata graficzna (2026-06-10)

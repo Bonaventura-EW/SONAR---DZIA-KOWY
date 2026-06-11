@@ -1,0 +1,282 @@
+{
+ "krężnicka": {
+  "result": {
+   "lat": 51.1831809,
+   "lon": 22.5210223,
+   "name": "Krężnicka"
+  },
+  "ts": 1781174451.3575103
+ },
+ "kasprowicza": {
+  "result": {
+   "lat": 51.2557504,
+   "lon": 22.634313,
+   "name": "Jana Kasprowicza"
+  },
+  "ts": 1781174452.959517
+ },
+ "lubuszan": {
+  "result": {
+   "lat": 51.2561687,
+   "lon": 22.4853757,
+   "name": "Lubuszan"
+  },
+  "ts": 1781174454.500359
+ },
+ "urbanowicza": {
+  "result": {
+   "lat": 51.2170988,
+   "lon": 22.6273332,
+   "name": "Generała Witolda Urbanowicza"
+  },
+  "ts": 1781174455.9399009
+ },
+ "kosynierów": {
+  "result": {
+   "lat": 51.2792674,
+   "lon": 22.5793239,
+   "name": "Kosynierów"
+  },
+  "ts": 1781174457.2595184
+ },
+ "zorza": {
+  "result": {
+   "lat": 51.2036802,
+   "lon": 22.6041462,
+   "name": "Zorza"
+  },
+  "ts": 1781174458.7374
+ },
+ "wyżynnej": {
+  "result": {
+   "lat": 51.2216968,
+   "lon": 22.5303157,
+   "name": "Wyżynna"
+  },
+  "ts": 1781174461.789067
+ },
+ "kłopotowskiego": {
+  "result": {
+   "lat": 51.269641,
+   "lon": 22.5865323,
+   "name": "Błogosławionego Księdza Ignacego Kłopotowskiego"
+  },
+  "ts": 1781174463.2816567
+ },
+ "folwarczn": {
+  "result": null,
+  "ts": 1781174464.6260397
+ },
+ "folwarcznej": {
+  "result": {
+   "lat": 51.2162822,
+   "lon": 22.4642839,
+   "name": "Folwarczna"
+  },
+  "ts": 1781174467.565935
+ },
+ "poziomkowej": {
+  "result": {
+   "lat": 51.2684194,
+   "lon": 22.5892481,
+   "name": "Poziomkowa"
+  },
+  "ts": 1781174470.5802586
+ },
+ "orzechowej": {
+  "result": {
+   "lat": 51.2726889,
+   "lon": 22.5960867,
+   "name": "Orzechowa"
+  },
+  "ts": 1781174473.5369008
+ },
+ "paprociowa": {
+  "result": {
+   "lat": 51.2711932,
+   "lon": 22.6014875,
+   "name": "Paprociowa"
+  },
+  "ts": 1781174475.0561082
+ },
+ "skowronkowej": {
+  "result": {
+   "lat": 51.2745524,
+   "lon": 22.5002368,
+   "name": "Skowronkowa"
+  },
+  "ts": 1781174477.9037652
+ },
+ "głuska": {
+  "result": {
+   "lat": 51.2074871,
+   "lon": 22.5894131,
+   "name": "Głuska"
+  },
+  "ts": 1781174479.6570494
+ },
+ "jeżynowej": {
+  "result": {
+   "lat": 51.2641839,
+   "lon": 22.6002479,
+   "name": "Jeżynowa"
+  },
+  "ts": 1781174482.494808
+ },
+ "skubiszewskiego": {
+  "result": {
+   "lat": 51.2346345,
+   "lon": 22.4770212,
+   "name": "Feliksa Skubiszewskiego"
+  },
+  "ts": 1781174483.8036716
+ },
+ "wólczańska": {
+  "result": {
+   "lat": 51.1884032,
+   "lon": 22.5873437,
+   "name": "Wólczańska"
+  },
+  "ts": 1781174485.3146
+ },
+ "dębowa": {
+  "result": {
+   "lat": 51.2847712,
+   "lon": 22.5835076,
+   "name": "Dębowa"
+  },
+  "ts": 1781174486.913131
+ },
+ "imbirowej": {
+  "result": {
+   "lat": 51.2796822,
+   "lon": 22.5867124,
+   "name": "Imbirowa"
+  },
+  "ts": 1781174489.9593894
+ },
+ "krężnickiej": {
+  "result": {
+   "lat": 51.1831809,
+   "lon": 22.5210223,
+   "name": "Krężnicka"
+  },
+  "ts": 1781174492.3767257
+ },
+ "odległa": {
+  "result": {
+   "lat": 51.1948762,
+   "lon": 22.5880989,
+   "name": "Odległa"
+  },
+  "ts": 1781174493.6728885
+ },
+ "gdańska": {
+  "result": {
+   "lat": 51.2281943,
+   "lon": 22.5020265,
+   "name": "Gdańska"
+  },
+  "ts": 1781174494.995887
+ },
+ "czeremchowa": {
+  "result": {
+   "lat": 51.2532642,
+   "lon": 22.5175063,
+   "name": "Czeremchowa"
+  },
+  "ts": 1781174496.3851647
+ },
+ "ziołowej": {
+  "result": {
+   "lat": 51.1955851,
+   "lon": 22.5153704,
+   "name": "Ziołowa"
+  },
+  "ts": 1781174499.1008234
+ },
+ "skalskiego": {
+  "result": {
+   "lat": 51.2160289,
+   "lon": 22.6286119,
+   "name": "Generała Stanisława Skalskiego"
+  },
+  "ts": 1781174500.6139534
+ },
+ "turystyczna": {
+  "result": {
+   "lat": 51.2613338,
+   "lon": 22.6241978,
+   "name": "Turystyczna"
+  },
+  "ts": 1781174502.1741092
+ },
+ "szafranowa": {
+  "result": {
+   "lat": 51.2814279,
+   "lon": 22.5044257,
+   "name": "Szafranowa"
+  },
+  "ts": 1781174503.4988198
+ },
+ "nałęczowska": {
+  "result": {
+   "lat": 51.2490324,
+   "lon": 22.519447,
+   "name": "Nałęczowska"
+  },
+  "ts": 1781174505.0346162
+ },
+ "wojciechowska": {
+  "result": {
+   "lat": 51.2471703,
+   "lon": 22.5073014,
+   "name": "Wojciechowska"
+  },
+  "ts": 1781174506.6108613
+ },
+ "zorzy": {
+  "result": null,
+  "ts": 1781174508.1100898
+ },
+ "wyzwolenia": {
+  "result": {
+   "lat": 51.2176992,
+   "lon": 22.5898459,
+   "name": "Wyzwolenia"
+  },
+  "ts": 1781174509.6447875
+ },
+ "zadębie": {
+  "result": {
+   "lat": 51.2547094,
+   "lon": 22.6263403,
+   "name": "Zadębie"
+  },
+  "ts": 1781174511.0531049
+ },
+ "makowej": {
+  "result": {
+   "lat": 51.2003226,
+   "lon": 22.5755377,
+   "name": "Makowa"
+  },
+  "ts": 1781174514.100607
+ },
+ "osiedlowa": {
+  "result": null,
+  "ts": 1781174515.4463046
+ },
+ "osiedlowej": {
+  "result": null,
+  "ts": 1781174518.1256301
+ },
+ "rudnicka": {
+  "result": {
+   "lat": 51.264582,
+   "lon": 22.5902323,
+   "name": "Rudnicka"
+  },
+  "ts": 1781174519.6539943
+ }
+}
