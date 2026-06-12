@@ -20,6 +20,11 @@ jobs:
         with:
           token: ${{ secrets.PAT_TOKEN || github.token }}
           fetch-depth: 0
+          # FIX 2026-06-12: harmonogram odpala workflow na gałęzi DOMYŚLNEJ
+          # repo (claude/...), przez co commit ze skanem lądował na złej
+          # gałęzi a push na main padał ('src refspec main does not match').
+          # Wymuszamy pracę na main niezależnie od gałęzi domyślnej.
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -79,7 +84,7 @@ jobs:
               sleep 5
               continue
             fi
-            if git push origin main; then
+            if git push origin HEAD:main; then
               echo "✅ Push successful (attempt #$attempt)"
               exit 0
             else

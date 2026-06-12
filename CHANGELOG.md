@@ -47,3 +47,9 @@
   działki; legenda przełącza się automatycznie.
 - Scraping wszystkich 6 źródeł równolegle (ThreadPoolExecutor) — skan
   z ~5 min do ~45 s (szczegóły ofert i tak tylko dla nowych, known_offers).
+
+### Naprawione (2026-06-12)
+- Automatyczne skany padały: harmonogram odpala workflow na gałęzi domyślnej
+  repo (claude/...), a push szedł na main — `scanner.yml` ma teraz
+  `ref: main` w checkout i `push HEAD:main`. Zalecane: zmiana gałęzi
+  domyślnej repo na `main` (Settings → Branches).
