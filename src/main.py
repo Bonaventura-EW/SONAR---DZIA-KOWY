@@ -190,10 +190,14 @@ class SonarDzialkowy:
         new['days_active'] = 0
         self.database['offers'].append(new)
 
-    def _mark_inactive(self, scraped_by_source: Dict[str, List[Dict]]):
+    def _mark_inactive(self, scraped_by_source: Dict[str, List[Dict]]) -> int:
         """Dezaktywuje oferty nieobecne w skanie — per źródło, z ochroną
-        przed masową dezaktywacją przy blokadzie portalu."""
+        przed masową dezaktywacją przy blokadzie portalu.
+
+        Returns: łączna liczba dezaktywowanych ofert (do statystyk API).
+        """
         now = datetime.now(self.tz).isoformat()
+        total_deactivated = 0
         for source, scraped in scraped_by_source.items():
             scraped_ids = {o['id'] for o in scraped}
             active_in_db = [o for o in self.database['offers']
@@ -216,8 +220,10 @@ class SonarDzialkowy:
                     offer['active'] = False
                     offer['deactivated_at'] = now
                     deactivated += 1
+            total_deactivated += deactivated
             if deactivated:
                 print(f"   ⏸️ [{source}] dezaktywowano: {deactivated}")
+        return total_deactivated
 
     def _update_days_active(self):
         for offer in self.database['offers']:
@@ -351,11 +357,26 @@ class SonarDzialkowy:
             json.dump(history, f, ensure_ascii=False, indent=1)
 
     def run_scan(self, max_pages: int = 10):
+        """Pełny skan z logowaniem statusu — nieudany skan też trafia do
+        scan_history (status 'failed'), żeby API pokazywało awarie."""
+        start = time.time()
+        now = datetime.now(self.tz)
+        try:
+            self._run_scan(max_pages, start, now)
+        except Exception as e:
+            print(f"\n❌ Skan nieudany: {e}")
+            self._log_scan({
+                'timestamp': now.isoformat(),
+                'status': 'failed',
+                'error': str(e)[:300],
+                'duration_s': round(time.time() - start, 1),
+            })
+            raise
+
+    def _run_scan(self, max_pages: int, start: float, now):
         print("\n" + "=" * 60)
         print("🎯 SONAR DZIAŁKOWY — Scan Started")
         print("=" * 60 + "\n")
-        start = time.time()
-        now = datetime.now(self.tz)
 
         # 1. Scraping wszystkich źródeł RÓWNOLEGLE (każde źródło to inna
         # domena z własnym rate limitem, więc równoległość jest bezpieczna).
@@ -445,7 +466,7 @@ class SonarDzialkowy:
                   f"→ sekcja 'bez GPS' (centroid miasta usunięty)")
 
         # 4. Dezaktywacja + porządki
-        self._mark_inactive(scraped_by_source)
+        deactivated_count = self._mark_inactive(scraped_by_source)
         self._update_days_active()
         self._tag_cross_portal_duplicates()
         self._cleanup_old()
@@ -462,7 +483,9 @@ class SonarDzialkowy:
         duration = time.time() - start
         self._log_scan({
             'timestamp': now.isoformat(),
+            'status': 'completed',
             'duration_s': round(duration, 1),
+            'deactivated': deactivated_count,
             'scraped_olx': len(scraped_by_source['olx']),
             'scraped_otodom': len(scraped_by_source['otodom']),
             'scraped_adresowo': len(scraped_by_source.get('adresowo', [])),

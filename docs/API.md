@@ -16,6 +16,11 @@ Statystyki bieżącego stanu bazy.
   "generated_at": "2026-06-10T20:07:04+02:00",
   "last_scan": "2026-06-10T20:06:18+02:00",
   "next_scan": "2026-06-11T08:00:00+02:00",
+  "last_scan_status": "completed",
+  "last_scan_success": true,
+  "last_scan_new_offers": 8,
+  "last_scan_disappeared_offers": 2,
+  "last_scan_duration_s": 46.3,
   "active_offers": 182,
   "total_in_db": 220,
   "median_price_per_m2": 396.44,
@@ -75,15 +80,35 @@ Pola:
 
 ### `GET api/history.json`
 
-Ostatnie 50 skanów (czas trwania, liczby ofert, nowe/zaktualizowane).
+**6 ostatnich skanów** (nowe nadpisują stare), najnowszy pierwszy — format
+analogiczny do SONAR-POKOJOWY/MIESZKANIOWY:
+
+```json
+{
+  "system": "sonar-dzialkowy",
+  "count": 6,
+  "scans": [{
+    "timestamp": "2026-06-12T22:18:08+02:00",
+    "uiStatus": "success",            // "success" | "failure"
+    "rawStatus": "completed",
+    "failureReason": null,
+    "durationFormatted": "46s",
+    "notification": {"title": "✅ Skan 22:18 — +8 nowych / -2 znikło", "body": "..."},
+    "offers": {"new": 8, "disappeared": 2, "updated": 478,
+               "active": 485, "activeDelta": -1, "totalInDb": 502,
+               "bySource": {"olx": 53, "otodom": 171, "adresowo": 192, "agencies": 70}}
+  }]
+}
+```
 
 ### `GET api/health.json`
 
 ```json
-{"status": "ok", "last_scan": "...", "hours_since_last_scan": 0.1}
+{"status": "ok", "last_scan_status": "completed", "hours_since_last_scan": 0.1}
 ```
 
-`status` = `"stale"` gdy ostatni skan starszy niż 26 h.
+`status`: `ok` (świeży i udany) / `failing` (świeży, ale nieudany) /
+`stale` (brak skanu od >26 h).
 
 ## Pełne dane mapy
 

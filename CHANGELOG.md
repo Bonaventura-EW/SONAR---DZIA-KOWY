@@ -53,3 +53,11 @@
   repo (claude/...), a push szedł na main — `scanner.yml` ma teraz
   `ref: main` w checkout i `push HEAD:main`. Zalecane: zmiana gałęzi
   domyślnej repo na `main` (Settings → Branches).
+
+### Zmienione (2026-06-12, API v2)
+- API pokazuje status skanu (udany/nieudany + powód) i bilans ofert
+  (+nowe / -znikłe): status.json, health.json (ok/failing/stale).
+- api/history.json = 6 ostatnich skanów (nowe nadpisują stare), format
+  jak w SONAR-POKOJOWY/MIESZKANIOWY (uiStatus, notification, offers).
+- main.py loguje status 'completed'/'failed' i liczbę dezaktywowanych
+  ofert do scan_history; nieudany skan też trafia do historii.
