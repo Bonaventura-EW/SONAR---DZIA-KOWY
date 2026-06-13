@@ -994,5 +994,21 @@
    "name": "Tadeusza Piskora"
   },
   "ts": 1781295574.253661
+ },
+ "tadeusza piskora": {
+  "result": {
+   "lat": 51.2090512,
+   "lon": 22.5958896,
+   "name": "Tadeusza Piskora"
+  },
+  "ts": 1781343944.2989585
+ },
+ "nadbystrzyckiej": {
+  "result": {
+   "lat": 51.2331386,
+   "lon": 22.5397656,
+   "name": "Nadbystrzycka"
+  },
+  "ts": 1781343947.102896
  }
 }
