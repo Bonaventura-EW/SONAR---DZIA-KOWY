@@ -3,6 +3,13 @@
 ## [Niewydane]
 
 ### Naprawione
+- Mapa nie odświeżała się po automatycznym skanie: `pages.yml` (trigger `push`
+  na `docs/**`) nie startował, bo skan pushuje przez `github.token`
+  (`github-actions[bot]`), a GitHub z założenia nie budzi nim innych workflowów
+  (ochrona antyrekurencyjna). Deploy Pages przeniesiony wprost do `scanner.yml`
+  (kroki `configure-pages` + `upload-pages-artifact` + `deploy-pages`, OIDC
+  `id-token` zamiast triggera push) — mapa odświeża się od razu po każdym skanie,
+  bez zależności od sekretu `PAT_TOKEN`. `pages.yml` zostaje dla pushów ręcznych.
 - Fałszywie dokładne pinezki Otodom (centroidy dzielnic, np. plac Zamkowy):
   `mapDetails.radius > 0` ⇒ precyzja `approx`; klastry ≥3 ofert w promieniu
   250 m flagowane jako `approx`; geokoder przyjmuje tylko `class=highway`.

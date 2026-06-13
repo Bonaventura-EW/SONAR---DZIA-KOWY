@@ -13,6 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      # FIX 2026-06-13: deploy Pages wprost w skanerze. Push skanu idzie przez
+      # github.token (github-actions[bot]), a GitHub z założenia NIE budzi nim
+      # innych workflowów (ochrona antyrekurencyjna) — przez co pages.yml nie
+      # odpalał się po skanie i mapa stała na starych danych. Deploy w tym jobie
+      # używa OIDC (id-token), nie triggera push, więc działa bez PAT_TOKEN.
+      pages: write
+      id-token: write
+
+    # Deploy do środowiska github-pages (URL widoczny w podsumowaniu runa).
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
@@ -95,3 +107,21 @@ jobs:
 
           echo "::error::Push failed po 3 próbach"
           exit 1
+
+      # FIX 2026-06-13: publikacja docs/ na GitHub Pages w tym samym jobie.
+      # if: always() — mapa ma się odświeżyć nawet gdy push danych się nie udał
+      # (wygenerowane docs/ i tak są aktualne wobec stanu skanu).
+      - name: Setup Pages
+        if: always()
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        id: deployment
+        uses: actions/deploy-pages@v4
