@@ -105,6 +105,10 @@ class VirgoAgencyScraper(BaseAgencyScraper):
     """Galactica Virgo (ANMA, Pasjonaci): listing ?page=N, dane w slugu."""
 
     listing_path = '/oferty/dzialki/sprzedaz/'
+    # listing dotyczy WYŁĄCZNIE działek (ANMA/Pasjonaci) → strona bez slugu działki
+    # = koniec paginacji. IdsHome scrapuje mieszany listing miasta, gdzie działki
+    # bywają na dalszych stronach, więc wyłącza tę przerwę (patrz IdsHomeScraper).
+    break_on_no_slug = True
 
     def _parse_listing(self, html: str) -> List[Dict]:
         offers = []
@@ -167,7 +171,7 @@ class VirgoAgencyScraper(BaseAgencyScraper):
             # slugów ofert — strona z samymi powtórkami (karuzele "oferty
             # specjalne" na każdej stronie) nie może ucinać paginacji
             raw_offers = self._parse_listing(html)
-            if not _VIRGO_SLUG_RE.search(html):
+            if self.break_on_no_slug and not _VIRGO_SLUG_RE.search(html):
                 break
             new_offers = [o for o in raw_offers if o['id'] not in seen_ids]
             for o in new_offers:
@@ -207,16 +211,24 @@ class IdsHomeScraper(VirgoAgencyScraper):
     """IdsHome (idshome.pl) — Galactica Virgo, jak ANMA/Pasjonaci.
 
     FIX 2026-06-14: ten sam slug (dzialki-na-sprzedaz-{cena}zl-{area}m2-{lok}-o{id})
-    i paginacja ?page=N co inne Virgo, więc listing obsługuje VirgoAgencyScraper
-    bez zmian. Różnica: strona szczegółów osadza punkt oferty w gmap_params
-    (markers[].lat/long) → uzupełniamy coords (precyzja 'street', zachowawczo —
-    marker bywa orientacyjny; location_refiner nie nadpisuje 'street').
+    i paginacja ?page=N co inne Virgo. Różnica: strona szczegółów osadza punkt
+    oferty w gmap_params (markers[].lat/long) → uzupełniamy coords (precyzja
+    'street', zachowawczo — marker bywa orientacyjny; location_refiner nie
+    nadpisuje 'street').
+
+    FIX 2026-06-14 (v2): scrapujemy listing MIASTA `/oferty/Lublin/` (mieszany:
+    mieszkania/domy/działki...), bo dedykowany `/oferty/dzialki/` agencji ma
+    tylko działki z całej Polski i gubił część działek z Lublina. Z mieszanego
+    listingu regex bierze tylko `dzialki-na-sprzedaz`, a `break_on_no_slug=False`
+    zapobiega przerwaniu paginacji na stronie z samymi mieszkaniami (działki
+    bywają dopiero na 2./3. stronie). Koniec paginacji = HTTP 404 kolejnej strony.
     """
 
     agency_key = 'idshome'
     agency_name = 'IdsHome'
     base_url = 'https://www.idshome.pl'
-    listing_path = '/oferty/dzialki/'  # działki (wszystkie transakcje; regex bierze tylko sprzedaż)
+    listing_path = '/oferty/Lublin/'   # mieszany listing miasta; regex filtruje działki-sprzedaż
+    break_on_no_slug = False           # działki bywają na dalszych stronach mieszanego listingu
 
     def _parse_details(self, offer: Dict, soup, html: str) -> None:
         super()._parse_details(offer, soup, html)
