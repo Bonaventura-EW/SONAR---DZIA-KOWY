@@ -29,6 +29,11 @@ def build_map_offer(offer: dict) -> dict:
         'previous_price': price.get('previous_price'),
         'price_trend': price.get('price_trend'),
         'price_history': price.get('history', []),
+        # FIX 2026-06-14: znaczniki czasu zmian ceny (do wykresu „cena w czasie"
+        # na docs/oferty.html). history to same wartości — bez dat nie da się
+        # narysować osi czasu.
+        'price_changes': price.get('price_changes', []),
+        'price_changed_at': price.get('price_changed_at'),
         'area_m2': offer.get('area_m2'),
         'price_per_m2': offer.get('price_per_m2'),
         'plot_type': offer.get('plot_type') or 'inna',

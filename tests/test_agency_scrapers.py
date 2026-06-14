@@ -1,7 +1,8 @@
 """Testy parserów agencji (bez live requestów)."""
 
 from agency_scrapers import (
-    AnmaScraper, PasjonaciScraper, AlternatywneScraper, _VIRGO_SLUG_RE,
+    AnmaScraper, PasjonaciScraper, AlternatywneScraper, IdsHomeScraper,
+    _VIRGO_SLUG_RE,
 )
 from bs4 import BeautifulSoup
 
@@ -74,3 +75,45 @@ def test_alternatywne_rejects_outside_lublin():
                                  '<span>Miejscowość:</span><span>Bogucin</span>')
     card = BeautifulSoup(html, 'lxml').find('div', class_='row')
     assert AlternatywneScraper()._parse_card(card, 'x', '1') is None
+
+
+# IdsHome to Virgo — slug ofert siedzi w korzeniu domeny (jak ANMA: sufiks -o{id})
+IDSHOME_LISTING_HTML = '''
+<a href="https://www.idshome.pl/dzialki-na-sprzedaz-450000zl-1200m2-lublin-slawinek-o7129999" class="overlay-link">Działka Sławinek</a>
+<a href="https://www.idshome.pl/mieszkania-na-sprzedaz-980000zl-55m2-lublin-czechow-poludniowy-o7129660">Mieszkanie (ignorować)</a>
+<a href="https://www.idshome.pl/dzialki-na-sprzedaz-300000zl-900m2-niemce-o7120000">Działka poza Lublinem</a>
+'''
+
+
+def test_idshome_parse_listing_only_dzialki_lublin():
+    offers = IdsHomeScraper()._parse_listing(IDSHOME_LISTING_HTML)
+    # tylko działka w Lublinie — mieszkanie i działka spoza Lublina odrzucone
+    assert {o['id'] for o in offers} == {'idshome:7129999'}
+    o = offers[0]
+    assert o['agency_name'] == 'IdsHome'
+    assert o['price'] == 450000 and o['area_m2'] == 1200.0
+    assert o['location']['district'] == 'Slawinek'  # district ze slugu = ASCII
+    assert o['url'] == ('https://www.idshome.pl/'
+                        'dzialki-na-sprzedaz-450000zl-1200m2-lublin-slawinek-o7129999')
+
+
+def test_idshome_details_extract_coords():
+    offer = IdsHomeScraper()._base_offer('7129999', 'http://x')
+    html = ('<h1>Działka na sprzedaż - Lublin, Sławinek</h1>'
+            '<div class="offer-description">Piękna działka.</div>'
+            '<script>var gmap_params = eval({"center_lat":"51.276","center_long":"22.520",'
+            '"zoom":13,"markers":[{"lat":"51.276","long":"22.520"}]});</script>')
+    soup = BeautifulSoup(html, 'lxml')
+    IdsHomeScraper()._parse_details(offer, soup, html)
+    assert offer['location']['coords'] == {'lat': 51.276, 'lon': 22.520}
+    assert offer['location']['coords_precision'] == 'street'
+    assert offer['title'] == 'Działka na sprzedaż - Lublin, Sławinek'
+    assert 'Piękna' in offer['description']
+
+
+def test_idshome_rejects_coords_outside_region():
+    # pusta tablica markers / centroid spoza Lubelszczyzny → coords zostają puste
+    offer = IdsHomeScraper()._base_offer('1', 'http://x')
+    html = '<script>var gmap_params = eval({"markers":[{"lat":"52.229","long":"21.012"}]});</script>'
+    IdsHomeScraper()._parse_details(offer, BeautifulSoup(html, 'lxml'), html)
+    assert offer['location']['coords'] is None
