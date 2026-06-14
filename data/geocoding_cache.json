@@ -1026,5 +1026,17 @@
    "name": "Lazurowa"
   },
   "ts": 1781424603.5383613
+ },
+ "bliska": {
+  "result": {
+   "lat": 51.2507372,
+   "lon": 22.5021598,
+   "name": "Bliska"
+  },
+  "ts": 1781460155.07192
+ },
+ "bliska. idealna": {
+  "result": null,
+  "ts": 1781460156.6240118
  }
 }
