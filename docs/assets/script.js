@@ -186,18 +186,20 @@ function buildLegend() {
         if (lo == null) text = `do ${fmtPrice(hi)}/m²`;
         else if (hi == null) text = `powyżej ${fmtPrice(lo)}/m²`;
         else text = `${fmtPrice(lo)} – ${fmtPrice(hi)}/m²`;
-        // FIX 2026-06-14: checkbox przy zakresie — filtr ofert wg kubełka ceny/m²
+        // FIX 2026-06-14: checkbox przy zakresie — filtr ofert wg kubełka ceny/m².
+        // Jawne elementy + inline flex:0 0 auto, żeby checkbox nie ściskał kropki.
         const row = document.createElement('label');
-        row.className = 'legend-row';
-        row.style.cursor = 'pointer';
+        row.style.cssText = 'display:flex;align-items:center;gap:8px;font-size:12px;padding:2px 0;cursor:pointer';
         const cb = document.createElement('input');
         cb.type = 'checkbox';
         cb.checked = quantileBucketState[i] !== false;
-        cb.style.cssText = 'margin:0;accent-color:#16a34a;flex-shrink:0';
+        cb.style.cssText = 'width:15px;height:15px;margin:0;flex:0 0 auto;accent-color:#16a34a';
         cb.addEventListener('change', () => { quantileBucketState[i] = cb.checked; render(); });
-        row.appendChild(cb);
-        row.insertAdjacentHTML('beforeend',
-            `<span class="legend-dot" style="background:${QUANTILE_COLORS[i]}"></span> ${text}`);
+        const dot = document.createElement('span');
+        dot.style.cssText = `width:14px;height:14px;border-radius:50%;flex:0 0 auto;border:1px solid rgba(0,0,0,0.25);background:${QUANTILE_COLORS[i]}`;
+        const lbl = document.createElement('span');
+        lbl.textContent = text;
+        row.append(cb, dot, lbl);
         container.appendChild(row);
     }
 }
