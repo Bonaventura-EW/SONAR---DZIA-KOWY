@@ -162,22 +162,26 @@ class VirgoAgencyScraper(BaseAgencyScraper):
         print(f"🔍 {self.agency_name}: scraping działek...")
         offers: List[Dict] = []
         seen_ids = set()
-        for page in range(0, max_pages):  # Virgo numeruje od 0
-            url = f"{self.base_url}{self.listing_path}?page={page}"
-            html = self._fetch(url)
-            if html is None:
-                break
-            # FIX 2026-06-11: przerywamy dopiero gdy strona nie ma ŻADNYCH
-            # slugów ofert — strona z samymi powtórkami (karuzele "oferty
-            # specjalne" na każdej stronie) nie może ucinać paginacji
-            raw_offers = self._parse_listing(html)
-            if self.break_on_no_slug and not _VIRGO_SLUG_RE.search(html):
-                break
-            new_offers = [o for o in raw_offers if o['id'] not in seen_ids]
-            for o in new_offers:
-                seen_ids.add(o['id'])
-            offers.extend(new_offers)
-            self._sleep()
+        # FIX 2026-06-14: można podać kilka listingów (IdsHome: /oferty/dzialki/
+        # ORAZ /oferty/Lublin/ — żadne pojedyncze źródło nie ma kompletu działek).
+        listing_paths = getattr(self, 'listing_paths', None) or [self.listing_path]
+        for listing_path in listing_paths:
+            for page in range(0, max_pages):  # Virgo numeruje od 0
+                url = f"{self.base_url}{listing_path}?page={page}"
+                html = self._fetch(url)
+                if html is None:
+                    break
+                # FIX 2026-06-11: przerywamy dopiero gdy strona nie ma ŻADNYCH
+                # slugów ofert — strona z samymi powtórkami (karuzele "oferty
+                # specjalne" na każdej stronie) nie może ucinać paginacji
+                raw_offers = self._parse_listing(html)
+                if self.break_on_no_slug and not _VIRGO_SLUG_RE.search(html):
+                    break
+                new_offers = [o for o in raw_offers if o['id'] not in seen_ids]
+                for o in new_offers:
+                    seen_ids.add(o['id'])
+                offers.extend(new_offers)
+                self._sleep()
 
         new = [o for o in offers if o['id'] not in known_offers]
         for o in offers:
@@ -216,18 +220,18 @@ class IdsHomeScraper(VirgoAgencyScraper):
     'street', zachowawczo — marker bywa orientacyjny; location_refiner nie
     nadpisuje 'street').
 
-    FIX 2026-06-14 (v2): scrapujemy listing MIASTA `/oferty/Lublin/` (mieszany:
-    mieszkania/domy/działki...), bo dedykowany `/oferty/dzialki/` agencji ma
-    tylko działki z całej Polski i gubił część działek z Lublina. Z mieszanego
-    listingu regex bierze tylko `dzialki-na-sprzedaz`, a `break_on_no_slug=False`
-    zapobiega przerwaniu paginacji na stronie z samymi mieszkaniami (działki
-    bywają dopiero na 2./3. stronie). Koniec paginacji = HTTP 404 kolejnej strony.
+    FIX 2026-06-14 (v3): scrapujemy DWA listingi i łączymy wyniki, bo żaden
+    pojedynczy nie ma kompletu działek: dedykowany `/oferty/dzialki/` zawiera
+    działki nieobecne na liście miasta (np. Węglin o7071230), a `/oferty/Lublin/`
+    łapie działki ukryte między mieszkaniami. Regex bierze tylko
+    `dzialki-na-sprzedaz`, dedup po id. `break_on_no_slug=False` (mieszany listing
+    miasta), koniec paginacji = HTTP 404 kolejnej strony.
     """
 
     agency_key = 'idshome'
     agency_name = 'IdsHome'
     base_url = 'https://www.idshome.pl'
-    listing_path = '/oferty/Lublin/'   # mieszany listing miasta; regex filtruje działki-sprzedaż
+    listing_paths = ['/oferty/dzialki/', '/oferty/Lublin/']  # union; dedup po id
     break_on_no_slug = False           # działki bywają na dalszych stronach mieszanego listingu
 
     def _parse_details(self, offer: Dict, soup, html: str) -> None:
