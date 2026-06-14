@@ -7,6 +7,8 @@ Agencje i ich silniki:
   toleruje 503 i po prostu zwraca to, co udało się pobrać)
 - Alternatywne Biuro Nieruchomości (alternatywnebn.pl) — WordPress
   (wymaga rozgrzania sesji wejściem na stronę główną)
+- IdsHome (idshome.pl) — CMS Galactica Virgo (jak ANMA/Pasjonaci), ale strona
+  szczegółów osadza współrzędne oferty w JS (gmap_params) → uzupełniamy coords
 
 Wspólne cechy:
 - Virgo koduje cenę/powierzchnię/lokalizację W SLUGU oferty:
@@ -39,6 +41,10 @@ _VIRGO_SLUG_RE = re.compile(
     r'dzialki-na-sprzedaz-(\d+)zl-(\d+)m2-([a-z0-9\-]+?)(?:-o(\d+)|/(\d+))(?:$|["\?])')
 
 _WS_RE = re.compile(r'\s+')
+
+# IdsHome osadza punkt oferty w JS:
+# var gmap_params = eval({..."markers":[{"lat":"51.258972","long":"22.552979"}]});
+_GMAP_MARKER_RE = re.compile(r'"markers":\s*\[\s*\{\s*"lat":"([\d.]+)","long":"([\d.]+)"')
 
 
 def _clean(text: str) -> str:
@@ -131,6 +137,10 @@ class VirgoAgencyScraper(BaseAgencyScraper):
         if not html:
             return offer
         soup = BeautifulSoup(html, 'lxml')
+        self._parse_details(offer, soup, html)
+        return offer
+
+    def _parse_details(self, offer: Dict, soup, html: str) -> None:
         h1 = soup.find('h1')
         if h1 and len(_clean(h1.get_text())) > 5:
             offer['title'] = _clean(h1.get_text())
@@ -142,7 +152,6 @@ class VirgoAgencyScraper(BaseAgencyScraper):
         img = soup.find('meta', property='og:image')
         if img and img.get('content'):
             offer['image'] = img['content']
-        return offer
 
     def scrape(self, max_pages: int = 10, known_offers: Dict = None) -> List[Dict]:
         known_offers = known_offers or {}
@@ -192,6 +201,35 @@ class PasjonaciScraper(VirgoAgencyScraper):
     agency_name = 'Pasjonaci Nieruchomości'
     base_url = 'https://www.pasjonacinieruchomosci.pl'
     listing_path = '/oferty/dzialki/sprzedaz'
+
+
+class IdsHomeScraper(VirgoAgencyScraper):
+    """IdsHome (idshome.pl) — Galactica Virgo, jak ANMA/Pasjonaci.
+
+    FIX 2026-06-14: ten sam slug (dzialki-na-sprzedaz-{cena}zl-{area}m2-{lok}-o{id})
+    i paginacja ?page=N co inne Virgo, więc listing obsługuje VirgoAgencyScraper
+    bez zmian. Różnica: strona szczegółów osadza punkt oferty w gmap_params
+    (markers[].lat/long) → uzupełniamy coords (precyzja 'street', zachowawczo —
+    marker bywa orientacyjny; location_refiner nie nadpisuje 'street').
+    """
+
+    agency_key = 'idshome'
+    agency_name = 'IdsHome'
+    base_url = 'https://www.idshome.pl'
+    listing_path = '/oferty/dzialki/'  # działki (wszystkie transakcje; regex bierze tylko sprzedaż)
+
+    def _parse_details(self, offer: Dict, soup, html: str) -> None:
+        super()._parse_details(offer, soup, html)
+        m = _GMAP_MARKER_RE.search(html)
+        if not m:
+            return
+        lat, lon = float(m.group(1)), float(m.group(2))
+        # sanity: marker w granicach Lubelszczyzny — pusta tablica markers albo
+        # centroid kraju to dezinformacja, więc wtedy zostawiamy coords pustym
+        # (refiner spróbuje wyciągnąć ulicę z tytułu/opisu)
+        if 50.8 < lat < 51.6 and 22.0 < lon < 23.2:
+            offer['location']['coords'] = {'lat': lat, 'lon': lon}
+            offer['location']['coords_precision'] = 'street'
 
 
 class AlternatywneScraper(BaseAgencyScraper):
@@ -306,7 +344,7 @@ class AlternatywneScraper(BaseAgencyScraper):
         return offers
 
 
-AGENCY_SCRAPERS = [AnmaScraper, PasjonaciScraper, AlternatywneScraper]
+AGENCY_SCRAPERS = [AnmaScraper, PasjonaciScraper, AlternatywneScraper, IdsHomeScraper]
 
 
 if __name__ == "__main__":

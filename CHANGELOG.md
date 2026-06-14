@@ -17,6 +17,12 @@
   ~70 stało w generycznych punktach).
 
 ### Dodane
+- Scraper agencji **IdsHome** (idshome.pl) — kolejny silnik Galactica Virgo
+  (jak ANMA/Pasjonaci): ten sam slug `dzialki-na-sprzedaz-{cena}zl-{area}m2-
+  {lok}-o{id}` i paginacja `?page=N`, więc listing obsługuje `VirgoAgencyScraper`
+  bez zmian. W odróżnieniu od pozostałych agencji strona szczegółów osadza punkt
+  oferty w JS (`gmap_params.markers[].lat/long`) → uzupełniamy `coords`
+  (precyzja `street`, z sanity-checkiem granic Lubelszczyzny).
 - Doprecyzowanie lokalizacji (`location_refiner.py`): ulica z tytułu/opisu →
   geokodowanie Nominatim (cache, limit 100/skan), precyzja `approx`→`street`.
   Pierwszy przebieg poprawił 38/52 pinezek OLX (max korekta 8,2 km).
