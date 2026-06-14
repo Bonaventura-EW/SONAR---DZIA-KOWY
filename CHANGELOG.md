@@ -2,6 +2,19 @@
 
 ## [Niewydane]
 
+### Dodane
+- Podstrona **🏢 Agencje** (`docs/agencje.html`) na wzór `profile_tracker.html`:
+  zakładki per agencja (ANMA, Pasjonaci, Alternatywne BN, IdsHome) z listą ofert,
+  statystykami (aktywne/archiwalne, mediana ceny/m², min/max) i sparkline ceny
+  w czasie. Dane z nowego `agency_generator.py` → `docs/agency_data.json`
+  (czyta pełną bazę PRZED dedupem, więc pokazuje komplet ofert agencji z
+  adnotacją „też na: Otodom/OLX/Adresowo"). Wpięty w `scanner.yml` i nawigację.
+
+### Zmienione
+- Skala kolorów ceny/m² na mapie: 5 → **10 stopni** (zielony→fioletowy, decyle
+  zamiast kwartyli). `map_generator.py` liczy 9 progów (0.1…0.9), `script.js`
+  ma 10 kolorów; legenda buduje się automatycznie.
+
 ### Naprawione
 - Mapa nie odświeżała się po automatycznym skanie: `pages.yml` (trigger `push`
   na `docs/**`) nie startował, bo skan pushuje przez `github.token`

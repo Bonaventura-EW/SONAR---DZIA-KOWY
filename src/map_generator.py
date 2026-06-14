@@ -88,9 +88,10 @@ def generate():
             'active': len(active),
             'active_with_coords': sum(1 for o in active if o['coords']),
             'median_price_per_m2': percentile(per_m2_values, 0.5),
-            # progi kwantylowe do kolorowania pinezek wg ceny za m²
+            # progi do kolorowania pinezek wg ceny za m² — 9 decyli = 10 stopni
+            # (zielony→fioletowy); QUANTILE_COLORS w script.js musi mieć 10 kolorów
             'per_m2_quantiles': [percentile(per_m2_values, q)
-                                 for q in (0.2, 0.4, 0.6, 0.8)],
+                                 for q in (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)],
         },
         'offers': offers,
     }
