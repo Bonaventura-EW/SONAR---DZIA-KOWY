@@ -13,7 +13,6 @@ const NEW_OFFER_DAYS = 7;
 // kolory kwantyli ceny za m²: tani (zielony) → drogi (fioletowy), 10 stopni (decyle)
 const QUANTILE_COLORS = ['#15803d', '#4ca11e', '#84cc16', '#c4d62b', '#eab308',
                          '#f59e0b', '#f97316', '#ef4444', '#db2777', '#7c3aed'];
-const INACTIVE_COLOR = '#9ca3af';
 // stałe kolory typów działek — wspólne z wykresem w analytics.html
 const TYPE_COLORS = {
     'budowlana': '#15803d',
@@ -95,7 +94,8 @@ function colorMode() {
 }
 
 function colorFor(offer) {
-    if (!offer.active) return INACTIVE_COLOR;
+    // FIX 2026-06-14: nieaktywne też kolorujemy wg ceny/typu — i tak mają ×
+    // w środku pinezki, więc się odróżniają (wcześniej były szare).
     if (colorMode() === 'type') {
         return TYPE_COLORS[offer.plot_type || 'inna'] || '#64748b';
     }
