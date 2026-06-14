@@ -2,6 +2,13 @@
 
 ## [Niewydane]
 
+### Wydajność
+- Płynność mapy: memoizacja ikon markerów (jeden `L.divIcon` współdzielony przez
+  pinezki o identycznym wyglądzie zamiast ~380 unikalnych stringów SVG na każde
+  przeliczenie filtrów; tooltip przeniesiony do opcji markera), `preferCanvas`
+  oraz `updateWhenZooming:false`/`keepBuffer:2` na kafelkach (mniej przerysowań
+  przy zoomie). Filtry cena/powierzchnia już wcześniej debounce'owane (300 ms).
+
 ### Dodane
 - Podstrona **🏢 Agencje** (`docs/agencje.html`) na wzór `profile_tracker.html`:
   zakładki per agencja (ANMA, Pasjonaci, Alternatywne BN, IdsHome) z listą ofert,
