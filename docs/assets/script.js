@@ -27,6 +27,7 @@ const TYPE_COLORS = {
 };
 
 let map, markersLayer;
+const _iconCache = new Map();  // memoizacja L.divIcon wg wyglądu (patrz makeIcon)
 let allOffers = [];
 let quantiles = [];
 let typeFilterState = {};   // plot_type -> bool
@@ -35,9 +36,11 @@ let agencyFilterState = {}; // agency_name -> bool
 init();
 
 async function init() {
-    map = L.map('map').setView(LUBLIN_CENTER, 12);
+    // FIX 2026-06-14: preferCanvas + opcje kafelków = mniej przerysowań przy zoomie
+    map = L.map('map', { preferCanvas: true }).setView(LUBLIN_CENTER, 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap', maxZoom: 19,
+        updateWhenZooming: false, keepBuffer: 2,
     }).addTo(map);
     markersLayer = L.layerGroup().addTo(map);
 
@@ -189,7 +192,7 @@ function bindFilterEvents() {
         .forEach(id => document.getElementById(id).addEventListener('change', render));
     document.getElementById('time-filter').addEventListener('change', render);
     document.querySelectorAll('input[name="color-mode"]').forEach(r =>
-        r.addEventListener('change', () => { buildLegend(); render(); }));
+        r.addEventListener('change', () => { _iconCache.clear(); buildLegend(); render(); }));
     ['price-min', 'price-max', 'area-min', 'area-max']
         .forEach(id => document.getElementById(id).addEventListener('input', debounce(render, 300)));
 }
@@ -255,23 +258,39 @@ function badgesHtml(o) {
     return html;
 }
 
+// typ badge'a (musi odpowiadać badgesHtml) — część klucza memoizacji ikony
+function badgeType(o) {
+    if (o.previous_price && o.price_trend) return o.price_trend === 'down' ? 'd' : 'u';
+    if (isNew(o)) return 'n';
+    return '';
+}
+
 function makeIcon(o) {
     const color = colorFor(o);
     const fresh = isNew(o);
+    const approx = isApprox(o);
+    // FIX 2026-06-14: memoizacja — identyczny wygląd (kształt+kolor+stan+badge)
+    // współdzieli jeden L.divIcon zamiast budować ~380 unikalnych stringów SVG
+    // przy każdym przeliczeniu filtrów. Tooltip (unikalny) idzie w opcję markera.
+    const key = (approx ? 's' : 'p') + color + (o.active ? 1 : 0)
+        + (fresh ? 1 : 0) + (o.is_agency ? 1 : 0) + badgeType(o);
+    const cached = _iconCache.get(key);
+    if (cached) return cached;
+
     // priorytet obwódki: nowa (czerwona) > agencja (złota) > standard (biała)
     const stroke = fresh ? '#ff0000' : (o.is_agency ? '#FFD700' : 'white');
     const strokeW = fresh ? 3 : (o.is_agency ? 4 : 2);
-    const tooltip = `${escapeHtml(o.title || '')} — ${fmtPrice(o.price)}`;
 
-    if (isApprox(o)) {
+    let icon;
+    if (approx) {
         // KWADRAT 34×34 z przerywaną obwódką (przybliżony adres), anchor w środku
         const s = 34;
         const cross = !o.active
             ? `<text x="17" y="17" text-anchor="middle" dominant-baseline="central" font-size="22" font-weight="700" fill="white" font-family="-apple-system, sans-serif" style="paint-order: stroke; stroke: rgba(0,0,0,0.5); stroke-width: 2px;">×</text>`
             : '';
-        return L.divIcon({
+        icon = L.divIcon({
             className: 'square-marker',
-            html: `<div style="position:relative;width:${s}px;height:${s}px;" title="${tooltip}">
+            html: `<div style="position:relative;width:${s}px;height:${s}px;">
                 <svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
                     <rect x="3" y="3" width="${s - 6}" height="${s - 6}"
                           fill="${color}" fill-opacity="0.85"
@@ -285,28 +304,30 @@ function makeIcon(o) {
             iconAnchor: [s / 2, s / 2],
             popupAnchor: [0, -s / 2],
         });
+    } else {
+        // PINEZKA-KROPLA 40×50 (dokładny adres)
+        const inner = !o.active
+            ? `<circle cx="20" cy="18" r="9" fill="white"/><text x="20" y="18" text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="700" fill="#1f2937" font-family="-apple-system, sans-serif">×</text>`
+            : `<circle cx="20" cy="18" r="7" fill="white" fill-opacity="0.9"/>`;
+        icon = L.divIcon({
+            className: 'pin-marker',
+            html: `<div style="position:relative;width:40px;height:50px;">
+                <svg width="40" height="50" viewBox="0 0 40 50">
+                    <path d="M20 0 C9 0 0 9 0 20 C0 35 20 50 20 50 C20 50 40 35 40 20 C40 9 31 0 20 0 Z"
+                          fill="${color}"
+                          stroke="${stroke}"
+                          stroke-width="${strokeW}"/>
+                    ${inner}
+                </svg>
+                ${badgesHtml(o)}
+            </div>`,
+            iconSize: [40, 50],
+            iconAnchor: [20, 50],
+            popupAnchor: [0, -50],
+        });
     }
-
-    // PINEZKA-KROPLA 40×50 (dokładny adres)
-    const inner = !o.active
-        ? `<circle cx="20" cy="18" r="9" fill="white"/><text x="20" y="18" text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="700" fill="#1f2937" font-family="-apple-system, sans-serif">×</text>`
-        : `<circle cx="20" cy="18" r="7" fill="white" fill-opacity="0.9"/>`;
-    return L.divIcon({
-        className: 'pin-marker',
-        html: `<div style="position:relative;width:40px;height:50px;" title="${tooltip}">
-            <svg width="40" height="50" viewBox="0 0 40 50">
-                <path d="M20 0 C9 0 0 9 0 20 C0 35 20 50 20 50 C20 50 40 35 40 20 C40 9 31 0 20 0 Z"
-                      fill="${color}"
-                      stroke="${stroke}"
-                      stroke-width="${strokeW}"/>
-                ${inner}
-            </svg>
-            ${badgesHtml(o)}
-        </div>`,
-        iconSize: [40, 50],
-        iconAnchor: [20, 50],
-        popupAnchor: [0, -50],
-    });
+    _iconCache.set(key, icon);
+    return icon;
 }
 
 function popupHtml(o) {
@@ -352,6 +373,7 @@ function render() {
     located.forEach(o => {
         const marker = L.marker([o.coords.lat, o.coords.lon], {
             icon: makeIcon(o),
+            title: `${o.title || ''} — ${fmtPrice(o.price)}`,  // tooltip per marker (ikona memoizowana)
             // dokładne pinezki nad kwadratami, nieaktywne pod aktywnymi
             zIndexOffset: (isApprox(o) ? 0 : 200) + (o.active ? 100 : 0),
         });
