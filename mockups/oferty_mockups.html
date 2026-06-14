@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SONAR DZIAŁKOWY — mockupy strony „Oferty + cena w czasie" (10 wariantów)</title>
+<style>
+:root{
+  --ink:#0f1f15; --bg:#eef3ee; --card:#fff; --line:#dce5dc;
+  --green-900:#052e16; --green-800:#0b3d20; --green-700:#14532d; --green-600:#16a34a;
+  --lime:#a3e635; --lime-soft:#ecfccb; --muted:#64748b;
+  --up:#dc2626; --down:#16a34a; --flat:#94a3b8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+
+/* ---- pasek wyboru wariantu (meta-UI mockupu, NIE część strony docelowej) ---- */
+.picker{position:sticky;top:0;z-index:50;background:var(--green-900);color:#e7f6df;
+  padding:8px 12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+  box-shadow:0 2px 14px rgba(2,22,10,.45);border-bottom:1px solid rgba(163,230,53,.25)}
+.picker b{font-size:13px;letter-spacing:.04em;margin-right:6px;color:var(--lime)}
+.picker button{cursor:pointer;border:1px solid rgba(163,230,53,.3);background:rgba(163,230,53,.12);
+  color:#e7f6df;border-radius:999px;padding:5px 11px;font-weight:700;font-size:12px}
+.picker button.active{background:var(--lime);color:var(--green-900);border-color:var(--lime)}
+.picker .desc{flex-basis:100%;font-size:12px;color:#bcd9b0;margin-top:2px}
+
+/* ---- wspólny nagłówek strony (jak w SONAR DZIAŁKOWY) ---- */
+.header{background:linear-gradient(120deg,var(--green-900),var(--green-800) 55%,#123a26);
+  color:#fff;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(163,230,53,.25)}
+.header h1{font-size:18px;font-weight:800;letter-spacing:.04em;display:flex;align-items:center;gap:10px}
+.header h1 .sub{font-size:10px;font-weight:600;color:var(--lime);letter-spacing:.14em;display:block;text-transform:uppercase}
+.header-nav{display:flex;gap:8px;flex-wrap:wrap}
+.header-nav a{color:#e7f6df;text-decoration:none;background:rgba(163,230,53,.12);border:1px solid rgba(163,230,53,.3);
+  padding:6px 13px;border-radius:999px;font-weight:600;font-size:13px}
+.header-nav a.active{background:var(--lime);color:var(--green-900)}
+
+/* ---- elementy współdzielone ---- */
+.wrap{padding:16px;max-width:1280px;margin:0 auto}
+.variant{display:none}
+.variant.active{display:block}
+.badge{font-size:10px;padding:1px 7px;border-radius:999px;font-weight:700;white-space:nowrap}
+.b-olx{background:#e0f2fe;color:#075985}.b-otodom{background:#ede9fe;color:#5b21b6}
+.b-adresowo{background:#fef9c3;color:#854d0e}.b-agency{background:var(--lime-soft);color:var(--green-700);border:1px solid #cfe89a}
+.b-type{background:#f1f5f9;color:#475569}
+.trend-up{color:var(--up);font-weight:700}.trend-down{color:var(--down);font-weight:700}.trend-flat{color:var(--flat)}
+.muted{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 3px rgba(2,22,10,.06)}
+.price{font-weight:800}
+.pricem{font-size:11px;color:var(--muted)}
+h2.vtitle{font-size:15px;margin-bottom:4px;color:var(--green-800)}
+p.vnote{font-size:12px;color:var(--muted);margin-bottom:14px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.filters select,.filters input{font:inherit;font-size:12px;padding:6px 9px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.chip{cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600}
+.chip.on{background:var(--green-700);color:#fff;border-color:var(--green-700)}
+table.tbl{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:12px;overflow:hidden}
+table.tbl th{background:var(--lime-soft);color:var(--green-800);text-align:left;padding:9px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.03em;cursor:pointer;position:sticky;top:0}
+table.tbl td{padding:9px 10px;border-top:1px solid var(--line)}
+table.tbl tr:hover td{background:#f6faf3}
+table.tbl tr.sel td{background:var(--lime-soft)}
+.chart-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:11px;height:3px;border-radius:2px;display:inline-block}
+.modal-bg{position:fixed;inset:0;background:rgba(5,46,22,.45);display:none;align-items:center;justify-content:center;z-index:60;padding:16px}
+.modal-bg.show{display:flex}
+.modal{background:#fff;border-radius:16px;max-width:640px;width:100%;padding:18px;box-shadow:0 20px 60px rgba(2,22,10,.4)}
+.modal .x{float:right;cursor:pointer;font-size:20px;color:var(--muted);border:none;background:none}
+.kv{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:8px 0}
+.kv b{color:var(--ink)}
+button.mini{cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:8px;padding:3px 8px;font-size:12px}
+button.mini:hover{border-color:var(--green-600)}
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.ofcard{padding:13px;display:flex;flex-direction:column;gap:8px}
+.ofcard .t{font-size:13px;font-weight:700;line-height:1.3;min-height:34px}
+.row-flex{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.split{display:grid;grid-template-columns:minmax(280px,1fr) 1.3fr;gap:14px}
+.list-pane{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:12px;background:#fff}
+.li{padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;gap:8px;align-items:center}
+.li:hover{background:#f6faf3}.li.sel{background:var(--lime-soft)}
+.li .chk{accent-color:var(--green-600)}
+.acc-head{cursor:pointer;padding:11px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.acc-body{display:none;padding:0 13px 13px}
+.acc.open .acc-body{display:block}
+.acc{border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:8px}
+.spark{flex-shrink:0}
+@media(max-width:760px){.split{grid-template-columns:1fr}.wrap{padding:10px}}
+</style>
+</head>
+<body>
+
+<div class="picker" id="picker">
+  <b>MOCKUP ▸ 10 wariantów</b>
+  <span id="btns"></span>
+  <span class="desc" id="vdesc"></span>
+</div>
+
+<header class="header">
+  <h1><span>🛰️ SONAR DZIAŁKOWY<span class="sub">oferty · cena w czasie · Lublin</span></span></h1>
+  <nav class="header-nav">
+    <a href="#">🗺️ Mapa</a><a href="#">📈 Analityka</a><a href="#">📊 Monitoring</a>
+    <a href="#">🏢 Agencje</a><a href="#" class="active">📋 Oferty</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div id="v1" class="variant"></div>
+  <div id="v2" class="variant"></div>
+  <div id="v3" class="variant"></div>
+  <div id="v4" class="variant"></div>
+  <div id="v5" class="variant"></div>
+  <div id="v6" class="variant"></div>
+  <div id="v7" class="variant"></div>
+  <div id="v8" class="variant"></div>
+  <div id="v9" class="variant"></div>
+  <div id="v10" class="variant"></div>
+</div>
+
+<div class="modal-bg" id="modal"><div class="modal"><button class="x" onclick="closeModal()">×</button><div id="modal-body"></div></div></div>
+
+<script>
+/* =========================================================================
+   PRZYKŁADOWE DANE (realistyczne działki Lublin; ceny w czasie = price_changes)
+   Każda oferta ma timeline [{d:'YYYY-MM-DD', p:cena}] — krokowy wykres trzyma
+   cenę do kolejnej zmiany; ostatni punkt przeciągamy do "dziś".
+   ========================================================================= */
+const TODAY='2026-06-14';
+const SAMPLE=[
+ {id:'otodom:68064601',t:'Działka budowlana, Sławin',src:'otodom',ag:null,type:'budowlana',dist:'Sławin',area:1050,
+  tl:[{d:'2026-05-12',p:340000},{d:'2026-06-02',p:325000},{d:'2026-06-13',p:299000}],active:true},
+ {id:'olx:CID3-IDa1',t:'Działka inwestycyjna, Felin',src:'olx',ag:null,type:'inwestycyjna',dist:'Felin',area:3400,
+  tl:[{d:'2026-05-20',p:599000}],active:true},
+ {id:'otodom:67465295',t:'Działka rolno-budowlana, Zemborzyce',src:'otodom',ag:null,type:'rolno-budowlana',dist:'Zemborzyce',area:1800,
+  tl:[{d:'2026-05-08',p:280000},{d:'2026-06-04',p:299000}],active:true},
+ {id:'idshome:7082291',t:'Działka, Hajdów-Zadębie',src:'agency',ag:'IdsHome',type:'budowlana',dist:'Hajdów',area:5002,
+  tl:[{d:'2026-04-28',p:1390000},{d:'2026-05-30',p:1290000}],active:true},
+ {id:'anma:6677851',t:'Duża działka, Zemborzyce',src:'agency',ag:'ANMA',type:'inwestycyjna',dist:'Zemborzyce',area:24252,
+  tl:[{d:'2026-03-15',p:4281540}],active:true},
+ {id:'adresowo:99213',t:'Działka budowlana, Węglin',src:'adresowo',ag:null,type:'budowlana',dist:'Węglin',area:900,
+  tl:[{d:'2026-05-25',p:255000},{d:'2026-06-10',p:245000}],active:true},
+ {id:'olx:CID3-IDb2',t:'Działka, Czechów Północny',src:'olx',ag:null,type:'budowlana',dist:'Czechów',area:780,
+  tl:[{d:'2026-04-30',p:330000},{d:'2026-05-18',p:330000},{d:'2026-06-08',p:349000}],active:true},
+ {id:'pasjonaci:711201',t:'Działka rolna, Konopnica',src:'agency',ag:'Pasjonaci',type:'rolna',dist:'Konopnica',area:7600,
+  tl:[{d:'2026-05-02',p:760000},{d:'2026-06-01',p:720000}],active:false},
+ {id:'otodom:68111002',t:'Działka usługowa, Wrotków',src:'otodom',ag:null,type:'usługowa',dist:'Wrotków',area:2100,
+  tl:[{d:'2026-06-05',p:560000}],active:true},
+ {id:'alternatywne:7122183',t:'Działka budowlana, Dziesiąta',src:'agency',ag:'Alternatywne BN',type:'budowlana',dist:'Dziesiąta',area:1120,
+  tl:[{d:'2026-05-10',p:419000},{d:'2026-05-28',p:399000},{d:'2026-06-12',p:389000}],active:true},
+ {id:'olx:CID3-IDc3',t:'Działka, Sławinek',src:'olx',ag:null,type:'budowlana',dist:'Sławinek',area:1200,
+  tl:[{d:'2026-06-09',p:450000}],active:true},
+ {id:'adresowo:99250',t:'Działka inwestycyjna, Tatary',src:'adresowo',ag:null,type:'inwestycyjna',dist:'Tatary',area:4300,
+  tl:[{d:'2026-04-22',p:980000},{d:'2026-05-19',p:950000},{d:'2026-06-07',p:899000}],active:true},
+];
+SAMPLE.forEach(o=>{o.price=o.tl.at(-1).p; o.perM2=Math.round(o.price/o.area);
+  o.first=o.tl[0].d; o.changes=o.tl.length-1;
+  o.trend=o.tl.length<2?'flat':(o.price<o.tl[0].p?'down':o.price>o.tl[0].p?'up':'flat');});
+
+/* ---------- helpery ---------- */
+const PLN=n=>n.toLocaleString('pl-PL')+' zł';
+const PLNk=n=>Math.round(n/1000)+'k';
+const dnum=d=>{const[y,m,da]=d.split('-').map(Number);return Date.UTC(y,m-1,da);};
+const SRC={olx:['OLX','b-olx'],otodom:['Otodom','b-otodom'],adresowo:['Adresowo','b-adresowo'],agency:['Agencja','b-agency']};
+function srcBadge(o){const[lbl,cls]=SRC[o.src];return `<span class="badge ${cls}">${o.ag||lbl}</span>`;}
+function typeBadge(o){return `<span class="badge b-type">${o.type}</span>`;}
+function trendTxt(o){const dl=o.price-o.tl[0].p;if(o.trend==='flat')return '<span class="trend-flat">—</span>';
+  return `<span class="trend-${o.trend}">${o.trend==='down'?'▼':'▲'} ${PLN(Math.abs(dl))}</span>`;}
+const TYPE_COLORS={'budowlana':'#16a34a','inwestycyjna':'#0ea5e9','rolno-budowlana':'#ca8a04','rolna':'#a16207','usługowa':'#9333ea'};
+const palette=['#16a34a','#0ea5e9','#dc2626','#9333ea','#ca8a04','#0d9488','#db2777','#2563eb','#65a30d','#e11d48','#7c3aed','#ea580c'];
+
+/* ---------- mini sparkline (SVG) ---------- */
+function spark(o,w=84,h=26){
+  const pts=o.tl.concat([{d:TODAY,p:o.price}]);
+  const xs=pts.map(p=>dnum(p.d)),ys=pts.map(p=>p.p);
+  const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const sx=v=>x1===x0?w/2:4+(v-x0)/(x1-x0)*(w-8);
+  const sy=v=>y1===y0?h/2:h-4-(v-y0)/(y1-y0)*(h-8);
+  let d='';pts.forEach((p,i)=>{const X=sx(xs[i]),Y=sy(p.p);
+    if(i===0)d+=`M${X} ${Y}`;else d+=`H${sx(xs[i])} V${Y}`;});
+  const col=o.trend==='down'?'var(--down)':o.trend==='up'?'var(--up)':'var(--flat)';
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+    <path d="${d}" fill="none" stroke="${col}" stroke-width="1.6" stroke-linejoin="round"/>
+    ${pts.map((p,i)=>`<circle cx="${sx(xs[i])}" cy="${sy(p.p)}" r="${i===pts.length-1?2.4:1.6}" fill="${col}"/>`).join('')}
+  </svg>`;
+}
+
+/* ---------- duży wykres ceny w czasie (SVG, krokowy, wiele serii) ---------- */
+function bigChart(offers,opts={}){
+  const W=opts.w||560,H=opts.h||300,L=58,R=14,T=14,B=34;
+  const series=offers.map((o,i)=>({o,color:opts.byType?TYPE_COLORS[o.type]||'#16a34a':palette[i%palette.length],
+    pts:o.tl.concat([{d:TODAY,p:o.price}])}));
+  const allX=series.flatMap(s=>s.pts.map(p=>dnum(p.d)));
+  const allY=series.flatMap(s=>s.pts.map(p=>p.p));
+  let x0=Math.min(...allX),x1=Math.max(...allX),y0=Math.min(...allY),y1=Math.max(...allY);
+  if(x0===x1){x0-=864e5*7;x1+=864e5*7;} const ypad=(y1-y0)*.12||y1*.1; y0=Math.max(0,y0-ypad);y1+=ypad;
+  const sx=v=>L+(v-x0)/(x1-x0)*(W-L-R);
+  const sy=v=>T+(1-(v-y0)/(y1-y0))*(H-T-B);
+  // osie Y (4 linie)
+  let grid='';for(let i=0;i<=4;i++){const val=y0+(y1-y0)*i/4,Y=sy(val);
+    grid+=`<line x1="${L}" y1="${Y}" x2="${W-R}" y2="${Y}" stroke="#e7efe7"/>
+    <text x="${L-6}" y="${Y+3}" text-anchor="end" font-size="9" fill="#94a3b8">${PLNk(val)}</text>`;}
+  // osie X (daty min/mid/max)
+  let xax='';[0,.5,1].forEach(f=>{const t=x0+(x1-x0)*f,X=sx(t);const dt=new Date(t);
+    const lbl=String(dt.getUTCDate()).padStart(2,'0')+'.'+String(dt.getUTCMonth()+1).padStart(2,'0');
+    xax+=`<text x="${X}" y="${H-12}" text-anchor="middle" font-size="9" fill="#94a3b8">${lbl}</text>`;});
+  let paths='';series.forEach(s=>{let d='';s.pts.forEach((p,i)=>{const X=sx(dnum(p.d)),Y=sy(p.p);
+      if(i===0)d+=`M${X} ${Y}`;else d+=`H${X} V${Y}`;});
+    paths+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.2" stroke-linejoin="round"/>`;
+    paths+=s.pts.map(p=>`<circle cx="${sx(dnum(p.d))}" cy="${sy(p.p)}" r="3" fill="#fff" stroke="${s.color}" stroke-width="1.8"><title>${p.d}: ${PLN(p.p)}</title></circle>`).join('');});
+  const leg=offers.length>1?`<div class="legend">${series.map(s=>`<span><i style="background:${s.color}"></i>${s.o.dist} · ${s.o.area} m²</span>`).join('')}</div>`:'';
+  return `<svg width="100%" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
+    ${grid}${xax}${paths}</svg>${leg}`;
+}
+
+function offerMeta(o){return `<div class="kv">
+  ${srcBadge(o)} ${typeBadge(o)}
+  <span>📐 <b>${o.area.toLocaleString('pl-PL')} m²</b></span>
+  <span>💰 <b>${PLN(o.price)}</b></span>
+  <span>📊 <b>${PLN(o.perM2)}/m²</b></span>
+  <span>🔁 zmiany ceny: <b>${o.changes}</b></span>
+  <span>📅 od ${o.first}</span>
+  <span>${o.active?'🟢 aktywna':'⚪ nieaktywna'}</span></div>`;}
+
+/* ===================== WARIANTY ===================== */
+const VARIANTS=[
+ {id:'v1',name:'V1 · Tabela + panel',desc:'Sortowalna tabela wszystkich ofert; klik wiersz → panel pod spodem z dużym wykresem ceny w czasie i metadanymi. Klasyczne master–detail.'},
+ {id:'v2',name:'V2 · Karty + sparkline',desc:'Siatka kart, każda z mini-wykresem (sparkline) trendu ceny. Klik → modal z dużym wykresem. Wizualne, dobre na desktop.'},
+ {id:'v3',name:'V3 · Split + multi',desc:'Lista po lewej, duży wykres po prawej. Zaznacz kilka ofert (checkbox) i nałóż ich ceny na jeden wykres.'},
+ {id:'v4',name:'V4 · Akordeon',desc:'Lista wierszy; klik rozwija wiersz w miejscu i pokazuje wykres ceny pod nim. Minimalistyczne, mobilne.'},
+ {id:'v5',name:'V5 · Dashboard',desc:'Panel filtrów (źródło, typ, tylko ze zmianą ceny) + tabela + wykres wybranej oferty. Dla „przeglądania rynku".'},
+ {id:'v6',name:'V6 · Rynek (overlay)',desc:'Jeden duży wykres nakłada krzywe cen WSZYSTKICH ofert (kolor = typ działki) + lista pod spodem. Widok makro.'},
+ {id:'v7',name:'V7 · Tabela + modal',desc:'Gęsta tabela danych; przy każdej ofercie przycisk 📈 otwiera wyśrodkowany modal z wykresem. Maks. danych na ekranie.'},
+ {id:'v8',name:'V8 · Feed mobilny',desc:'Jedna kolumna dużych kart z wbudowanym wykresem. Duże cele dotyku, myśl „mobile-first".'},
+ {id:'v9',name:'V9 · Porównywarka',desc:'Wybierasz oferty chipami; jeden wykres porównuje ich cenę/m² w czasie. Do analizy „co tanieje".'},
+ {id:'v10',name:'V10 · Agregat + tabela',desc:'Górny pasek = wykres mediany ceny/m² rynku w czasie; tabela z kolumną sparkline; klik podświetla.'},
+];
+
+/* ---- V1: tabela + panel ---- */
+function buildV1(){
+  let sortKey='price',sortDir=-1,sel=SAMPLE[0].id;
+  const el=document.getElementById('v1');
+  function render(){
+    const rows=[...SAMPLE].sort((a,b)=>(a[sortKey]>b[sortKey]?1:-1)*sortDir);
+    const o=SAMPLE.find(x=>x.id===sel);
+    el.innerHTML=`<h2 class="vtitle">Wszystkie oferty (${SAMPLE.length})</h2>
+    <p class="vnote">Kliknij wiersz, by zobaczyć wykres ceny w czasie. Nagłówki sortują.</p>
+    <table class="tbl"><thead><tr>
+      ${[['t','Oferta'],['src','Źródło'],['type','Typ'],['area','Pow.'],['price','Cena'],['perM2','Cena/m²'],['__','Trend']]
+        .map(([k,l])=>`<th onclick="V1sort('${k}')">${l}${sortKey===k?(sortDir<0?' ▼':' ▲'):''}</th>`).join('')}
+    </tr></thead><tbody>
+    ${rows.map(r=>`<tr class="${r.id===sel?'sel':''}" onclick="V1sel('${r.id}')">
+      <td><b>${r.t}</b></td><td>${srcBadge(r)}</td><td>${typeBadge(r)}</td>
+      <td>${r.area.toLocaleString('pl-PL')} m²</td><td class="price">${PLN(r.price)}</td>
+      <td class="pricem">${PLN(r.perM2)}</td><td>${spark(r)} ${trendTxt(r)}</td></tr>`).join('')}
+    </tbody></table>
+    <div class="chart-box" style="margin-top:14px">
+      <h2 class="vtitle">📈 ${o.t}</h2>${offerMeta(o)}${bigChart([o],{w:620,h:300})}</div>`;
+  }
+  window.V1sort=k=>{if(k==='__')return;if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=-1;}render();};
+  window.V1sel=id=>{sel=id;render();};
+  render();
+}
+
+/* ---- V2: karty + sparkline ---- */
+function buildV2(){
+  document.getElementById('v2').innerHTML=`<h2 class="vtitle">Oferty — karty</h2>
+  <p class="vnote">Każda karta pokazuje sparkline ceny. Kliknij „wykres", by powiększyć.</p>
+  <div class="grid-cards">${SAMPLE.map(o=>`<div class="card ofcard">
+    <div class="row-flex">${srcBadge(o)}${typeBadge(o)}</div>
+    <div class="t">${o.t}</div>
+    <div class="row-flex"><span class="price">${PLN(o.price)}</span><span>${trendTxt(o)}</span></div>
+    <div class="pricem">${o.area.toLocaleString('pl-PL')} m² · ${PLN(o.perM2)}/m²</div>
+    <div class="row-flex">${spark(o,150,40)}<button class="mini" onclick="showChart('${o.id}')">📈 wykres</button></div>
+  </div>`).join('')}</div>`;
+}
+
+/* ---- V3: split + multi ---- */
+function buildV3(){
+  let selset=new Set([SAMPLE[0].id,SAMPLE[2].id]);
+  const el=document.getElementById('v3');
+  function render(){
+    const chosen=SAMPLE.filter(o=>selset.has(o.id));
+    el.innerHTML=`<h2 class="vtitle">Lista + wykres porównawczy</h2>
+    <p class="vnote">Zaznacz oferty po lewej — ich ceny w czasie nakładają się na wspólnym wykresie.</p>
+    <div class="split">
+      <div class="list-pane">${SAMPLE.map(o=>`<label class="li ${selset.has(o.id)?'sel':''}">
+        <input type="checkbox" class="chk" ${selset.has(o.id)?'checked':''} onchange="V3tog('${o.id}')">
+        <span style="flex:1"><b>${o.t}</b><br><span class="pricem">${srcBadge(o)} ${PLN(o.price)} · ${o.area} m²</span></span>
+        ${spark(o)}</label>`).join('')}</div>
+      <div class="chart-box"><h2 class="vtitle">📈 Cena w czasie (${chosen.length})</h2>
+        ${chosen.length?bigChart(chosen,{w:560,h:320}):'<p class="muted">Zaznacz oferty z listy.</p>'}</div>
+    </div>`;
+  }
+  window.V3tog=id=>{selset.has(id)?selset.delete(id):selset.add(id);render();};
+  render();
+}
+
+/* ---- V4: akordeon ---- */
+function buildV4(){
+  document.getElementById('v4').innerHTML=`<h2 class="vtitle">Oferty — akordeon</h2>
+  <p class="vnote">Kliknij ofertę, by rozwinąć wykres ceny w czasie pod spodem.</p>
+  ${SAMPLE.map(o=>`<div class="acc" id="acc-${o.id}">
+    <div class="acc-head" onclick="V4tog('${o.id}')">
+      <span><b>${o.t}</b> &nbsp;${srcBadge(o)} ${typeBadge(o)}</span>
+      <span class="row-flex" style="gap:10px">${spark(o)}<span class="price">${PLN(o.price)}</span> ${trendTxt(o)} <span class="muted">▾</span></span>
+    </div>
+    <div class="acc-body">${offerMeta(o)}<div class="chart-box">${bigChart([o],{w:600,h:280})}</div></div>
+  </div>`).join('')}`;
+  window.V4tog=id=>document.getElementById('acc-'+id).classList.toggle('open');
+}
+
+/* ---- V5: dashboard z filtrami ---- */
+function buildV5(){
+  let f={src:'',type:'',changed:false},sel=SAMPLE[0].id;
+  const el=document.getElementById('v5');
+  function render(){
+    let list=SAMPLE.filter(o=>(!f.src||(f.src==='agency'?o.src==='agency':o.src===f.src))&&(!f.type||o.type===f.type)&&(!f.changed||o.changes>0));
+    if(!list.find(o=>o.id===sel))sel=list[0]?.id;
+    const o=SAMPLE.find(x=>x.id===sel);
+    const types=[...new Set(SAMPLE.map(o=>o.type))];
+    el.innerHTML=`<h2 class="vtitle">Dashboard ofert</h2>
+    <p class="vnote">Filtruj rynek i wybierz ofertę do podglądu wykresu.</p>
+    <div class="filters">
+      <select onchange="V5f('src',this.value)"><option value="">— źródło —</option>
+        ${['olx','otodom','adresowo','agency'].map(s=>`<option value="${s}" ${f.src===s?'selected':''}>${SRC[s][0]}</option>`).join('')}</select>
+      <select onchange="V5f('type',this.value)"><option value="">— typ —</option>
+        ${types.map(t=>`<option ${f.type===t?'selected':''}>${t}</option>`).join('')}</select>
+      <label class="chip ${f.changed?'on':''}" onclick="V5f('changed',${!f.changed})">tylko ze zmianą ceny</label>
+    </div>
+    <div class="split">
+      <div class="list-pane">${list.length?list.map(r=>`<div class="li ${r.id===sel?'sel':''}" onclick="V5sel('${r.id}')">
+        <span style="flex:1"><b>${r.t}</b><br><span class="pricem">${PLN(r.price)} · ${PLN(r.perM2)}/m²</span></span>${trendTxt(r)}</div>`).join(''):'<p class="empty muted" style="padding:20px">Brak ofert dla filtra.</p>'}</div>
+      <div class="chart-box">${o?`<h2 class="vtitle">📈 ${o.t}</h2>${offerMeta(o)}${bigChart([o],{w:560,h:300})}`:'<p class="muted">—</p>'}</div>
+    </div>`;
+  }
+  window.V5f=(k,v)=>{f[k]=v;render();};window.V5sel=id=>{sel=id;render();};
+  render();
+}
+
+/* ---- V6: rynek overlay ---- */
+function buildV6(){
+  document.getElementById('v6').innerHTML=`<h2 class="vtitle">Widok rynku — wszystkie ceny w czasie</h2>
+  <p class="vnote">Każda linia to jedna oferta (kolor = typ działki). Pod spodem pełna lista.</p>
+  <div class="chart-box">${bigChart(SAMPLE,{w:900,h:360,byType:true})}
+    <div class="legend">${Object.entries(TYPE_COLORS).map(([t,c])=>`<span><i style="background:${c}"></i>${t}</span>`).join('')}</div></div>
+  <table class="tbl" style="margin-top:14px"><thead><tr><th>Oferta</th><th>Źródło</th><th>Typ</th><th>Cena</th><th>Cena/m²</th><th>Trend</th></tr></thead><tbody>
+  ${SAMPLE.map(o=>`<tr><td><b>${o.t}</b></td><td>${srcBadge(o)}</td><td>${typeBadge(o)}</td><td class="price">${PLN(o.price)}</td><td class="pricem">${PLN(o.perM2)}</td><td>${trendTxt(o)}</td></tr>`).join('')}
+  </tbody></table>`;
+}
+
+/* ---- V7: tabela + modal ---- */
+function buildV7(){
+  document.getElementById('v7').innerHTML=`<h2 class="vtitle">Gęsta tabela ofert</h2>
+  <p class="vnote">Maksimum danych; 📈 otwiera wykres w oknie modalnym.</p>
+  <table class="tbl"><thead><tr><th>Oferta</th><th>Źródło</th><th>Typ</th><th>Dzielnica</th><th>Pow.</th><th>Cena</th><th>Cena/m²</th><th>Zmian</th><th>Trend</th><th></th></tr></thead><tbody>
+  ${SAMPLE.map(o=>`<tr><td><b>${o.t}</b></td><td>${srcBadge(o)}</td><td>${typeBadge(o)}</td><td>${o.dist}</td>
+    <td>${o.area.toLocaleString('pl-PL')} m²</td><td class="price">${PLN(o.price)}</td><td class="pricem">${PLN(o.perM2)}</td>
+    <td style="text-align:center">${o.changes}</td><td>${trendTxt(o)}</td>
+    <td><button class="mini" onclick="showChart('${o.id}')">📈</button></td></tr>`).join('')}
+  </tbody></table>`;
+}
+
+/* ---- V8: feed mobilny ---- */
+function buildV8(){
+  document.getElementById('v8').innerHTML=`<h2 class="vtitle">Feed mobilny</h2>
+  <p class="vnote">Jedna kolumna dużych kart z wykresem w środku.</p>
+  <div style="max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:14px">
+  ${SAMPLE.map(o=>`<div class="card" style="padding:15px">
+    <div class="row-flex" style="margin-bottom:6px">${srcBadge(o)}${typeBadge(o)}<span style="margin-left:auto">${trendTxt(o)}</span></div>
+    <div style="font-size:15px;font-weight:800;margin-bottom:2px">${o.t}</div>
+    <div class="row-flex"><span class="price" style="font-size:18px">${PLN(o.price)}</span><span class="pricem">${o.area.toLocaleString('pl-PL')} m² · ${PLN(o.perM2)}/m²</span></div>
+    <div class="chart-box" style="margin-top:10px;padding:8px">${bigChart([o],{w:420,h:200})}</div>
+  </div>`).join('')}</div>`;
+}
+
+/* ---- V9: porównywarka cena/m² ---- */
+function buildV9(){
+  let selset=new Set(SAMPLE.slice(0,4).map(o=>o.id));
+  const el=document.getElementById('v9');
+  function render(){
+    const chosen=SAMPLE.filter(o=>selset.has(o.id));
+    // wykres cena/m² w czasie — przeliczamy timeline na /m²
+    const asM2=chosen.map(o=>({...o,tl:o.tl.map(p=>({d:p.d,p:Math.round(p.p/o.area)})),price:Math.round(o.price/o.area)}));
+    el.innerHTML=`<h2 class="vtitle">Porównywarka — cena/m² w czasie</h2>
+    <p class="vnote">Klik chipa dodaje/usuwa ofertę z wykresu (normalizacja do ceny za m²).</p>
+    <div class="filters">${SAMPLE.map((o,i)=>`<span class="chip ${selset.has(o.id)?'on':''}" onclick="V9t('${o.id}')">${o.dist} ${o.area}m²</span>`).join('')}</div>
+    <div class="chart-box">${chosen.length?bigChart(asM2,{w:900,h:340}):'<p class="muted">Wybierz oferty.</p>'}</div>`;
+  }
+  window.V9t=id=>{selset.has(id)?selset.delete(id):selset.add(id);render();};
+  render();
+}
+
+/* ---- V10: agregat + tabela ---- */
+function buildV10(){
+  // mediana ceny/m² rynku w czasie — po datach zmian
+  const dates=[...new Set(SAMPLE.flatMap(o=>o.tl.map(p=>p.d)).concat([TODAY]))].sort();
+  const median=arr=>{const s=[...arr].sort((a,b)=>a-b);const m=s.length>>1;return s.length%2?s[m]:Math.round((s[m-1]+s[m])/2);};
+  const priceAt=(o,d)=>{let v=null;o.tl.forEach(p=>{if(p.d<=d)v=p.p;});return v;};
+  const aggTl=dates.map(d=>{const vals=SAMPLE.filter(o=>o.tl[0].d<=d).map(o=>Math.round(priceAt(o,d)/o.area));
+    return {d,p:vals.length?median(vals):null};}).filter(x=>x.p!=null);
+  const aggOffer={tl:aggTl,price:aggTl.at(-1).p,trend:aggTl.at(-1).p<aggTl[0].p?'down':'up',area:1,dist:'mediana/m²'};
+  document.getElementById('v10').innerHTML=`<h2 class="vtitle">Agregat rynku + lista</h2>
+  <p class="vnote">Górny wykres: mediana ceny za m² działek w czasie. Niżej tabela z mini-trendem.</p>
+  <div class="chart-box"><h2 class="vtitle">📊 Mediana ceny/m² (rynek)</h2>${bigChart([aggOffer],{w:900,h:240})}</div>
+  <table class="tbl" style="margin-top:14px"><thead><tr><th>Oferta</th><th>Źródło</th><th>Cena</th><th>Cena/m²</th><th>Historia</th><th>Trend</th></tr></thead><tbody>
+  ${SAMPLE.map(o=>`<tr><td><b>${o.t}</b></td><td>${srcBadge(o)}</td><td class="price">${PLN(o.price)}</td>
+    <td class="pricem">${PLN(o.perM2)}</td><td>${spark(o,120,30)}</td><td>${trendTxt(o)}</td></tr>`).join('')}
+  </tbody></table>`;
+}
+
+/* ---- modal wykresu ---- */
+function showChart(id){const o=SAMPLE.find(x=>x.id===id);
+  document.getElementById('modal-body').innerHTML=`<h2 class="vtitle">📈 ${o.t}</h2>${offerMeta(o)}${bigChart([o],{w:580,h:300})}`;
+  document.getElementById('modal').classList.add('show');}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+
+/* ---- przełącznik wariantów ---- */
+const builders={v1:buildV1,v2:buildV2,v3:buildV3,v4:buildV4,v5:buildV5,v6:buildV6,v7:buildV7,v8:buildV8,v9:buildV9,v10:buildV10};
+const built={};
+function show(vid){
+  VARIANTS.forEach(v=>document.getElementById(v.id).classList.toggle('active',v.id===vid));
+  document.querySelectorAll('#btns button').forEach(b=>b.classList.toggle('active',b.dataset.v===vid));
+  document.getElementById('vdesc').textContent=VARIANTS.find(v=>v.id===vid).desc;
+  if(!built[vid]){builders[vid]();built[vid]=true;}
+  window.scrollTo(0,0);
+}
+document.getElementById('btns').innerHTML=VARIANTS.map(v=>`<button data-v="${v.id}" onclick="show('${v.id}')">${v.name}</button>`).join('');
+show('v1');
+</script>
+</body>
+</html>
