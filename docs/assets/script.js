@@ -30,6 +30,7 @@ const _iconCache = new Map();  // memoizacja L.divIcon wg wyglądu (patrz makeIc
 let allOffers = [];
 let quantiles = [];
 let typeFilterState = {};   // plot_type -> bool
+let quantileBucketState = {};   // index kubełka ceny/m² -> bool (legenda z checkboxami)
 let agencyFilterState = {}; // agency_name -> bool
 
 init();
@@ -99,11 +100,17 @@ function colorFor(offer) {
     if (colorMode() === 'type') {
         return TYPE_COLORS[offer.plot_type || 'inna'] || '#64748b';
     }
+    return QUANTILE_COLORS[quantileIndex(offer)];
+}
+
+// indeks kubełka ceny/m² (0..QUANTILE_COLORS.length-1) — wspólny dla koloru,
+// legendy i filtra; brak ceny/kwantyli → kubełek środkowy (2)
+function quantileIndex(offer) {
     const v = offer.price_per_m2;
-    if (v == null || !quantiles.length) return QUANTILE_COLORS[2];
+    if (v == null || !quantiles.length) return 2;
     let i = 0;
     while (i < quantiles.length && v > quantiles[i]) i++;
-    return QUANTILE_COLORS[i];
+    return i;
 }
 
 function buildTypeFilters() {
@@ -179,9 +186,18 @@ function buildLegend() {
         if (lo == null) text = `do ${fmtPrice(hi)}/m²`;
         else if (hi == null) text = `powyżej ${fmtPrice(lo)}/m²`;
         else text = `${fmtPrice(lo)} – ${fmtPrice(hi)}/m²`;
-        const row = document.createElement('div');
+        // FIX 2026-06-14: checkbox przy zakresie — filtr ofert wg kubełka ceny/m²
+        const row = document.createElement('label');
         row.className = 'legend-row';
-        row.innerHTML = `<span class="legend-dot" style="background:${QUANTILE_COLORS[i]}"></span> ${text}`;
+        row.style.cursor = 'pointer';
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = quantileBucketState[i] !== false;
+        cb.style.cssText = 'margin:0;accent-color:#16a34a;flex-shrink:0';
+        cb.addEventListener('change', () => { quantileBucketState[i] = cb.checked; render(); });
+        row.appendChild(cb);
+        row.insertAdjacentHTML('beforeend',
+            `<span class="legend-dot" style="background:${QUANTILE_COLORS[i]}"></span> ${text}`);
         container.appendChild(row);
     }
 }
@@ -230,6 +246,9 @@ function passesFilters(o) {
     if (document.getElementById('only-private').checked && !o.is_private_owner) return false;
 
     if (!typeFilterState[o.plot_type || 'inna']) return false;
+
+    // filtr zakresów ceny/m² (checkboxy w legendzie; tylko w trybie koloru ceny)
+    if (colorMode() === 'price' && quantileBucketState[quantileIndex(o)] === false) return false;
 
     const pMin = parseFloat(document.getElementById('price-min').value);
     const pMax = parseFloat(document.getElementById('price-max').value);
