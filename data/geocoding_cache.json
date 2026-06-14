@@ -1010,5 +1010,21 @@
    "name": "Nadbystrzycka"
   },
   "ts": 1781343947.102896
+ },
+ "district:hajdow": {
+  "result": {
+   "lat": 51.2603092,
+   "lon": 22.6178765,
+   "name": "Hajdów"
+  },
+  "ts": 1781424601.8723385
+ },
+ "lazurowa na": {
+  "result": {
+   "lat": 51.2369228,
+   "lon": 22.4808641,
+   "name": "Lazurowa"
+  },
+  "ts": 1781424603.5383613
  }
 }
