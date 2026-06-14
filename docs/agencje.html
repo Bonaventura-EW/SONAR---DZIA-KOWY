@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SONAR DZIAŁKOWY — Agencje</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=2">
+<link rel="stylesheet" href="assets/style.css?v=2">
+<style>
+.ag-wrap{flex:1;overflow:auto;width:100%}
+/* zakładki agencji */
+.ag-tabs{display:flex;gap:4px;flex-wrap:wrap;padding:10px 16px;background:var(--lime-soft);border-bottom:1px solid var(--line)}
+.ag-tab{cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;color:var(--green-800);display:flex;align-items:center;gap:7px}
+.ag-tab.active{background:var(--green-700);color:#fff;border-color:var(--green-700)}
+.ag-tab .badge-cnt{background:rgba(0,0,0,.08);border-radius:999px;padding:0 7px;font-size:11px}
+.ag-tab.active .badge-cnt{background:rgba(255,255,255,.25)}
+/* statsbar */
+.ag-stats{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);background:#fff}
+.stat{display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:6px 12px;min-width:84px}
+.stat .v{font-size:15px;font-weight:800;color:var(--green-800)}
+.stat .v.dim{color:var(--muted)}
+.stat .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.ag-link{margin-left:auto;font-size:12px;color:var(--green-600);text-decoration:none;font-weight:600}
+.ag-link:hover{text-decoration:underline}
+/* lista */
+.ag-list{padding:12px 16px;max-width:1100px;margin:0 auto}
+.of{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:9px;border-left:3px solid var(--green-600)}
+.of.inactive{opacity:.62;border-left-color:#cbd5e1}
+.of-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.of-t{font-size:14px;font-weight:700;color:var(--ink)}
+.of-price{font-size:15px;font-weight:800;white-space:nowrap;text-align:right}
+.of-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.badge{font-size:10px;padding:1px 8px;border-radius:999px;font-weight:700;white-space:nowrap}
+.b-type{background:#f1f5f9;color:#475569}
+.b-dup{background:#ede9fe;color:#5b21b6}
+.b-inact{background:#f1f5f9;color:#64748b;border:1px solid var(--line)}
+.b-new{background:#dc2626;color:#fff}
+.meta-txt{font-size:11px;color:var(--muted)}
+.of-link{font-size:11px;color:var(--green-600);text-decoration:none;margin-left:auto}
+.of-link:hover{text-decoration:underline}
+.trend-up{color:#dc2626;font-weight:700}.trend-down{color:#16a34a;font-weight:700}.trend-flat{color:#94a3b8}
+.hist-row{display:flex;align-items:center;gap:9px;margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+.hist-lbl{font-size:10px;color:var(--muted);width:84px;flex-shrink:0}
+.hist-list{font-size:10px;color:#475569}
+.divider{display:flex;align-items:center;gap:10px;margin:14px 0 8px}
+.divider .line{flex:1;height:1px;background:var(--line)}
+.divider span{font-size:11px;color:var(--muted);font-weight:600}
+.empty{padding:40px;text-align:center;color:var(--muted)}
+#ag-loading{padding:60px;text-align:center;color:var(--muted)}
+@media(max-width:600px){.of-t{font-size:13px}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="header">
+    <h1><span class="sonar-logo"></span><span>SONAR DZIAŁKOWY<span class="sub">agencje nieruchomości</span></span></h1>
+    <nav class="header-nav">
+      <a href="index.html">🗺️ Mapa</a>
+      <a href="analytics.html">📈 Analityka</a>
+      <a href="monitoring.html">📊 Monitoring</a>
+      <a href="oferty.html">📋 Oferty</a>
+      <a href="agencje.html" class="active">🏢 Agencje</a>
+    </nav>
+    <div class="header-meta">🕐 Ostatni scan: <strong id="last-scan">—</strong></div>
+  </header>
+
+  <div class="ag-wrap">
+    <div id="ag-loading">⏳ Ładowanie danych agencji…</div>
+    <div id="ag-main" style="display:none">
+      <div class="ag-tabs" id="ag-tabs"></div>
+      <div class="ag-stats" id="ag-stats"></div>
+      <div class="ag-list" id="ag-list"></div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/logo.js"></script>
+<script>
+const TODAY=new Date().toISOString().slice(0,10);
+let DATA=null, CURRENT=null;
+
+const PLN=n=>n==null?'—':n.toLocaleString('pl-PL')+' zł';
+const PERM2=n=>n==null?'—':n.toLocaleString('pl-PL')+' zł/m²';
+const AREA=n=>n==null?'—':n.toLocaleString('pl-PL')+' m²';
+const dnum=d=>{const[y,m,da]=d.split('-').map(Number);return Date.UTC(y,m-1,da);};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+
+function timeline(o){
+  const start=(o.first_seen||'').slice(0,10);
+  const ch=(o.price_changes||[]).filter(c=>c.changed_at&&c.new_price!=null);
+  const initial=ch.length?ch[0].old_price:((o.price_history&&o.price_history.length)?o.price_history[0]:o.price);
+  let tl=[]; if(start)tl.push({d:start,p:initial});
+  ch.forEach(c=>tl.push({d:c.changed_at.slice(0,10),p:c.new_price}));
+  if(!tl.length)tl=[{d:start||TODAY,p:o.price}];
+  const endD=o.active?TODAY:((o.last_seen||'').slice(0,10)||TODAY);
+  if(endD>tl.at(-1).d)tl.push({d:endD,p:o.price});
+  return tl;
+}
+function spark(tl,w=92,h=26){
+  if(tl.length<2)return `<svg width="${w}" height="${h}"><circle cx="${w/2}" cy="${h/2}" r="2.2" fill="#94a3b8"/></svg>`;
+  const xs=tl.map(p=>dnum(p.d)),ys=tl.map(p=>p.p);
+  const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const sx=v=>x1===x0?w/2:4+(v-x0)/(x1-x0)*(w-8);
+  const sy=v=>y1===y0?h/2:h-4-(v-y0)/(y1-y0)*(h-8);
+  let d='';tl.forEach((p,i)=>{const X=sx(xs[i]),Y=sy(p.p);d+=(i===0?`M${X} ${Y}`:`H${X} V${Y}`);});
+  const col=tl.at(-1).p<tl[0].p?'#16a34a':tl.at(-1).p>tl[0].p?'#dc2626':'#94a3b8';
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="flex-shrink:0"><path d="${d}" fill="none" stroke="${col}" stroke-width="1.6" stroke-linejoin="round"/>${tl.map((p,i)=>`<circle cx="${sx(xs[i])}" cy="${sy(p.p)}" r="${i===tl.length-1?2.4:1.5}" fill="${col}"/>`).join('')}</svg>`;
+}
+function alsoAtTxt(o){
+  if(!o.also_at)return '';
+  const labels={olx:'OLX',otodom:'Otodom',adresowo:'Adresowo'};
+  const arr=Array.isArray(o.also_at)?o.also_at:[o.also_at];
+  const srcs=[...new Set(arr.map(x=>(typeof x==='string'?x:x.source||'').split(':')[0]).filter(Boolean))]
+    .map(s=>labels[s]||s);
+  return srcs.length?`<span class="badge b-dup">też na: ${srcs.join(', ')}</span>`:
+    (o.duplicate_of?'<span class="badge b-dup">duplikat portalu</span>':'');
+}
+
+function offerCard(o){
+  const tl=timeline(o);
+  const delta=tl.length>1?tl.at(-1).p-tl[0].p:0;
+  const trend=delta<0?`<span class="trend-down">▼ ${PLN(Math.abs(delta))}</span>`:delta>0?`<span class="trend-up">▲ ${PLN(Math.abs(delta))}</span>`:'<span class="trend-flat">—</span>';
+  const histList=tl.length>1?tl.map(p=>`${p.d.slice(5)}: <b>${(p.p/1000).toLocaleString('pl-PL')}k</b>`).join(' → '):'';
+  return `<div class="of ${o.active?'':'inactive'}">
+    <div class="of-top">
+      <span class="of-t">${esc(o.title||'—')}</span>
+      <span class="of-price">${PLN(o.price)}<br><span class="meta-txt">${PERM2(o.price_per_m2)}</span></span>
+    </div>
+    <div class="of-meta">
+      <span class="badge b-type">${esc(o.plot_type||'inna')}</span>
+      ${o.district?`<span class="meta-txt">📍 ${esc(o.district)}</span>`:''}
+      <span class="meta-txt">📐 ${AREA(o.area_m2)}</span>
+      ${alsoAtTxt(o)}
+      ${o.active?'':'<span class="badge b-inact">nieaktywna</span>'}
+      <span class="meta-txt">📅 ${(o.first_seen||'—').slice(0,10)}${!o.active&&o.last_seen?' → '+o.last_seen.slice(0,10):''} · ${o.days_active||0} dni</span>
+      <a class="of-link" href="${esc(o.url)}" target="_blank" rel="noopener">otwórz ↗</a>
+    </div>
+    <div class="hist-row"><span class="hist-lbl">Cena w czasie:</span>${spark(tl)} <span style="font-size:11px">${trend}</span>
+      ${histList?`<span class="hist-list">${histList}</span>`:'<span class="hist-list" style="color:#cbd5e1">brak zmian ceny</span>'}</div>
+  </div>`;
+}
+
+function renderAgency(key){
+  CURRENT=key;
+  const a=DATA.agencies[key];
+  // tabs
+  document.getElementById('ag-tabs').innerHTML=DATA.agency_keys.map(k=>{
+    const ag=DATA.agencies[k];
+    return `<div class="ag-tab ${k===key?'active':''}" onclick="renderAgency('${k}')">${esc(ag.name)}<span class="badge-cnt">${ag.stats.active}</span></div>`;
+  }).join('');
+  // stats
+  const s=a.stats;
+  const stat=(v,l,dim)=>`<div class="stat"><span class="v ${dim?'dim':''}">${v}</span><span class="l">${l}</span></div>`;
+  document.getElementById('ag-stats').innerHTML=
+    stat(s.active,'aktywne')+stat(s.inactive,'archiwalne',true)+stat(s.total,'łącznie')
+    +(s.median_per_m2!=null?stat(PERM2(s.median_per_m2),'mediana/m²'):'')
+    +(s.min_price!=null?stat(PLN(s.min_price),'najtańsza'):'')
+    +(s.max_price!=null?stat(PLN(s.max_price),'najdroższa'):'')
+    +`<a class="ag-link" href="${esc(a.url)}" target="_blank" rel="noopener">${esc((a.url||'').replace('https://','').replace(/\/$/,''))} ↗</a>`;
+  // list
+  const active=a.offers.filter(o=>o.active), arch=a.offers.filter(o=>!o.active);
+  let html='';
+  if(!a.offers.length)html='<div class="empty">📭 Brak ofert tej agencji w bazie.</div>';
+  else{
+    html+=active.map(offerCard).join('');
+    if(arch.length){
+      html+=`<div class="divider"><div class="line"></div><span>archiwalne (${arch.length})</span><div class="line"></div></div>`;
+      html+=arch.map(offerCard).join('');
+    }
+  }
+  document.getElementById('ag-list').innerHTML=html;
+  if(history.replaceState)history.replaceState(null,'','#'+key);
+}
+
+async function load(){
+  try{
+    const res=await fetch('agency_data.json?v='+Date.now());
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    DATA=await res.json();
+    document.getElementById('last-scan').textContent=(DATA.last_scan||DATA.generated_at||'—').slice(0,16).replace('T',' ');
+    document.getElementById('ag-loading').style.display='none';
+    document.getElementById('ag-main').style.display='block';
+    const hash=location.hash.slice(1);
+    const start=DATA.agencies[hash]?hash:DATA.agency_keys[0];
+    renderAgency(start);
+  }catch(e){
+    document.getElementById('ag-loading').innerHTML='❌ Błąd ładowania agency_data.json: '+e.message
+      +'<br><small>Plik powstaje przy skanie / uruchomieniu agency_generator.py</small>';
+  }
+}
+load();
+</script>
+</body>
+</html>

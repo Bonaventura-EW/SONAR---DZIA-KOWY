@@ -10,8 +10,9 @@
 
 const LUBLIN_CENTER = [51.2465, 22.5684];
 const NEW_OFFER_DAYS = 7;
-// kolory kwantyli ceny za m²: tani (zielony) → drogi (czerwony)
-const QUANTILE_COLORS = ['#15803d', '#84cc16', '#eab308', '#f97316', '#dc2626'];
+// kolory kwantyli ceny za m²: tani (zielony) → drogi (fioletowy), 10 stopni (decyle)
+const QUANTILE_COLORS = ['#15803d', '#4ca11e', '#84cc16', '#c4d62b', '#eab308',
+                         '#f59e0b', '#f97316', '#ef4444', '#db2777', '#7c3aed'];
 const INACTIVE_COLOR = '#9ca3af';
 // stałe kolory typów działek — wspólne z wykresem w analytics.html
 const TYPE_COLORS = {
