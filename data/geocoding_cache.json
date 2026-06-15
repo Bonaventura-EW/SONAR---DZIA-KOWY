@@ -1038,5 +1038,13 @@
  "bliska. idealna": {
   "result": null,
   "ts": 1781460156.6240118
+ },
+ "henryka wolińskiego": {
+  "result": {
+   "lat": 51.2023768,
+   "lon": 22.5521686,
+   "name": "Henryka Wolińskiego"
+  },
+  "ts": 1781528032.4566894
  }
 }
