@@ -1046,5 +1046,21 @@
    "name": "Henryka Wolińskiego"
   },
   "ts": 1781528032.4566894
+ },
+ "krańcowa": {
+  "result": {
+   "lat": 51.233944,
+   "lon": 22.5916481,
+   "name": "Krańcowa"
+  },
+  "ts": 1781639900.0042472
+ },
+ "krańcowa na": {
+  "result": {
+   "lat": 51.233944,
+   "lon": 22.5916481,
+   "name": "Krańcowa"
+  },
+  "ts": 1781639901.651474
  }
 }
