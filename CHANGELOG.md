@@ -10,6 +10,19 @@
   przy zoomie). Filtry cena/powierzchnia już wcześniej debounce'owane (300 ms).
 
 ### Dodane
+- Podstrona **🔄 Ruch** (`docs/zmiany.html`) — dwukolumnowy widok ruchu na rynku:
+  po lewej oferty **zniknięte** (nieaktywne, czerwone), po prawej **nowe**
+  (świeży `first_seen`, zielone). Każda karta ma miniaturę, cenę + cena/m²,
+  trend ceny, datę względną („3 dni temu"), a zniknięte dodatkowo czas życia
+  („była X dni"). Pasek bilansu (KPI: nowe / zniknięte / bilans netto / mediana
+  ceny/m² nowych / śr. czas życia), filtry okna czasu (1–90 dni / cały czas),
+  źródła, „tylko od właściciela", sortowanie i wyszukiwarka. Przycisk 📍 **Mapa**
+  przenosi do mapy z fokusem oferty (`index.html#offer=<id>`): `script.js`
+  czyta hash, włącza potrzebne warstwy/filtry, wyśrodkowuje mapę i otwiera popup
+  (działa też dla nieaktywnych i bez GPS). Wpięta w nawigację wszystkich podstron.
+  10 propozycji wizualizacji w `mockups/zmiany_mockups.html` (dwie kolumny,
+  oś czasu, bilans, karty+segment, tabela ruchu, lista+mini-mapa, kafelki dzienne,
+  feed mobilny, bilans dzielnic, porównanie).
 - Podstrona **🏢 Agencje** (`docs/agencje.html`) na wzór `profile_tracker.html`:
   zakładki per agencja (ANMA, Pasjonaci, Alternatywne BN, IdsHome) z listą ofert,
   statystykami (aktywne/archiwalne, mediana ceny/m², min/max) i sparkline ceny

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SONAR DZIAŁKOWY — mockupy strony „Ruch na rynku: nowe / zniknięte" (10 wariantów)</title>
+<style>
+:root{
+  --ink:#0f1f15; --bg:#eef3ee; --card:#fff; --line:#dce5dc;
+  --green-900:#052e16; --green-800:#0b3d20; --green-700:#14532d; --green-600:#16a34a;
+  --lime:#a3e635; --lime-soft:#ecfccb; --muted:#64748b;
+  --gone:#dc2626; --gone-900:#7f1d1d; --new:#16a34a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+
+/* ---- pasek wyboru wariantu (meta-UI mockupu, NIE część strony docelowej) ---- */
+.picker{position:sticky;top:0;z-index:50;background:var(--green-900);color:#e7f6df;
+  padding:8px 12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+  box-shadow:0 2px 14px rgba(2,22,10,.45);border-bottom:1px solid rgba(163,230,53,.25)}
+.picker b{font-size:13px;letter-spacing:.04em;margin-right:6px;color:var(--lime)}
+.picker button{cursor:pointer;border:1px solid rgba(163,230,53,.3);background:rgba(163,230,53,.12);
+  color:#e7f6df;border-radius:999px;padding:5px 11px;font-weight:700;font-size:12px}
+.picker button.active{background:var(--lime);color:var(--green-900);border-color:var(--lime)}
+.picker .desc{flex-basis:100%;font-size:12px;color:#bcd9b0;margin-top:2px}
+
+/* ---- wspólny nagłówek strony (jak w SONAR DZIAŁKOWY) ---- */
+.header{background:linear-gradient(120deg,var(--green-900),var(--green-800) 55%,#123a26);
+  color:#fff;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(163,230,53,.25)}
+.header h1{font-size:18px;font-weight:800;letter-spacing:.04em;display:flex;align-items:center;gap:10px}
+.header h1 .sub{font-size:10px;font-weight:600;color:var(--lime);letter-spacing:.14em;display:block;text-transform:uppercase}
+.header-nav{display:flex;gap:8px;flex-wrap:wrap}
+.header-nav a{color:#e7f6df;text-decoration:none;background:rgba(163,230,53,.12);border:1px solid rgba(163,230,53,.3);
+  padding:6px 13px;border-radius:999px;font-weight:600;font-size:13px}
+.header-nav a.active{background:var(--lime);color:var(--green-900)}
+
+/* ---- elementy współdzielone ---- */
+.wrap{padding:16px;max-width:1320px;margin:0 auto}
+.variant{display:none}
+.variant.active{display:block}
+h2.vtitle{font-size:16px;margin-bottom:3px;color:var(--green-800)}
+p.vnote{font-size:12px;color:var(--muted);margin-bottom:14px}
+.badge{font-size:10px;padding:1px 7px;border-radius:999px;font-weight:700;white-space:nowrap;display:inline-block}
+.b-olx{background:#e0f2fe;color:#075985}.b-otodom{background:#ede9fe;color:#5b21b6}
+.b-adresowo{background:#fef9c3;color:#854d0e}.b-agency{background:var(--lime-soft);color:var(--green-700);border:1px solid #cfe89a}
+.b-type{background:#f1f5f9;color:#475569}.b-new{background:var(--new);color:#fff}.b-gone{background:var(--gone);color:#fff}
+.b-priv{background:#0284c7;color:#fff}
+.trend-up{color:var(--gone);font-weight:700}.trend-down{color:var(--new);font-weight:700}
+.muted{color:var(--muted)}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.toolbar select,.toolbar input{font:inherit;font-size:12px;padding:6px 9px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.chip{cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;user-select:none}
+.chip.on{background:var(--green-700);color:#fff;border-color:var(--green-700)}
+.pin{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:700;text-decoration:none;border-radius:999px;padding:3px 9px;background:var(--green-600);color:#fff;cursor:pointer;border:none}
+.pin.off{background:#f1f5f9;color:#94a3b8;cursor:not-allowed}
+.lnk{font-size:11px;font-weight:700;color:var(--green-700);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(15,31,21,.06)}
+.kpi h3{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:5px}
+.kpi .v{font-size:23px;font-weight:800;line-height:1}
+.kpi .s{font-size:11px;color:var(--muted);margin-top:3px}
+.v-gone{color:var(--gone)}.v-new{color:var(--new)}
+
+/* dwie kolumny (V1) */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.col{background:var(--bg);border-radius:16px;min-width:0}
+.col-head{padding:11px 14px;border-radius:14px;display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;color:#fff;margin-bottom:10px}
+.col.gone .col-head{background:linear-gradient(120deg,var(--gone-900),var(--gone))}
+.col.new  .col-head{background:linear-gradient(120deg,var(--green-900),var(--green-600))}
+.col-head .cnt{margin-left:auto;font-size:12px;font-weight:700;background:rgba(255,255,255,.18);padding:2px 9px;border-radius:999px}
+.list{display:flex;flex-direction:column;gap:10px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 3px rgba(2,22,10,.06);display:flex;gap:10px;padding:10px;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+.col.gone .card:before,.card.gone:before{background:var(--gone)}
+.col.new  .card:before,.card.new:before{background:var(--new)}
+.thumb{width:80px;height:80px;flex:0 0 auto;border-radius:9px;background:#dfe7df;display:flex;align-items:center;justify-content:center;font-size:26px;color:#9db49d}
+.body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.t{font-size:13px;font-weight:700;line-height:1.3}
+.badges{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.price{font-size:15px;font-weight:800;color:var(--green-800)}
+.price .pm{font-size:11px;font-weight:600;color:var(--muted)}
+.meta{font-size:11px;color:var(--muted);line-height:1.5}
+.foot{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:2px}
+.when{font-size:11px;color:var(--muted);margin-right:auto}.when b{color:var(--ink)}
+
+/* timeline (V2) */
+.tl{position:relative;margin-left:14px;padding-left:18px;border-left:2px solid var(--line)}
+.tl .day{font-size:11px;font-weight:800;color:var(--green-700);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 8px}
+.tl .ev{position:relative;background:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.tl .ev:before{content:"";position:absolute;left:-25px;top:14px;width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.tl .ev.new:before{background:var(--new)}.tl .ev.gone:before{background:var(--gone)}
+.tl .dir{font-size:13px;font-weight:800;width:74px;flex:0 0 auto}
+.tl .dir.new{color:var(--new)}.tl .dir.gone{color:var(--gone)}
+
+/* tabela (V5) */
+table.tbl{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(2,22,10,.06)}
+table.tbl th{background:var(--lime-soft);color:var(--green-800);text-align:left;padding:9px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.03em;cursor:pointer}
+table.tbl td{padding:9px 10px;border-top:1px solid var(--line);vertical-align:middle}
+table.tbl tr:hover td{background:#f6faf3}
+.dirpill{font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px}
+.dirpill.new{background:#dcfce7;color:#166534}.dirpill.gone{background:#fee2e2;color:#991b1b}
+
+/* karty siatka (V4, V8) */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.feed{display:flex;flex-direction:column;gap:12px;max-width:560px;margin:0 auto}
+
+/* split + mini-mapa (V6) */
+.split{display:grid;grid-template-columns:minmax(300px,1fr) 1.25fr;gap:14px}
+.list-pane{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:12px;background:#fff}
+.li{padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;gap:8px;align-items:center}
+.li:hover{background:#f6faf3}.li.sel{background:var(--lime-soft)}
+.li .dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+.minimap{position:sticky;top:0;background:linear-gradient(160deg,#e8f0e8,#dde9e3);border:1px solid var(--line);border-radius:14px;height:560px;position:relative;overflow:hidden}
+.minimap .mlabel{position:absolute;top:8px;left:10px;font-size:11px;font-weight:700;color:var(--green-700);background:rgba(255,255,255,.8);padding:2px 8px;border-radius:999px}
+.mpin{position:absolute;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50% 50% 50% 0;rotate:-45deg;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);cursor:pointer}
+.mpin.sel{width:20px;height:20px;z-index:5}
+
+/* dzienne (V7) */
+.dayblock{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(2,22,10,.06)}
+.dayblock h3{font-size:13px;color:var(--green-700);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.daygrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.daygrid h4{font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.daygrid h4.gone{color:var(--gone)}.daygrid h4.new{color:var(--new)}
+.minirow{font-size:12px;padding:5px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:8px}
+
+/* dzielnice (V9) */
+.distrow{display:grid;grid-template-columns:120px 1fr 60px;align-items:center;gap:10px;margin-bottom:7px;font-size:12px}
+.distbar{display:flex;align-items:center;height:20px}
+.distbar .b-out{background:var(--gone);height:100%;border-radius:4px 0 0 4px}
+.distbar .b-in{background:var(--new);height:100%;border-radius:0 4px 4px 0}
+.distbar .mid{width:2px;height:26px;background:#94a3b8}
+
+/* porównanie (V10) */
+.cmp{display:grid;grid-template-columns:1fr 110px 1fr;gap:14px;align-items:start}
+.cmp .panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 1px 3px rgba(2,22,10,.06)}
+.cmp .panel.gone{border-top:4px solid var(--gone)}.cmp .panel.new{border-top:4px solid var(--new)}
+.cmp .gauge{text-align:center;padding-top:30px}
+.cmp .gauge .big{font-size:34px;font-weight:800}
+.statline{display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid var(--line)}
+.statline b{color:var(--ink)}
+
+@media(max-width:820px){.cols,.daygrid,.split,.cmp{grid-template-columns:1fr}.minimap{height:340px}}
+</style>
+</head>
+<body>
+
+<div class="picker" id="picker">
+  <b>MOCKUP ▸ 10 wariantów „Ruch na rynku"</b>
+  <span id="btns"></span>
+  <span class="desc" id="vdesc"></span>
+</div>
+
+<header class="header">
+  <h1><span>🛰️ SONAR DZIAŁKOWY<span class="sub">ruch na rynku · nowe / zniknięte · Lublin</span></span></h1>
+  <nav class="header-nav">
+    <a href="#">🗺️ Mapa</a><a href="#">📈 Analityka</a><a href="#">📊 Monitoring</a>
+    <a href="#">📋 Oferty</a><a href="#" class="active">🔄 Ruch</a><a href="#">🏢 Agencje</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div id="v1" class="variant"></div>
+  <div id="v2" class="variant"></div>
+  <div id="v3" class="variant"></div>
+  <div id="v4" class="variant"></div>
+  <div id="v5" class="variant"></div>
+  <div id="v6" class="variant"></div>
+  <div id="v7" class="variant"></div>
+  <div id="v8" class="variant"></div>
+  <div id="v9" class="variant"></div>
+  <div id="v10" class="variant"></div>
+</div>
+
+<script>
+/* =========================================================================
+   PRZYKŁADOWE DANE — działki Lublin. Każda oferta to znormalizowany rekord
+   z data.json: first/last (first_seen/last_seen), active, daysActive,
+   coords{lat,lon} (pinezka → mapa). Nowe = active z świeżym first; zniknięte
+   = !active z świeżym last.
+   ========================================================================= */
+const TODAY=new Date('2026-06-16T12:00:00');
+const SAMPLE=[
+ {id:'otodom:68064601',t:'Działka budowlana, Sławin',src:'otodom',ag:null,type:'budowlana',dist:'Sławin',area:1050,price:299000,
+  first:'2026-06-15',last:'2026-06-16',active:true, priv:true,  lat:51.293,lon:22.510, prev:325000,trend:'down'},
+ {id:'olx:CID3-IDa1',t:'Działka inwestycyjna, Felin',src:'olx',ag:null,type:'inwestycyjna',dist:'Felin',area:3400,price:599000,
+  first:'2026-06-16',last:'2026-06-16',active:true, priv:false, lat:51.221,lon:22.642, prev:null,trend:'flat'},
+ {id:'adresowo:99213',t:'Działka budowlana, Węglin Płd.',src:'adresowo',ag:null,type:'budowlana',dist:'Węglin',area:900,price:245000,
+  first:'2026-06-14',last:'2026-06-16',active:true, priv:true,  lat:51.225,lon:22.494, prev:null,trend:'flat'},
+ {id:'olx:CID3-IDc3',t:'Działka, Sławinek (blisko lasu)',src:'olx',ag:null,type:'budowlana',dist:'Sławinek',area:1200,price:450000,
+  first:'2026-06-13',last:'2026-06-16',active:true, priv:true,  lat:null,lon:null, prev:null,trend:'flat'},
+ {id:'idshome:7082291',t:'Działka, Hajdów-Zadębie',src:'agency',ag:'IdsHome',type:'budowlana',dist:'Hajdów',area:5002,price:1290000,
+  first:'2026-06-12',last:'2026-06-16',active:true, priv:false, lat:51.272,lon:22.640, prev:1390000,trend:'down'},
+ {id:'otodom:68111002',t:'Działka usługowa, Wrotków',src:'otodom',ag:null,type:'usługowa',dist:'Wrotków',area:2100,price:560000,
+  first:'2026-06-11',last:'2026-06-16',active:true, priv:false, lat:51.207,lon:22.540, prev:null,trend:'flat'},
+ {id:'adresowo:99250',t:'Działka inwestycyjna, Tatary',src:'adresowo',ag:null,type:'inwestycyjna',dist:'Tatary',area:4300,price:899000,
+  first:'2026-06-09',last:'2026-06-16',active:true, priv:false, lat:51.255,lon:22.610, prev:950000,trend:'down'},
+
+ {id:'olx:CID3-IDb2',t:'Działka, Czechów Północny',src:'olx',ag:null,type:'budowlana',dist:'Czechów',area:780,price:349000,
+  first:'2026-04-30',last:'2026-06-15',active:false,priv:true,  lat:51.275,lon:22.555, prev:330000,trend:'up', daysActive:46},
+ {id:'pasjonaci:711201',t:'Działka rolna, Konopnica',src:'agency',ag:'Pasjonaci',type:'rolna',dist:'Konopnica',area:7600,price:720000,
+  first:'2026-05-02',last:'2026-06-14',active:false,priv:false, lat:51.222,lon:22.460, prev:760000,trend:'down', daysActive:43},
+ {id:'otodom:67465295',t:'Działka rolno-budowlana, Zemborzyce',src:'otodom',ag:null,type:'rolno-budowlana',dist:'Zemborzyce',area:1800,price:299000,
+  first:'2026-05-08',last:'2026-06-13',active:false,priv:true,  lat:51.184,lon:22.520, prev:280000,trend:'up', daysActive:36},
+ {id:'olx:CID3-IDd4',t:'Działka budowlana, Dziesiąta',src:'olx',ag:null,type:'budowlana',dist:'Dziesiąta',area:1120,price:389000,
+  first:'2026-05-28',last:'2026-06-12',active:false,priv:true,  lat:null,lon:null, prev:419000,trend:'down', daysActive:15},
+ {id:'otodom:68023411',t:'Działka, Ponikwoda',src:'otodom',ag:null,type:'budowlana',dist:'Ponikwoda',area:980,price:330000,
+  first:'2026-06-02',last:'2026-06-11',active:false,priv:false, lat:51.268,lon:22.595, prev:null,trend:'flat', daysActive:9},
+ {id:'anma:6677851',t:'Duża działka, Zemborzyce',src:'agency',ag:'ANMA',type:'inwestycyjna',dist:'Zemborzyce',area:24252,price:1281540,
+  first:'2026-03-15',last:'2026-06-10',active:false,priv:false, lat:51.176,lon:22.515, prev:null,trend:'flat', daysActive:87},
+];
+SAMPLE.forEach(o=>{o.perM2=Math.round(o.price/o.area); o.hasGps=o.lat!=null;});
+const NEW =()=>SAMPLE.filter(o=>o.active);
+const GONE=()=>SAMPLE.filter(o=>!o.active);
+
+/* ---------- helpery ---------- */
+const PLN=n=>n==null?'—':n.toLocaleString('pl-PL')+' zł';
+const PERM2=n=>n==null?'—':n.toLocaleString('pl-PL')+' zł/m²';
+const AREA=n=>n.toLocaleString('pl-PL')+' m²';
+const SRC={olx:['OLX','b-olx'],otodom:['Otodom','b-otodom'],adresowo:['Adresowo','b-adresowo'],agency:['Agencja','b-agency']};
+function srcBadge(o){const[l,c]=SRC[o.src];return `<span class="badge ${c}">${o.ag||l}</span>`;}
+function typeBadge(o){return `<span class="badge b-type">${o.type}</span>`;}
+function ageDays(d){return Math.floor((TODAY-new Date(d+'T12:00:00'))/86400000);}
+function relDate(d){const n=ageDays(d);if(n<=0)return 'dzisiaj';if(n===1)return 'wczoraj';return n+' dni temu';}
+function trendTxt(o){if(o.trend==='flat'||!o.prev)return '';const down=o.trend==='down';
+  return ` <span class="trend-${down?'down':'up'}">${down?'▼':'▲'} było ${PLN(o.prev)}</span>`;}
+function pinBtn(o){return o.hasGps
+  ? `<a class="pin" href="#" onclick="return false" title="Pokaż na mapie (index.html#offer=${o.id})">📍 Mapa</a>`
+  : `<span class="pin off" title="Brak GPS">📍 bez GPS</span>`;}
+function median(a){if(!a.length)return null;const s=[...a].sort((x,y)=>x-y);const m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2;}
+
+/* karta wspólna */
+function card(o,kind){
+  const when=kind==='new'?`🆕 dodano <b>${relDate(o.first)}</b>`
+    :`⏸ zniknęła <b>${relDate(o.last)}</b> · była <b>${o.daysActive} dni</b>`;
+  const nb=kind==='new'?'<span class="badge b-new">NOWA</span>':'';
+  const pb=o.priv?'<span class="badge b-priv">właściciel</span>':'';
+  return `<article class="card ${kind}">
+    <div class="thumb">🌳</div>
+    <div class="body">
+      <div class="t">${o.t}</div>
+      <div class="badges">${srcBadge(o)}${typeBadge(o)}${nb}${pb}</div>
+      <div class="price">${PLN(o.price)} <span class="pm">· ${PERM2(o.perM2)}</span>${trendTxt(o)}</div>
+      <div class="meta">📐 ${AREA(o.area)} · 📍 ${o.dist}</div>
+      <div class="foot"><span class="when">${when}</span>${pinBtn(o)}
+        <a class="lnk" href="#" onclick="return false">Ogłoszenie ↗</a></div>
+    </div>
+  </article>`;
+}
+
+/* mini KPI bilans */
+function kpis(){
+  const n=NEW(),g=GONE();const net=n.length-g.length;
+  const ppm=median(n.map(o=>o.perM2));
+  const life=Math.round(g.reduce((a,b)=>a+b.daysActive,0)/g.length);
+  return `<div class="kpis">
+    <div class="kpi"><h3>Zniknęło z rynku</h3><div class="v v-gone">${g.length}</div><div class="s">w oknie 14 dni</div></div>
+    <div class="kpi"><h3>Nowych ofert</h3><div class="v v-new">${n.length}</div><div class="s">w oknie 14 dni</div></div>
+    <div class="kpi"><h3>Bilans netto</h3><div class="v" style="color:${net>=0?'var(--new)':'var(--gone)'}">${net>0?'+':''}${net}</div><div class="s">nowe − zniknięte</div></div>
+    <div class="kpi"><h3>Mediana cena/m² — nowe</h3><div class="v" style="font-size:19px">${PERM2(ppm)}</div><div class="s">w nowych ofertach</div></div>
+    <div class="kpi"><h3>Śr. czas życia</h3><div class="v" style="font-size:19px">${life} dni</div><div class="s">zniknięte oferty</div></div>
+  </div>`;
+}
+
+/* ===================== WARIANTY ===================== */
+const VARIANTS=[
+ {id:'v1',name:'V1 · Dwie kolumny',desc:'Strona docelowa: po lewej oferty zniknięte (czerwone), po prawej nowe (zielone). Każda karta z miniaturą, ceną/m², datą i pinezką 📍 przenoszącą do mapy (index.html#offer=<id>). Na górze pasek bilansu + filtry okna/źródła.'},
+ {id:'v2',name:'V2 · Oś czasu',desc:'Jeden chronologiczny strumień zdarzeń (najnowsze u góry) z separatorami dni: zielona kropka = pojawiła się, czerwona = zniknęła. Świetne do śledzenia „co się dziś działo".'},
+ {id:'v3',name:'V3 · Bilans + listy',desc:'Akcent na liczby: duże KPI (nowe, zniknięte, bilans netto, mediana, rotacja) + dwie kompaktowe listy pod spodem. Widok „zarządczy".'},
+ {id:'v4',name:'V4 · Karty + segment',desc:'Siatka kart z przełącznikiem Nowe / Zniknięte / Wszystkie. Kolor lewej krawędzi karty koduje kierunek. Wizualne, dobre na desktop.'},
+ {id:'v5',name:'V5 · Tabela ruchu',desc:'Gęsta sortowalna tabela wszystkich zmian z kolumną „kierunek" (▲ nowa / ▼ zniknięta), źródłem, ceną/m², datą i czasem życia. Maks. danych na ekranie.'},
+ {id:'v6',name:'V6 · Lista + mini-mapa',desc:'Lista po lewej, podgląd mapy po prawej. Klik karty podświetla pinezkę; „otwórz w pełnej mapie" przenosi do widoku Leaflet. Przestrzenny kontekst od razu.'},
+ {id:'v7',name:'V7 · Kafelki dzienne',desc:'Grupowanie po dniu skanu: każdy dzień to blok z dwiema mini-listami (pojawiły się / zniknęły). Dobre do raportu dziennego.'},
+ {id:'v8',name:'V8 · Feed mobilny',desc:'Jedna kolumna dużych kart (nowe i zniknięte przeplatane, oznaczone kolorem). Duże cele dotyku — „mobile-first".'},
+ {id:'v9',name:'V9 · Bilans dzielnic',desc:'Dla każdej dzielnicy słupek: w lewo czerwony (odpływ = zniknięcia), w prawo zielony (napływ = nowe). Pokazuje GDZIE rynek się rusza.'},
+ {id:'v10',name:'V10 · Porównanie',desc:'Dwa panele statystyk (zniknęło ↔ pojawiło się) z licznikiem rotacji rynku w środku: liczby, mediany cen/m², średni czas życia, struktura źródeł.'},
+];
+
+/* ---- V1: dwie kolumny (docelowa) ---- */
+function buildV1(){
+  document.getElementById('v1').innerHTML=`
+    <h2 class="vtitle">Ruch na rynku — nowe vs zniknięte</h2>
+    <p class="vnote">Domyślny układ podstrony. 📍 przy każdej ofercie przenosi do mapy i otwiera jej pinezkę.</p>
+    <div class="toolbar">
+      <select><option>Okno: 14 dni</option><option>Okno: 7 dni</option><option>Okno: 30 dni</option></select>
+      <select><option>Sortuj: data (najnowsze)</option><option>cena ↓</option><option>cena/m² ↑</option></select>
+      <input type="search" placeholder="szukaj: tytuł / dzielnica…">
+      <span class="chip on">OLX</span><span class="chip on">Otodom</span><span class="chip on">Adresowo</span><span class="chip">Agencje</span>
+    </div>
+    ${kpis()}
+    <div class="cols">
+      <section class="col gone"><div class="col-head">🔴 Zniknęły z rynku <span class="cnt">${GONE().length}</span></div>
+        <div class="list">${GONE().map(o=>card(o,'gone')).join('')}</div></section>
+      <section class="col new"><div class="col-head">🟢 Nowe oferty <span class="cnt">${NEW().length}</span></div>
+        <div class="list">${NEW().map(o=>card(o,'new')).join('')}</div></section>
+    </div>`;
+}
+
+/* ---- V2: oś czasu ---- */
+function buildV2(){
+  const ev=SAMPLE.map(o=>({o,kind:o.active?'new':'gone',d:o.active?o.first:o.last}))
+    .sort((a,b)=>new Date(b.d)-new Date(a.d));
+  let html='',lastDay=null;
+  ev.forEach(e=>{
+    if(e.d!==lastDay){html+=`<div class="day">${relDate(e.d)} · ${e.d}</div>`;lastDay=e.d;}
+    html+=`<div class="ev ${e.kind}">
+      <span class="dir ${e.kind}">${e.kind==='new'?'+ NOWA':'− ZNIKŁA'}</span>
+      <div style="flex:1;min-width:0">
+        <div class="t" style="font-size:12px">${e.o.t}</div>
+        <div class="meta">${srcBadge(e.o)} ${typeBadge(e.o)} · <b>${PLN(e.o.price)}</b> · ${PERM2(e.o.perM2)} · ${e.o.dist}${e.kind==='gone'?` · była ${e.o.daysActive} dni`:''}</div>
+      </div>${pinBtn(e.o)}</div>`;
+  });
+  document.getElementById('v2').innerHTML=`
+    <h2 class="vtitle">Oś czasu ruchu</h2>
+    <p class="vnote">Wszystkie zdarzenia chronologicznie. Kropka zielona = pojawiła się, czerwona = zniknęła.</p>
+    ${kpis()}<div class="tl">${html}</div>`;
+}
+
+/* ---- V3: bilans + kompaktowe listy ---- */
+function buildV3(){
+  const mini=(o,kind)=>`<div class="minirow"><span>${kind==='new'?'🟢':'🔴'} ${o.t} <span class="muted">· ${o.dist}</span></span>
+    <span><b>${PLN(o.price)}</b> ${pinBtn(o)}</span></div>`;
+  document.getElementById('v3').innerHTML=`
+    <h2 class="vtitle">Bilans rynku</h2>
+    <p class="vnote">Akcent na liczby — szybki przegląd kondycji rynku.</p>
+    ${kpis()}
+    <div class="cols">
+      <div class="card" style="display:block"><h3 style="color:var(--gone);margin-bottom:8px">🔴 Zniknęły (${GONE().length})</h3>${GONE().map(o=>mini(o,'gone')).join('')}</div>
+      <div class="card" style="display:block"><h3 style="color:var(--new);margin-bottom:8px">🟢 Nowe (${NEW().length})</h3>${NEW().map(o=>mini(o,'new')).join('')}</div>
+    </div>`;
+}
+
+/* ---- V4: karty + segment ---- */
+function buildV4(){
+  function render(seg){
+    let arr=seg==='new'?NEW():seg==='gone'?GONE():SAMPLE;
+    document.getElementById('v4grid').innerHTML=arr.map(o=>card(o,o.active?'new':'gone')).join('');
+    document.querySelectorAll('#v4seg .chip').forEach(c=>c.classList.toggle('on',c.dataset.s===seg));
+  }
+  document.getElementById('v4').innerHTML=`
+    <h2 class="vtitle">Karty zmian</h2>
+    <p class="vnote">Przełącz segment; kolor krawędzi karty koduje kierunek.</p>
+    <div class="toolbar" id="v4seg">
+      <span class="chip" data-s="all" onclick="V4r('all')">Wszystkie</span>
+      <span class="chip on" data-s="new" onclick="V4r('new')">🟢 Nowe (${NEW().length})</span>
+      <span class="chip" data-s="gone" onclick="V4r('gone')">🔴 Zniknięte (${GONE().length})</span>
+    </div>
+    <div class="grid" id="v4grid"></div>`;
+  window.V4r=render;render('new');
+}
+
+/* ---- V5: tabela ruchu ---- */
+function buildV5(){
+  const rows=SAMPLE.map(o=>{const kind=o.active?'new':'gone';
+    return `<tr>
+      <td><span class="dirpill ${kind}">${kind==='new'?'▲ nowa':'▼ zniknięta'}</span></td>
+      <td><b>${o.t}</b><br><span class="muted" style="font-size:11px">${o.dist}</span></td>
+      <td>${srcBadge(o)}</td><td>${typeBadge(o)}</td>
+      <td>${AREA(o.area)}</td><td><b>${PLN(o.price)}</b></td><td class="muted">${PERM2(o.perM2)}</td>
+      <td>${kind==='new'?relDate(o.first):relDate(o.last)}</td>
+      <td>${o.active?'<span class="muted">—</span>':o.daysActive+' dni'}</td>
+      <td>${pinBtn(o)}</td></tr>`;}).join('');
+  document.getElementById('v5').innerHTML=`
+    <h2 class="vtitle">Tabela ruchu</h2><p class="vnote">Maks. danych na ekranie; sortowalne kolumny.</p>
+    ${kpis()}
+    <table class="tbl"><thead><tr><th>Kierunek</th><th>Oferta</th><th>Źródło</th><th>Typ</th><th>Pow.</th><th>Cena</th><th>Cena/m²</th><th>Kiedy</th><th>Czas życia</th><th></th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
+}
+
+/* ---- V6: lista + mini-mapa ---- */
+function buildV6(){
+  // proste rzutowanie lat/lon na pudełko (przybliżony bbox Lublina)
+  const LA0=51.30,LA1=51.17,LO0=22.45,LO1=22.66;
+  const px=o=>((o.lon-LO0)/(LO1-LO0))*100, py=o=>((LA0-o.lat)/(LA0-LA1))*100;
+  let sel=SAMPLE.find(o=>o.hasGps).id;
+  function render(){
+    const list=SAMPLE.map(o=>{const kind=o.active?'new':'gone';
+      return `<div class="li ${o.id===sel?'sel':''}" onclick="V6s('${o.id}')">
+        <span class="dot" style="background:${kind==='new'?'var(--new)':'var(--gone)'}"></span>
+        <div style="flex:1;min-width:0"><div class="t" style="font-size:12px">${o.t}</div>
+          <div class="meta">${PLN(o.price)} · ${PERM2(o.perM2)} · ${o.dist}${o.hasGps?'':' · <span class="muted">bez GPS</span>'}</div></div>
+      </div>`;}).join('');
+    const pins=SAMPLE.filter(o=>o.hasGps).map(o=>{const kind=o.active?'new':'gone';
+      return `<div class="mpin ${o.id===sel?'sel':''}" style="left:${px(o)}%;top:${py(o)}%;background:${kind==='new'?'var(--new)':'var(--gone)'}" onclick="V6s('${o.id}')" title="${o.t}"></div>`;}).join('');
+    document.getElementById('v6').innerHTML=`
+      <h2 class="vtitle">Lista + mini-mapa</h2><p class="vnote">Klik podświetla pinezkę. „Otwórz w pełnej mapie" → index.html#offer=&lt;id&gt;.</p>
+      <div class="split">
+        <div class="list-pane">${list}</div>
+        <div class="minimap"><span class="mlabel">🗺️ podgląd · Lublin</span>${pins}
+          <a class="pin" style="position:absolute;bottom:10px;right:10px" href="#" onclick="return false">↗ pełna mapa</a></div>
+      </div>`;
+  }
+  window.V6s=id=>{sel=id;render();};render();
+}
+
+/* ---- V7: kafelki dzienne ---- */
+function buildV7(){
+  const days={};
+  SAMPLE.forEach(o=>{const d=o.active?o.first:o.last;(days[d]=days[d]||[]).push(o);});
+  const sorted=Object.keys(days).sort().reverse();
+  const block=d=>{const list=days[d];const ns=list.filter(o=>o.active),gs=list.filter(o=>!o.active);
+    const row=o=>`<div class="minirow"><span>${o.t} <span class="muted">· ${o.dist}</span></span><span><b>${PLN(o.price)}</b> ${pinBtn(o)}</span></div>`;
+    return `<div class="dayblock"><h3>📅 ${d} <span class="muted" style="font-weight:600">(${relDate(d)})</span></h3>
+      <div class="daygrid">
+        <div><h4 class="gone">🔴 Zniknęły (${gs.length})</h4>${gs.length?gs.map(row).join(''):'<div class="muted" style="font-size:12px">—</div>'}</div>
+        <div><h4 class="new">🟢 Nowe (${ns.length})</h4>${ns.length?ns.map(row).join(''):'<div class="muted" style="font-size:12px">—</div>'}</div>
+      </div></div>`;};
+  document.getElementById('v7').innerHTML=`
+    <h2 class="vtitle">Kafelki dzienne</h2><p class="vnote">Raport dzień po dniu: co się pojawiło i co zniknęło.</p>
+    ${sorted.map(block).join('')}`;
+}
+
+/* ---- V8: feed mobilny ---- */
+function buildV8(){
+  const all=SAMPLE.map(o=>({o,d:o.active?o.first:o.last})).sort((a,b)=>new Date(b.d)-new Date(a.d));
+  document.getElementById('v8').innerHTML=`
+    <h2 class="vtitle">Feed mobilny</h2><p class="vnote">Jedna kolumna, duże karty, nowe i zniknięte przeplatane.</p>
+    <div class="feed">${all.map(e=>card(e.o,e.o.active?'new':'gone')).join('')}</div>`;
+}
+
+/* ---- V9: bilans dzielnic ---- */
+function buildV9(){
+  const d={};SAMPLE.forEach(o=>{d[o.dist]=d[o.dist]||{in:0,out:0};o.active?d[o.dist].in++:d[o.dist].out++;});
+  const max=Math.max(...Object.values(d).flatMap(x=>[x.in,x.out]),1);
+  const rows=Object.entries(d).sort((a,b)=>(b[1].in+b[1].out)-(a[1].in+a[1].out)).map(([name,x])=>{
+    const net=x.in-x.out;
+    return `<div class="distrow">
+      <span style="text-align:right">${name}</span>
+      <div class="distbar" style="justify-content:flex-end">
+        <div class="b-out" style="width:${x.out/max*45}%" title="zniknęły: ${x.out}"></div>
+        <span class="mid"></span>
+        <div class="b-in" style="width:${x.in/max*45}%" title="nowe: ${x.in}"></div>
+      </div>
+      <span style="color:${net>=0?'var(--new)':'var(--gone)'};font-weight:800">${net>0?'+':''}${net}</span>
+    </div>`;}).join('');
+  document.getElementById('v9').innerHTML=`
+    <h2 class="vtitle">Bilans dzielnic</h2>
+    <p class="vnote">Lewa (czerwona) = odpływ (zniknięcia), prawa (zielona) = napływ (nowe). Liczba = bilans netto.</p>
+    ${kpis()}<div class="card" style="display:block">${rows}</div>`;
+}
+
+/* ---- V10: porównanie ---- */
+function buildV10(){
+  const n=NEW(),g=GONE();
+  const srcStat=arr=>{const c={};arr.forEach(o=>c[o.ag||SRC[o.src][0]]=(c[o.ag||SRC[o.src][0]]||0)+1);
+    return Object.entries(c).map(([k,v])=>`${k}: <b>${v}</b>`).join(' · ');};
+  const panel=(arr,kind)=>`<div class="panel ${kind}">
+    <h3 style="color:${kind==='new'?'var(--new)':'var(--gone)'};margin-bottom:10px">${kind==='new'?'🟢 Pojawiło się':'🔴 Zniknęło'}</h3>
+    <div class="statline"><span>Liczba ofert</span><b>${arr.length}</b></div>
+    <div class="statline"><span>Mediana cena/m²</span><b>${PERM2(median(arr.map(o=>o.perM2)))}</b></div>
+    <div class="statline"><span>Mediana ceny</span><b>${PLN(median(arr.map(o=>o.price)))}</b></div>
+    ${kind==='gone'?`<div class="statline"><span>Śr. czas życia</span><b>${Math.round(g.reduce((a,b)=>a+b.daysActive,0)/g.length)} dni</b></div>`:`<div class="statline"><span>Z GPS na mapie</span><b>${arr.filter(o=>o.hasGps).length}/${arr.length}</b></div>`}
+    <div class="statline" style="border:none"><span>Źródła</span></div>
+    <div class="muted" style="font-size:12px">${srcStat(arr)}</div>
+  </div>`;
+  const rot=(g.length/(n.length+g.length)*100).toFixed(0);
+  document.getElementById('v10').innerHTML=`
+    <h2 class="vtitle">Porównanie ruchu</h2><p class="vnote">Lustrzane statystyki + wskaźnik rotacji rynku w środku.</p>
+    <div class="cmp">
+      ${panel(g,'gone')}
+      <div class="gauge"><div class="muted" style="font-size:11px;text-transform:uppercase">Rotacja</div>
+        <div class="big" style="color:var(--gone)">${rot}%</div>
+        <div class="muted" style="font-size:11px">ofert zniknęło<br>na ${n.length+g.length} zmian</div>
+        <div style="margin-top:16px;font-size:11px;text-transform:uppercase;color:var(--muted)">Bilans</div>
+        <div class="big" style="color:${n.length-g.length>=0?'var(--new)':'var(--gone)'}">${n.length-g.length>0?'+':''}${n.length-g.length}</div></div>
+      ${panel(n,'new')}
+    </div>`;
+}
+
+/* ===================== STEROWANIE MOCKUPEM ===================== */
+const BUILDERS={v1:buildV1,v2:buildV2,v3:buildV3,v4:buildV4,v5:buildV5,v6:buildV6,v7:buildV7,v8:buildV8,v9:buildV9,v10:buildV10};
+let built={};
+function show(id){
+  document.querySelectorAll('.variant').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('#btns button').forEach(b=>b.classList.toggle('active',b.dataset.v===id));
+  if(!built[id]){BUILDERS[id]();built[id]=true;}
+  document.getElementById(id).classList.add('active');
+  document.getElementById('vdesc').textContent=VARIANTS.find(v=>v.id===id).desc;
+  location.hash=id;
+}
+document.getElementById('btns').innerHTML=VARIANTS.map(v=>`<button data-v="${v.id}" onclick="show('${v.id}')">${v.name}</button>`).join('');
+show((location.hash||'#v1').slice(1) in BUILDERS?location.hash.slice(1):'v1');
+</script>
+</body>
+</html>

@@ -27,6 +27,7 @@ const TYPE_COLORS = {
 
 let map, markersLayer;
 const _iconCache = new Map();  // memoizacja L.divIcon wg wyglądu (patrz makeIcon)
+let markerById = {};  // id oferty -> L.marker (do fokusowania z linku #offer=…)
 let allOffers = [];
 let quantiles = [];
 let typeFilterState = {};   // plot_type -> bool
@@ -68,6 +69,55 @@ async function init() {
     buildLegend();
     bindFilterEvents();
     render();
+
+    // FIX 2026-06-16: fokus oferty z linku (#offer=<id>) — pinezka z podstrony
+    // „🔄 Ruch" przenosi tutaj i otwiera popup wskazanej oferty.
+    focusOfferFromHash();
+    window.addEventListener('hashchange', focusOfferFromHash);
+}
+
+// warstwa (checkbox), do której należy oferta — wspólne z passesFilters
+function layerIdFor(o) {
+    const approx = isApprox(o);
+    return o.active
+        ? (approx ? 'layer-active-approx' : 'layer-active')
+        : (approx ? 'layer-inactive-approx' : 'layer-inactive');
+}
+
+// odczytaj #offer=<id> z URL, włącz potrzebne filtry, wyśrodkuj mapę i otwórz popup
+function focusOfferFromHash() {
+    const m = location.hash.match(/offer=([^&]+)/);
+    if (!m) return;
+    const id = decodeURIComponent(m[1]);
+    const o = allOffers.find(x => x.id === id);
+    if (!o) return;
+
+    // upewnij się, że oferta nie jest odfiltrowana (warstwa / źródło / typ / czas)
+    const layer = document.getElementById(layerIdFor(o));
+    if (layer) layer.checked = true;
+    if (o.is_agency) {
+        document.getElementById('agency-master').checked = true;
+        if (o.agency_name) agencyFilterState[o.agency_name] = true;
+    } else {
+        const sc = document.getElementById('src-' + o.source);
+        if (sc) sc.checked = true;
+    }
+    const type = o.plot_type || 'inna';
+    typeFilterState[type] = true;
+    const typeCb = document.querySelector(`#type-filters input[data-type="${type}"]`);
+    if (typeCb) typeCb.checked = true;
+    if (colorMode() === 'price') quantileBucketState[quantileIndex(o)] = true;
+    document.getElementById('time-filter').value = 'all';
+    render();
+
+    if (o.coords) {
+        map.setView([o.coords.lat, o.coords.lon], 16, { animate: true });
+        const mk = markerById[o.id];
+        if (mk) setTimeout(() => mk.openPopup(), 250);
+    } else {
+        // oferta bez GPS — rozwiń sekcję „bez lokalizacji" pod mapą
+        document.getElementById('unlocalised-section').style.display = 'block';
+    }
 }
 
 function fmtPrice(v) {
@@ -388,6 +438,7 @@ function escapeHtml(s) {
 
 function render() {
     markersLayer.clearLayers();
+    markerById = {};
     const visible = allOffers.filter(passesFilters);
     const located = visible.filter(o => o.coords);
 
@@ -400,6 +451,7 @@ function render() {
         });
         marker.bindPopup(() => popupHtml(o), { maxWidth: 330 });
         markersLayer.addLayer(marker);
+        markerById[o.id] = marker;  // do fokusu z linku #offer=<id>
     });
 
     renderStats(visible);
