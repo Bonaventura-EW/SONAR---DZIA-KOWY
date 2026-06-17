@@ -1070,5 +1070,21 @@
    "name": "Agronomiczna"
   },
   "ts": 1781695415.9388142
+ },
+ "powojowa": {
+  "result": {
+   "lat": 51.1950528,
+   "lon": 22.5744942,
+   "name": "Powojowa"
+  },
+  "ts": 1781723482.7041032
+ },
+ "abramowickiej": {
+  "result": {
+   "lat": 51.2042615,
+   "lon": 22.5863868,
+   "name": "Abramowicka"
+  },
+  "ts": 1781723485.674022
  }
 }
