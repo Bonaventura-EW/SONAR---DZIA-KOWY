@@ -1062,5 +1062,13 @@
    "name": "Krańcowa"
   },
   "ts": 1781639901.651474
+ },
+ "agronomiczna": {
+  "result": {
+   "lat": 51.2606989,
+   "lon": 22.5036445,
+   "name": "Agronomiczna"
+  },
+  "ts": 1781695415.9388142
  }
 }
