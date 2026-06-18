@@ -357,7 +357,7 @@
  },
  "warszawskiej. malownicza": {
   "result": null,
-  "ts": 1781176249.0464864
+  "ts": 1781809545.5217588
  },
  "jana kasprowicza": {
   "result": {
@@ -385,7 +385,7 @@
  },
  "brzegowa": {
   "result": null,
-  "ts": 1781176256.437367
+  "ts": 1781809547.168717
  },
  "mełgiewska": {
   "result": {
@@ -609,7 +609,7 @@
  },
  "kasprowicza. dojazd": {
   "result": null,
-  "ts": 1781204143.4601529
+  "ts": 1781809548.5299819
  },
  "południowej": {
   "result": {
@@ -1098,5 +1098,33 @@
    "name": "Abramowicka"
   },
   "ts": 1781729352.9629395
+ },
+ "wapienna": {
+  "result": {
+   "lat": 51.2321612,
+   "lon": 22.5430989,
+   "name": "Wapienna"
+  },
+  "ts": 1781809550.1441655
+ },
+ "mełgiewskiej. to": {
+  "result": null,
+  "ts": 1781809551.554406
+ },
+ "wapiennej": {
+  "result": {
+   "lat": 51.2321612,
+   "lon": 22.5430989,
+   "name": "Wapienna"
+  },
+  "ts": 1781809554.3017874
+ },
+ "dzbenin": {
+  "result": {
+   "lat": 51.2784336,
+   "lon": 22.5124808,
+   "name": "Dzbenin"
+  },
+  "ts": 1781809555.7428145
  }
 }
