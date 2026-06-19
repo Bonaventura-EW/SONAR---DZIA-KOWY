@@ -621,15 +621,15 @@
  },
  "woda": {
   "result": null,
-  "ts": 1781204147.8499224
+  "ts": 1781867251.004932
  },
  "kanalizacja": {
   "result": null,
-  "ts": 1781204149.1701033
+  "ts": 1781867252.2056375
  },
  "dodatkowe": {
   "result": null,
-  "ts": 1781204150.5628898
+  "ts": 1781867255.0564585
  },
  "laury. prezentowana": {
   "result": null,
@@ -849,7 +849,7 @@
  },
  "mełgiewskiej. na": {
   "result": null,
-  "ts": 1781206810.2903395
+  "ts": 1781867245.5381458
  },
  "stary gaj": {
   "result": {
@@ -981,7 +981,7 @@
  },
  "district:zadebie": {
   "result": null,
-  "ts": 1781207225.5046642
+  "ts": 1781867247.1814282
  },
  "firlejowska": {
   "result": {
@@ -1126,5 +1126,29 @@
    "name": "Dzbenin"
   },
   "ts": 1781809555.7428145
+ },
+ "bukszpanowa": {
+  "result": {
+   "lat": 51.2765874,
+   "lon": 22.5083831,
+   "name": "Bukszpanowa"
+  },
+  "ts": 1781867243.9545918
+ },
+ "gospodarczej": {
+  "result": {
+   "lat": 51.2466915,
+   "lon": 22.6021858,
+   "name": "Gospodarcza"
+  },
+  "ts": 1781867249.7433598
+ },
+ "prąd": {
+  "result": null,
+  "ts": 1781867253.834108
+ },
+ "strumykowej. prezentowana": {
+  "result": null,
+  "ts": 1781867256.277568
  }
 }
