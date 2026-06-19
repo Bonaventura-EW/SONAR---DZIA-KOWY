@@ -1150,5 +1150,41 @@
  "strumykowej. prezentowana": {
   "result": null,
   "ts": 1781867256.277568
+ },
+ "gospodarcza": {
+  "result": {
+   "lat": 51.2466915,
+   "lon": 22.6021858,
+   "name": "Gospodarcza"
+  },
+  "ts": 1781893270.6970484
+ },
+ "zdrowej": {
+  "result": {
+   "lat": 51.1885117,
+   "lon": 22.6118745,
+   "name": "Zdrowa"
+  },
+  "ts": 1781893273.6521256
+ },
+ "zdrowa": {
+  "result": {
+   "lat": 51.1885117,
+   "lon": 22.6118745,
+   "name": "Zdrowa"
+  },
+  "ts": 1781893274.7785976
+ },
+ "zdrowej. nieruchomość": {
+  "result": null,
+  "ts": 1781893276.4614813
+ },
+ "głuską": {
+  "result": {
+   "lat": 51.2074871,
+   "lon": 22.5894131,
+   "name": "Głuska"
+  },
+  "ts": 1781893277.892609
  }
 }
