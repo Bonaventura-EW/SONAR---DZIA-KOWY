@@ -1,0 +1,78 @@
+=========================================================================
+ SONAR DZIAŁKOWY — OPIS DZIAŁANIA API
+=========================================================================
+
+CZYM JEST TO API
+-----------------
+To NIE jest serwer/REST API z requestami na żywo. To zestaw STATYCZNYCH
+plików JSON, generowanych podczas skanu (src/api_generator.py) z bazy
+data/offers.json i serwowanych przez GitHub Pages z katalogu docs/api/.
+Klient (frontend, skrypt, monitoring) po prostu pobiera plik HTTP GET — bez
+żadnej autoryzacji, bez parametrów zapytań. Pliki są nadpisywane przy każdym
+skanie (2×/dzień), więc dane są "tak świeże, jak ostatni skan".
+
+Generowanie: w katalogu src/ uruchom `python api_generator.py`.
+Pliki lądują w docs/api/ i są commitowane na main przez workflow scanner.yml.
+
+ŹRÓDŁO DANYCH
+-------------
+- data/offers.json        → pełna baza ofert (historia cen, dedup, aktywność)
+- data/scan_history.json  → log kolejnych skanów (czas, bilans, błędy)
+
+Z aktywnych ofert odfiltrowywane są duplikaty (oferta z aktywnym polem
+`duplicate_of` wskazującym na inną aktywną ofertę jest pomijana — np. ta sama
+działka na OLX i Otodom pokazuje się raz). Każda oferta przepuszczana jest
+przez build_map_offer() — tę samą funkcję co mapa — więc kształt obiektu
+oferty jest identyczny jak w docs/data.json.
+
+=========================================================================
+ ENDPOINTY (pliki w docs/api/)
+=========================================================================
+
+1) status.json  — migawka bieżącego stanu bazy + wynik ostatniego skanu
+   Pola m.in.:
+     generated_at                 czas wygenerowania pliku (ISO, strefa PL)
+     last_scan / next_scan        czas ostatniego i planowanego skanu
+     last_scan_status / _success  status ostatniego skanu (completed?) + bool
+     last_scan_new_offers         ile nowych ofert w ostatnim skanie
+     last_scan_disappeared_offers ile ofert zniknęło
+     last_scan_duration_s         czas trwania skanu w sekundach
+     active_offers                liczba aktywnych ofert (po deduplikacji)
+     total_in_db                  wszystkie oferty w bazie (też nieaktywne)
+     median_price_per_m2          mediana ceny za m²
+     by_source                    licznik ofert wg źródła (olx/otodom/...)
+     by_plot_type                 licznik ofert wg typu działki
+
+2) offers.json  — pełna lista aktywnych ofert (po deduplikacji)
+   Pola: generated_at, count, offers[].
+   Każda oferta zawiera m.in.: id, source, url, title, price,
+   previous_price, price_trend, price_history, price_changes, area_m2,
+   price_per_m2, plot_type, district, street, coords, coords_precision,
+   description, is_private_owner, is_agency, agency_name, image,
+   first_seen, last_seen, active, days_active, also_at.
+   (coords_precision: exact > street > approx — patrz CLAUDE.md.)
+
+3) history.json — ostatnie 6 skanów (najnowszy pierwszy)
+   Pola: system, generated_at, count, scans[].
+   Każdy skan: timestamp, scanTimeFormatted, uiStatus (success/failure),
+   rawStatus, failureReason, durationSeconds, durationFormatted,
+   notification {title, body} oraz offers {new, disappeared, updated,
+   active, activeDelta (zmiana vs poprzedni udany skan), totalInDb,
+   bySource {olx, otodom, adresowo, agencies}}.
+
+4) health.json — prosty healthcheck świeżości danych
+   Pola: status, generated_at, last_scan, last_scan_status,
+   hours_since_last_scan.
+   status = "ok"      → świeże (<26 h) i ostatni skan udany
+            "stale"   → minęło >26 h od ostatniego skanu
+            "failing" → świeże, ale ostatni skan zakończył się błędem
+
+=========================================================================
+ UWAGI
+=========================================================================
+- JSON jest zminifikowany (separators=(',',':')), kodowanie UTF-8,
+  ensure_ascii=False (polskie znaki zachowane).
+- Wszystkie czasy generowania w strefie Europe/Warsaw (ISO 8601).
+- STALE_AFTER_HOURS = 26 h (2 skany/dzień → brak >26 h = problem).
+- HISTORY_SCANS = 6 (tyle skanów trzyma history.json).
+- Pliki są tylko do odczytu — nie edytuj ręcznie, regeneruje je skan.
