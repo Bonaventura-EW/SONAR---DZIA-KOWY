@@ -1186,5 +1186,17 @@
    "name": "Głuska"
   },
   "ts": 1781893277.892609
+ },
+ "zagajnikowa 6": {
+  "result": null,
+  "ts": 1782239288.4719336
+ },
+ "zagajnikowa": {
+  "result": {
+   "lat": 51.1925415,
+   "lon": 22.5171767,
+   "name": "Zagajnikowa"
+  },
+  "ts": 1782239289.7809389
  }
 }
