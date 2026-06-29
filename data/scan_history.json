@@ -685,6 +685,21 @@
    "skipped_removed": 0,
    "active": 476,
    "total_in_db": 594
+  },
+  {
+   "timestamp": "2026-06-29T20:32:21.618061+02:00",
+   "status": "completed",
+   "duration_s": 42.8,
+   "deactivated": 17,
+   "scraped_olx": 54,
+   "scraped_otodom": 166,
+   "scraped_adresowo": 198,
+   "scraped_agencies": 254,
+   "new": 3,
+   "updated": 471,
+   "skipped_removed": 0,
+   "active": 474,
+   "total_in_db": 597
   }
  ]
 }
