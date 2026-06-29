@@ -357,7 +357,7 @@
  },
  "warszawskiej. malownicza": {
   "result": null,
-  "ts": 1781809545.5217588
+  "ts": 1782732890.904656
  },
  "jana kasprowicza": {
   "result": {
@@ -1230,5 +1230,37 @@
  "plan": {
   "result": null,
   "ts": 1782412658.1988451
+ },
+ "feliksa strojnowskiego": {
+  "result": {
+   "lat": 51.1808498,
+   "lon": 22.5873009,
+   "name": "Feliksa Strojnowskiego"
+  },
+  "ts": 1782732883.7548625
+ },
+ "turczynowicza": {
+  "result": {
+   "lat": 51.2345427,
+   "lon": 22.4657217,
+   "name": "Jana Turczynowicza"
+  },
+  "ts": 1782732885.0255497
+ },
+ "parafialnej": {
+  "result": {
+   "lat": 51.1949325,
+   "lon": 22.6014705,
+   "name": "Parafialna"
+  },
+  "ts": 1782732887.984696
+ },
+ "jana turczynowicza": {
+  "result": {
+   "lat": 51.2345427,
+   "lon": 22.4657217,
+   "name": "Jana Turczynowicza"
+  },
+  "ts": 1782732889.2569487
  }
 }
