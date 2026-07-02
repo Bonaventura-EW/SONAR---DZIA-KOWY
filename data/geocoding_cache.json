@@ -1262,5 +1262,17 @@
    "name": "Jana Turczynowicza"
   },
   "ts": 1782732889.2569487
+ },
+ "nadleśnej": {
+  "result": null,
+  "ts": 1783016288.0141685
+ },
+ "siewierzan": {
+  "result": {
+   "lat": 51.2551651,
+   "lon": 22.5024363,
+   "name": "Siewierzan"
+  },
+  "ts": 1783016289.5298145
  }
 }
