@@ -1274,5 +1274,13 @@
    "name": "Siewierzan"
   },
   "ts": 1783016289.5298145
+ },
+ "letniskowa": {
+  "result": {
+   "lat": 51.1887901,
+   "lon": 22.5120564,
+   "name": "Letniskowa"
+  },
+  "ts": 1783336548.7749054
  }
 }
