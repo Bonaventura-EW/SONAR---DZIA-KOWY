@@ -1189,7 +1189,7 @@
  },
  "zagajnikowa 6": {
   "result": null,
-  "ts": 1782902177.7972558
+  "ts": 1783533910.8816288
  },
  "zagajnikowa": {
   "result": {
@@ -1294,5 +1294,13 @@
    "name": "Strumykowa"
   },
   "ts": 1783501880.9925086
+ },
+ "strumykowa": {
+  "result": {
+   "lat": 51.2604957,
+   "lon": 22.4935027,
+   "name": "Strumykowa"
+  },
+  "ts": 1783533912.3261924
  }
 }
