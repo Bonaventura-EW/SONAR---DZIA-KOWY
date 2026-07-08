@@ -1286,5 +1286,13 @@
  "kobaltowa": {
   "result": null,
   "ts": 1783418922.852591
+ },
+ "strumykowej": {
+  "result": {
+   "lat": 51.2604957,
+   "lon": 22.4935027,
+   "name": "Strumykowa"
+  },
+  "ts": 1783501880.9925086
  }
 }
