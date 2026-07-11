@@ -621,15 +621,15 @@
  },
  "woda": {
   "result": null,
-  "ts": 1783156072.135411
+  "ts": 1783791473.7155874
  },
  "kanalizacja": {
   "result": null,
-  "ts": 1783156073.3911505
+  "ts": 1783791475.1911125
  },
  "dodatkowe": {
   "result": null,
-  "ts": 1783156076.3348463
+  "ts": 1783791478.1272519
  },
  "laury. prezentowana": {
   "result": null,
@@ -849,7 +849,7 @@
  },
  "mełgiewskiej. na": {
   "result": null,
-  "ts": 1783156070.647035
+  "ts": 1783791472.2187417
  },
  "stary gaj": {
   "result": {
@@ -1145,11 +1145,11 @@
  },
  "prąd": {
   "result": null,
-  "ts": 1783156074.890788
+  "ts": 1783791476.6824532
  },
  "strumykowej. prezentowana": {
   "result": null,
-  "ts": 1783156077.7912972
+  "ts": 1783791479.5885072
  },
  "gospodarcza": {
   "result": {
@@ -1302,5 +1302,13 @@
    "name": "Strumykowa"
   },
   "ts": 1783533912.3261924
+ },
+ "akacjowa": {
+  "result": {
+   "lat": 51.2294766,
+   "lon": 22.5811425,
+   "name": "Akacjowa"
+  },
+  "ts": 1783791480.9514906
  }
 }
