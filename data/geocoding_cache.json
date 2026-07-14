@@ -357,7 +357,7 @@
  },
  "warszawskiej. malownicza": {
   "result": null,
-  "ts": 1783362567.4454207
+  "ts": 1784019178.2626612
  },
  "jana kasprowicza": {
   "result": {
@@ -1330,5 +1330,13 @@
  "młyńska 12": {
   "result": null,
   "ts": 1783966802.965351
+ },
+ "miętowa": {
+  "result": {
+   "lat": 51.1906347,
+   "lon": 22.5950636,
+   "name": "Miętowa"
+  },
+  "ts": 1784019176.8971226
  }
 }
