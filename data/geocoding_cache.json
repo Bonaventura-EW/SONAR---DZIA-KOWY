@@ -1346,5 +1346,25 @@
    "name": "Czeremchowa"
   },
   "ts": 1784137908.4470112
+ },
+ "dra gustawa dolińskiego": {
+  "result": null,
+  "ts": 1784224153.611494
+ },
+ "dolińskiego": {
+  "result": {
+   "lat": 51.2580168,
+   "lon": 22.5746919,
+   "name": "Doktora Gustawa Dolińskiego"
+  },
+  "ts": 1784224155.0759733
+ },
+ "koncertowa": {
+  "result": {
+   "lat": 51.2768809,
+   "lon": 22.5436226,
+   "name": "Koncertowa"
+  },
+  "ts": 1784224156.5474584
  }
 }
