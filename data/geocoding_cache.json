@@ -1366,5 +1366,13 @@
    "name": "Koncertowa"
   },
   "ts": 1784224156.5474584
+ },
+ "jagiellońska": {
+  "result": {
+   "lat": 51.2577338,
+   "lon": 22.5250268,
+   "name": "Jagiellońska"
+  },
+  "ts": 1784451429.420554
  }
 }
