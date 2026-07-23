@@ -1189,7 +1189,7 @@
  },
  "zagajnikowa 6": {
   "result": null,
-  "ts": 1784192350.8419333
+  "ts": 1784797977.5960808
  },
  "zagajnikowa": {
   "result": {
@@ -1390,5 +1390,21 @@
    "name": "Julii"
   },
   "ts": 1784572336.961223
+ },
+ "wilhelma hessa": {
+  "result": {
+   "lat": 51.2317111,
+   "lon": 22.6364354,
+   "name": "Wilhelma Hessa"
+  },
+  "ts": 1784797979.1890929
+ },
+ "erazma plewińskiego": {
+  "result": {
+   "lat": 51.2299759,
+   "lon": 22.6365194,
+   "name": "Erazma Plewińskiego"
+  },
+  "ts": 1784797980.5700016
  }
 }
