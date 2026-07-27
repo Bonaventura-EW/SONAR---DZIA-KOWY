@@ -981,7 +981,7 @@
  },
  "district:zadebie": {
   "result": null,
-  "ts": 1784540667.0382497
+  "ts": 1785148110.5769014
  },
  "firlejowska": {
   "result": {
@@ -1406,5 +1406,13 @@
    "name": "Erazma Plewińskiego"
   },
   "ts": 1784797980.5700016
+ },
+ "rybnej": {
+  "result": {
+   "lat": 51.2486034,
+   "lon": 22.5675818,
+   "name": "Rybna"
+  },
+  "ts": 1785148113.177319
  }
 }
