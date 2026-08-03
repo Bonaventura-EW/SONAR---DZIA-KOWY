@@ -1422,5 +1422,13 @@
    "name": "Rybna"
   },
   "ts": 1785175845.8369882
+ },
+ "unii lubelskiej": {
+  "result": {
+   "lat": 51.2397515,
+   "lon": 22.5725473,
+   "name": "Aleja Unii Lubelskiej"
+  },
+  "ts": 1785752762.8395
  }
 }
