@@ -1,6 +1,6 @@
 {
- "last_scan": "2026-08-05T11:21:40.443118+02:00",
- "next_scan": "2026-08-05T14:00:00+02:00",
+ "last_scan": "2026-08-05T20:08:10.004942+02:00",
+ "next_scan": "2026-08-06T08:00:00+02:00",
  "offers": [
   {
    "id": "olx:CID3-ID17aH9w",
@@ -67,9 +67,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539407+02:00",
-   "last_seen": "2026-08-05T11:22:27.238582+02:00",
+   "last_seen": "2026-08-05T20:08:47.831759+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-przy-zalewie-zemborzyckim-ul-kreznicka-ID4tkL7",
    "deactivated_at": "2026-06-28T19:48:53.813018+02:00",
    "reactivated_at": "2026-06-30T20:22:41.190207+02:00",
@@ -130,9 +130,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539440+02:00",
-   "last_seen": "2026-08-05T11:22:27.238647+02:00",
+   "last_seen": "2026-08-05T20:08:47.831768+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/2-dzialki-z-wz-lublin-h-i-m-sachsow-ID4BAI9",
    "deactivated_at": "2026-08-01T19:38:43.318395+02:00",
    "reactivated_at": "2026-08-04T11:24:35.656104+02:00",
@@ -204,9 +204,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539502+02:00",
-   "last_seen": "2026-08-05T11:22:27.239393+02:00",
+   "last_seen": "2026-08-05T20:08:47.832584+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-1144-m2-okolice-ikei-ID4yz6N",
    "deactivated_at": "2026-08-03T12:26:02.844619+02:00",
    "reactivated_at": "2026-08-05T11:22:27.239393+02:00",
@@ -361,9 +361,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539638+02:00",
-   "last_seen": "2026-08-05T11:22:27.238955+02:00",
+   "last_seen": "2026-08-05T20:08:47.831943+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-585-m2-szerokie-idealna-pod-dom-ID4A4Vb",
    "deactivated_at": "2026-07-26T19:40:03.135666+02:00",
    "reactivated_at": "2026-07-29T19:52:20.130548+02:00",
@@ -611,9 +611,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539845+02:00",
-   "last_seen": "2026-08-05T11:22:27.239682+02:00",
+   "last_seen": "2026-08-05T20:08:47.832402+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-w-spokojnej-okolicy-lublin-ul-folwarczn-ID4Afxf",
    "deactivated_at": "2026-07-08T20:05:12.328358+02:00",
    "reactivated_at": "2026-07-09T12:06:51.742088+02:00",
@@ -649,10 +649,10 @@
    },
    "first_seen": "2026-06-10T19:56:59.539874+02:00",
    "last_seen": "2026-08-05T11:22:27.239245+02:00",
-   "active": true,
+   "active": false,
    "days_active": 55,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-zabudowe-wielorodzinna-na-ponikwodzie-ID4BCa4",
-   "deactivated_at": "2026-07-02T20:18:09.532008+02:00",
+   "deactivated_at": "2026-08-05T20:08:48.427473+02:00",
    "reactivated_at": "2026-07-06T20:29:27.289831+02:00",
    "duplicate_of": "otodom:68070176"
   },
@@ -722,9 +722,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.539933+02:00",
-   "last_seen": "2026-08-05T11:22:27.239016+02:00",
+   "last_seen": "2026-08-05T20:08:47.831978+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-zabudowe-jednorodzinna-lub-uslugowa-ID4xNN8",
    "deactivated_at": "2026-07-22T19:52:03.087047+02:00",
    "reactivated_at": "2026-07-23T11:12:57.215382+02:00",
@@ -795,9 +795,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540013+02:00",
-   "last_seen": "2026-08-05T11:22:27.239131+02:00",
+   "last_seen": "2026-08-05T20:08:47.832042+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-zagajnikowa-e0j9z3",
    "duplicate_of": "adresowo:e0j9z3"
   },
@@ -830,9 +830,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540042+02:00",
-   "last_seen": "2026-08-05T11:22:27.238603+02:00",
+   "last_seen": "2026-08-05T20:08:47.831807+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/najtansza-dzialka-budowlana-w-lublinie-ul-gluska-ID4yMWu",
    "deactivated_at": "2026-07-19T19:38:33.494320+02:00",
    "reactivated_at": "2026-07-30T20:01:08.443317+02:00",
@@ -867,9 +867,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540072+02:00",
-   "last_seen": "2026-08-05T11:22:27.239663+02:00",
+   "last_seen": "2026-08-05T20:08:47.832393+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "olx:CID3-ID18KzFB",
@@ -935,9 +935,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540129+02:00",
-   "last_seen": "2026-08-05T11:22:27.238490+02:00",
+   "last_seen": "2026-08-05T20:08:47.831715+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "deactivated_at": "2026-06-22T21:57:18.377738+02:00",
    "reactivated_at": "2026-07-24T20:04:17.910553+02:00"
   },
@@ -1025,9 +1025,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540188+02:00",
-   "last_seen": "2026-08-05T11:22:27.239861+02:00",
+   "last_seen": "2026-08-05T20:08:47.832541+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "deactivated_at": "2026-06-20T19:58:15.228930+02:00",
    "reactivated_at": "2026-06-21T12:21:00.041151+02:00"
   },
@@ -1168,9 +1168,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540315+02:00",
-   "last_seen": "2026-08-05T11:22:27.239743+02:00",
+   "last_seen": "2026-08-05T20:08:47.832438+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/ul-gluska-najtansze-dzialki-budowlane-w-lublini-ID4yMZA",
    "deactivated_at": "2026-07-19T19:38:33.494320+02:00",
    "reactivated_at": "2026-07-30T20:01:08.443434+02:00",
@@ -1362,9 +1362,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540469+02:00",
-   "last_seen": "2026-08-05T11:22:27.240066+02:00",
+   "last_seen": "2026-08-05T20:08:47.832790+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-ul-turystyczna-pierwsza-linia-zabudowy-ID4xUYh",
    "deactivated_at": "2026-08-03T12:26:02.844619+02:00",
    "reactivated_at": "2026-08-05T11:22:27.240066+02:00",
@@ -1564,9 +1564,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540616+02:00",
-   "last_seen": "2026-08-05T11:22:27.240392+02:00",
+   "last_seen": "2026-08-05T20:08:47.832903+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-mieszkaniowo-uslugowa1569-m2-ul-zorzy-ID4jyQF",
    "deactivated_at": "2026-07-06T20:29:27.447901+02:00",
    "reactivated_at": "2026-07-17T19:43:10.417805+02:00",
@@ -1638,9 +1638,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540682+02:00",
-   "last_seen": "2026-08-05T11:22:27.240294+02:00",
+   "last_seen": "2026-08-05T20:08:47.832866+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1-ha-wyzwolenia-mozliwosc-zabudowy-szeregowej-ID4xbWZ",
    "deactivated_at": "2026-08-03T12:26:02.844619+02:00",
    "reactivated_at": "2026-08-05T11:22:27.240294+02:00",
@@ -1745,9 +1745,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540772+02:00",
-   "last_seen": "2026-08-05T11:22:27.240236+02:00",
+   "last_seen": "2026-08-05T20:08:47.832781+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-3000-m2-turystyczna-sasiaduje-z-centrum-handlowym-ID4Ao8b",
    "deactivated_at": "2026-07-21T19:56:36.209174+02:00",
    "reactivated_at": "2026-07-23T11:12:57.216216+02:00",
@@ -1782,9 +1782,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540802+02:00",
-   "last_seen": "2026-08-05T11:22:27.240221+02:00",
+   "last_seen": "2026-08-05T20:08:47.832771+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-lublin-ul-makowa-swietochowskiego-ID4xcS7",
    "deactivated_at": "2026-07-19T19:38:33.494320+02:00",
    "reactivated_at": "2026-07-30T20:01:08.443920+02:00",
@@ -2005,9 +2005,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.540989+02:00",
-   "last_seen": "2026-08-05T11:22:27.247323+02:00",
+   "last_seen": "2026-08-05T20:08:47.834732+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-poligonowa-f0l6p8"
   },
   {
@@ -2073,9 +2073,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541059+02:00",
-   "last_seen": "2026-08-05T11:22:27.247208+02:00",
+   "last_seen": "2026-08-05T20:08:47.834635+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:66181272",
@@ -2141,9 +2141,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541144+02:00",
-   "last_seen": "2026-08-05T11:22:27.247334+02:00",
+   "last_seen": "2026-08-05T20:08:47.834742+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67893215",
@@ -2208,9 +2208,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541230+02:00",
-   "last_seen": "2026-08-05T11:22:27.247065+02:00",
+   "last_seen": "2026-08-05T20:08:47.834508+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/rezydencjonalna-dzialka-premium-gorki-czechowskie-CID3-ID1aA3TU.html"
   },
   {
@@ -2254,9 +2254,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541240+02:00",
-   "last_seen": "2026-08-05T11:22:27.246450+02:00",
+   "last_seen": "2026-08-05T20:08:47.833951+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-466-m2-5mn-ul-firlejowska-bronowice-CID3-ID1aA3TJ.html"
   },
   {
@@ -2405,9 +2405,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541369+02:00",
-   "last_seen": "2026-08-05T11:22:27.247347+02:00",
+   "last_seen": "2026-08-05T20:08:47.834752+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-weglin-poludniowy-ul-folwarczna-CID3-ID1b4Bqb.html"
   },
   {
@@ -2589,9 +2589,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541552+02:00",
-   "last_seen": "2026-08-05T11:22:27.247359+02:00",
+   "last_seen": "2026-08-05T20:08:47.834762+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/mala-powierzchnia-duzy-potencjal-biznesowy-CID3-ID1b36qB.html"
   },
   {
@@ -2658,9 +2658,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541613+02:00",
-   "last_seen": "2026-08-05T11:22:27.247371+02:00",
+   "last_seen": "2026-08-05T20:08:47.834772+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-z-wz-na-16-lokali-lublin-ul-makowa-CID3-ID1b8ilO.html"
   },
   {
@@ -2693,9 +2693,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541648+02:00",
-   "last_seen": "2026-08-05T11:22:27.247137+02:00",
+   "last_seen": "2026-08-05T20:08:47.834573+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-zagajnikowa-e0j9z3",
    "duplicate_of": "adresowo:e0j9z3"
   },
@@ -2728,9 +2728,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541679+02:00",
-   "last_seen": "2026-08-05T11:22:27.247383+02:00",
+   "last_seen": "2026-08-05T20:08:47.834782+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:68071697",
@@ -2761,9 +2761,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541710+02:00",
-   "last_seen": "2026-08-05T11:22:27.247395+02:00",
+   "last_seen": "2026-08-05T20:08:47.834792+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67704135",
@@ -2794,9 +2794,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541805+02:00",
-   "last_seen": "2026-08-05T11:22:27.246831+02:00",
+   "last_seen": "2026-08-05T20:08:47.834299+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-585-m2-szerokie-idealna-pod-dom-CID3-ID1aKPAx.html"
   },
   {
@@ -2828,9 +2828,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541837+02:00",
-   "last_seen": "2026-08-05T11:22:27.247407+02:00",
+   "last_seen": "2026-08-05T20:08:47.834802+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7125192/"
   },
   {
@@ -2863,9 +2863,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541868+02:00",
-   "last_seen": "2026-08-05T11:22:27.246282+02:00",
+   "last_seen": "2026-08-05T20:08:47.833797+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:68064601",
@@ -2922,9 +2922,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541899+02:00",
-   "last_seen": "2026-08-05T11:22:27.247418+02:00",
+   "last_seen": "2026-08-05T20:08:47.834812+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/2-dzialki-z-wz-lublin-h-i-m-sachsow-CID3-ID1aTumd.html"
   },
   {
@@ -2956,9 +2956,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.541930+02:00",
-   "last_seen": "2026-08-05T11:22:27.247053+02:00",
+   "last_seen": "2026-08-05T20:08:47.834498+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-w-dzielnicy-weglin-CID3-ID19Zsz1.html"
   },
   {
@@ -3161,9 +3161,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542149+02:00",
-   "last_seen": "2026-08-05T11:22:27.247430+02:00",
+   "last_seen": "2026-08-05T20:08:47.834859+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:68059670",
@@ -3195,9 +3195,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542188+02:00",
-   "last_seen": "2026-08-05T11:22:27.247477+02:00",
+   "last_seen": "2026-08-05T20:08:47.834874+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:68059173",
@@ -3296,9 +3296,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542308+02:00",
-   "last_seen": "2026-08-05T11:22:27.246439+02:00",
+   "last_seen": "2026-08-05T20:08:47.833941+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-615-m-wz-na-blizniaka-lublin-CID3-ID17RCz5.html"
   },
   {
@@ -3364,9 +3364,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542370+02:00",
-   "last_seen": "2026-08-05T11:22:27.246159+02:00",
+   "last_seen": "2026-08-05T20:08:47.833682+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:68049401",
@@ -3466,9 +3466,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542464+02:00",
-   "last_seen": "2026-08-05T11:22:27.247221+02:00",
+   "last_seen": "2026-08-05T20:08:47.834647+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-515m2-ul-kosynierow-dzielnicaponikwoda-lublin-CID3-ID1aOAxc.html"
   },
   {
@@ -3548,9 +3548,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542527+02:00",
-   "last_seen": "2026-08-05T11:22:27.247493+02:00",
+   "last_seen": "2026-08-05T20:08:47.834886+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:68019937",
@@ -3581,9 +3581,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542559+02:00",
-   "last_seen": "2026-08-05T11:22:27.247507+02:00",
+   "last_seen": "2026-08-05T20:08:47.834897+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "deactivated_at": "2026-07-18T10:26:26.774032+02:00",
    "reactivated_at": "2026-07-18T19:38:18.258694+02:00"
   },
@@ -3616,9 +3616,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542590+02:00",
-   "last_seen": "2026-08-05T11:22:27.246712+02:00",
+   "last_seen": "2026-08-05T20:08:47.834195+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/duza-zielona-dzialka-2824m-twoj-dom-pod-lublinem-CID3-ID1aIYRc.html"
   },
   {
@@ -3662,9 +3662,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542628+02:00",
-   "last_seen": "2026-08-05T11:22:27.247520+02:00",
+   "last_seen": "2026-08-05T20:08:47.834908+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67929074",
@@ -3695,9 +3695,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542660+02:00",
-   "last_seen": "2026-08-05T11:22:27.245975+02:00",
+   "last_seen": "2026-08-05T20:08:47.833513+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:66475152",
@@ -3763,9 +3763,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542723+02:00",
-   "last_seen": "2026-08-05T11:22:27.246463+02:00",
+   "last_seen": "2026-08-05T20:08:47.833962+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "deactivated_at": "2026-07-13T11:56:57.519485+02:00",
    "reactivated_at": "2026-07-15T19:51:46.674119+02:00"
   },
@@ -3798,9 +3798,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542754+02:00",
-   "last_seen": "2026-08-05T11:22:27.247534+02:00",
+   "last_seen": "2026-08-05T20:08:47.834919+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7114701/"
   },
   {
@@ -3832,9 +3832,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542786+02:00",
-   "last_seen": "2026-08-05T11:22:27.247546+02:00",
+   "last_seen": "2026-08-05T20:08:47.834931+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:63767537",
@@ -3866,9 +3866,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542818+02:00",
-   "last_seen": "2026-08-05T11:22:27.245640+02:00",
+   "last_seen": "2026-08-05T20:08:47.833205+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-inwestycyjna-mieszkaniowo-uslugowa1569-m2-ul-zorzy-CID3-IDSgvwp.html"
   },
   {
@@ -3900,9 +3900,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542850+02:00",
-   "last_seen": "2026-08-05T11:22:27.246912+02:00",
+   "last_seen": "2026-08-05T20:08:47.834371+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-makowa-u2n8c9"
   },
   {
@@ -3934,9 +3934,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.542882+02:00",
-   "last_seen": "2026-08-05T11:22:27.247558+02:00",
+   "last_seen": "2026-08-05T20:08:47.834942+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67650335",
@@ -4069,9 +4069,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543403+02:00",
-   "last_seen": "2026-08-05T11:22:27.247571+02:00",
+   "last_seen": "2026-08-05T20:08:47.834953+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67931743",
@@ -4102,9 +4102,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543437+02:00",
-   "last_seen": "2026-08-05T11:22:27.247586+02:00",
+   "last_seen": "2026-08-05T20:08:47.834965+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7087420/"
   },
   {
@@ -4137,9 +4137,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543471+02:00",
-   "last_seen": "2026-08-05T11:22:27.247599+02:00",
+   "last_seen": "2026-08-05T20:08:47.834977+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67929799",
@@ -4204,9 +4204,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543535+02:00",
-   "last_seen": "2026-08-05T11:22:27.247613+02:00",
+   "last_seen": "2026-08-05T20:08:47.834988+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67908346",
@@ -4305,9 +4305,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543646+02:00",
-   "last_seen": "2026-08-05T11:22:27.247655+02:00",
+   "last_seen": "2026-08-05T20:08:47.835000+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67902477",
@@ -4372,9 +4372,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543710+02:00",
-   "last_seen": "2026-08-05T11:22:27.247677+02:00",
+   "last_seen": "2026-08-05T20:08:47.835012+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67888170",
@@ -4417,9 +4417,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543742+02:00",
-   "last_seen": "2026-08-05T11:22:27.247697+02:00",
+   "last_seen": "2026-08-05T20:08:47.835024+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7080828/"
   },
   {
@@ -4451,9 +4451,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543774+02:00",
-   "last_seen": "2026-08-05T11:22:27.247716+02:00",
+   "last_seen": "2026-08-05T20:08:47.835036+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7080835/"
   },
   {
@@ -4497,9 +4497,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543809+02:00",
-   "last_seen": "2026-08-05T11:22:27.247755+02:00",
+   "last_seen": "2026-08-05T20:08:47.835060+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7081717/"
   },
   {
@@ -4543,9 +4543,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543841+02:00",
-   "last_seen": "2026-08-05T11:22:27.247738+02:00",
+   "last_seen": "2026-08-05T20:08:47.835048+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:96809353800067",
@@ -4610,9 +4610,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543905+02:00",
-   "last_seen": "2026-08-05T11:22:27.247770+02:00",
+   "last_seen": "2026-08-05T20:08:47.835072+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7003595/"
   },
   {
@@ -4644,9 +4644,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543937+02:00",
-   "last_seen": "2026-08-05T11:22:27.247785+02:00",
+   "last_seen": "2026-08-05T20:08:47.835084+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6981587/"
   },
   {
@@ -4678,9 +4678,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.543994+02:00",
-   "last_seen": "2026-08-05T11:22:27.247799+02:00",
+   "last_seen": "2026-08-05T20:08:47.835121+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67800592",
@@ -4746,9 +4746,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544065+02:00",
-   "last_seen": "2026-08-05T11:22:27.247814+02:00",
+   "last_seen": "2026-08-05T20:08:47.835137+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67122720",
@@ -4779,9 +4779,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544098+02:00",
-   "last_seen": "2026-08-05T11:22:27.247828+02:00",
+   "last_seen": "2026-08-05T20:08:47.835150+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67834274",
@@ -4915,9 +4915,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544231+02:00",
-   "last_seen": "2026-08-05T11:22:27.247842+02:00",
+   "last_seen": "2026-08-05T20:08:47.835162+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6915742/"
   },
   {
@@ -4949,9 +4949,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544264+02:00",
-   "last_seen": "2026-08-05T11:22:27.247856+02:00",
+   "last_seen": "2026-08-05T20:08:47.835175+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67798761",
@@ -4982,9 +4982,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544297+02:00",
-   "last_seen": "2026-08-05T11:22:27.247870+02:00",
+   "last_seen": "2026-08-05T20:08:47.835187+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7050117/"
   },
   {
@@ -5016,9 +5016,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544329+02:00",
-   "last_seen": "2026-08-05T11:22:27.247884+02:00",
+   "last_seen": "2026-08-05T20:08:47.835199+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7007306/"
   },
   {
@@ -5096,9 +5096,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544395+02:00",
-   "last_seen": "2026-08-05T11:22:27.247899+02:00",
+   "last_seen": "2026-08-05T20:08:47.835212+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67777915",
@@ -5129,9 +5129,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544428+02:00",
-   "last_seen": "2026-08-05T11:22:27.247914+02:00",
+   "last_seen": "2026-08-05T20:08:47.835224+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-3000-m2-turystyczna-sasiaduje-z-centrum-handlowym-CID3-ID19FkFy.html"
   },
   {
@@ -5163,9 +5163,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544461+02:00",
-   "last_seen": "2026-08-05T11:22:27.247929+02:00",
+   "last_seen": "2026-08-05T20:08:47.835236+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67769111",
@@ -5196,9 +5196,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544493+02:00",
-   "last_seen": "2026-08-05T11:22:27.247945+02:00",
+   "last_seen": "2026-08-05T20:08:47.835248+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-teczowa-n5u7o4"
   },
   {
@@ -5230,9 +5230,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544526+02:00",
-   "last_seen": "2026-08-05T11:22:27.247960+02:00",
+   "last_seen": "2026-08-05T20:08:47.835261+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-teczowa-t3m4y0"
   },
   {
@@ -5264,9 +5264,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544559+02:00",
-   "last_seen": "2026-08-05T11:22:27.247975+02:00",
+   "last_seen": "2026-08-05T20:08:47.835285+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6749772/"
   },
   {
@@ -5298,9 +5298,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544591+02:00",
-   "last_seen": "2026-08-05T11:22:27.247990+02:00",
+   "last_seen": "2026-08-05T20:08:47.835273+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6972338/"
   },
   {
@@ -5332,9 +5332,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544628+02:00",
-   "last_seen": "2026-08-05T11:22:27.248005+02:00",
+   "last_seen": "2026-08-05T20:08:47.835298+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67744873",
@@ -5365,9 +5365,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544661+02:00",
-   "last_seen": "2026-08-05T11:22:27.248019+02:00",
+   "last_seen": "2026-08-05T20:08:47.835310+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7000445/"
   },
   {
@@ -5399,9 +5399,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544694+02:00",
-   "last_seen": "2026-08-05T11:22:27.248034+02:00",
+   "last_seen": "2026-08-05T20:08:47.835322+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67740183",
@@ -5467,9 +5467,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544760+02:00",
-   "last_seen": "2026-08-05T11:22:27.248050+02:00",
+   "last_seen": "2026-08-05T20:08:47.835334+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67718570",
@@ -5500,9 +5500,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544793+02:00",
-   "last_seen": "2026-08-05T11:22:27.248064+02:00",
+   "last_seen": "2026-08-05T20:08:47.835347+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6995706/"
   },
   {
@@ -5534,9 +5534,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544827+02:00",
-   "last_seen": "2026-08-05T11:22:27.248079+02:00",
+   "last_seen": "2026-08-05T20:08:47.835359+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67084744",
@@ -5568,9 +5568,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544859+02:00",
-   "last_seen": "2026-08-05T11:22:27.248095+02:00",
+   "last_seen": "2026-08-05T20:08:47.835372+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67669770",
@@ -5648,9 +5648,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544925+02:00",
-   "last_seen": "2026-08-05T11:22:27.248110+02:00",
+   "last_seen": "2026-08-05T20:08:47.835384+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67465295",
@@ -5693,9 +5693,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.544958+02:00",
-   "last_seen": "2026-08-05T11:22:27.248126+02:00",
+   "last_seen": "2026-08-05T20:08:47.835397+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67445112",
@@ -5773,9 +5773,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545048+02:00",
-   "last_seen": "2026-08-05T11:22:27.248142+02:00",
+   "last_seen": "2026-08-05T20:08:47.835410+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67396826",
@@ -5806,9 +5806,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545082+02:00",
-   "last_seen": "2026-08-05T11:22:27.248158+02:00",
+   "last_seen": "2026-08-05T20:08:47.835423+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6950197/"
   },
   {
@@ -5840,9 +5840,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545115+02:00",
-   "last_seen": "2026-08-05T11:22:27.248174+02:00",
+   "last_seen": "2026-08-05T20:08:47.835436+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-macieja-rataja-k5s4m8",
    "duplicate_of": "adresowo:k5s4m8"
   },
@@ -5875,9 +5875,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545151+02:00",
-   "last_seen": "2026-08-05T11:22:27.248189+02:00",
+   "last_seen": "2026-08-05T20:08:47.835449+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6947842/"
   },
   {
@@ -5909,9 +5909,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545185+02:00",
-   "last_seen": "2026-08-05T11:22:27.248206+02:00",
+   "last_seen": "2026-08-05T20:08:47.835463+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-dozynkowa-f7b2c6"
   },
   {
@@ -5943,9 +5943,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545218+02:00",
-   "last_seen": "2026-08-05T11:22:27.248223+02:00",
+   "last_seen": "2026-08-05T20:08:47.835476+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.pasjonacinieruchomosci.pl/dzialki-na-sprzedaz-375000zl-1740m2-lublin/6940511"
   },
   {
@@ -5977,9 +5977,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545251+02:00",
-   "last_seen": "2026-08-05T11:22:27.248241+02:00",
+   "last_seen": "2026-08-05T20:08:47.835489+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-1144-m2-okolice-ikei-CID3-ID17QimL.html"
   },
   {
@@ -6045,9 +6045,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545317+02:00",
-   "last_seen": "2026-08-05T11:22:27.248257+02:00",
+   "last_seen": "2026-08-05T20:08:47.835502+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6933155/"
   },
   {
@@ -6079,9 +6079,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545350+02:00",
-   "last_seen": "2026-08-05T11:22:27.248274+02:00",
+   "last_seen": "2026-08-05T20:08:47.835515+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67259472",
@@ -6112,9 +6112,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545383+02:00",
-   "last_seen": "2026-08-05T11:22:27.248290+02:00",
+   "last_seen": "2026-08-05T20:08:47.835528+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67248680",
@@ -6145,9 +6145,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545417+02:00",
-   "last_seen": "2026-08-05T11:22:27.248307+02:00",
+   "last_seen": "2026-08-05T20:08:47.835541+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67201307",
@@ -6178,9 +6178,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545450+02:00",
-   "last_seen": "2026-08-05T11:22:27.248322+02:00",
+   "last_seen": "2026-08-05T20:08:47.835554+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67129360",
@@ -6211,9 +6211,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545483+02:00",
-   "last_seen": "2026-08-05T11:22:27.248339+02:00",
+   "last_seen": "2026-08-05T20:08:47.835567+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "deactivated_at": "2026-07-12T19:40:04.823132+02:00",
    "reactivated_at": "2026-07-15T19:51:46.676445+02:00"
   },
@@ -6246,9 +6246,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545517+02:00",
-   "last_seen": "2026-08-05T11:22:27.248356+02:00",
+   "last_seen": "2026-08-05T20:08:47.835579+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-uslugowa-ul-turystyczna-pierwsza-linia-zabudowy-CID3-ID17gt2K.html"
   },
   {
@@ -6280,9 +6280,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545551+02:00",
-   "last_seen": "2026-08-05T11:22:27.248372+02:00",
+   "last_seen": "2026-08-05T20:08:47.835592+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67170527",
@@ -6325,9 +6325,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545584+02:00",
-   "last_seen": "2026-08-05T11:22:27.248387+02:00",
+   "last_seen": "2026-08-05T20:08:47.835606+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6627806/"
   },
   {
@@ -6360,9 +6360,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545618+02:00",
-   "last_seen": "2026-08-05T11:22:27.248404+02:00",
+   "last_seen": "2026-08-05T20:08:47.835619+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67093429",
@@ -6393,9 +6393,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545657+02:00",
-   "last_seen": "2026-08-05T11:22:27.248420+02:00",
+   "last_seen": "2026-08-05T20:08:47.835633+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:66730904",
@@ -6426,9 +6426,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545690+02:00",
-   "last_seen": "2026-08-05T11:22:27.248438+02:00",
+   "last_seen": "2026-08-05T20:08:47.835645+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67078021",
@@ -6528,9 +6528,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545837+02:00",
-   "last_seen": "2026-08-05T11:22:27.248455+02:00",
+   "last_seen": "2026-08-05T20:08:47.835660+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:67016047",
@@ -6561,9 +6561,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545872+02:00",
-   "last_seen": "2026-08-05T11:22:27.248473+02:00",
+   "last_seen": "2026-08-05T20:08:47.835674+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-1-ha-wyzwolenia-mozliwosc-zabudowy-szeregowej-CID3-ID16xftp.html"
   },
   {
@@ -6595,9 +6595,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545906+02:00",
-   "last_seen": "2026-08-05T11:22:27.248491+02:00",
+   "last_seen": "2026-08-05T20:08:47.835687+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6886636/"
   },
   {
@@ -6664,9 +6664,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.545991+02:00",
-   "last_seen": "2026-08-05T11:22:27.248509+02:00",
+   "last_seen": "2026-08-05T20:08:47.835700+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6883733/"
   },
   {
@@ -6733,9 +6733,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546060+02:00",
-   "last_seen": "2026-08-05T11:22:27.248527+02:00",
+   "last_seen": "2026-08-05T20:08:47.835714+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:66880283",
@@ -6767,9 +6767,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546094+02:00",
-   "last_seen": "2026-08-05T11:22:27.248545+02:00",
+   "last_seen": "2026-08-05T20:08:47.835728+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6862299/"
   },
   {
@@ -6801,9 +6801,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546130+02:00",
-   "last_seen": "2026-08-05T11:22:27.248562+02:00",
+   "last_seen": "2026-08-05T20:08:47.835742+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:66785707",
@@ -6868,9 +6868,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546199+02:00",
-   "last_seen": "2026-08-05T11:22:27.248579+02:00",
+   "last_seen": "2026-08-05T20:08:47.835756+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:66771129",
@@ -6901,9 +6901,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546233+02:00",
-   "last_seen": "2026-08-05T11:22:27.248596+02:00",
+   "last_seen": "2026-08-05T20:08:47.835770+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:65517470",
@@ -6934,9 +6934,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546268+02:00",
-   "last_seen": "2026-08-05T11:22:27.248613+02:00",
+   "last_seen": "2026-08-05T20:08:47.835784+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:66635237",
@@ -6968,9 +6968,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546302+02:00",
-   "last_seen": "2026-08-05T11:22:27.248660+02:00",
+   "last_seen": "2026-08-05T20:08:47.835838+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:66574263",
@@ -7001,9 +7001,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546337+02:00",
-   "last_seen": "2026-08-05T11:22:27.248715+02:00",
+   "last_seen": "2026-08-05T20:08:47.835853+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6828893/"
   },
   {
@@ -7035,9 +7035,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546371+02:00",
-   "last_seen": "2026-08-05T11:22:27.248733+02:00",
+   "last_seen": "2026-08-05T20:08:47.835868+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:66365321",
@@ -7068,9 +7068,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546406+02:00",
-   "last_seen": "2026-08-05T11:22:27.248751+02:00",
+   "last_seen": "2026-08-05T20:08:47.835882+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:96788543800067",
@@ -7241,9 +7241,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546577+02:00",
-   "last_seen": "2026-08-05T11:22:27.248769+02:00",
+   "last_seen": "2026-08-05T20:08:47.835896+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6768708/"
   },
   {
@@ -7310,9 +7310,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546651+02:00",
-   "last_seen": "2026-08-05T11:22:27.248787+02:00",
+   "last_seen": "2026-08-05T20:08:47.835910+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6715640/"
   },
   {
@@ -7344,9 +7344,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546686+02:00",
-   "last_seen": "2026-08-05T11:22:27.248804+02:00",
+   "last_seen": "2026-08-05T20:08:47.835925+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:65041300",
@@ -7377,9 +7377,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546720+02:00",
-   "last_seen": "2026-08-05T11:22:27.248822+02:00",
+   "last_seen": "2026-08-05T20:08:47.835939+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-zawieprzycka-c9m6u7"
   },
   {
@@ -7411,9 +7411,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546755+02:00",
-   "last_seen": "2026-08-05T11:22:27.248841+02:00",
+   "last_seen": "2026-08-05T20:08:47.835953+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6686026/"
   },
   {
@@ -7445,9 +7445,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546789+02:00",
-   "last_seen": "2026-08-05T11:22:27.248859+02:00",
+   "last_seen": "2026-08-05T20:08:47.835968+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-6686116/"
   },
   {
@@ -7561,9 +7561,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546894+02:00",
-   "last_seen": "2026-08-05T11:22:27.248878+02:00",
+   "last_seen": "2026-08-05T20:08:47.835983+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:62680250",
@@ -7594,9 +7594,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546928+02:00",
-   "last_seen": "2026-08-05T11:22:27.248897+02:00",
+   "last_seen": "2026-08-05T20:08:47.835997+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-3000-m2-ul-kreznicka-CID3-IDNu9Ao.html"
   },
   {
@@ -7628,9 +7628,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.546963+02:00",
-   "last_seen": "2026-08-05T11:22:27.248916+02:00",
+   "last_seen": "2026-08-05T20:08:47.836012+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:63403507",
@@ -7661,9 +7661,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547022+02:00",
-   "last_seen": "2026-08-05T11:22:27.248934+02:00",
+   "last_seen": "2026-08-05T20:08:47.836026+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:62515033",
@@ -7694,9 +7694,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547057+02:00",
-   "last_seen": "2026-08-05T11:22:27.248972+02:00",
+   "last_seen": "2026-08-05T20:08:47.836056+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-67/"
   },
   {
@@ -7728,9 +7728,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547092+02:00",
-   "last_seen": "2026-08-05T11:22:27.248954+02:00",
+   "last_seen": "2026-08-05T20:08:47.836041+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:59902348",
@@ -7761,9 +7761,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547128+02:00",
-   "last_seen": "2026-08-05T11:22:27.248989+02:00",
+   "last_seen": "2026-08-05T20:08:47.836070+02:00",
    "active": true,
-   "days_active": 55
+   "days_active": 56
   },
   {
    "id": "otodom:59940284",
@@ -7794,9 +7794,9 @@
     ]
    },
    "first_seen": "2026-06-10T19:56:59.547164+02:00",
-   "last_seen": "2026-08-05T11:22:27.249006+02:00",
+   "last_seen": "2026-08-05T20:08:47.836084+02:00",
    "active": true,
-   "days_active": 55,
+   "days_active": 56,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-5415016/"
   },
   {
@@ -7897,7 +7897,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.138394+02:00",
-   "last_seen": "2026-08-05T11:22:27.240416+02:00",
+   "last_seen": "2026-08-05T20:08:47.832919+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-3-443-m2-a5y3p6"
@@ -7966,7 +7966,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.138672+02:00",
-   "last_seen": "2026-08-05T11:22:27.247239+02:00",
+   "last_seen": "2026-08-05T20:08:47.834662+02:00",
    "active": true,
    "days_active": 54
   },
@@ -7999,7 +7999,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.138694+02:00",
-   "last_seen": "2026-08-05T11:22:27.247256+02:00",
+   "last_seen": "2026-08-05T20:08:47.834678+02:00",
    "active": true,
    "days_active": 54
   },
@@ -8032,7 +8032,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.138722+02:00",
-   "last_seen": "2026-08-05T11:22:27.247311+02:00",
+   "last_seen": "2026-08-05T20:08:47.834708+02:00",
    "active": true,
    "days_active": 54
   },
@@ -8065,7 +8065,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.138754+02:00",
-   "last_seen": "2026-08-05T11:22:27.247293+02:00",
+   "last_seen": "2026-08-05T20:08:47.834723+02:00",
    "active": true,
    "days_active": 54
   },
@@ -8098,7 +8098,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.138789+02:00",
-   "last_seen": "2026-08-05T11:22:27.247274+02:00",
+   "last_seen": "2026-08-05T20:08:47.834693+02:00",
    "active": true,
    "days_active": 54
   },
@@ -8234,11 +8234,11 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141045+02:00",
-   "last_seen": "2026-08-02T10:57:54.172711+02:00",
-   "active": false,
-   "days_active": 51,
+   "last_seen": "2026-08-05T20:08:47.836165+02:00",
+   "active": true,
+   "days_active": 54,
    "deactivated_at": "2026-08-02T19:40:37.242756+02:00",
-   "reactivated_at": "2026-07-30T11:17:09.306014+02:00"
+   "reactivated_at": "2026-08-05T20:08:47.836165+02:00"
   },
   {
    "id": "alternatywne:7127335",
@@ -8271,7 +8271,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141073+02:00",
-   "last_seen": "2026-08-05T11:22:27.249274+02:00",
+   "last_seen": "2026-08-05T20:08:47.836739+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-weglin-poludniowy-ul-folwarczna-ID4BFEw",
@@ -8346,7 +8346,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141113+02:00",
-   "last_seen": "2026-08-05T11:22:27.249292+02:00",
+   "last_seen": "2026-08-05T20:08:47.836769+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-zabudowe-wielorodzinna-na-ponikwodzie-ID4BCa4",
@@ -8383,7 +8383,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141128+02:00",
-   "last_seen": "2026-08-05T11:22:27.249311+02:00",
+   "last_seen": "2026-08-05T20:08:47.836754+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-z-wz-na-16-lokali-lublin-ul-makowa-ID4BDr5",
@@ -8420,7 +8420,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141141+02:00",
-   "last_seen": "2026-08-05T11:22:27.249328+02:00",
+   "last_seen": "2026-08-05T20:08:47.836783+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-w-lublinie-pod-uslugi-oswiaty-ID4Bju7",
@@ -8457,7 +8457,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141168+02:00",
-   "last_seen": "2026-08-05T11:22:27.249346+02:00",
+   "last_seen": "2026-08-05T20:08:47.836798+02:00",
    "active": true,
    "days_active": 54
   },
@@ -8492,7 +8492,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141193+02:00",
-   "last_seen": "2026-08-05T11:22:27.249365+02:00",
+   "last_seen": "2026-08-05T20:08:47.836812+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-lublin-ul-folwarczna-ID4B29h",
@@ -8541,7 +8541,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141223+02:00",
-   "last_seen": "2026-08-05T11:22:27.249382+02:00",
+   "last_seen": "2026-08-05T20:08:47.836826+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-ul-kijanska-ID4AQli",
@@ -8590,7 +8590,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141252+02:00",
-   "last_seen": "2026-08-05T11:22:27.249399+02:00",
+   "last_seen": "2026-08-05T20:08:47.836840+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-ul-kijanska-ID4AQli",
@@ -8639,7 +8639,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141281+02:00",
-   "last_seen": "2026-08-05T11:22:27.249418+02:00",
+   "last_seen": "2026-08-05T20:08:47.836855+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-slawin-szerokie-ID4AQOu",
@@ -8676,7 +8676,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141327+02:00",
-   "last_seen": "2026-08-05T11:22:27.249435+02:00",
+   "last_seen": "2026-08-05T20:08:47.836869+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-ul-narcyzowa-ID4AQOt",
@@ -8713,7 +8713,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141359+02:00",
-   "last_seen": "2026-08-05T11:22:27.249453+02:00",
+   "last_seen": "2026-08-05T20:08:47.836883+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowalne-w-lublinie-ID4Atyp",
@@ -8752,7 +8752,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141380+02:00",
-   "last_seen": "2026-08-05T11:22:27.249472+02:00",
+   "last_seen": "2026-08-05T20:08:47.836897+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-4-lokale-mieszkalne-lublin-weglin-pn-ID4Arxc",
@@ -8791,7 +8791,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141395+02:00",
-   "last_seen": "2026-08-05T11:22:27.249490+02:00",
+   "last_seen": "2026-08-05T20:08:47.836912+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-w-lublinie-ul-zadebie-ID4AQ6q",
@@ -8830,7 +8830,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141411+02:00",
-   "last_seen": "2026-08-05T11:22:27.249508+02:00",
+   "last_seen": "2026-08-05T20:08:47.836926+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-w-spokojnej-okolicy-lublin-ul-folwarczn-ID4Afxf",
@@ -8907,7 +8907,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141453+02:00",
-   "last_seen": "2026-08-05T11:22:27.249525+02:00",
+   "last_seen": "2026-08-05T20:08:47.836940+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/3467m-przy-s17-plan-ogolny-nawet-4400-m-zabudow-ID4A8H0",
@@ -8946,7 +8946,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141484+02:00",
-   "last_seen": "2026-08-05T11:22:27.249543+02:00",
+   "last_seen": "2026-08-05T20:08:47.836954+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/zadrzewiona-dzialka-pod-dom-na-szerokim-ID4AQ6p",
@@ -8985,7 +8985,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141514+02:00",
-   "last_seen": "2026-08-05T11:22:27.249562+02:00",
+   "last_seen": "2026-08-05T20:08:47.836969+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-inwestycjna-przy-glownej-trasie-lublin-ID4zp41",
@@ -9024,7 +9024,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141545+02:00",
-   "last_seen": "2026-08-05T11:22:27.249581+02:00",
+   "last_seen": "2026-08-05T20:08:47.836983+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/ul-gluska-najtansze-dzialki-budowlane-w-lublini-ID4yMZA",
@@ -9063,7 +9063,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141581+02:00",
-   "last_seen": "2026-08-05T11:22:27.249600+02:00",
+   "last_seen": "2026-08-05T20:08:47.836998+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/najtansza-dzialka-budowlana-w-lublinie-ul-gluska-ID4yMWu",
@@ -9102,7 +9102,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141598+02:00",
-   "last_seen": "2026-08-05T11:22:27.249638+02:00",
+   "last_seen": "2026-08-05T20:08:47.837013+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-rekreacyjna-przy-ul-gluskiej-w-lublinie-ID4ymZ7",
@@ -9141,7 +9141,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141614+02:00",
-   "last_seen": "2026-08-05T11:22:27.249664+02:00",
+   "last_seen": "2026-08-05T20:08:47.837027+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-zabudowe-jednorodzinna-lub-uslugowa-ID4xNN8",
@@ -9219,7 +9219,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141644+02:00",
-   "last_seen": "2026-08-05T11:22:27.249683+02:00",
+   "last_seen": "2026-08-05T20:08:47.837042+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-lublin-ul-makowa-swietochowskiego-ID4xcS7",
@@ -9296,7 +9296,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141675+02:00",
-   "last_seen": "2026-08-05T11:22:27.249703+02:00",
+   "last_seen": "2026-08-05T20:08:47.837057+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-rolno-inwestycyjna-lublin-ul-blawatkowa-ID4x04w",
@@ -9373,7 +9373,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141705+02:00",
-   "last_seen": "2026-08-05T11:22:27.249723+02:00",
+   "last_seen": "2026-08-05T20:08:47.837071+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-w-lublinie-ul-skowronkowa-ID4vZ5H",
@@ -9412,7 +9412,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141721+02:00",
-   "last_seen": "2026-08-05T11:22:27.249742+02:00",
+   "last_seen": "2026-08-05T20:08:47.837086+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-2km-od-wezla-s17-ID4vCCf",
@@ -9451,7 +9451,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141736+02:00",
-   "last_seen": "2026-08-05T11:22:27.249761+02:00",
+   "last_seen": "2026-08-05T20:08:47.837129+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-komercyjna-przy-ul-wyzynnej-ID4wl0r",
@@ -9604,7 +9604,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141800+02:00",
-   "last_seen": "2026-08-05T11:22:27.249779+02:00",
+   "last_seen": "2026-08-05T20:08:47.837148+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-przy-zalewie-zemborzyckim-ul-kreznicka-ID4tkL7",
@@ -9643,7 +9643,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141816+02:00",
-   "last_seen": "2026-08-05T11:22:27.249799+02:00",
+   "last_seen": "2026-08-05T20:08:47.837164+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/lublin-uslugi-przemysl-magazyny-pow-88ar-ID4sSBW",
@@ -9682,7 +9682,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141832+02:00",
-   "last_seen": "2026-08-05T11:22:27.249818+02:00",
+   "last_seen": "2026-08-05T20:08:47.837180+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-lublin-ul-kijanska-ID4rMq0",
@@ -9721,7 +9721,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141859+02:00",
-   "last_seen": "2026-08-05T11:22:27.249856+02:00",
+   "last_seen": "2026-08-05T20:08:47.837210+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/atrakcyjna-dzialka-pod-aktywnosc-gospodarcza-ID4qWsW",
@@ -9760,7 +9760,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141891+02:00",
-   "last_seen": "2026-08-05T11:22:27.249837+02:00",
+   "last_seen": "2026-08-05T20:08:47.837195+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialki-pod-zabudowe-jednorodzinna-w-lublinie-ID4r10c",
@@ -9900,7 +9900,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.141985+02:00",
-   "last_seen": "2026-08-05T11:22:27.249875+02:00",
+   "last_seen": "2026-08-05T20:08:47.837226+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-w-lublinie-ul-folwarczna-ID4xQ7B",
@@ -9939,7 +9939,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.142017+02:00",
-   "last_seen": "2026-08-05T11:22:27.249894+02:00",
+   "last_seen": "2026-08-05T20:08:47.837241+02:00",
    "active": true,
    "days_active": 54,
    "deactivated_at": "2026-07-06T20:29:27.447901+02:00",
@@ -9976,7 +9976,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.142048+02:00",
-   "last_seen": "2026-08-05T11:22:27.249913+02:00",
+   "last_seen": "2026-08-05T20:08:47.837257+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-rolna-w-lubelskiej-strefie-ekonomicznej-ID4ej0Z",
@@ -10015,7 +10015,7 @@
     ]
    },
    "first_seen": "2026-06-11T20:55:28.142079+02:00",
-   "last_seen": "2026-08-05T11:22:27.249932+02:00",
+   "last_seen": "2026-08-05T20:08:47.837272+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-1-9ha-lublin-pod-przemysl-uslugi-ID43wcM",
@@ -10053,9 +10053,9 @@
    },
    "first_seen": "2026-06-11T21:39:41.875397+02:00",
    "last_seen": "2026-08-05T11:22:27.249063+02:00",
-   "active": true,
+   "active": false,
    "days_active": 54,
-   "deactivated_at": "2026-07-29T19:52:20.171900+02:00",
+   "deactivated_at": "2026-08-05T20:08:48.427473+02:00",
    "reactivated_at": "2026-08-02T19:40:29.367691+02:00"
   },
   {
@@ -10119,7 +10119,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875499+02:00",
-   "last_seen": "2026-08-05T11:22:27.242019+02:00",
+   "last_seen": "2026-08-05T20:08:47.828541+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.olx.pl/d/oferta/dzialki-budowlane-lublin-poludniowa-swietochowskiego-CID3-ID1b1DSQ.html",
@@ -10152,7 +10152,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875530+02:00",
-   "last_seen": "2026-08-05T11:22:27.242041+02:00",
+   "last_seen": "2026-08-05T20:08:47.828559+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10186,7 +10186,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875554+02:00",
-   "last_seen": "2026-08-05T11:22:27.240849+02:00",
+   "last_seen": "2026-08-05T20:08:47.827563+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1040-m-lublin-ID4AlQb",
@@ -10221,7 +10221,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875576+02:00",
-   "last_seen": "2026-08-05T11:22:27.241015+02:00",
+   "last_seen": "2026-08-05T20:08:47.827694+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/duza-dzialka-budowlana-w-lublinie-1503-m-ID4AlLM",
@@ -10256,7 +10256,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875603+02:00",
-   "last_seen": "2026-08-05T11:22:27.242061+02:00",
+   "last_seen": "2026-08-05T20:08:47.828577+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10289,7 +10289,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875647+02:00",
-   "last_seen": "2026-08-05T11:22:27.242083+02:00",
+   "last_seen": "2026-08-05T20:08:47.828595+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10320,7 +10320,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875698+02:00",
-   "last_seen": "2026-08-05T11:22:27.242105+02:00",
+   "last_seen": "2026-08-05T20:08:47.828612+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10353,7 +10353,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875743+02:00",
-   "last_seen": "2026-08-05T11:22:27.241040+02:00",
+   "last_seen": "2026-08-05T20:08:47.827712+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10386,7 +10386,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875798+02:00",
-   "last_seen": "2026-08-05T11:22:27.241201+02:00",
+   "last_seen": "2026-08-05T20:08:47.827833+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1000-m-dozynkowa-konwaliowa-ID4yAyn",
@@ -10421,7 +10421,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875843+02:00",
-   "last_seen": "2026-08-05T11:22:27.242126+02:00",
+   "last_seen": "2026-08-05T20:08:47.828630+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10455,7 +10455,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875888+02:00",
-   "last_seen": "2026-08-05T11:22:27.242147+02:00",
+   "last_seen": "2026-08-05T20:08:47.828647+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10488,7 +10488,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875931+02:00",
-   "last_seen": "2026-08-05T11:22:27.242169+02:00",
+   "last_seen": "2026-08-05T20:08:47.828664+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10521,7 +10521,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.875974+02:00",
-   "last_seen": "2026-08-05T11:22:27.241226+02:00",
+   "last_seen": "2026-08-05T20:08:47.827851+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10554,7 +10554,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876000+02:00",
-   "last_seen": "2026-08-05T11:22:27.241411+02:00",
+   "last_seen": "2026-08-05T20:08:47.827999+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10588,7 +10588,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876042+02:00",
-   "last_seen": "2026-08-05T11:22:27.242191+02:00",
+   "last_seen": "2026-08-05T20:08:47.828681+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10621,7 +10621,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876086+02:00",
-   "last_seen": "2026-08-05T11:22:27.242212+02:00",
+   "last_seen": "2026-08-05T20:08:47.828698+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10654,7 +10654,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876129+02:00",
-   "last_seen": "2026-08-05T11:22:27.242232+02:00",
+   "last_seen": "2026-08-05T20:08:47.828715+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10699,7 +10699,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876172+02:00",
-   "last_seen": "2026-08-05T11:22:27.242254+02:00",
+   "last_seen": "2026-08-05T20:08:47.828733+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10732,7 +10732,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876216+02:00",
-   "last_seen": "2026-08-05T11:22:27.242276+02:00",
+   "last_seen": "2026-08-05T20:08:47.828751+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10763,7 +10763,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876260+02:00",
-   "last_seen": "2026-08-05T11:22:27.242297+02:00",
+   "last_seen": "2026-08-05T20:08:47.828769+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10808,7 +10808,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876304+02:00",
-   "last_seen": "2026-08-05T11:22:27.242319+02:00",
+   "last_seen": "2026-08-05T20:08:47.828786+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10841,7 +10841,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876348+02:00",
-   "last_seen": "2026-08-05T11:22:27.242340+02:00",
+   "last_seen": "2026-08-05T20:08:47.828803+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/sprzedam-dzialke-uslugowo-mieszkaniowa-lublin-konopnica-ID4BnjY"
@@ -10873,7 +10873,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876391+02:00",
-   "last_seen": "2026-08-05T11:22:27.242362+02:00",
+   "last_seen": "2026-08-05T20:08:47.828821+02:00",
    "active": true,
    "days_active": 54
   },
@@ -10984,7 +10984,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876523+02:00",
-   "last_seen": "2026-08-05T11:22:27.242383+02:00",
+   "last_seen": "2026-08-05T20:08:47.828838+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11015,7 +11015,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876571+02:00",
-   "last_seen": "2026-08-05T11:22:27.242404+02:00",
+   "last_seen": "2026-08-05T20:08:47.828856+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11049,7 +11049,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876615+02:00",
-   "last_seen": "2026-08-05T11:22:27.242423+02:00",
+   "last_seen": "2026-08-05T20:08:47.828874+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11082,7 +11082,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876659+02:00",
-   "last_seen": "2026-08-05T11:22:27.242444+02:00",
+   "last_seen": "2026-08-05T20:08:47.828892+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11113,7 +11113,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876713+02:00",
-   "last_seen": "2026-08-05T11:22:27.242465+02:00",
+   "last_seen": "2026-08-05T20:08:47.828911+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11146,7 +11146,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876756+02:00",
-   "last_seen": "2026-08-05T11:22:27.242485+02:00",
+   "last_seen": "2026-08-05T20:08:47.828929+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11177,7 +11177,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876810+02:00",
-   "last_seen": "2026-08-05T11:22:27.242504+02:00",
+   "last_seen": "2026-08-05T20:08:47.828947+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11210,7 +11210,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876854+02:00",
-   "last_seen": "2026-08-05T11:22:27.242524+02:00",
+   "last_seen": "2026-08-05T20:08:47.828965+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11243,7 +11243,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876897+02:00",
-   "last_seen": "2026-08-05T11:22:27.242544+02:00",
+   "last_seen": "2026-08-05T20:08:47.828983+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11276,7 +11276,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876941+02:00",
-   "last_seen": "2026-08-05T11:22:27.242565+02:00",
+   "last_seen": "2026-08-05T20:08:47.829001+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11309,7 +11309,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.876986+02:00",
-   "last_seen": "2026-08-05T11:22:27.242585+02:00",
+   "last_seen": "2026-08-05T20:08:47.829019+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11372,7 +11372,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877080+02:00",
-   "last_seen": "2026-08-05T11:22:27.242605+02:00",
+   "last_seen": "2026-08-05T20:08:47.829037+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11405,7 +11405,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877104+02:00",
-   "last_seen": "2026-08-05T11:22:27.242651+02:00",
+   "last_seen": "2026-08-05T20:08:47.829057+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11438,7 +11438,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877128+02:00",
-   "last_seen": "2026-08-05T11:22:27.242677+02:00",
+   "last_seen": "2026-08-05T20:08:47.829075+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.olx.pl/d/oferta/sprzedam-dzialke-1200-m2-hajdow-zadebe-CID3-ID1apk0o.html"
@@ -11470,7 +11470,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877152+02:00",
-   "last_seen": "2026-08-05T11:22:27.242698+02:00",
+   "last_seen": "2026-08-05T20:08:47.829114+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11504,7 +11504,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877194+02:00",
-   "last_seen": "2026-08-05T11:22:27.242720+02:00",
+   "last_seen": "2026-08-05T20:08:47.829148+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-25-arow-wszystkie-media-asfaltowy-dojazd-CID3-ID1amf9K.html"
@@ -11538,7 +11538,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877241+02:00",
-   "last_seen": "2026-08-05T11:22:27.242740+02:00",
+   "last_seen": "2026-08-05T20:08:47.829167+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11571,7 +11571,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877317+02:00",
-   "last_seen": "2026-08-05T11:22:27.242761+02:00",
+   "last_seen": "2026-08-05T20:08:47.829186+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11604,7 +11604,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877363+02:00",
-   "last_seen": "2026-08-05T11:22:27.242782+02:00",
+   "last_seen": "2026-08-05T20:08:47.829204+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11763,7 +11763,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877543+02:00",
-   "last_seen": "2026-08-05T11:22:27.242803+02:00",
+   "last_seen": "2026-08-05T20:08:47.829221+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11796,7 +11796,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877587+02:00",
-   "last_seen": "2026-08-05T11:22:27.242824+02:00",
+   "last_seen": "2026-08-05T20:08:47.829239+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11827,7 +11827,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877632+02:00",
-   "last_seen": "2026-08-05T11:22:27.242845+02:00",
+   "last_seen": "2026-08-05T20:08:47.829258+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11858,7 +11858,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877690+02:00",
-   "last_seen": "2026-08-05T11:22:27.242866+02:00",
+   "last_seen": "2026-08-05T20:08:47.829275+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11891,7 +11891,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877736+02:00",
-   "last_seen": "2026-08-05T11:22:27.242886+02:00",
+   "last_seen": "2026-08-05T20:08:47.829292+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11924,7 +11924,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877780+02:00",
-   "last_seen": "2026-08-05T11:22:27.242908+02:00",
+   "last_seen": "2026-08-05T20:08:47.829309+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11957,7 +11957,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877826+02:00",
-   "last_seen": "2026-08-05T11:22:27.242929+02:00",
+   "last_seen": "2026-08-05T20:08:47.829326+02:00",
    "active": true,
    "days_active": 54
   },
@@ -11990,7 +11990,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877871+02:00",
-   "last_seen": "2026-08-05T11:22:27.242949+02:00",
+   "last_seen": "2026-08-05T20:08:47.829344+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12021,7 +12021,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877916+02:00",
-   "last_seen": "2026-08-05T11:22:27.242971+02:00",
+   "last_seen": "2026-08-05T20:08:47.829362+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12054,7 +12054,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.877961+02:00",
-   "last_seen": "2026-08-05T11:22:27.242993+02:00",
+   "last_seen": "2026-08-05T20:08:47.829380+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12119,7 +12119,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878067+02:00",
-   "last_seen": "2026-08-05T11:22:27.243014+02:00",
+   "last_seen": "2026-08-05T20:08:47.829398+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12150,7 +12150,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878110+02:00",
-   "last_seen": "2026-08-05T11:22:27.243036+02:00",
+   "last_seen": "2026-08-05T20:08:47.829416+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12209,7 +12209,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878155+02:00",
-   "last_seen": "2026-08-05T11:22:27.243058+02:00",
+   "last_seen": "2026-08-05T20:08:47.829435+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12242,7 +12242,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878200+02:00",
-   "last_seen": "2026-08-05T11:22:27.243079+02:00",
+   "last_seen": "2026-08-05T20:08:47.829453+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12275,7 +12275,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878245+02:00",
-   "last_seen": "2026-08-05T11:22:27.243100+02:00",
+   "last_seen": "2026-08-05T20:08:47.829471+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/piekna-zielona-dzialka-pod-twoj-dom-ID4BIeS",
@@ -12456,7 +12456,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878472+02:00",
-   "last_seen": "2026-08-05T11:22:27.243121+02:00",
+   "last_seen": "2026-08-05T20:08:47.829490+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12489,7 +12489,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878517+02:00",
-   "last_seen": "2026-08-05T11:22:27.243145+02:00",
+   "last_seen": "2026-08-05T20:08:47.829509+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12520,7 +12520,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878562+02:00",
-   "last_seen": "2026-08-05T11:22:27.243166+02:00",
+   "last_seen": "2026-08-05T20:08:47.829527+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12599,7 +12599,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878653+02:00",
-   "last_seen": "2026-08-05T11:22:27.243188+02:00",
+   "last_seen": "2026-08-05T20:08:47.829546+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12630,7 +12630,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878708+02:00",
-   "last_seen": "2026-08-05T11:22:27.243210+02:00",
+   "last_seen": "2026-08-05T20:08:47.829565+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12663,7 +12663,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878754+02:00",
-   "last_seen": "2026-08-05T11:22:27.243233+02:00",
+   "last_seen": "2026-08-05T20:08:47.829584+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12696,7 +12696,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878802+02:00",
-   "last_seen": "2026-08-05T11:22:27.243254+02:00",
+   "last_seen": "2026-08-05T20:08:47.829603+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12761,7 +12761,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878892+02:00",
-   "last_seen": "2026-08-05T11:22:27.243275+02:00",
+   "last_seen": "2026-08-05T20:08:47.829620+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12795,7 +12795,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878938+02:00",
-   "last_seen": "2026-08-05T11:22:27.243296+02:00",
+   "last_seen": "2026-08-05T20:08:47.829639+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12828,7 +12828,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.878983+02:00",
-   "last_seen": "2026-08-05T11:22:27.243317+02:00",
+   "last_seen": "2026-08-05T20:08:47.829658+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.anma.lublin.pl/dzialki-na-sprzedaz-499000zl-2227m2-lublin-zadebie-o6957605"
@@ -12897,7 +12897,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879092+02:00",
-   "last_seen": "2026-08-05T11:22:27.243339+02:00",
+   "last_seen": "2026-08-05T20:08:47.829676+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12928,7 +12928,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879137+02:00",
-   "last_seen": "2026-08-05T11:22:27.243361+02:00",
+   "last_seen": "2026-08-05T20:08:47.829696+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12961,7 +12961,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879182+02:00",
-   "last_seen": "2026-08-05T11:22:27.243382+02:00",
+   "last_seen": "2026-08-05T20:08:47.829714+02:00",
    "active": true,
    "days_active": 54
   },
@@ -12994,7 +12994,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879227+02:00",
-   "last_seen": "2026-08-05T11:22:27.243403+02:00",
+   "last_seen": "2026-08-05T20:08:47.829733+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13025,7 +13025,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879272+02:00",
-   "last_seen": "2026-08-05T11:22:27.243424+02:00",
+   "last_seen": "2026-08-05T20:08:47.829752+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13071,7 +13071,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879318+02:00",
-   "last_seen": "2026-08-05T11:22:27.243445+02:00",
+   "last_seen": "2026-08-05T20:08:47.829771+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13138,7 +13138,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879410+02:00",
-   "last_seen": "2026-08-05T11:22:27.243466+02:00",
+   "last_seen": "2026-08-05T20:08:47.829789+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13171,7 +13171,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879455+02:00",
-   "last_seen": "2026-08-05T11:22:27.243488+02:00",
+   "last_seen": "2026-08-05T20:08:47.829808+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13204,7 +13204,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879502+02:00",
-   "last_seen": "2026-08-05T11:22:27.243510+02:00",
+   "last_seen": "2026-08-05T20:08:47.829828+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13237,7 +13237,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879549+02:00",
-   "last_seen": "2026-08-05T11:22:27.243531+02:00",
+   "last_seen": "2026-08-05T20:08:47.829847+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13270,7 +13270,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879595+02:00",
-   "last_seen": "2026-08-05T11:22:27.243552+02:00",
+   "last_seen": "2026-08-05T20:08:47.829866+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13315,7 +13315,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879642+02:00",
-   "last_seen": "2026-08-05T11:22:27.243573+02:00",
+   "last_seen": "2026-08-05T20:08:47.829885+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13392,7 +13392,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879745+02:00",
-   "last_seen": "2026-08-05T11:22:27.243595+02:00",
+   "last_seen": "2026-08-05T20:08:47.829904+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13423,7 +13423,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879791+02:00",
-   "last_seen": "2026-08-05T11:22:27.243639+02:00",
+   "last_seen": "2026-08-05T20:08:47.829924+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13524,7 +13524,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.879960+02:00",
-   "last_seen": "2026-08-05T11:22:27.243665+02:00",
+   "last_seen": "2026-08-05T20:08:47.829943+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13555,7 +13555,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880008+02:00",
-   "last_seen": "2026-08-05T11:22:27.243688+02:00",
+   "last_seen": "2026-08-05T20:08:47.829963+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13588,7 +13588,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880079+02:00",
-   "last_seen": "2026-08-05T11:22:27.243709+02:00",
+   "last_seen": "2026-08-05T20:08:47.829982+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13631,7 +13631,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880110+02:00",
-   "last_seen": "2026-08-05T11:22:27.243731+02:00",
+   "last_seen": "2026-08-05T20:08:47.830001+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13732,7 +13732,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880244+02:00",
-   "last_seen": "2026-08-05T11:22:27.243754+02:00",
+   "last_seen": "2026-08-05T20:08:47.830021+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13765,7 +13765,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880290+02:00",
-   "last_seen": "2026-08-05T11:22:27.243776+02:00",
+   "last_seen": "2026-08-05T20:08:47.830041+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13810,7 +13810,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880338+02:00",
-   "last_seen": "2026-08-05T11:22:27.243798+02:00",
+   "last_seen": "2026-08-05T20:08:47.830060+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13946,7 +13946,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880528+02:00",
-   "last_seen": "2026-08-05T11:22:27.243820+02:00",
+   "last_seen": "2026-08-05T20:08:47.830080+02:00",
    "active": true,
    "days_active": 54
   },
@@ -13991,7 +13991,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880576+02:00",
-   "last_seen": "2026-08-05T11:22:27.243843+02:00",
+   "last_seen": "2026-08-05T20:08:47.830124+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14024,7 +14024,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880794+02:00",
-   "last_seen": "2026-08-05T11:22:27.243865+02:00",
+   "last_seen": "2026-08-05T20:08:47.830149+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14057,7 +14057,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880825+02:00",
-   "last_seen": "2026-08-05T11:22:27.243888+02:00",
+   "last_seen": "2026-08-05T20:08:47.830170+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlano-uslugowa-1000-m2-lublin-felin-ID4yMVT"
@@ -14092,7 +14092,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880867+02:00",
-   "last_seen": "2026-08-05T11:22:27.243910+02:00",
+   "last_seen": "2026-08-05T20:08:47.830191+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14125,7 +14125,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.880915+02:00",
-   "last_seen": "2026-08-05T11:22:27.243932+02:00",
+   "last_seen": "2026-08-05T20:08:47.830212+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14238,7 +14238,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881078+02:00",
-   "last_seen": "2026-08-05T11:22:27.243955+02:00",
+   "last_seen": "2026-08-05T20:08:47.830232+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14271,7 +14271,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881124+02:00",
-   "last_seen": "2026-08-05T11:22:27.243978+02:00",
+   "last_seen": "2026-08-05T20:08:47.830252+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14302,7 +14302,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881168+02:00",
-   "last_seen": "2026-08-05T11:22:27.244000+02:00",
+   "last_seen": "2026-08-05T20:08:47.830273+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14335,7 +14335,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881217+02:00",
-   "last_seen": "2026-08-05T11:22:27.244022+02:00",
+   "last_seen": "2026-08-05T20:08:47.830293+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14412,7 +14412,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881364+02:00",
-   "last_seen": "2026-08-05T11:22:27.244045+02:00",
+   "last_seen": "2026-08-05T20:08:47.830313+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14445,7 +14445,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881414+02:00",
-   "last_seen": "2026-08-05T11:22:27.244068+02:00",
+   "last_seen": "2026-08-05T20:08:47.830334+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14512,7 +14512,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881511+02:00",
-   "last_seen": "2026-08-05T11:22:27.244091+02:00",
+   "last_seen": "2026-08-05T20:08:47.830355+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14545,7 +14545,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881560+02:00",
-   "last_seen": "2026-08-05T11:22:27.244114+02:00",
+   "last_seen": "2026-08-05T20:08:47.830376+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-1400-m2-zawieprzycka-ID4oUde",
@@ -14580,7 +14580,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881607+02:00",
-   "last_seen": "2026-08-05T11:22:27.244136+02:00",
+   "last_seen": "2026-08-05T20:08:47.830396+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14613,7 +14613,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881658+02:00",
-   "last_seen": "2026-08-05T11:22:27.244160+02:00",
+   "last_seen": "2026-08-05T20:08:47.830416+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-lublin-ul-makowa-swietochowskiego-ID4xcS7",
@@ -14660,7 +14660,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881710+02:00",
-   "last_seen": "2026-08-05T11:22:27.244183+02:00",
+   "last_seen": "2026-08-05T20:08:47.830436+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14693,7 +14693,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881759+02:00",
-   "last_seen": "2026-08-05T11:22:27.244205+02:00",
+   "last_seen": "2026-08-05T20:08:47.830457+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14726,7 +14726,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881806+02:00",
-   "last_seen": "2026-08-05T11:22:27.244229+02:00",
+   "last_seen": "2026-08-05T20:08:47.830477+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14759,7 +14759,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881858+02:00",
-   "last_seen": "2026-08-05T11:22:27.244252+02:00",
+   "last_seen": "2026-08-05T20:08:47.830499+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14793,7 +14793,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881905+02:00",
-   "last_seen": "2026-08-05T11:22:27.244274+02:00",
+   "last_seen": "2026-08-05T20:08:47.830520+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14836,7 +14836,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.881952+02:00",
-   "last_seen": "2026-08-05T11:22:27.244298+02:00",
+   "last_seen": "2026-08-05T20:08:47.830540+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14867,7 +14867,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882000+02:00",
-   "last_seen": "2026-08-05T11:22:27.244321+02:00",
+   "last_seen": "2026-08-05T20:08:47.830561+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14898,7 +14898,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882065+02:00",
-   "last_seen": "2026-08-05T11:22:27.244343+02:00",
+   "last_seen": "2026-08-05T20:08:47.830582+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14931,7 +14931,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882112+02:00",
-   "last_seen": "2026-08-05T11:22:27.244366+02:00",
+   "last_seen": "2026-08-05T20:08:47.830603+02:00",
    "active": true,
    "days_active": 54
   },
@@ -14976,7 +14976,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882160+02:00",
-   "last_seen": "2026-08-05T11:22:27.244389+02:00",
+   "last_seen": "2026-08-05T20:08:47.830624+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15007,7 +15007,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882209+02:00",
-   "last_seen": "2026-08-05T11:22:27.244412+02:00",
+   "last_seen": "2026-08-05T20:08:47.830645+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15041,7 +15041,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882256+02:00",
-   "last_seen": "2026-08-05T11:22:27.244435+02:00",
+   "last_seen": "2026-08-05T20:08:47.830666+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15074,7 +15074,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882303+02:00",
-   "last_seen": "2026-08-05T11:22:27.244459+02:00",
+   "last_seen": "2026-08-05T20:08:47.830686+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15105,7 +15105,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882352+02:00",
-   "last_seen": "2026-08-05T11:22:27.244482+02:00",
+   "last_seen": "2026-08-05T20:08:47.830707+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15138,7 +15138,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882400+02:00",
-   "last_seen": "2026-08-05T11:22:27.244505+02:00",
+   "last_seen": "2026-08-05T20:08:47.830728+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15201,7 +15201,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882500+02:00",
-   "last_seen": "2026-08-05T11:22:27.244528+02:00",
+   "last_seen": "2026-08-05T20:08:47.830749+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15234,7 +15234,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882550+02:00",
-   "last_seen": "2026-08-05T11:22:27.244552+02:00",
+   "last_seen": "2026-08-05T20:08:47.830770+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15267,7 +15267,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882598+02:00",
-   "last_seen": "2026-08-05T11:22:27.244575+02:00",
+   "last_seen": "2026-08-05T20:08:47.830791+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlano-uslugowa-na-sprzedaz-w-lublinie-CID3-IDZs3nD.html"
@@ -15301,7 +15301,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882646+02:00",
-   "last_seen": "2026-08-05T11:22:27.244599+02:00",
+   "last_seen": "2026-08-05T20:08:47.830812+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15334,7 +15334,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882705+02:00",
-   "last_seen": "2026-08-05T11:22:27.244645+02:00",
+   "last_seen": "2026-08-05T20:08:47.830833+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15367,7 +15367,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882752+02:00",
-   "last_seen": "2026-08-05T11:22:27.244672+02:00",
+   "last_seen": "2026-08-05T20:08:47.830854+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15432,7 +15432,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882856+02:00",
-   "last_seen": "2026-08-05T11:22:27.244696+02:00",
+   "last_seen": "2026-08-05T20:08:47.830875+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15499,7 +15499,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.882956+02:00",
-   "last_seen": "2026-08-05T11:22:27.244720+02:00",
+   "last_seen": "2026-08-05T20:08:47.830896+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15532,7 +15532,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883005+02:00",
-   "last_seen": "2026-08-05T11:22:27.244745+02:00",
+   "last_seen": "2026-08-05T20:08:47.830918+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15565,7 +15565,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883073+02:00",
-   "last_seen": "2026-08-05T11:22:27.244770+02:00",
+   "last_seen": "2026-08-05T20:08:47.830940+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15598,7 +15598,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883138+02:00",
-   "last_seen": "2026-08-05T11:22:27.244795+02:00",
+   "last_seen": "2026-08-05T20:08:47.830962+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15631,7 +15631,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883211+02:00",
-   "last_seen": "2026-08-05T11:22:27.244818+02:00",
+   "last_seen": "2026-08-05T20:08:47.830983+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15698,7 +15698,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883321+02:00",
-   "last_seen": "2026-08-05T11:22:27.244843+02:00",
+   "last_seen": "2026-08-05T20:08:47.831005+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15743,7 +15743,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883397+02:00",
-   "last_seen": "2026-08-05T11:22:27.244869+02:00",
+   "last_seen": "2026-08-05T20:08:47.831027+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15776,7 +15776,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883463+02:00",
-   "last_seen": "2026-08-05T11:22:27.244893+02:00",
+   "last_seen": "2026-08-05T20:08:47.831049+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15809,7 +15809,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883526+02:00",
-   "last_seen": "2026-08-05T11:22:27.244917+02:00",
+   "last_seen": "2026-08-05T20:08:47.831072+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15840,7 +15840,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883572+02:00",
-   "last_seen": "2026-08-05T11:22:27.244941+02:00",
+   "last_seen": "2026-08-05T20:08:47.831119+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15873,7 +15873,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883631+02:00",
-   "last_seen": "2026-08-05T11:22:27.244965+02:00",
+   "last_seen": "2026-08-05T20:08:47.831148+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15906,7 +15906,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883710+02:00",
-   "last_seen": "2026-08-05T11:22:27.244989+02:00",
+   "last_seen": "2026-08-05T20:08:47.831171+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15939,7 +15939,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883759+02:00",
-   "last_seen": "2026-08-05T11:22:27.245013+02:00",
+   "last_seen": "2026-08-05T20:08:47.831194+02:00",
    "active": true,
    "days_active": 54
   },
@@ -15972,7 +15972,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883828+02:00",
-   "last_seen": "2026-08-05T11:22:27.245038+02:00",
+   "last_seen": "2026-08-05T20:08:47.831217+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16006,7 +16006,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883889+02:00",
-   "last_seen": "2026-08-05T11:22:27.245063+02:00",
+   "last_seen": "2026-08-05T20:08:47.831239+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16039,7 +16039,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.883947+02:00",
-   "last_seen": "2026-08-05T11:22:27.245087+02:00",
+   "last_seen": "2026-08-05T20:08:47.831261+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16073,7 +16073,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884003+02:00",
-   "last_seen": "2026-08-05T11:22:27.245112+02:00",
+   "last_seen": "2026-08-05T20:08:47.831284+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16118,7 +16118,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884081+02:00",
-   "last_seen": "2026-08-05T11:22:27.245138+02:00",
+   "last_seen": "2026-08-05T20:08:47.831306+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16151,7 +16151,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884137+02:00",
-   "last_seen": "2026-08-05T11:22:27.245163+02:00",
+   "last_seen": "2026-08-05T20:08:47.831329+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16184,7 +16184,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884195+02:00",
-   "last_seen": "2026-08-05T11:22:27.245187+02:00",
+   "last_seen": "2026-08-05T20:08:47.831351+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16217,7 +16217,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884256+02:00",
-   "last_seen": "2026-08-05T11:22:27.245244+02:00",
+   "last_seen": "2026-08-05T20:08:47.831404+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16250,7 +16250,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884314+02:00",
-   "last_seen": "2026-08-05T11:22:27.245269+02:00",
+   "last_seen": "2026-08-05T20:08:47.831426+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16283,7 +16283,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884375+02:00",
-   "last_seen": "2026-08-05T11:22:27.245294+02:00",
+   "last_seen": "2026-08-05T20:08:47.831449+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16328,7 +16328,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884433+02:00",
-   "last_seen": "2026-08-05T11:22:27.245319+02:00",
+   "last_seen": "2026-08-05T20:08:47.831471+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-w-lublinie-w-dobrej-lokalizacji-ID4BXkv"
@@ -16362,7 +16362,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884485+02:00",
-   "last_seen": "2026-08-05T11:22:27.245343+02:00",
+   "last_seen": "2026-08-05T20:08:47.831492+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16396,7 +16396,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884535+02:00",
-   "last_seen": "2026-08-05T11:22:27.245368+02:00",
+   "last_seen": "2026-08-05T20:08:47.831515+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16429,7 +16429,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884584+02:00",
-   "last_seen": "2026-08-05T11:22:27.245393+02:00",
+   "last_seen": "2026-08-05T20:08:47.831538+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16462,7 +16462,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884633+02:00",
-   "last_seen": "2026-08-05T11:22:27.245419+02:00",
+   "last_seen": "2026-08-05T20:08:47.831560+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16495,7 +16495,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884694+02:00",
-   "last_seen": "2026-08-05T11:22:27.245444+02:00",
+   "last_seen": "2026-08-05T20:08:47.831583+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16528,7 +16528,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884745+02:00",
-   "last_seen": "2026-08-05T11:22:27.245469+02:00",
+   "last_seen": "2026-08-05T20:08:47.831606+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16595,7 +16595,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884844+02:00",
-   "last_seen": "2026-08-05T11:22:27.245494+02:00",
+   "last_seen": "2026-08-05T20:08:47.831628+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16628,7 +16628,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884894+02:00",
-   "last_seen": "2026-08-05T11:22:27.245520+02:00",
+   "last_seen": "2026-08-05T20:08:47.831651+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16661,7 +16661,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:39:41.884951+02:00",
-   "last_seen": "2026-08-05T11:22:27.245545+02:00",
+   "last_seen": "2026-08-05T20:08:47.831674+02:00",
    "active": true,
    "days_active": 54
   },
@@ -16807,7 +16807,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141453+02:00",
-   "last_seen": "2026-08-05T11:22:27.249957+02:00",
+   "last_seen": "2026-08-05T20:08:47.836258+02:00",
    "active": true,
    "days_active": 54,
    "also_at": "https://adresowo.pl/o/dzialka-inwestycyjna-lublin-ul-kijanska-u7h2y4",
@@ -17068,7 +17068,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141634+02:00",
-   "last_seen": "2026-08-05T11:22:27.249982+02:00",
+   "last_seen": "2026-08-05T20:08:47.836282+02:00",
    "active": true,
    "days_active": 54,
    "deactivated_at": "2026-07-10T20:10:50.486773+02:00",
@@ -17105,7 +17105,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141658+02:00",
-   "last_seen": "2026-08-05T11:22:27.250007+02:00",
+   "last_seen": "2026-08-05T20:08:47.836306+02:00",
    "active": true,
    "days_active": 54,
    "deactivated_at": "2026-07-10T20:10:50.486773+02:00",
@@ -17142,7 +17142,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141685+02:00",
-   "last_seen": "2026-08-05T11:22:27.250033+02:00",
+   "last_seen": "2026-08-05T20:08:47.836328+02:00",
    "active": true,
    "days_active": 54,
    "deactivated_at": "2026-07-10T20:10:50.486773+02:00",
@@ -17176,7 +17176,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141727+02:00",
-   "last_seen": "2026-08-05T11:22:27.250059+02:00",
+   "last_seen": "2026-08-05T20:08:47.836352+02:00",
    "active": true,
    "days_active": 54,
    "deactivated_at": "2026-07-10T20:10:50.486773+02:00",
@@ -17213,7 +17213,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141762+02:00",
-   "last_seen": "2026-08-05T11:22:27.250084+02:00",
+   "last_seen": "2026-08-05T20:08:47.836374+02:00",
    "active": true,
    "days_active": 54,
    "deactivated_at": "2026-07-10T20:10:50.486773+02:00",
@@ -17250,7 +17250,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141796+02:00",
-   "last_seen": "2026-08-05T11:22:27.250108+02:00",
+   "last_seen": "2026-08-05T20:08:47.836398+02:00",
    "active": true,
    "days_active": 54,
    "deactivated_at": "2026-07-10T20:10:50.486773+02:00",
@@ -17287,7 +17287,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141829+02:00",
-   "last_seen": "2026-08-05T11:22:27.250134+02:00",
+   "last_seen": "2026-08-05T20:08:47.836421+02:00",
    "active": true,
    "days_active": 54,
    "deactivated_at": "2026-07-29T11:25:30.644574+02:00",
@@ -17324,7 +17324,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141862+02:00",
-   "last_seen": "2026-08-05T11:22:27.250159+02:00",
+   "last_seen": "2026-08-05T20:08:47.836444+02:00",
    "active": true,
    "days_active": 54,
    "deactivated_at": "2026-07-29T11:25:30.644574+02:00",
@@ -17361,7 +17361,7 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141896+02:00",
-   "last_seen": "2026-08-05T11:22:27.250184+02:00",
+   "last_seen": "2026-08-05T20:08:47.836466+02:00",
    "active": true,
    "days_active": 54,
    "deactivated_at": "2026-07-29T11:25:30.644574+02:00",
@@ -17398,11 +17398,11 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141930+02:00",
-   "last_seen": "2026-08-04T20:16:18.233613+02:00",
-   "active": false,
-   "days_active": 53,
+   "last_seen": "2026-08-05T20:08:47.836489+02:00",
+   "active": true,
+   "days_active": 54,
    "deactivated_at": "2026-08-05T11:22:27.281240+02:00",
-   "reactivated_at": "2026-07-30T11:17:09.306316+02:00"
+   "reactivated_at": "2026-08-05T20:08:47.836489+02:00"
   },
   {
    "id": "anma:1005982",
@@ -17435,11 +17435,11 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.141969+02:00",
-   "last_seen": "2026-08-04T20:16:18.233634+02:00",
-   "active": false,
-   "days_active": 53,
+   "last_seen": "2026-08-05T20:08:47.836514+02:00",
+   "active": true,
+   "days_active": 54,
    "deactivated_at": "2026-08-05T11:22:27.281240+02:00",
-   "reactivated_at": "2026-07-30T11:17:09.306338+02:00"
+   "reactivated_at": "2026-08-05T20:08:47.836514+02:00"
   },
   {
    "id": "anma:1005393",
@@ -17472,11 +17472,11 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.142002+02:00",
-   "last_seen": "2026-08-04T20:16:18.233655+02:00",
-   "active": false,
-   "days_active": 53,
+   "last_seen": "2026-08-05T20:08:47.836539+02:00",
+   "active": true,
+   "days_active": 54,
    "deactivated_at": "2026-08-05T11:22:27.281240+02:00",
-   "reactivated_at": "2026-07-30T11:17:09.306361+02:00"
+   "reactivated_at": "2026-08-05T20:08:47.836539+02:00"
   },
   {
    "id": "anma:990708",
@@ -17509,11 +17509,11 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.142035+02:00",
-   "last_seen": "2026-08-04T20:16:18.233677+02:00",
-   "active": false,
-   "days_active": 53,
+   "last_seen": "2026-08-05T20:08:47.836563+02:00",
+   "active": true,
+   "days_active": 54,
    "deactivated_at": "2026-08-05T11:22:27.281240+02:00",
-   "reactivated_at": "2026-08-04T20:16:18.233677+02:00"
+   "reactivated_at": "2026-08-05T20:08:47.836563+02:00"
   },
   {
    "id": "anma:945938",
@@ -17543,11 +17543,11 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.142068+02:00",
-   "last_seen": "2026-08-04T20:16:18.233700+02:00",
-   "active": false,
-   "days_active": 53,
+   "last_seen": "2026-08-05T20:08:47.836587+02:00",
+   "active": true,
+   "days_active": 54,
    "deactivated_at": "2026-08-05T11:22:27.281240+02:00",
-   "reactivated_at": "2026-08-04T20:16:18.233700+02:00"
+   "reactivated_at": "2026-08-05T20:08:47.836587+02:00"
   },
   {
    "id": "anma:926501",
@@ -17580,11 +17580,11 @@
     ]
    },
    "first_seen": "2026-06-11T21:46:50.142101+02:00",
-   "last_seen": "2026-08-04T20:16:18.233723+02:00",
-   "active": false,
-   "days_active": 53,
+   "last_seen": "2026-08-05T20:08:47.836612+02:00",
+   "active": true,
+   "days_active": 54,
    "deactivated_at": "2026-08-05T11:22:27.281240+02:00",
-   "reactivated_at": "2026-08-04T20:16:18.233723+02:00"
+   "reactivated_at": "2026-08-05T20:08:47.836612+02:00"
   },
   {
    "id": "olx:CID3-ID1aA3TJ",
@@ -17627,7 +17627,7 @@
     ]
    },
    "first_seen": "2026-06-12T22:19:32.602250+02:00",
-   "last_seen": "2026-08-05T11:22:27.239060+02:00",
+   "last_seen": "2026-08-05T20:08:47.832002+02:00",
    "active": true,
    "days_active": 53,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-466-m2-5mn-ul-firlejowska-bronowice-ID4Bd6I",
@@ -17664,7 +17664,7 @@
     ]
    },
    "first_seen": "2026-06-12T22:19:32.602314+02:00",
-   "last_seen": "2026-08-05T11:22:27.238999+02:00",
+   "last_seen": "2026-08-05T20:08:47.831968+02:00",
    "active": true,
    "days_active": 53,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-615-m-wz-na-blizniaka-lublin-ID4yvm5",
@@ -17771,7 +17771,7 @@
     ]
    },
    "first_seen": "2026-06-12T22:19:32.602879+02:00",
-   "last_seen": "2026-08-05T11:22:27.241998+02:00",
+   "last_seen": "2026-08-05T20:08:47.828523+02:00",
    "active": true,
    "days_active": 53
   },
@@ -18092,9 +18092,9 @@
     ]
    },
    "first_seen": "2026-06-14T20:02:34.474386+02:00",
-   "last_seen": "2026-08-05T11:22:27.239611+02:00",
+   "last_seen": "2026-08-05T20:08:47.832382+02:00",
    "active": true,
-   "days_active": 51,
+   "days_active": 52,
    "also_at": "https://www.otodom.pl/pl/oferta/unikat-dzialka-na-ul-bliskiej-super-lokalizacja-ID4BLow",
    "deactivated_at": "2026-07-14T19:45:14.612923+02:00",
    "reactivated_at": "2026-07-16T10:59:10.390007+02:00",
@@ -18130,9 +18130,9 @@
     ]
    },
    "first_seen": "2026-06-14T20:02:34.474615+02:00",
-   "last_seen": "2026-08-05T11:22:27.245854+02:00",
+   "last_seen": "2026-08-05T20:08:47.833399+02:00",
    "active": true,
-   "days_active": 51,
+   "days_active": 52,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-bliska-b5t7p3",
    "deactivated_at": "2026-07-14T19:45:14.612923+02:00",
    "reactivated_at": "2026-07-16T10:59:10.394526+02:00"
@@ -18285,9 +18285,9 @@
     ]
    },
    "first_seen": "2026-06-15T14:53:52.290361+02:00",
-   "last_seen": "2026-08-05T11:22:27.239952+02:00",
+   "last_seen": "2026-08-05T20:08:47.832610+02:00",
    "active": true,
-   "days_active": 50,
+   "days_active": 51,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-weglin-poludniowy-ul-folwarczna-ID4BFEw",
    "deactivated_at": "2026-07-15T19:51:48.449301+02:00",
    "reactivated_at": "2026-07-16T19:49:13.178142+02:00",
@@ -18323,9 +18323,9 @@
     ]
    },
    "first_seen": "2026-06-15T14:53:52.290820+02:00",
-   "last_seen": "2026-08-05T11:22:27.241935+02:00",
+   "last_seen": "2026-08-05T20:08:47.828472+02:00",
    "active": true,
-   "days_active": 50,
+   "days_active": 51,
    "also_at": "https://www.otodom.pl/pl/oferta/unikat-dzialka-na-ul-bliskiej-super-lokalizacja-ID4BLow",
    "duplicate_of": "otodom:68105667"
   },
@@ -18358,9 +18358,9 @@
     ]
    },
    "first_seen": "2026-06-15T14:53:52.290844+02:00",
-   "last_seen": "2026-08-05T11:22:27.241967+02:00",
+   "last_seen": "2026-08-05T20:08:47.828499+02:00",
    "active": true,
-   "days_active": 50
+   "days_active": 51
   },
   {
    "id": "otodom:96733287300067",
@@ -18533,7 +18533,7 @@
     ]
    },
    "first_seen": "2026-06-16T21:58:19.411124+02:00",
-   "last_seen": "2026-08-05T11:22:27.239725+02:00",
+   "last_seen": "2026-08-05T20:08:47.832428+02:00",
    "active": true,
    "days_active": 49
   },
@@ -18743,9 +18743,9 @@
     ]
    },
    "first_seen": "2026-06-17T13:23:35.575511+02:00",
-   "last_seen": "2026-08-05T11:22:27.239437+02:00",
+   "last_seen": "2026-08-05T20:08:47.832294+02:00",
    "active": true,
-   "days_active": 48
+   "days_active": 49
   },
   {
    "id": "olx:CID3-ID1b79f4",
@@ -18788,9 +18788,9 @@
     ]
    },
    "first_seen": "2026-06-17T13:23:35.575618+02:00",
-   "last_seen": "2026-08-05T11:22:27.238815+02:00",
+   "last_seen": "2026-08-05T20:08:47.831865+02:00",
    "active": true,
-   "days_active": 48,
+   "days_active": 49,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1425-m-lublin-abramowice-mpzp-ID4BLSV",
    "duplicate_of": "otodom:68107554"
   },
@@ -18824,9 +18824,9 @@
     ]
    },
    "first_seen": "2026-06-17T13:23:35.576367+02:00",
-   "last_seen": "2026-08-05T11:22:27.241904+02:00",
+   "last_seen": "2026-08-05T20:08:47.828446+02:00",
    "active": true,
-   "days_active": 48
+   "days_active": 49
   },
   {
    "id": "otodom:68107554",
@@ -18869,9 +18869,9 @@
     ]
    },
    "first_seen": "2026-06-17T13:23:35.580121+02:00",
-   "last_seen": "2026-08-05T11:22:27.245606+02:00",
+   "last_seen": "2026-08-05T20:08:47.833191+02:00",
    "active": true,
-   "days_active": 48,
+   "days_active": 49,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-1425-m-lublin-abramowice-mpzp-CID3-ID1b79f4.html"
   },
   {
@@ -18984,7 +18984,7 @@
     ]
    },
    "first_seen": "2026-06-17T21:11:22.291246+02:00",
-   "last_seen": "2026-08-05T11:22:27.241872+02:00",
+   "last_seen": "2026-08-05T20:08:47.828419+02:00",
    "active": true,
    "days_active": 48,
    "also_at": "https://www.otodom.pl/pl/oferta/sprzedam-dzialke-rod-300-m-blisko-zalewu-zemborzyckiego-ID4BVYY",
@@ -19127,7 +19127,7 @@
     ]
    },
    "first_seen": "2026-06-18T21:05:45.198264+02:00",
-   "last_seen": "2026-08-05T11:22:27.239176+02:00",
+   "last_seen": "2026-08-05T20:08:47.832069+02:00",
    "active": true,
    "days_active": 47,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-z-wz-na-16-lokali-lublin-ul-makowa-ID4BDr5",
@@ -19164,7 +19164,7 @@
     ]
    },
    "first_seen": "2026-06-18T21:05:45.198551+02:00",
-   "last_seen": "2026-08-05T11:22:27.240157+02:00",
+   "last_seen": "2026-08-05T20:08:47.832760+02:00",
    "active": true,
    "days_active": 47,
    "also_at": "https://www.otodom.pl/pl/oferta/ostatni-tak-duzy-teren-inwestycyjny-w-lublinie-6-1-ha-strefa-ag-ID4BNke",
@@ -19201,7 +19201,7 @@
     ]
    },
    "first_seen": "2026-06-18T21:05:45.198578+02:00",
-   "last_seen": "2026-08-05T11:22:27.239285+02:00",
+   "last_seen": "2026-08-05T20:08:47.832201+02:00",
    "active": true,
    "days_active": 47,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-w-centrum-lublina-mieszkanie-uslugi-w-jednym-miejscu-ID4AQQe",
@@ -19236,7 +19236,7 @@
     ]
    },
    "first_seen": "2026-06-18T21:05:45.198965+02:00",
-   "last_seen": "2026-08-05T11:22:27.247196+02:00",
+   "last_seen": "2026-08-05T20:08:47.834625+02:00",
    "active": true,
    "days_active": 47
   },
@@ -19269,7 +19269,7 @@
     ]
    },
    "first_seen": "2026-06-18T21:05:45.199017+02:00",
-   "last_seen": "2026-08-05T11:22:27.246004+02:00",
+   "last_seen": "2026-08-05T20:08:47.833540+02:00",
    "active": true,
    "days_active": 47,
    "also_at": "https://www.olx.pl/d/oferta/ostatni-tak-duzy-teren-inwestycyjny-w-lublinie-6-1-ha-strefa-ag-CID3-ID1b8gvA.html"
@@ -19304,7 +19304,7 @@
     ]
    },
    "first_seen": "2026-06-18T21:05:45.199043+02:00",
-   "last_seen": "2026-08-05T11:22:27.246035+02:00",
+   "last_seen": "2026-08-05T20:08:47.833567+02:00",
    "active": true,
    "days_active": 47,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-w-centrum-lublina-mieszkanie-uslugi-w-jednym-miejscu-CID3-ID1a8MjU.html"
@@ -19440,9 +19440,9 @@
     ]
    },
    "first_seen": "2026-06-19T13:07:23.390726+02:00",
-   "last_seen": "2026-08-05T11:22:27.249227+02:00",
+   "last_seen": "2026-08-05T20:08:47.836698+02:00",
    "active": true,
-   "days_active": 46,
+   "days_active": 47,
    "also_at": "https://www.otodom.pl/pl/oferta/piekna-dzialka-ze-swietnym-dojazdem-szerokie-ID4C4a7",
    "duplicate_of": "otodom:68177811"
   },
@@ -19475,7 +19475,7 @@
     ]
    },
    "first_seen": "2026-06-19T20:21:10.514772+02:00",
-   "last_seen": "2026-08-05T11:22:27.240114+02:00",
+   "last_seen": "2026-08-05T20:08:47.832702+02:00",
    "active": true,
    "days_active": 46,
    "also_at": "https://www.otodom.pl/pl/oferta/duzy-grunt-z-wz-pod-dom-lub-inwestycje-lublin-ID4BQk4",
@@ -19513,7 +19513,7 @@
     ]
    },
    "first_seen": "2026-06-19T20:21:10.515405+02:00",
-   "last_seen": "2026-08-05T11:22:27.247167+02:00",
+   "last_seen": "2026-08-05T20:08:47.834599+02:00",
    "active": true,
    "days_active": 46,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7128796/"
@@ -19618,7 +19618,7 @@
     ]
    },
    "first_seen": "2026-06-19T20:21:10.517751+02:00",
-   "last_seen": "2026-08-05T11:22:27.249255+02:00",
+   "last_seen": "2026-08-05T20:08:47.836724+02:00",
    "active": true,
    "days_active": 46,
    "also_at": "https://www.otodom.pl/pl/oferta/duzy-grunt-z-wz-pod-dom-lub-inwestycje-lublin-ID4BQk4",
@@ -19665,9 +19665,9 @@
     ]
    },
    "first_seen": "2026-06-20T11:52:47.454244+02:00",
-   "last_seen": "2026-08-05T11:22:27.239480+02:00",
+   "last_seen": "2026-08-05T20:08:47.832530+02:00",
    "active": true,
-   "days_active": 45,
+   "days_active": 46,
    "deactivated_at": "2026-06-22T14:38:02.170532+02:00",
    "reactivated_at": "2026-06-30T20:22:41.190905+02:00"
   },
@@ -19802,7 +19802,7 @@
     ]
    },
    "first_seen": "2026-06-22T21:57:18.359771+02:00",
-   "last_seen": "2026-08-05T11:22:27.240377+02:00",
+   "last_seen": "2026-08-05T20:08:47.832893+02:00",
    "active": true,
    "days_active": 43,
    "deactivated_at": "2026-07-22T19:52:03.087047+02:00",
@@ -20012,7 +20012,7 @@
     ]
    },
    "first_seen": "2026-06-24T20:22:00.256247+02:00",
-   "last_seen": "2026-08-05T11:22:27.241839+02:00",
+   "last_seen": "2026-08-05T20:08:47.828393+02:00",
    "active": true,
    "days_active": 41,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-lublin-slawin-skowronkowa-1150-m2-CID3-ID1b8PKB.html"
@@ -20151,9 +20151,9 @@
     ]
    },
    "first_seen": "2026-06-25T11:57:01.804694+02:00",
-   "last_seen": "2026-08-05T11:22:27.239571+02:00",
+   "last_seen": "2026-08-05T20:08:47.832356+02:00",
    "active": true,
-   "days_active": 40,
+   "days_active": 41,
    "also_at": "https://adresowo.pl/o/dzialka-inwestycyjna-lublin-ul-wislan-x7x8m5"
   },
   {
@@ -20186,9 +20186,9 @@
     ]
    },
    "first_seen": "2026-06-25T11:57:01.805186+02:00",
-   "last_seen": "2026-08-05T11:22:27.247095+02:00",
+   "last_seen": "2026-08-05T20:08:47.834536+02:00",
    "active": true,
-   "days_active": 40,
+   "days_active": 41,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7133104/"
   },
   {
@@ -20220,9 +20220,9 @@
     ]
    },
    "first_seen": "2026-06-25T11:57:01.805213+02:00",
-   "last_seen": "2026-08-05T11:22:27.247125+02:00",
+   "last_seen": "2026-08-05T20:08:47.834563+02:00",
    "active": true,
-   "days_active": 40
+   "days_active": 41
   },
   {
    "id": "otodom:96814310300067",
@@ -20474,7 +20474,7 @@
     ]
    },
    "first_seen": "2026-06-25T20:37:33.358291+02:00",
-   "last_seen": "2026-08-05T11:22:27.249198+02:00",
+   "last_seen": "2026-08-05T20:08:47.836672+02:00",
    "active": true,
    "days_active": 40,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-uslugowa-blisko-wezla-s17-czechow-ID4BW8j",
@@ -20510,9 +20510,9 @@
     ]
    },
    "first_seen": "2026-06-26T12:00:52.272579+02:00",
-   "last_seen": "2026-08-05T11:22:27.241805+02:00",
+   "last_seen": "2026-08-05T20:08:47.828365+02:00",
    "active": true,
-   "days_active": 39,
+   "days_active": 40,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-lublin-ul-wislan-CID3-ID1bddQJ.html",
    "duplicate_of": "olx:CID3-ID1bddQJ"
   },
@@ -20545,7 +20545,7 @@
     ]
    },
    "first_seen": "2026-06-27T11:15:32.022960+02:00",
-   "last_seen": "2026-08-05T11:22:27.247007+02:00",
+   "last_seen": "2026-08-05T20:08:47.834457+02:00",
    "active": true,
    "days_active": 39,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-2407-m2-z-duzym-potencjalem-CID3-ID1bhxjC.html"
@@ -20613,9 +20613,9 @@
     ]
    },
    "first_seen": "2026-06-27T19:43:22.313611+02:00",
-   "last_seen": "2026-08-05T11:22:27.245789+02:00",
+   "last_seen": "2026-08-05T20:08:47.833342+02:00",
    "active": true,
-   "days_active": 38,
+   "days_active": 39,
    "also_at": "https://adresowo.pl/o/dzialka-rod-lublin-300-m2-y8k8x6"
   },
   {
@@ -20659,9 +20659,9 @@
     ]
    },
    "first_seen": "2026-06-28T11:45:38.297741+02:00",
-   "last_seen": "2026-08-05T11:22:27.246566+02:00",
+   "last_seen": "2026-08-05T20:08:47.834054+02:00",
    "active": true,
-   "days_active": 37
+   "days_active": 38
   },
   {
    "id": "otodom:96815055700067",
@@ -20926,9 +20926,9 @@
     ]
    },
    "first_seen": "2026-06-29T13:34:43.442817+02:00",
-   "last_seen": "2026-08-05T11:22:27.238705+02:00",
+   "last_seen": "2026-08-05T20:08:47.831797+02:00",
    "active": true,
-   "days_active": 36,
+   "days_active": 37,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-w-lublinie-ID4BXnG",
    "duplicate_of": "otodom:68151744"
   },
@@ -20962,9 +20962,9 @@
     ]
    },
    "first_seen": "2026-06-29T13:34:43.443025+02:00",
-   "last_seen": "2026-08-05T11:22:27.241735+02:00",
+   "last_seen": "2026-08-05T20:08:47.828307+02:00",
    "active": true,
-   "days_active": 36,
+   "days_active": 37,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-21ar-turczynowicza-weglin-lublin-CID3-ID1bg24T.html"
   },
   {
@@ -20997,9 +20997,9 @@
     ]
    },
    "first_seen": "2026-06-29T13:34:43.443054+02:00",
-   "last_seen": "2026-08-05T11:22:27.241771+02:00",
+   "last_seen": "2026-08-05T20:08:47.828337+02:00",
    "active": true,
-   "days_active": 36,
+   "days_active": 37,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-w-lublinie-ID4BXnG"
   },
   {
@@ -21180,9 +21180,9 @@
     ]
    },
    "first_seen": "2026-06-29T13:34:43.447201+02:00",
-   "last_seen": "2026-08-05T11:22:27.245576+02:00",
+   "last_seen": "2026-08-05T20:08:47.833152+02:00",
    "active": true,
-   "days_active": 36,
+   "days_active": 37,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-w-lublinie-CID3-ID1bg7M3.html"
   },
   {
@@ -21364,9 +21364,9 @@
     ]
    },
    "first_seen": "2026-06-30T12:22:07.120751+02:00",
-   "last_seen": "2026-08-05T11:22:27.246976+02:00",
+   "last_seen": "2026-08-05T20:08:47.834429+02:00",
    "active": true,
-   "days_active": 35,
+   "days_active": 36,
    "also_at": "https://www.olx.pl/d/oferta/na-sprzedaz-dzialka-uslugowo-produkcyjna-lublin-CID3-ID1bhxjx.html"
   },
   {
@@ -21469,7 +21469,7 @@
     ]
    },
    "first_seen": "2026-06-30T20:22:41.191252+02:00",
-   "last_seen": "2026-08-05T11:22:27.241700+02:00",
+   "last_seen": "2026-08-05T20:08:47.828278+02:00",
    "active": true,
    "days_active": 35,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialki-budowlane-bezposrednio-ID4BZbd",
@@ -21504,7 +21504,7 @@
     ]
    },
    "first_seen": "2026-06-30T20:22:41.195276+02:00",
-   "last_seen": "2026-08-05T11:22:27.247039+02:00",
+   "last_seen": "2026-08-05T20:08:47.834487+02:00",
    "active": true,
    "days_active": 35,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-ptasia-m5m4p8"
@@ -21727,7 +21727,7 @@
     ]
    },
    "first_seen": "2026-07-02T20:18:06.454604+02:00",
-   "last_seen": "2026-08-05T11:22:27.240338+02:00",
+   "last_seen": "2026-08-05T20:08:47.832983+02:00",
    "active": true,
    "days_active": 33
   },
@@ -21779,7 +21779,7 @@
     ]
    },
    "first_seen": "2026-07-02T20:18:06.455018+02:00",
-   "last_seen": "2026-08-05T11:22:27.240550+02:00",
+   "last_seen": "2026-08-05T20:08:47.833047+02:00",
    "active": true,
    "days_active": 33
   },
@@ -21812,7 +21812,7 @@
     ]
    },
    "first_seen": "2026-07-02T20:18:06.459123+02:00",
-   "last_seen": "2026-08-05T11:22:27.246943+02:00",
+   "last_seen": "2026-08-05T20:08:47.834400+02:00",
    "active": true,
    "days_active": 33,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-1410m-poligonowa-CID3-ID1bivLz.html"
@@ -21880,9 +21880,9 @@
     ]
    },
    "first_seen": "2026-07-03T11:44:44.734069+02:00",
-   "last_seen": "2026-08-05T11:22:27.241660+02:00",
+   "last_seen": "2026-08-05T20:08:47.828248+02:00",
    "active": true,
-   "days_active": 32
+   "days_active": 33
   },
   {
    "id": "otodom:68171075",
@@ -22145,9 +22145,9 @@
     ]
    },
    "first_seen": "2026-07-05T11:31:02.549799+02:00",
-   "last_seen": "2026-08-05T11:22:27.245219+02:00",
+   "last_seen": "2026-08-05T20:08:47.831380+02:00",
    "active": true,
-   "days_active": 30
+   "days_active": 31
   },
   {
    "id": "otodom:96701965100067",
@@ -22214,9 +22214,9 @@
     ]
    },
    "first_seen": "2026-07-06T13:15:48.164134+02:00",
-   "last_seen": "2026-08-05T11:22:27.241600+02:00",
+   "last_seen": "2026-08-05T20:08:47.828218+02:00",
    "active": true,
-   "days_active": 29
+   "days_active": 30
   },
   {
    "id": "otodom:96815174400067",
@@ -22260,9 +22260,9 @@
    },
    "first_seen": "2026-07-06T13:15:48.166912+02:00",
    "last_seen": "2026-08-05T11:22:27.247462+02:00",
-   "active": true,
+   "active": false,
    "days_active": 29,
-   "deactivated_at": "2026-07-30T11:17:09.576226+02:00",
+   "deactivated_at": "2026-08-05T20:08:48.427473+02:00",
    "reactivated_at": "2026-08-05T11:22:27.247462+02:00"
   },
   {
@@ -22294,7 +22294,7 @@
     ]
    },
    "first_seen": "2026-07-06T20:29:27.290425+02:00",
-   "last_seen": "2026-08-05T11:22:27.241562+02:00",
+   "last_seen": "2026-08-05T20:08:47.828187+02:00",
    "active": true,
    "days_active": 29
   },
@@ -22327,7 +22327,7 @@
     ]
    },
    "first_seen": "2026-07-06T20:29:27.294522+02:00",
-   "last_seen": "2026-08-05T11:22:27.246897+02:00",
+   "last_seen": "2026-08-05T20:08:47.834359+02:00",
    "active": true,
    "days_active": 29,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7131049/"
@@ -22361,9 +22361,9 @@
     ]
    },
    "first_seen": "2026-07-07T12:08:42.435462+02:00",
-   "last_seen": "2026-08-05T11:22:27.241525+02:00",
+   "last_seen": "2026-08-05T20:08:47.828152+02:00",
    "active": true,
-   "days_active": 28
+   "days_active": 29
   },
   {
    "id": "otodom:68179640",
@@ -22395,9 +22395,9 @@
     ]
    },
    "first_seen": "2026-07-07T12:08:42.439591+02:00",
-   "last_seen": "2026-08-05T11:22:27.246864+02:00",
+   "last_seen": "2026-08-05T20:08:47.834329+02:00",
    "active": true,
-   "days_active": 28
+   "days_active": 29
   },
   {
    "id": "otodom:67111776",
@@ -22429,9 +22429,9 @@
     ]
    },
    "first_seen": "2026-07-07T12:08:42.439624+02:00",
-   "last_seen": "2026-08-05T11:22:27.245886+02:00",
+   "last_seen": "2026-08-05T20:08:47.833430+02:00",
    "active": true,
-   "days_active": 28
+   "days_active": 29
   },
   {
    "id": "otodom:96817964000067",
@@ -22559,7 +22559,7 @@
    },
    "description": "&nbsp;\n\n\n\nW SKR&Oacute;CIE:\n\nDziałka budowlana położona w prestiżowej części Lublina &ndash; Szerokie, przy ul. Strumykowej.\n\nPowierzchnia 754 m&sup2;.\n\nTeren objęty MPZP z przeznaczeniem M4 &ndash; zabudowa mieszkaniowa jednorodzinna.\n\nNieruchomość usytuowana jest bezpośrednio przy asfaltowej drodze miejskiej, w otoczeniu nowoczesnej zabudowy jednorodzinnej.\n\nAtutem oferty jest narożne położenie, komplet medi&oacute;w w ulicy oraz szybki dojazd do centrum miasta.\n\nCena: 790 000 zł.\n\n==================\n\n&nbsp;\n\nSZCZEG&Oacute;ŁY NIERUCHOMOŚCI:\n\nLokalizacja: Lublin, Szerokie, ul. Strumykowa\n\nPowierzchnia: 754 m&sup2;\n\nWymiary: szerokość około 23&nbsp;m\n\nKształt: nieregularny\n\nDojazd: asfaltowa droga miejska\n\nMedia: prąd w ulicy, woda w ulicy, gaz w ulicy, kanalizacja w ulicy\n\nMPZP / WZ / Plan Og&oacute;lny: MPZP obowiązuje\n\nPrzeznaczenie: M4 &ndash; tereny zabudowy mieszkaniowej jednorodzinnej\n\nCena: 790 000 zł\n\nCena za m&sup2;: 1 048 zł\n\nParametr: teren oznaczony symbolem M4 &ndash; zabudowa mieszkaniowa jednorodzinna\n\nMożliwość zabudowy: budynki wolnostojące, bliźniacze lub szeregowe zgodnie z ustaleniami planu\n\nPowierzchnia zabudowy: do 30% powierzchni działki\n\nUzupełnienie funkcji: usługi do 50% powierzchni użytkowej budynku\n\nMiejsca postojowe: wymagane w granicach własnej posesji\n\n==================\n\n\n\nOPIS OFERTY:\n\nAlternatywne Biuro Nieruchomości prezentuje Państwu atrakcyjną działkę budowlaną zlokalizowaną w jednej z najbardziej pożądanych części Lublina &ndash; na Szerokim, przy ul. Strumykowej. To propozycja skierowana do os&oacute;b poszukujących miejsca pod budowę domu w spokojnym otoczeniu, bez rezygnacji z wygody życia w mieście.\n\nNieruchomość położona jest w pierwszej linii zabudowy, bezpośrednio przy asfaltowej drodze miejskiej. Narożny charakter działki zapewnia dużą swobodę projektową i pozwala na funkcjonalne zagospodarowanie terenu. W najbliższym sąsiedztwie znajdują się nowoczesne domy jednorodzinne oraz elegancka zabudowa willowa.\n\nLokalizacja oferuje bardzo dobrze rozwiniętą infrastrukturę. W pobliżu znajdują się sklepy, plac&oacute;wki edukacyjne, punkty usługowe, przychodnie oraz tereny rekreacyjne. Dojazd do centrum Lublina zajmuje około 15 minut, co czyni tę ofertę idealnym połączeniem komfortu miejskiego i kameralnego charakteru okolicy.\n\nDzięki obowiązującemu miejscowemu planowi zagospodarowania przestrzennego nieruchomość stanowi bezpieczną i przewidywalną inwestycję dla os&oacute;b planujących budowę domu na lata.\n\n==================\n\n\n\nPODSUMOWANIE:\n\nLokalizacja: prestiżowa część Lublina &ndash; Szerokie\n\nPowierzchnia: 754 m&sup2; w pierwszej linii zabudowy\n\nDojazd: bezpośredni dostęp do asfaltowej drogi miejskiej\n\nMedia: pełne uzbrojenie dostępne w ulicy\n\nOtoczenie: nowoczesna zabudowa jednorodzinna i willowa\n\nPotencjał: możliwość realizacji komfortowego domu w granicach miasta\n\nKomunikacja: szybki dojazd do centrum oraz pełnej infrastruktury miejskiej\n\nCena: 790 000 zł\n\nCena za m&sup2;: 1 048 zł\n\n==================\n\n\n\nKONTAKT:\n\nOpiekun oferty: Ewa Wiertel\n\nTelefon: (użyj formularza kontaktowego)\n\nE-mail: \n\nTreść niniejszego ogłoszenia nie stanowi oferty handlowej w rozumieniu Kodeksu Cywilnego.\n\n&nbsp;",
    "is_private_owner": false,
-   "image": "https://ireland.apollo.olxcdn.com:443/v1/files/qgjy45f5vovr2-PL/image;s=1280x720",
+   "image": "https://ireland.apollo.olxcdn.com:443/v1/files/ce1jhq7sao9w1-PL/image;s=1280x720",
    "created_at": "2026-07-08T09:48:18+02:00",
    "price": {
     "current": 790000,
@@ -22568,7 +22568,7 @@
     ]
    },
    "first_seen": "2026-07-08T11:11:19.121024+02:00",
-   "last_seen": "2026-08-05T11:22:27.239379+02:00",
+   "last_seen": "2026-08-05T20:08:47.832267+02:00",
    "active": true,
    "days_active": 28,
    "also_at": "https://www.otodom.pl/pl/oferta/piekna-dzialka-ze-swietnym-dojazdem-szerokie-ID4C4a7",
@@ -22603,9 +22603,9 @@
     ]
    },
    "first_seen": "2026-07-08T20:05:10.475072+02:00",
-   "last_seen": "2026-08-05T11:22:27.246815+02:00",
+   "last_seen": "2026-08-05T20:08:47.834288+02:00",
    "active": true,
-   "days_active": 27,
+   "days_active": 28,
    "also_at": "https://www.olx.pl/d/oferta/macieja-rataja-tereny-obiektow-produkcyjnych-skladow-i-magazynow-CID3-IDZHtGz.html"
   },
   {
@@ -22671,9 +22671,9 @@
     ]
    },
    "first_seen": "2026-07-08T20:05:10.478102+02:00",
-   "last_seen": "2026-08-05T11:22:27.240279+02:00",
+   "last_seen": "2026-08-05T20:08:47.832854+02:00",
    "active": true,
-   "days_active": 27,
+   "days_active": 28,
    "also_at": "https://www.otodom.pl/pl/oferta/macieja-rataja-tereny-obiektow-produkcyjnych-skladow-i-magazynow-ID4q7mk",
    "duplicate_of": "otodom:65330164"
   },
@@ -22705,9 +22705,9 @@
     ]
    },
    "first_seen": "2026-07-09T12:06:51.745322+02:00",
-   "last_seen": "2026-08-05T11:22:27.249133+02:00",
+   "last_seen": "2026-08-05T20:08:47.836233+02:00",
    "active": true,
-   "days_active": 26
+   "days_active": 27
   },
   {
    "id": "olx:CID3-ID1bog7a",
@@ -22738,7 +22738,7 @@
     ]
    },
    "first_seen": "2026-07-09T20:23:09.502988+02:00",
-   "last_seen": "2026-08-05T11:22:27.240204+02:00",
+   "last_seen": "2026-08-05T20:08:47.832732+02:00",
    "active": true,
    "days_active": 26,
    "also_at": "https://www.otodom.pl/pl/oferta/gotowiec-inwestycyjny-grunt-projekt-pnb-blok-8-mieszkan-centrum-ID4C8qn",
@@ -22773,7 +22773,7 @@
     ]
    },
    "first_seen": "2026-07-09T20:23:09.503317+02:00",
-   "last_seen": "2026-08-05T11:22:27.239229+02:00",
+   "last_seen": "2026-08-05T20:08:47.832125+02:00",
    "active": true,
    "days_active": 26,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-801m-spokojna-okolica-ul-paprociowa-ID4C8oO",
@@ -22808,7 +22808,7 @@
     ]
    },
    "first_seen": "2026-07-09T20:23:09.504023+02:00",
-   "last_seen": "2026-08-05T11:22:27.246745+02:00",
+   "last_seen": "2026-08-05T20:08:47.834226+02:00",
    "active": true,
    "days_active": 26
   },
@@ -22841,7 +22841,7 @@
     ]
    },
    "first_seen": "2026-07-09T20:23:09.504053+02:00",
-   "last_seen": "2026-08-05T11:22:27.245823+02:00",
+   "last_seen": "2026-08-05T20:08:47.833373+02:00",
    "active": true,
    "days_active": 26,
    "also_at": "https://www.olx.pl/d/oferta/gotowiec-inwestycyjny-grunt-projekt-pnb-blok-8-mieszkan-centrum-CID3-ID1bog7a.html"
@@ -22875,7 +22875,7 @@
     ]
    },
    "first_seen": "2026-07-09T20:23:09.504082+02:00",
-   "last_seen": "2026-08-05T11:22:27.246780+02:00",
+   "last_seen": "2026-08-05T20:08:47.834258+02:00",
    "active": true,
    "days_active": 26,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-801m-spokojna-okolica-ul-paprociowa-CID3-ID1bog5Q.html"
@@ -22944,7 +22944,7 @@
     ]
    },
    "first_seen": "2026-07-10T20:10:47.518078+02:00",
-   "last_seen": "2026-08-05T11:22:27.241450+02:00",
+   "last_seen": "2026-08-05T20:08:47.828058+02:00",
    "active": true,
    "days_active": 25
   },
@@ -22977,7 +22977,7 @@
     ]
    },
    "first_seen": "2026-07-10T20:10:47.518113+02:00",
-   "last_seen": "2026-08-05T11:22:27.241488+02:00",
+   "last_seen": "2026-08-05T20:08:47.828090+02:00",
    "active": true,
    "days_active": 25
   },
@@ -23011,7 +23011,7 @@
     ]
    },
    "first_seen": "2026-07-10T20:10:47.518178+02:00",
-   "last_seen": "2026-08-05T11:22:27.240823+02:00",
+   "last_seen": "2026-08-05T20:08:47.827538+02:00",
    "active": true,
    "days_active": 25,
    "also_at": "https://www.otodom.pl/pl/oferta/ostatni-tak-duzy-teren-inwestycyjny-w-lublinie-6-1-ha-strefa-ag-ID4BNke",
@@ -23162,9 +23162,9 @@
     ]
    },
    "first_seen": "2026-07-13T11:56:57.483012+02:00",
-   "last_seen": "2026-08-05T11:22:27.238419+02:00",
+   "last_seen": "2026-08-05T20:08:47.831704+02:00",
    "active": true,
-   "days_active": 22
+   "days_active": 23
   },
   {
    "id": "olx:CID3-ID1brgkg",
@@ -23195,7 +23195,7 @@
     ]
    },
    "first_seen": "2026-07-13T20:19:59.633419+02:00",
-   "last_seen": "2026-08-05T11:22:27.238766+02:00",
+   "last_seen": "2026-08-05T20:08:47.831838+02:00",
    "active": true,
    "days_active": 22,
    "also_at": "https://www.otodom.pl/pl/oferta/sprzedam-4-dzialki-budowlane-w-atrakcyjnej-czesci-lublina-dz-szerokie-ID4CbGg",
@@ -23230,7 +23230,7 @@
     ]
    },
    "first_seen": "2026-07-13T20:19:59.633759+02:00",
-   "last_seen": "2026-08-05T11:22:27.239333+02:00",
+   "last_seen": "2026-08-05T20:08:47.832236+02:00",
    "active": true,
    "days_active": 22,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-wielorodzinna-i-uslugi-przy-nowym-dworcu-ID4qiFm",
@@ -23265,7 +23265,7 @@
     ]
    },
    "first_seen": "2026-07-13T20:19:59.634560+02:00",
-   "last_seen": "2026-08-05T11:22:27.241389+02:00",
+   "last_seen": "2026-08-05T20:08:47.828028+02:00",
    "active": true,
    "days_active": 22,
    "also_at": "https://www.otodom.pl/pl/oferta/sprzedam-4-dzialki-budowlane-w-atrakcyjnej-czesci-lublina-dz-szerokie-ID4CbGg",
@@ -23301,7 +23301,7 @@
     ]
    },
    "first_seen": "2026-07-13T20:19:59.638682+02:00",
-   "last_seen": "2026-08-05T11:22:27.246660+02:00",
+   "last_seen": "2026-08-05T20:08:47.834144+02:00",
    "active": true,
    "days_active": 22,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-wielorodzinna-i-uslugi-przy-nowym-dworcu-CID3-ID1brkHG.html"
@@ -23335,7 +23335,7 @@
     ]
    },
    "first_seen": "2026-07-13T20:19:59.638714+02:00",
-   "last_seen": "2026-08-05T11:22:27.246352+02:00",
+   "last_seen": "2026-08-05T20:08:47.833862+02:00",
    "active": true,
    "days_active": 22,
    "also_at": "https://www.olx.pl/d/oferta/sprzedam-4-dzialki-budowlane-w-atrakcyjnej-czesci-lublina-dz-szerokie-CID3-ID1brgkg.html"
@@ -23370,7 +23370,7 @@
     ]
    },
    "first_seen": "2026-07-13T20:19:59.638744+02:00",
-   "last_seen": "2026-08-05T11:22:27.246699+02:00",
+   "last_seen": "2026-08-05T20:08:47.834181+02:00",
    "active": true,
    "days_active": 22
   },
@@ -23474,7 +23474,7 @@
     ]
    },
    "first_seen": "2026-07-14T10:52:56.371690+02:00",
-   "last_seen": "2026-08-05T11:22:27.246600+02:00",
+   "last_seen": "2026-08-05T20:08:47.834085+02:00",
    "active": true,
    "days_active": 22,
    "also_at": "https://alternatywnebn.pl/offer/dzialka-sprzedaz-7143222/"
@@ -23604,7 +23604,7 @@
    },
    "description": "Działka&nbsp;przy ul. Zdrowej w Lublinie z aktualnymi warunkami zabudowy na dom jednorodzinny z ogromnym potencjałem inwestycyjnym,&nbsp;położona w pełnej zieleni dzielnicy Głusk.&nbsp;Nieruchomość stanowi doskonałą propozycję zar&oacute;wno dla inwestor&oacute;w jak i os&oacute;b prywatnych szukających miejsca na ulokowanie środk&oacute;w w pewną inwestycję.\n\nPrzedstawiamy&nbsp;ciekawą koncepcję podziałową, kt&oacute;ra będzie możliwa do wykonania po uchwaleniu miejscowego planu zagospodarowania przestrzennego miasta Lublin - część VIG, kt&oacute;ry aktualnie jest w opracowaniu. Projektowany Plan Og&oacute;lny przewiduję na tym terenie strefę jednorodzinną 560SJ, kt&oacute;ra potwierdza przyszłe przeznaczenie tej działki.\n\n__________________\n\nPotencjał inwestycyjny nieruchomości:\n\nPrawdopodobne parametry podziałowe:\n\n1000 m2 - zabudowa wolnostojąca\n\n600 m2 - zabudowa bliźniacza\n\n400 m2 - zabudowa szeregowa\n\nKoncepcja podziałowa:\n\n\n\nI: 149 000 zł - 600m2\n\nII: 149 000 zł - 600m2\n\nIII: 149 000 zł - 600m2\n\nIV: 149 000 zł - 600m2\n\nV: 149 000 zł - 600m2\n\nVI: 149 000 zł - 600m2\n\nVII: 149 000 zł - 600m2\n\nVIII: 149 000 zł - 680m2\n\nMożliwość zakupu nieruchomości w całości - cena ofertowa: 1 199 000,00 zł\n\n\n\nProponowany podział jest tylko koncepcją, kt&oacute;ry będzie możliwy do realizacji dopiero po uchwaleniu przez Prezydenta Miasta Lublin miejscowego planu zagospodarowania przestrzennego miasta Lublin - część VIG\n\n__________________\n\n\n\nMedia i uzbrojenie\n\nDostępne media:\n\n- prąd w ulicy\n\n- gaz w ulicy\n\n__________________\n\n\n\nWZ / MPZP / Plan Og&oacute;lny\n\nWZ: Aktualne warunki zabudowy na dom jednorodzinny o maksymalnej powierzchni 13,7%\n\nMPZP: W trakcie opracowania\n\nPlan Og&oacute;lny: projektowane parametry\n\nMaksymalna nadziemna intensywność zabudowy: 0.5\n\nMaksymalny udział powierzchni zabudowy: 25%\n\nMaksymalna wysokość zabudowy: 12m\n\nMinimalny udział powierzchni biologicznie czynnej: 50%\n\n__________________\n\n\n\nOtoczenie i przestrzeń:\n\nDzielnica Głusk charakteryzuję się niską, jednorodzinną zabudową zapewniającą prywatność oraz bliskość natury. Działka posiada wygodny dojazd bezpośrednio drogą asfaltową. Przedmiotowa nieruchomość będzie ostatnią działka strefy jednorodzinnej, co zapewni dodatkową kameralność i ustronność. &nbsp;\n\nInfrastruktura w okolicy:\n\nPrzystanek MPK - 2,0 km\n\nSzkoła Podstawowa - 1,2 km\n\nPoradnia lekarza rodzinnego - 1,2 km\n\nZapraszam serdecznie do kontaktu, jeśli mają Państwo jakiekolwiek pytania dotyczące działki lub chcą się Państwo um&oacute;wić na prezentację nieruchomości. Zachęcam do zapoznania się z innymi ofertami dostępnymi na stronie internetowej:\n\n__________________\n\n\n\nKONTAKT:\n\nOpiekun oferty: Maciej G&oacute;ralski\n\nTelefon: (użyj formularza kontaktowego)\n\nE-mail: \n\nOpiekun oferty: Grzegorz Budziński\n\nTelefon: (użyj formularza kontaktowego)\n\nE-mail: \n\nAlternatywne Biuro Nieruchomości Sp. z o.o.\n\nAdres: ul. Czeremchowa 5, 20-807 Lublin\n\nTreść niniejszego ogłoszenia nie stanowi oferty handlowej w rozumieniu Kodeksu Cywilnego.",
    "is_private_owner": false,
-   "image": "https://ireland.apollo.olxcdn.com:443/v1/files/argb3wh7hhpd2-PL/image;s=1280x720",
+   "image": "https://ireland.apollo.olxcdn.com:443/v1/files/135hjyzz6jtu-PL/image;s=1280x720",
    "created_at": "2026-07-14T15:58:55+02:00",
    "price": {
     "current": 149000,
@@ -23613,9 +23613,9 @@
     ]
    },
    "first_seen": "2026-07-14T19:45:14.584394+02:00",
-   "last_seen": "2026-08-05T11:22:27.238561+02:00",
+   "last_seen": "2026-08-05T20:08:47.831749+02:00",
    "active": true,
-   "days_active": 21,
+   "days_active": 22,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-z-potencjalem-podzialu-i-wz-glusk-lubli-ID4CcfS",
    "duplicate_of": "otodom:68208920"
   },
@@ -23650,9 +23650,9 @@
     ]
    },
    "first_seen": "2026-07-14T19:45:14.585247+02:00",
-   "last_seen": "2026-08-05T11:22:27.249098+02:00",
+   "last_seen": "2026-08-05T20:08:47.836201+02:00",
    "active": true,
-   "days_active": 21
+   "days_active": 22
   },
   {
    "id": "alternatywne:7143222",
@@ -23685,9 +23685,9 @@
     ]
    },
    "first_seen": "2026-07-14T19:45:14.585600+02:00",
-   "last_seen": "2026-08-05T11:22:27.249166+02:00",
+   "last_seen": "2026-08-05T20:08:47.836644+02:00",
    "active": true,
-   "days_active": 21,
+   "days_active": 22,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-z-potencjalem-podzialu-i-wz-glusk-lubli-ID4CcfS",
    "duplicate_of": "otodom:68208920"
   },
@@ -23718,7 +23718,7 @@
     ]
    },
    "first_seen": "2026-07-15T10:58:42.353707+02:00",
-   "last_seen": "2026-08-05T11:22:27.241349+02:00",
+   "last_seen": "2026-08-05T20:08:47.827979+02:00",
    "active": true,
    "days_active": 21
   },
@@ -23751,7 +23751,7 @@
     ]
    },
    "first_seen": "2026-07-15T10:58:42.358428+02:00",
-   "last_seen": "2026-08-05T11:22:27.246533+02:00",
+   "last_seen": "2026-08-05T20:08:47.834025+02:00",
    "active": true,
    "days_active": 21
   },
@@ -23818,9 +23818,9 @@
     ]
    },
    "first_seen": "2026-07-15T19:51:46.669243+02:00",
-   "last_seen": "2026-08-05T11:22:27.240000+02:00",
+   "last_seen": "2026-08-05T20:08:47.832641+02:00",
    "active": true,
-   "days_active": 20,
+   "days_active": 21,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-inwestycyjna-slawinek-ID4oQAD",
    "duplicate_of": "otodom:65027375"
   },
@@ -23853,9 +23853,9 @@
     ]
    },
    "first_seen": "2026-07-15T19:51:46.674155+02:00",
-   "last_seen": "2026-08-05T11:22:27.246498+02:00",
+   "last_seen": "2026-08-05T20:08:47.833993+02:00",
    "active": true,
-   "days_active": 20,
+   "days_active": 21,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-inwestycyjna-slawinek-CID3-ID1bsAL3.html"
   },
   {
@@ -23954,7 +23954,7 @@
     ]
    },
    "first_seen": "2026-07-16T10:59:10.390479+02:00",
-   "last_seen": "2026-08-05T11:22:27.241310+02:00",
+   "last_seen": "2026-08-05T20:08:47.827947+02:00",
    "active": true,
    "days_active": 20
   },
@@ -24058,9 +24058,9 @@
     ]
    },
    "first_seen": "2026-07-16T19:49:13.173293+02:00",
-   "last_seen": "2026-08-05T11:22:27.241269+02:00",
+   "last_seen": "2026-08-05T20:08:47.827916+02:00",
    "active": true,
-   "days_active": 19
+   "days_active": 20
   },
   {
    "id": "olx:CID3-ID1btCWk",
@@ -24091,9 +24091,9 @@
     ]
    },
    "first_seen": "2026-07-16T19:49:13.177695+02:00",
-   "last_seen": "2026-08-05T11:22:27.239794+02:00",
+   "last_seen": "2026-08-05T20:08:47.832470+02:00",
    "active": true,
-   "days_active": 19
+   "days_active": 20
   },
   {
    "id": "olx:CID3-ID1btlpq",
@@ -24124,9 +24124,9 @@
     ]
    },
    "first_seen": "2026-07-16T19:49:13.177938+02:00",
-   "last_seen": "2026-08-05T11:22:27.239845+02:00",
+   "last_seen": "2026-08-05T20:08:47.832503+02:00",
    "active": true,
-   "days_active": 19,
+   "days_active": 20,
    "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-1-250-m2-r7m3n8",
    "duplicate_of": "adresowo:r7m3n8"
   },
@@ -24159,9 +24159,9 @@
     ]
    },
    "first_seen": "2026-07-16T19:49:13.178756+02:00",
-   "last_seen": "2026-08-05T11:22:27.246426+02:00",
+   "last_seen": "2026-08-05T20:08:47.833929+02:00",
    "active": true,
-   "days_active": 19
+   "days_active": 20
   },
   {
    "id": "otodom:96821880600067",
@@ -24228,9 +24228,9 @@
    },
    "first_seen": "2026-07-16T19:49:13.181232+02:00",
    "last_seen": "2026-08-05T11:22:27.248697+02:00",
-   "active": true,
+   "active": false,
    "days_active": 19,
-   "deactivated_at": "2026-08-02T10:57:54.204445+02:00",
+   "deactivated_at": "2026-08-05T20:08:48.427473+02:00",
    "reactivated_at": "2026-08-02T19:40:29.367411+02:00"
   },
   {
@@ -24274,7 +24274,7 @@
     ]
    },
    "first_seen": "2026-07-17T10:53:21.646804+02:00",
-   "last_seen": "2026-08-05T11:22:27.239115+02:00",
+   "last_seen": "2026-08-05T20:08:47.832033+02:00",
    "active": true,
    "days_active": 19,
    "also_at": "https://adresowo.pl/o/dzialka-inwestycyjna-lublin-ul-macieja-rataja-k2p6t3"
@@ -24308,7 +24308,7 @@
     ]
    },
    "first_seen": "2026-07-17T10:53:21.647179+02:00",
-   "last_seen": "2026-08-05T11:22:27.241175+02:00",
+   "last_seen": "2026-08-05T20:08:47.827883+02:00",
    "active": true,
    "days_active": 19,
    "also_at": "https://www.olx.pl/d/oferta/bezposrednio-dzialka-budowlana-1250-m-z-wz-lublin-slawin-dzbenin-CID3-ID1btlpq.html"
@@ -24378,7 +24378,7 @@
     ]
    },
    "first_seen": "2026-07-18T10:26:23.697799+02:00",
-   "last_seen": "2026-08-05T11:22:27.245719+02:00",
+   "last_seen": "2026-08-05T20:08:47.833275+02:00",
    "active": true,
    "days_active": 18
   },
@@ -24480,7 +24480,7 @@
     ]
    },
    "first_seen": "2026-07-20T20:32:16.822751+02:00",
-   "last_seen": "2026-08-05T11:22:27.241130+02:00",
+   "last_seen": "2026-08-05T20:08:47.827814+02:00",
    "active": true,
    "days_active": 15
   },
@@ -24513,7 +24513,7 @@
     ]
    },
    "first_seen": "2026-07-20T20:32:16.826062+02:00",
-   "last_seen": "2026-08-05T11:22:27.246390+02:00",
+   "last_seen": "2026-08-05T20:08:47.833896+02:00",
    "active": true,
    "days_active": 15,
    "deactivated_at": "2026-07-24T20:04:22.722553+02:00",
@@ -24548,11 +24548,11 @@
     ]
    },
    "first_seen": "2026-07-20T20:32:16.828009+02:00",
-   "last_seen": "2026-08-02T10:57:54.172392+02:00",
-   "active": false,
-   "days_active": 12,
+   "last_seen": "2026-08-05T20:08:47.835818+02:00",
+   "active": true,
+   "days_active": 15,
    "deactivated_at": "2026-08-02T19:40:37.242756+02:00",
-   "reactivated_at": "2026-08-02T10:57:54.172392+02:00"
+   "reactivated_at": "2026-08-05T20:08:47.835818+02:00"
   },
   {
    "id": "olx:CID3-ID1aqlq9",
@@ -24595,7 +24595,7 @@
     ]
    },
    "first_seen": "2026-07-20T20:32:16.828712+02:00",
-   "last_seen": "2026-08-05T11:22:27.239529+02:00",
+   "last_seen": "2026-08-05T20:08:47.832327+02:00",
    "active": true,
    "days_active": 15
   },
@@ -24699,9 +24699,9 @@
     ]
    },
    "first_seen": "2026-07-23T19:58:48.300944+02:00",
-   "last_seen": "2026-08-05T11:22:27.238940+02:00",
+   "last_seen": "2026-08-05T20:08:47.831933+02:00",
    "active": true,
-   "days_active": 12,
+   "days_active": 13,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-w-dzielnicy-weglin-ID4AIkM",
    "duplicate_of": "otodom:67855576"
   },
@@ -24838,9 +24838,9 @@
     ]
    },
    "first_seen": "2026-07-25T19:37:31.619855+02:00",
-   "last_seen": "2026-08-05T11:22:27.246317+02:00",
+   "last_seen": "2026-08-05T20:08:47.833830+02:00",
    "active": true,
-   "days_active": 10,
+   "days_active": 11,
    "also_at": "https://adresowo.pl/o/dzialka-lublin-ul-swidnicka-k6u8v8"
   },
   {
@@ -24906,9 +24906,9 @@
     ]
    },
    "first_seen": "2026-07-27T12:28:29.991385+02:00",
-   "last_seen": "2026-08-05T11:22:27.239911+02:00",
+   "last_seen": "2026-08-05T20:08:47.832574+02:00",
    "active": true,
-   "days_active": 8,
+   "days_active": 9,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-inwestycje-w-lublinie-ID4CnVY"
   },
   {
@@ -24940,9 +24940,9 @@
     ]
    },
    "first_seen": "2026-07-27T12:28:29.991468+02:00",
-   "last_seen": "2026-08-05T11:22:27.240051+02:00",
+   "last_seen": "2026-08-05T20:08:47.832675+02:00",
    "active": true,
-   "days_active": 8
+   "days_active": 9
   },
   {
    "id": "otodom:68253876",
@@ -24974,9 +24974,9 @@
     ]
    },
    "first_seen": "2026-07-27T12:28:29.995420+02:00",
-   "last_seen": "2026-08-05T11:22:27.249044+02:00",
+   "last_seen": "2026-08-05T20:08:47.836145+02:00",
    "active": true,
-   "days_active": 8,
+   "days_active": 9,
    "also_at": "https://www.olx.pl/d/oferta/dzialka-pod-inwestycje-w-lublinie-CID3-ID1bBFpZ.html"
   },
   {
@@ -25008,9 +25008,9 @@
     ]
    },
    "first_seen": "2026-07-27T12:28:29.995488+02:00",
-   "last_seen": "2026-08-05T11:22:27.240897+02:00",
+   "last_seen": "2026-08-05T20:08:47.827635+02:00",
    "active": true,
-   "days_active": 8,
+   "days_active": 9,
    "also_at": "https://www.otodom.pl/pl/oferta/ul-swidnicka-ID4CnhI",
    "duplicate_of": "otodom:68251318"
   },
@@ -25044,9 +25044,9 @@
     ]
    },
    "first_seen": "2026-07-27T12:28:29.995521+02:00",
-   "last_seen": "2026-08-05T11:22:27.240943+02:00",
+   "last_seen": "2026-08-05T20:08:47.827674+02:00",
    "active": true,
-   "days_active": 8
+   "days_active": 9
   },
   {
    "id": "adresowo:z1g5t7",
@@ -25077,9 +25077,9 @@
     ]
    },
    "first_seen": "2026-07-27T12:28:29.995554+02:00",
-   "last_seen": "2026-08-05T11:22:27.240990+02:00",
+   "last_seen": "2026-08-05T20:08:47.827745+02:00",
    "active": true,
-   "days_active": 8
+   "days_active": 9
   },
   {
    "id": "adresowo:d1q0k0",
@@ -25110,9 +25110,9 @@
     ]
    },
    "first_seen": "2026-07-27T12:28:29.995635+02:00",
-   "last_seen": "2026-08-05T11:22:27.241085+02:00",
+   "last_seen": "2026-08-05T20:08:47.827780+02:00",
    "active": true,
-   "days_active": 8
+   "days_active": 9
   },
   {
    "id": "adresowo:p1x7p9",
@@ -25144,7 +25144,7 @@
     ]
    },
    "first_seen": "2026-07-27T20:10:45.179876+02:00",
-   "last_seen": "2026-08-05T11:22:27.240779+02:00",
+   "last_seen": "2026-08-05T20:08:47.827599+02:00",
    "active": true,
    "days_active": 8
   },
@@ -25177,7 +25177,7 @@
     ]
    },
    "first_seen": "2026-07-27T20:10:45.184488+02:00",
-   "last_seen": "2026-08-05T11:22:27.246196+02:00",
+   "last_seen": "2026-08-05T20:08:47.833715+02:00",
    "active": true,
    "days_active": 8
   },
@@ -25210,7 +25210,7 @@
     ]
    },
    "first_seen": "2026-07-27T20:10:45.184516+02:00",
-   "last_seen": "2026-08-05T11:22:27.246232+02:00",
+   "last_seen": "2026-08-05T20:08:47.833750+02:00",
    "active": true,
    "days_active": 8
   },
@@ -25243,7 +25243,7 @@
     ]
    },
    "first_seen": "2026-07-27T20:10:45.184540+02:00",
-   "last_seen": "2026-08-05T11:22:27.246269+02:00",
+   "last_seen": "2026-08-05T20:08:47.833784+02:00",
    "active": true,
    "days_active": 8
   },
@@ -25276,7 +25276,7 @@
     ]
    },
    "first_seen": "2026-07-28T11:21:23.269947+02:00",
-   "last_seen": "2026-08-05T11:22:27.246145+02:00",
+   "last_seen": "2026-08-05T20:08:47.833669+02:00",
    "active": true,
    "days_active": 8
   },
@@ -25343,9 +25343,9 @@
     ]
    },
    "first_seen": "2026-07-28T20:01:48.776210+02:00",
-   "last_seen": "2026-08-05T11:22:27.246071+02:00",
+   "last_seen": "2026-08-05T20:08:47.833600+02:00",
    "active": true,
-   "days_active": 7
+   "days_active": 8
   },
   {
    "id": "otodom:68258000",
@@ -25376,9 +25376,9 @@
     ]
    },
    "first_seen": "2026-07-28T20:01:48.776243+02:00",
-   "last_seen": "2026-08-05T11:22:27.246109+02:00",
+   "last_seen": "2026-08-05T20:08:47.833635+02:00",
    "active": true,
-   "days_active": 7
+   "days_active": 8
   },
   {
    "id": "olx:CID3-ID162ZmE",
@@ -25409,9 +25409,9 @@
     ]
    },
    "first_seen": "2026-07-29T11:25:30.604481+02:00",
-   "last_seen": "2026-08-05T11:22:27.240463+02:00",
+   "last_seen": "2026-08-05T20:08:47.832953+02:00",
    "active": true,
-   "days_active": 6
+   "days_active": 7
   },
   {
    "id": "otodom:68264686",
@@ -25442,7 +25442,7 @@
     ]
    },
    "first_seen": "2026-07-30T11:17:09.303151+02:00",
-   "last_seen": "2026-08-05T11:22:27.245960+02:00",
+   "last_seen": "2026-08-05T20:08:47.833465+02:00",
    "active": true,
    "days_active": 6
   },
@@ -25475,7 +25475,7 @@
     ]
    },
    "first_seen": "2026-07-30T11:17:09.303190+02:00",
-   "last_seen": "2026-08-05T11:22:27.245924+02:00",
+   "last_seen": "2026-08-05T20:08:47.833500+02:00",
    "active": true,
    "days_active": 6
   },
@@ -25508,9 +25508,9 @@
     ]
    },
    "first_seen": "2026-07-30T20:01:08.443666+02:00",
-   "last_seen": "2026-08-05T11:22:27.240509+02:00",
+   "last_seen": "2026-08-05T20:08:47.833016+02:00",
    "active": true,
-   "days_active": 5,
+   "days_active": 6,
    "also_at": "https://adresowo.pl/o/dzialka-inwestycyjna-lublin-ul-melgiewska-t3h3i0",
    "duplicate_of": "adresowo:t3h3i0"
   },
@@ -25577,9 +25577,9 @@
     ]
    },
    "first_seen": "2026-08-03T12:26:02.657014+02:00",
-   "last_seen": "2026-08-05T11:22:27.238883+02:00",
+   "last_seen": "2026-08-05T20:08:47.831899+02:00",
    "active": true,
-   "days_active": 1,
+   "days_active": 2,
    "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1200-m-przy-lesie-lublin-slawin-ID4Ct7R",
    "duplicate_of": "otodom:68273771"
   },
@@ -25613,9 +25613,9 @@
     ]
    },
    "first_seen": "2026-08-03T12:26:02.658147+02:00",
-   "last_seen": "2026-08-05T11:22:27.240729+02:00",
+   "last_seen": "2026-08-05T20:08:47.827496+02:00",
    "active": true,
-   "days_active": 1
+   "days_active": 2
   },
   {
    "id": "otodom:68275094",
@@ -25646,9 +25646,9 @@
     ]
    },
    "first_seen": "2026-08-03T12:26:02.662236+02:00",
-   "last_seen": "2026-08-05T11:22:27.245681+02:00",
+   "last_seen": "2026-08-05T20:08:47.833240+02:00",
    "active": true,
-   "days_active": 1
+   "days_active": 2
   },
   {
    "id": "otodom:68273771",
@@ -25679,10 +25679,10 @@
     ]
    },
    "first_seen": "2026-08-03T12:26:02.662306+02:00",
-   "last_seen": "2026-08-05T11:22:27.245757+02:00",
+   "last_seen": "2026-08-05T20:08:47.833311+02:00",
    "active": true,
-   "days_active": 1,
-   "also_at": "https://www.olx.pl/d/oferta/dzialka-budowlana-1200-m-przy-lesie-lublin-slawin-CID3-ID1bHd42.html"
+   "days_active": 2,
+   "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-skowronkowa-u8k9v8"
   },
   {
    "id": "otodom:96827509400067",
@@ -25747,11 +25747,11 @@
     ]
    },
    "first_seen": "2026-08-05T11:22:27.240601+02:00",
-   "last_seen": "2026-08-05T11:22:27.240601+02:00",
+   "last_seen": "2026-08-05T20:08:47.832824+02:00",
    "active": true,
    "days_active": 0,
-   "duplicate_of": "adresowo:h4q4m9",
-   "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-skowronkowa-h4q4m9"
+   "also_at": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-skowronkowa-h4q4m9",
+   "duplicate_of": "adresowo:h4q4m9"
   },
   {
    "id": "adresowo:c2p7y8",
@@ -25782,7 +25782,145 @@
     ]
    },
    "first_seen": "2026-08-05T11:22:27.240679+02:00",
-   "last_seen": "2026-08-05T11:22:27.240679+02:00",
+   "last_seen": "2026-08-05T20:08:47.827443+02:00",
+   "active": true,
+   "days_active": 0
+  },
+  {
+   "id": "adresowo:u8k9v8",
+   "source": "adresowo",
+   "url": "https://adresowo.pl/o/dzialka-budowlana-lublin-ul-skowronkowa-u8k9v8",
+   "title": "Działka Lublin, ul. Skowronkowa, bez pośrednika - 1 200 m² - 1 200 000 zł",
+   "area_m2": 1200.0,
+   "price_per_m2": 1000.0,
+   "plot_type": "budowlana",
+   "location": {
+    "city": "Lublin",
+    "district": null,
+    "street": "ul. Skowronkowa",
+    "coords": {
+     "lat": 51.2745524,
+     "lon": 22.5002368
+    },
+    "coords_precision": "street",
+    "generic_centroid": true
+   },
+   "description": "Na sprzedaż atrakcyjna działka z aktualnymi warunkami zabudowy, położona w spokojnej, zielonej części Sławina , przy ul. Skowronkowej. Nieruchomość ma regularny kształt, powierzchnię 1200 m² i szeroki front 34 m, co daje dużą swobodę przy wyborze projektu domu oraz zagospodarowaniu ogrodu. Położenie w piątej linii zabudowy ogranicza ruch samochodowy i zapewnia ciszę i spokój. Dojazd utwardzoną drogą wewnętrzną. To propozycja dla osób, które chcą mieszkać blisko miasta, a jednocześnie cenią sobie ciszę, prywatność i bezpośredni kontakt z naturą. Działka znajduje się blisko lasu, dzięki czemu miejsce zachowuje kameralny charakter. Dla działki wydano warunki zabudowy pod zabudowę budynku mieszkalnego jednorodzinnego, które przewidują wykonanie własnego ujęcia wody oraz przydomowej oczyszczalni ścieków. Pozwoli to stworzyć nowoczesny dom z niezależną infrastrukturą, bez konieczności oczekiwania na rozbudowę miejskich sieci. Sprzedaż bezpośrednio od właściciela - bez pośredników i prowizji. Dokumentacja dostępna do wglądu dla osób zainteresowanych.",
+   "is_private_owner": true,
+   "image": "https://s2.adresowa.pl/oi/36/6f/40059e_4dec_xbig.jpg",
+   "created_at": null,
+   "price": {
+    "current": 1200000,
+    "history": [
+     1200000
+    ]
+   },
+   "first_seen": "2026-08-05T20:08:47.827361+02:00",
+   "last_seen": "2026-08-05T20:08:47.827361+02:00",
+   "active": true,
+   "days_active": 0,
+   "duplicate_of": "otodom:68273771",
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-budowlana-1200-m-przy-lesie-lublin-slawin-ID4Ct7R"
+  },
+  {
+   "id": "olx:CID3-ID1bJw4I",
+   "source": "olx",
+   "url": "https://www.olx.pl/d/oferta/dzialka-pod-magazyn-uslugi-CID3-ID1bJw4I.html",
+   "title": "Działka pod magazyn/usługi",
+   "area_m2": 2000.0,
+   "price_per_m2": 575.0,
+   "plot_type": "inwestycyjna",
+   "location": {
+    "city": "Lublin",
+    "district": null,
+    "street": "ul. Narzędziowa",
+    "coords": {
+     "lat": 51.2427369,
+     "lon": 22.6106805
+    },
+    "coords_precision": "street"
+   },
+   "description": "Na sprzedaż – atrakcyjna działka przemysłowa pod halę produkcyjną | Lublin, ul. Narzędziowa 8\nNa sprzedaż wyjątkowo atrakcyjna działka inwestycyjna o przeznaczeniu przemysłowym, położona w doskonałej lokalizacji przy ul. Narzędziowej 8 w Lublinie, w obrębie Hajdów. To idealna propozycja dla firm planujących budowę hali produkcyjnej, magazynowej, logistycznej lub obiektu usługowo-przemysłowego.\nJednym z największych atutów nieruchomości są bardzo korzystne warunki zabudowy, co daje inwestorowi dużą swobodę w zagospodarowaniu terenu i pozwala na realizację nawet wymagających projektów przemysłowych.\nNieruchomość znajduje się w rozwijającej się strefie przemysłowej, w sąsiedztwie licznych przedsiębiorstw i zakładów produkcyjnych. Lokalizacja zapewnia dogodny dojazd szeroką drogą oraz sprawną komunikację z pozostałymi częściami miasta i głównymi trasami wyjazdowymi.\nDodatkowym atutem jest pełne uzbrojenie – wszystkie media znajdują się w drodze, co znacząco ułatwia i przyspiesza proces realizacji inwestycji.\nNajważniejsze informacje\nAdres: ul. Narzędziowa 8, LublinObręb: 0013 – HajdówArkusz mapy: 9Nr działki: 1/166Identyfikator działki: 066301_1.0013.AR_9.1/166Powierzchnia: 0,2000 ha (2 000 m²)Forma władania: użytkowanie wieczystePrzeznaczenie: teren przemysłowyMedia: wszystkie dostępne w drodzeDojazd: szeroka droga dojazdowaAtuty nieruchomości\ndoskonała lokalizacja na terenie miasta,bardzo korzystne parametry zabudowy,idealna pod halę produkcyjną, magazyn lub centrum logistyczne,sąsiedztwo firm i terenów przemysłowych,pełna infrastruktura techniczna,szybki i wygodny dojazd dla samochodów ciężarowych oraz dostawczych.To nieruchomość, która dzięki swojej lokalizacji i parametrom planistycznym stanowi doskonałą bazę do realizacji inwestycji przemysłowej lub logistycznej. Duży potencjał zabudowy oraz niewielkie ograniczenia planistyczne sprawiają, że jest to jedna z ciekawszych ofert inwestycyjnych w tej części Lublina.\nFV VAT 23%.\nCena wskazana w ogłoszeniu jest kwotą brutto.",
+   "is_private_owner": true,
+   "image": "https://ireland.apollo.olxcdn.com:443/v1/files/9wde6b1rtqnt3-PL/image;s=931x1024",
+   "created_at": "2026-08-05T16:11:33+02:00",
+   "price": {
+    "current": 1150000,
+    "history": [
+     1150000
+    ]
+   },
+   "first_seen": "2026-08-05T20:08:47.832169+02:00",
+   "last_seen": "2026-08-05T20:08:47.832169+02:00",
+   "active": true,
+   "days_active": 0,
+   "duplicate_of": "otodom:67860144",
+   "also_at": "https://www.otodom.pl/pl/oferta/dzialka-pod-magazyn-uslugi-ID4AJvs"
+  },
+  {
+   "id": "otodom:67860144",
+   "source": "otodom",
+   "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-magazyn-uslugi-ID4AJvs",
+   "title": "Działka pod magazyn/usługi",
+   "area_m2": 2000.0,
+   "price_per_m2": 575.0,
+   "plot_type": "inwestycyjna",
+   "location": {
+    "city": "Lublin",
+    "district": "Tatary",
+    "street": "ul. Narzędziowa",
+    "coords": {
+     "lat": 51.242073,
+     "lon": 22.612955
+    },
+    "coords_precision": "exact"
+   },
+   "description": "Na sprzedaż – atrakcyjna działka przemysłowa pod halę produkcyjną | Lublin, ul. Narzędziowa 8\nNa sprzedaż wyjątkowo atrakcyjna działka inwestycyjna o przeznaczeniu przemysłowym, położona w doskonałej lokalizacji przy ul. Narzędziowej 8 w Lublinie, w obrębie Hajdów. To idealna propozycja dla firm planujących budowę hali produkcyjnej, magazynowej, logistycznej lub obiektu usługowo-przemysłowego.\nJednym z największych atutów nieruchomości są bardzo korzystne warunki zabudowy, co daje inwestorowi dużą swobodę w zagospodarowaniu terenu i pozwala na realizację nawet wymagających projektów przemysłowych.\nNieruchomość znajduje się w rozwijającej się strefie przemysłowej, w sąsiedztwie licznych przedsiębiorstw i zakładów produkcyjnych. Lokalizacja zapewnia dogodny dojazd szeroką drogą oraz sprawną komunikację z pozostałymi częściami miasta i głównymi trasami wyjazdowymi.\nDodatkowym atutem jest pełne uzbrojenie – wszystkie media znajdują się w drodze, co znacząco ułatwia i przyspiesza proces realizacji inwestycji.\nNajważniejsze informacje\nAdres: ul. Narzędziowa 8, LublinObręb: 0013 – HajdówArkusz mapy: 9Nr działki: 1/166Identyfikator działki: 066301_1.0013.AR_9.1/166Powierzchnia: 0,2000 ha (2 000 m²)Forma władania: użytkowanie wieczystePrzeznaczenie: teren przemysłowyMedia: wszystkie dostępne w drodzeDojazd: szeroka droga dojazdowaAtuty nieruchomości\ndoskonała lokalizacja na terenie miasta,bardzo korzystne parametry zabudowy,idealna pod halę produkcyjną, magazyn lub centrum logistyczne,sąsiedztwo firm i terenów przemysłowych,pełna infrastruktura techniczna,szybki i wygodny dojazd dla samochodów ciężarowych oraz dostawczych.To nieruchomość, która dzięki swojej lokalizacji i parametrom planistycznym stanowi doskonałą bazę do realizacji inwestycji przemysłowej lub logistycznej. Duży potencjał zabudowy oraz niewielkie ograniczenia planistyczne sprawiają, że jest to jedna z ciekawszych ofert inwestycyjnych w tej części Lublina.\nFV VAT 23%.\nCena wskazana w ogłoszeniu jest kwotą brutto.",
+   "is_private_owner": true,
+   "image": "https://ireland.apollo.olxcdn.com/v1/files/eyJmbiI6ImJoeGN3bG93NTljaS1BUEwiLCJ3IjpbeyJmbiI6ImVudmZxcWUxYXk0azEtQVBMIiwicyI6IjE0IiwicCI6IjEwLC0xMCIsImEiOiIwIn1dfQ.N7vLVQMJBrqUuS-yOvhdBR3vKqFchxtIiToAVu-lbAE/image;s=655x491;q=80",
+   "created_at": "2026-03-30T17:04:19Z",
+   "price": {
+    "current": 1150000,
+    "history": [
+     1150000
+    ]
+   },
+   "first_seen": "2026-08-05T20:08:47.833084+02:00",
+   "last_seen": "2026-08-05T20:08:47.833084+02:00",
+   "active": true,
+   "days_active": 0,
+   "also_at": "https://www.olx.pl/d/oferta/dzialka-pod-magazyn-uslugi-CID3-ID1bJw4I.html"
+  },
+  {
+   "id": "otodom:96786014400067",
+   "source": "otodom",
+   "url": "https://www.otodom.pl/pl/oferta/dzialka-pod-magazyn-uslugi-ID4AJvs",
+   "title": "Działka pod magazyn/usługi",
+   "area_m2": 2000.0,
+   "price_per_m2": 575.0,
+   "plot_type": "inwestycyjna",
+   "location": {
+    "city": "Lublin",
+    "district": "Tatary",
+    "street": "ul. Narzędziowa",
+    "coords": {
+     "lat": 51.242073,
+     "lon": 22.612955
+    },
+    "coords_precision": "exact"
+   },
+   "description": "Na sprzedaż – atrakcyjna działka przemysłowa pod halę produkcyjną | Lublin, ul. Narzędziowa 8\nNa sprzedaż wyjątkowo atrakcyjna działka inwestycyjna o przeznaczeniu przemysłowym, położona w doskonałej lokalizacji przy ul. Narzędziowej 8 w Lublinie, w obrębie Hajdów. To idealna propozycja dla firm planujących budowę hali produkcyjnej, magazynowej, logistycznej lub obiektu usługowo-przemysłowego.\nJednym z największych atutów nieruchomości są bardzo korzystne warunki zabudowy, co daje inwestorowi dużą swobodę w zagospodarowaniu terenu i pozwala na realizację nawet wymagających projektów przemysłowych.\nNieruchomość znajduje się w rozwijającej się strefie przemysłowej, w sąsiedztwie licznych przedsiębiorstw i zakładów produkcyjnych. Lokalizacja zapewnia dogodny dojazd szeroką drogą oraz sprawną komunikację z pozostałymi częściami miasta i głównymi trasami wyjazdowymi.\nDodatkowym atutem jest pełne uzbrojenie – wszystkie media znajdują się w drodze, co znacząco ułatwia i przyspiesza proces realizacji inwestycji.\nNajważniejsze informacje\nAdres: ul. Narzędziowa 8, LublinObręb: 0013 – HajdówArkusz mapy: 9Nr działki: 1/166Identyfikator działki: 066301_1.0013.AR_9.1/166Powierzchnia: 0,2000 ha (2 000 m²)Forma władania: użytkowanie wieczystePrzeznaczenie: teren przemysłowyMedia: wszystkie dostępne w drodzeDojazd: szeroka droga dojazdowaAtuty nieruchomości\ndoskonała lokalizacja na terenie miasta,bardzo korzystne parametry zabudowy,idealna pod halę produkcyjną, magazyn lub centrum logistyczne,sąsiedztwo firm i terenów przemysłowych,pełna infrastruktura techniczna,szybki i wygodny dojazd dla samochodów ciężarowych oraz dostawczych.To nieruchomość, która dzięki swojej lokalizacji i parametrom planistycznym stanowi doskonałą bazę do realizacji inwestycji przemysłowej lub logistycznej. Duży potencjał zabudowy oraz niewielkie ograniczenia planistyczne sprawiają, że jest to jedna z ciekawszych ofert inwestycyjnych w tej części Lublina.\nFV VAT 23%.\nCena wskazana w ogłoszeniu jest kwotą brutto.",
+   "is_private_owner": true,
+   "image": null,
+   "created_at": "1999-02-29 00:00:01",
+   "price": {
+    "current": 1150000,
+    "history": [
+     1150000
+    ]
+   },
+   "first_seen": "2026-08-05T20:08:47.834846+02:00",
+   "last_seen": "2026-08-05T20:08:47.834846+02:00",
    "active": true,
    "days_active": 0
   }

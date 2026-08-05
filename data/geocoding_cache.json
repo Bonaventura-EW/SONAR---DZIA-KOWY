@@ -1430,5 +1430,13 @@
    "name": "Aleja Unii Lubelskiej"
   },
   "ts": 1785752762.8395
+ },
+ "narzędziowa": {
+  "result": {
+   "lat": 51.2427369,
+   "lon": 22.6106805,
+   "name": "Narzędziowa"
+  },
+  "ts": 1785953328.424618
  }
 }
