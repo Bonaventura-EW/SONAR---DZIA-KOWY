@@ -1189,7 +1189,7 @@
  },
  "zagajnikowa 6": {
   "result": null,
-  "ts": 1785403029.5699818
+  "ts": 1786008422.764713
  },
  "zagajnikowa": {
   "result": {
@@ -1438,5 +1438,13 @@
    "name": "Narzędziowa"
   },
   "ts": 1785953328.424618
+ },
+ "kpt. władysława raginisa": {
+  "result": {
+   "lat": 51.2769271,
+   "lon": 22.5316096,
+   "name": "Kapitana Władysława Raginisa"
+  },
+  "ts": 1786008421.4965954
  }
 }
