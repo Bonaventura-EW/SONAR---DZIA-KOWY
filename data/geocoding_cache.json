@@ -357,7 +357,7 @@
  },
  "warszawskiej. malownicza": {
   "result": null,
-  "ts": 1784625256.8826916
+  "ts": 1786087335.7207801
  },
  "jana kasprowicza": {
   "result": {
@@ -517,7 +517,7 @@
  },
  "gołębiej": {
   "result": null,
-  "ts": 1785434470.3312662
+  "ts": 1786087334.0640948
  },
  "kraśnicką": {
   "result": {
@@ -1446,5 +1446,17 @@
    "name": "Kapitana Władysława Raginisa"
   },
   "ts": 1786008421.4965954
+ },
+ "h. m. sachsów": {
+  "result": null,
+  "ts": 1786087329.5565295
+ },
+ "stefana roweckiego": {
+  "result": {
+   "lat": 51.2081952,
+   "lon": 22.6012671,
+   "name": "Stefana Roweckiego"
+  },
+  "ts": 1786087331.196013
  }
 }
