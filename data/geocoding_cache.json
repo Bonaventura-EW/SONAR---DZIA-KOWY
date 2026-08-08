@@ -385,7 +385,7 @@
  },
  "brzegowa": {
   "result": null,
-  "ts": 1785574550.053843
+  "ts": 1786208780.3386679
  },
  "mełgiewska": {
   "result": {
@@ -609,7 +609,7 @@
  },
  "kasprowicza. dojazd": {
   "result": null,
-  "ts": 1785574551.4956295
+  "ts": 1786208781.9455342
  },
  "południowej": {
   "result": {
@@ -1109,7 +1109,7 @@
  },
  "mełgiewskiej. to": {
   "result": null,
-  "ts": 1785574552.8959594
+  "ts": 1786208783.5226693
  },
  "wapiennej": {
   "result": {
@@ -1458,5 +1458,21 @@
    "name": "Stefana Roweckiego"
   },
   "ts": 1786087331.196013
+ },
+ "sławinkowskiej": {
+  "result": {
+   "lat": 51.2647924,
+   "lon": 22.5125897,
+   "name": "Sławinkowska"
+  },
+  "ts": 1786208786.501994
+ },
+ "tadeusza krwawicza": {
+  "result": {
+   "lat": 51.2379257,
+   "lon": 22.4776888,
+   "name": "Tadeusza Krwawicza"
+  },
+  "ts": 1786208787.9133043
  }
 }
