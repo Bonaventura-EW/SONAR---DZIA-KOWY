@@ -1900,6 +1900,21 @@
    "skipped_removed": 0,
    "active": 465,
    "total_in_db": 746
+  },
+  {
+   "timestamp": "2026-08-09T09:38:03.159161+02:00",
+   "status": "completed",
+   "duration_s": 38.5,
+   "deactivated": 0,
+   "scraped_olx": 56,
+   "scraped_otodom": 166,
+   "scraped_adresowo": 193,
+   "scraped_agencies": 232,
+   "new": 0,
+   "updated": 454,
+   "skipped_removed": 0,
+   "active": 465,
+   "total_in_db": 746
   }
  ]
 }
