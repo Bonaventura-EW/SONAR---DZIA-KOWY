@@ -1930,6 +1930,21 @@
    "skipped_removed": 0,
    "active": 462,
    "total_in_db": 747
+  },
+  {
+   "timestamp": "2026-08-10T10:15:05.480653+02:00",
+   "status": "completed",
+   "duration_s": 47.8,
+   "deactivated": 6,
+   "scraped_olx": 56,
+   "scraped_otodom": 166,
+   "scraped_adresowo": 194,
+   "scraped_agencies": 235,
+   "new": 1,
+   "updated": 456,
+   "skipped_removed": 0,
+   "active": 457,
+   "total_in_db": 748
   }
  ]
 }
