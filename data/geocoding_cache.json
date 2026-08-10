@@ -1482,5 +1482,13 @@
    "name": "Sławinkowska"
   },
   "ts": 1786261121.5877626
+ },
+ "jagiellońskiej": {
+  "result": {
+   "lat": 51.2577338,
+   "lon": 22.5250268,
+   "name": "Jagiellońska"
+  },
+  "ts": 1786383143.9944963
  }
 }
