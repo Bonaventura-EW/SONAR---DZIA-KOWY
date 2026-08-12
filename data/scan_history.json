@@ -2005,6 +2005,21 @@
    "skipped_removed": 0,
    "active": 470,
    "total_in_db": 759
+  },
+  {
+   "timestamp": "2026-08-12T19:36:02.061451+02:00",
+   "status": "completed",
+   "duration_s": 35.9,
+   "deactivated": 2,
+   "scraped_olx": 0,
+   "scraped_otodom": 169,
+   "scraped_adresowo": 196,
+   "scraped_agencies": 243,
+   "new": 2,
+   "updated": 410,
+   "skipped_removed": 0,
+   "active": 470,
+   "total_in_db": 761
   }
  ]
 }
