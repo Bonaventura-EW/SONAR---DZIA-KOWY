@@ -1490,5 +1490,13 @@
    "name": "Jagiellońska"
   },
   "ts": 1786383143.9944963
+ },
+ "jana ciepielewskiego": {
+  "result": {
+   "lat": 51.2727802,
+   "lon": 22.5064279,
+   "name": "Jana Ciepielewskiego"
+  },
+  "ts": 1786521751.976485
  }
 }
