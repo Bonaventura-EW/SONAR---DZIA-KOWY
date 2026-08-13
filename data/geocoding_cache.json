@@ -1189,7 +1189,7 @@
  },
  "zagajnikowa 6": {
   "result": null,
-  "ts": 1786008422.764713
+  "ts": 1786642570.4789562
  },
  "zagajnikowa": {
   "result": {
@@ -1506,5 +1506,29 @@
    "name": "Macieja Rataja"
   },
   "ts": 1786556197.8950849
+ },
+ "kunickiego": {
+  "result": {
+   "lat": 51.2177735,
+   "lon": 22.5796416,
+   "name": "Władysława Kunickiego"
+  },
+  "ts": 1786642571.9695115
+ },
+ "nadrzeczna": {
+  "result": {
+   "lat": 51.2132687,
+   "lon": 22.5864284,
+   "name": "Nadrzeczna"
+  },
+  "ts": 1786642573.2507594
+ },
+ "watykańska": {
+  "result": {
+   "lat": 51.228356,
+   "lon": 22.5216905,
+   "name": "Watykańska"
+  },
+  "ts": 1786642574.6776075
  }
 }
