@@ -357,7 +357,7 @@
  },
  "warszawskiej. malownicza": {
   "result": null,
-  "ts": 1786087335.7207801
+  "ts": 1786694407.6665912
  },
  "jana kasprowicza": {
   "result": {
@@ -517,7 +517,7 @@
  },
  "gołębiej": {
   "result": null,
-  "ts": 1786087334.0640948
+  "ts": 1786694406.0551522
  },
  "kraśnicką": {
   "result": {
@@ -1449,7 +1449,7 @@
  },
  "h. m. sachsów": {
   "result": null,
-  "ts": 1786087329.5565295
+  "ts": 1786694402.0433333
  },
  "stefana roweckiego": {
   "result": {
@@ -1530,5 +1530,13 @@
    "name": "Watykańska"
   },
   "ts": 1786642574.6776075
+ },
+ "adama mickiewicza": {
+  "result": {
+   "lat": 51.2200085,
+   "lon": 22.5868609,
+   "name": "Adama Mickiewicza"
+  },
+  "ts": 1786694403.4229612
  }
 }
