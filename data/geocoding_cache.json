@@ -621,15 +621,15 @@
  },
  "woda": {
   "result": null,
-  "ts": 1786349747.3478858
+  "ts": 1786985992.1969447
  },
  "kanalizacja": {
   "result": null,
-  "ts": 1786349748.6800866
+  "ts": 1786985993.5567942
  },
  "dodatkowe": {
   "result": null,
-  "ts": 1786349751.6243644
+  "ts": 1786985996.2726514
  },
  "laury. prezentowana": {
   "result": null,
@@ -849,7 +849,7 @@
  },
  "mełgiewskiej. na": {
   "result": null,
-  "ts": 1786349745.7115407
+  "ts": 1786985990.9056814
  },
  "stary gaj": {
   "result": {
@@ -1145,11 +1145,11 @@
  },
  "prąd": {
   "result": null,
-  "ts": 1786349750.3094778
+  "ts": 1786985995.013949
  },
  "strumykowej. prezentowana": {
   "result": null,
-  "ts": 1786349753.205646
+  "ts": 1786985997.6022835
  },
  "gospodarcza": {
   "result": {
@@ -1538,5 +1538,25 @@
    "name": "Adama Mickiewicza"
   },
   "ts": 1786694403.4229612
+ },
+ "bolesława prusa": {
+  "result": {
+   "lat": 51.2543598,
+   "lon": 22.5626266,
+   "name": "Bolesława Prusa"
+  },
+  "ts": 1786985999.1428204
+ },
+ "skowronkowa. powierzchnia": {
+  "result": null,
+  "ts": 1786986000.6419601
+ },
+ "skowronkowa. liczba": {
+  "result": null,
+  "ts": 1786986001.9801362
+ },
+ "skowronkowej. nieruchomości": {
+  "result": null,
+  "ts": 1786986003.3168967
  }
 }
