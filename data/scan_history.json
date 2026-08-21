@@ -2260,6 +2260,21 @@
    "skipped_removed": 0,
    "active": 484,
    "total_in_db": 790
+  },
+  {
+   "timestamp": "2026-08-21T09:26:26.600757+02:00",
+   "status": "completed",
+   "duration_s": 39.2,
+   "deactivated": 3,
+   "scraped_olx": 0,
+   "scraped_otodom": 171,
+   "scraped_adresowo": 199,
+   "scraped_agencies": 241,
+   "new": 3,
+   "updated": 409,
+   "skipped_removed": 0,
+   "active": 485,
+   "total_in_db": 793
   }
  ]
 }
