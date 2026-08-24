@@ -44,7 +44,7 @@ więc nie ma parsowania HTML kart ani geokodowania adresów.
 | `api/status.json` | statystyki: liczba ofert, mediana ceny/m², podział wg źródła i typu |
 | `api/offers.json` | wszystkie aktywne oferty (po deduplikacji OLX↔Otodom) |
 | `api/history.json` | historia ostatnich 50 skanów |
-| `api/health.json` | healthcheck (świeżość ostatniego skanu) |
+| `api/health.json` | healthcheck: świeżość skanu + **alarmy awarii źródeł** (`degraded`, gdy portal przestał zwracać oferty) |
 
 Szczegóły i przykłady odpowiedzi: [docs/API.md](docs/API.md).
 

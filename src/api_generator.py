@@ -4,10 +4,11 @@ Endpointy (GitHub Pages, konwencja z SONAR-MIESZKANIOWY):
 - api/status.json  — statystyki bieżącego stanu bazy + czas skanów
 - api/offers.json  — kompaktowa lista aktywnych ofert (dedup OLX↔Otodom)
 - api/history.json — historia skanów (z data/scan_history.json)
-- api/health.json  — prosty healthcheck (świeżość ostatniego skanu)
+- api/health.json  — healthcheck: świeżość skanu + ALARMY awarii źródeł
 """
 
 import json
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -15,6 +16,8 @@ import pytz
 
 import paths
 from map_generator import build_map_offer
+from source_health import (build_source_alerts, group_active_by_source,
+                           health_status, summarize_sources)
 
 API_DIR = Path(paths.DOCS_DIR) / "api"
 STALE_AFTER_HOURS = 26  # 2 skany/dzień → >26 h bez skanu = problem
@@ -48,14 +51,19 @@ def generate():
         with open(API_DIR / name, 'w', encoding='utf-8') as f:
             json.dump(payload, f, ensure_ascii=False, separators=(',', ':'))
 
-    # status ostatniego skanu (czy się udał + bilans ofert)
-    last_entry = {}
-    history_path_for_status = Path(paths.SCAN_HISTORY_JSON)
-    if history_path_for_status.exists():
-        with open(history_path_for_status, 'r', encoding='utf-8') as f:
-            scans_for_status = json.load(f).get('scans', [])
-        if scans_for_status:
-            last_entry = scans_for_status[-1]
+    # historia skanów — jedno wczytanie: status, alarmy źródeł i history.json
+    raw_scans = []
+    history_path = Path(paths.SCAN_HISTORY_JSON)
+    if history_path.exists():
+        with open(history_path, 'r', encoding='utf-8') as f:
+            raw_scans = json.load(f).get('scans', [])
+    last_entry = raw_scans[-1] if raw_scans else {}
+
+    # FIX 2026-08-24: ALARM gdy źródło przestaje zwracać oferty. Skan z
+    # martwym OLX-em (403 CloudFront od 2026-08-11) kończył się jako
+    # 'completed', a health.json raportował 'ok' przez 26 skanów z rzędu.
+    sources = summarize_sources(raw_scans, group_active_by_source(all_offers))
+    alerts = build_source_alerts(sources)
 
     write('status.json', {
         'generated_at': now.isoformat(),
@@ -66,6 +74,7 @@ def generate():
         'last_scan_new_offers': last_entry.get('new'),
         'last_scan_disappeared_offers': last_entry.get('deactivated'),
         'last_scan_duration_s': last_entry.get('duration_s'),
+        'alerts': alerts,
         'active_offers': len(active),
         'total_in_db': len(all_offers),
         'median_price_per_m2': per_m2[len(per_m2) // 2] if per_m2 else None,
@@ -81,13 +90,6 @@ def generate():
 
     # history.json — 6 ostatnich skanów (nowe nadpisują stare), format
     # analogiczny do SONAR-POKOJOWY/MIESZKANIOWY: status skanu + bilans ofert
-    history = {}
-    history_path = Path(paths.SCAN_HISTORY_JSON)
-    if history_path.exists():
-        with open(history_path, 'r', encoding='utf-8') as f:
-            history = json.load(f)
-    raw_scans = history.get('scans', [])
-
     def format_duration(seconds):
         if seconds is None:
             return None
@@ -163,14 +165,32 @@ def generate():
     fresh = hours_since is not None and hours_since < STALE_AFTER_HOURS
     last_ok = last_entry.get('status', 'completed') == 'completed' if last_entry else True
     write('health.json', {
-        'status': 'ok' if (fresh and last_ok) else 'stale' if not fresh else 'failing',
+        'status': health_status(fresh, last_ok, alerts),
         'generated_at': now.isoformat(),
         'last_scan': last_scan,
         'last_scan_status': last_entry.get('status') if last_entry else None,
         'hours_since_last_scan': round(hours_since, 1) if hours_since is not None else None,
+        'alerts': alerts,
+        'sources': sources,
     })
 
     print(f"🔌 Wygenerowano API: {API_DIR} (status, offers[{len(active)}], history, health)")
+    _report_alerts(alerts)
+
+
+def _report_alerts(alerts):
+    """Alarmy na stdout, a w GitHub Actions też jako annotacje runa — awaria
+    źródła ma być widoczna bez zaglądania w JSON."""
+    if not alerts:
+        return
+    in_actions = os.environ.get('GITHUB_ACTIONS') == 'true'
+    for alert in alerts:
+        icon = '🚨' if alert['severity'] == 'critical' else '⚠️'
+        print(f"{icon} ALARM [{alert['source']}]: {alert['message']}")
+        if in_actions:
+            level = 'error' if alert['severity'] == 'critical' else 'warning'
+            print(f"::{level} title=SONAR: awaria źródła {alert['source']}::"
+                  f"{alert['message']}")
 
 
 if __name__ == "__main__":
