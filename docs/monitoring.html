@@ -25,6 +25,8 @@
     </header>
 
     <div class="page-content">
+        <div id="alerts"></div>
+
         <div class="cards-row">
             <div class="kpi-card"><h3>Skanów łącznie</h3><div class="kpi-value" id="kpi-total">—</div></div>
             <div class="kpi-card"><h3>Średni czas skanu</h3><div class="kpi-value" id="kpi-avg">—</div><div class="kpi-sub" id="kpi-last-dur">ostatni: —</div></div>
@@ -68,6 +70,23 @@ function ts(label) {
     return new Date(label).toLocaleString('pl-PL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
 }
 
+// FIX 2026-08-24: alarm o martwym źródle (np. OLX blokowany przez WAF) —
+// wykres spadający do zera łatwo przeoczyć, czerwony pasek nie.
+function renderAlerts(alerts) {
+    const box = document.getElementById('alerts');
+    if (!box) return;
+    box.innerHTML = alerts.map(a => {
+        const warning = a.severity !== 'critical';
+        const icon = warning ? '⚠️' : '🚨';
+        const head = warning ? 'Ostrzeżenie' : 'Awaria źródła';
+        const label = (a.source || '').toUpperCase();
+        return `<div class="alert-banner${warning ? ' warning' : ''}">
+            <span class="alert-icon">${icon}</span>
+            <span><strong>${head}: ${label}</strong>${a.message || ''}</span>
+        </div>`;
+    }).join('');
+}
+
 async function init() {
     let data;
     try {
@@ -77,6 +96,8 @@ async function init() {
         document.getElementById('kpi-total').textContent = 'brak danych';
         return;
     }
+
+    renderAlerts(data.alerts || []);
 
     const s = data.statistics || {};
     document.getElementById('kpi-total').textContent = s.total_scans ?? '—';

@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 
 import paths
+from source_health import build_source_alerts, summarize_sources
 
 OUTPUT_JSON = str(Path(paths.DOCS_DIR) / "monitoring_data.json")
 
@@ -47,9 +48,16 @@ def generate():
         ],
     }
 
+    # FIX 2026-08-24: te same alarmy co w api/health.json — dashboard ma
+    # pokazać awarię źródła (OLX 403), a nie tylko wykres, który spadł do zera
+    sources = summarize_sources(scans)
+    alerts = build_source_alerts(sources)
+
     last = recent[-1] if recent else {}
     data = {
         'generated_at': last.get('timestamp'),
+        'alerts': alerts,
+        'sources': sources,
         'statistics': {
             'total_scans': len(scans),
             'avg_duration_s': round(sum(durations) / len(durations), 1) if durations else None,

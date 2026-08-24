@@ -2,6 +2,33 @@
 
 ## [Niewydane]
 
+### Naprawione
+- **OLX znów się skanuje** (`olx_scraper.py`). Od 2026-08-11 OLX (CloudFront/WAF)
+  odrzucał każdy request biblioteki `requests` kodem **403** — niezależnie od
+  nagłówków (sprawdzone: pełny zestaw Chrome'owych `sec-ch-ua`/`Sec-Fetch-*`
+  też dostaje 403). Blokada idzie po **fingerprincie TLS (JA3)**: handshake
+  pythonowego OpenSSL nie wygląda jak przeglądarka. Warstwa HTTP scrapera OLX
+  przeszła na **`curl_cffi`** z `impersonate=` (odtwarza handshake prawdziwego
+  Chrome'a/Safari); ten sam URL wraca z kodem **200** i pełnym
+  `__PRERENDERED_STATE__`. Profile próbowane po kolei
+  (`chrome131 → chrome124 → chrome110 → safari17_0 → edge101`), a gdy żaden nie
+  przejdzie — fallback na gołe `requests` (scraper działa też bez `curl_cffi`
+  w środowisku). Zweryfikowane end-to-end: 64 oferty z Lublina po 13 dniach ciszy.
+
+### Dodane
+- **Alarm o awarii źródła w API** (`src/source_health.py`). Skan z martwym
+  źródłem kończył się statusem `completed` (pozostałe portale działały), a
+  ochrona przed masową dezaktywacją słusznie pomijała dezaktywację ofert —
+  przez co `api/health.json` przez **26 kolejnych skanów** raportował
+  `"status": "ok"` przy zerowym OLX-ie. Teraz `health.json` i `status.json`
+  niosą listę `alerts` (`source_down` / `source_degraded`, `severity`
+  `critical`/`warning`), a `health.status` schodzi na **`degraded`**, gdy
+  źródło padło mimo udanego skanu. `sources` w `health.json` pokazuje stan
+  każdego portalu (norma z 10 skanów vs ostatni skan, liczba pustych skanów
+  z rzędu, data ostatnich ofert). Alarmy trafiają też do
+  `docs/monitoring_data.json` → czerwony pasek na dashboardzie monitoringu
+  i annotacje runa w GitHub Actions (`::error` / `::warning`).
+
 ### Wydajność
 - Płynność mapy: memoizacja ikon markerów (jeden `L.divIcon` współdzielony przez
   pinezki o identycznym wyglądzie zamiast ~380 unikalnych stringów SVG na każde

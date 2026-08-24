@@ -20,6 +20,11 @@ from typing import Dict, List, Optional
 
 import requests
 
+try:  # FIX 2026-08-24: impersonacja TLS — patrz komentarz przy IMPERSONATE_PROFILES
+    from curl_cffi import requests as impersonate_requests
+except ImportError:  # środowisko bez curl_cffi — scraper zejdzie na gołe requests
+    impersonate_requests = None
+
 from cid import olx_offer_id
 
 
@@ -36,6 +41,14 @@ HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'pl,en-US;q=0.7,en;q=0.3',
 }
+
+# FIX 2026-08-24: OLX (CloudFront/WAF) od 2026-08-11 odrzucał KAŻDY request
+# biblioteki `requests` błędem 403 — niezależnie od nagłówków. Blokada idzie po
+# fingerprincie TLS (JA3): handshake pythonowego OpenSSL nie wygląda jak
+# przeglądarka. curl_cffi odtwarza handshake prawdziwego Chrome'a/Safari i ten
+# sam URL wraca z kodem 200. Profile próbujemy po kolei — nowsze buildy używają
+# rozszerzeń TLS, które bywają ucinane przez firmowe proxy/MITM.
+IMPERSONATE_PROFILES = ('chrome131', 'chrome124', 'chrome110', 'safari17_0', 'edge101')
 
 _STATE_RE = re.compile(r'window\.__PRERENDERED_STATE__\s*=\s*"(.*)";')
 _TAG_RE = re.compile(r'<[^>]+>')
@@ -153,24 +166,60 @@ def normalize_ad(ad: dict) -> Optional[Dict]:
     }
 
 
+# błędy sieciowe obu warstw HTTP (requests + curl_cffi)
+_FETCH_ERRORS = (requests.RequestException,)
+if impersonate_requests is not None:
+    _FETCH_ERRORS += (impersonate_requests.RequestsError,
+                      impersonate_requests.exceptions.HTTPError)
+
+
 class OLXDzialkiScraper:
-    def __init__(self, delay_range=(1.0, 2.0)):
+    def __init__(self, delay_range=(1.0, 2.0), impersonate_profiles=IMPERSONATE_PROFILES):
         self.delay_min, self.delay_max = delay_range
-        self.session = requests.Session()
-        self.session.headers.update(HEADERS)
+        self._profiles = list(impersonate_profiles) if impersonate_requests else []
+        self.impersonate = None
+        self.session = self._new_session()
+
+    def _new_session(self):
+        """Sesja z kolejnym profilem impersonacji; po ich wyczerpaniu — gołe
+        requests (lepsze niż nic, gdy curl_cffi nie jest zainstalowane)."""
+        if self._profiles:
+            self.impersonate = self._profiles.pop(0)
+            return impersonate_requests.Session(impersonate=self.impersonate)
+        self.impersonate = None
+        session = requests.Session()
+        session.headers.update(HEADERS)
+        return session
+
+    def _switch_session(self) -> bool:
+        """Przełącza na kolejny profil. False = nie ma już czego próbować."""
+        if not self._profiles and self.impersonate is None:
+            return False
+        try:
+            self.session.close()
+        except Exception:  # zamknięcie sesji nie może wywrócić skanu
+            pass
+        self.session = self._new_session()
+        print(f"🔁 OLX: ponawiam jako "
+              f"{self.impersonate or 'requests (bez impersonacji)'}")
+        return True
 
     def _fetch(self, url: str) -> Optional[str]:
-        try:
-            r = self.session.get(url, timeout=20)
-            r.raise_for_status()
-            return r.text
-        except requests.RequestException as e:
-            print(f"❌ OLX: błąd pobierania {url}: {e}")
-            return None
+        while True:
+            try:
+                r = self.session.get(url, timeout=20)
+                r.raise_for_status()
+                return r.text
+            except _FETCH_ERRORS as e:
+                client = self.impersonate or 'requests'
+                print(f"❌ OLX [{client}]: błąd pobierania {url}: {e}")
+                if not self._switch_session():
+                    return None
 
     def scrape(self, max_pages: int = 10) -> List[Dict]:
         """Pobiera wszystkie strony listingu i zwraca znormalizowane oferty."""
-        print("🔍 OLX: scraping działek (Lublin)...")
+        print(f"🔍 OLX: scraping działek (Lublin), klient: "
+              f"{self.impersonate or 'requests (bez impersonacji TLS)'}...")
         offers: List[Dict] = []
         seen_ids = set()
 

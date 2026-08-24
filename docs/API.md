@@ -21,6 +21,7 @@ Statystyki bieżącego stanu bazy.
   "last_scan_new_offers": 8,
   "last_scan_disappeared_offers": 2,
   "last_scan_duration_s": 46.3,
+  "alerts": [],
   "active_offers": 182,
   "total_in_db": 220,
   "median_price_per_m2": 396.44,
@@ -104,11 +105,58 @@ analogiczny do SONAR-POKOJOWY/MIESZKANIOWY:
 ### `GET api/health.json`
 
 ```json
-{"status": "ok", "last_scan_status": "completed", "hours_since_last_scan": 0.1}
+{
+  "status": "degraded",
+  "last_scan_status": "completed",
+  "hours_since_last_scan": 0.1,
+  "alerts": [{
+    "source": "olx",
+    "severity": "critical",
+    "code": "source_down",
+    "message": "OLX: 26 kolejnych skanów bez ani jednej oferty (norma ~56/skan), ostatnie oferty 2026-08-11 09:50. Prawdopodobna blokada źródła — dane tego portalu na mapie są nieaktualne.",
+    "scans_affected": 26,
+    "last_scan_count": 0,
+    "baseline": 56,
+    "last_offers_at": "2026-08-11T09:50:24+02:00",
+    "active_in_db": 57
+  }],
+  "sources": {
+    "olx":      {"label": "OLX", "status": "down", "last_scan_count": 0, "baseline": 56,
+                 "zero_scans_in_row": 26, "last_offers_at": "2026-08-11T09:50:24+02:00",
+                 "active_in_db": 57},
+    "otodom":   {"label": "Otodom", "status": "ok", "last_scan_count": 169, "baseline": 171,
+                 "zero_scans_in_row": 0, "last_offers_at": "...", "active_in_db": 169},
+    "adresowo": {"...": "..."},
+    "agencies": {"...": "..."}
+  }
+}
 ```
 
-`status`: `ok` (świeży i udany) / `failing` (świeży, ale nieudany) /
-`stale` (brak skanu od >26 h).
+`status` (najpoważniejszy problem wygrywa):
+
+| wartość | znaczenie |
+|---------|-----------|
+| `ok` | skan świeży, udany, wszystkie źródła zwracają oferty |
+| `degraded` | skan się udał, ale **któreś źródło padło** (alarm `critical`) |
+| `failing` | ostatni skan zakończył się błędem |
+| `stale` | brak skanu od >26 h |
+
+**Alarmy** (`alerts`, także w `api/status.json` i `docs/monitoring_data.json`)
+— pojedyncze źródło może paść, gdy cały skan wygląda na udany (portal blokuje
+scrapera, zmienia strukturę strony). Liczone z `data/scan_history.json` przez
+`src/source_health.py`:
+
+| `code` | `severity` | kiedy |
+|--------|-----------|-------|
+| `source_down` | `warning` | źródło nie dało ANI JEDNEJ oferty w ostatnim skanie |
+| `source_down` | `critical` | …i tak samo w ≥2 kolejnych skanach (≈doba) |
+| `source_degraded` | `warning` | źródło dało <30% swojej normy (mediana z 10 skanów) |
+
+`sources[*].status`: `ok` / `degraded` / `down` / `unknown` (za krótka historia,
+np. świeżo dodane źródło — wtedy nie alarmujemy).
+
+W GitHub Actions każdy alarm ląduje dodatkowo jako annotacja runa
+(`::error` dla `critical`, `::warning` dla ostrzeżeń).
 
 ## Pełne dane mapy
 
