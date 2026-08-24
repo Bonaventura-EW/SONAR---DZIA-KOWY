@@ -150,7 +150,7 @@ scrapera, zmienia strukturę strony). Liczone z `data/scan_history.json` przez
 |--------|-----------|-------|
 | `source_down` | `warning` | źródło nie dało ANI JEDNEJ oferty w ostatnim skanie |
 | `source_down` | `critical` | …i tak samo w ≥2 kolejnych skanach (≈doba) |
-| `source_degraded` | `warning` | źródło dało <30% swojej normy (mediana z 10 skanów) |
+| `source_degraded` | `warning` | źródło dało <30% swojej normy (mediana z 10 ostatnich **niezerowych** odczytów, szukanych w głąb 40 skanów — norma przeżywa długą awarię źródła) |
 
 `sources[*].status`: `ok` / `degraded` / `down` / `unknown` (za krótka historia,
 np. świeżo dodane źródło — wtedy nie alarmujemy).

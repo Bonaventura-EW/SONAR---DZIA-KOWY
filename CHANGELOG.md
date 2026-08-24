@@ -24,8 +24,11 @@
   niosą listę `alerts` (`source_down` / `source_degraded`, `severity`
   `critical`/`warning`), a `health.status` schodzi na **`degraded`**, gdy
   źródło padło mimo udanego skanu. `sources` w `health.json` pokazuje stan
-  każdego portalu (norma z 10 skanów vs ostatni skan, liczba pustych skanów
-  z rzędu, data ostatnich ofert). Alarmy trafiają też do
+  każdego portalu (norma vs ostatni skan, liczba pustych skanów z rzędu, data
+  ostatnich ofert). Norma to mediana 10 ostatnich **niezerowych** odczytów
+  szukanych w głąb 40 skanów — liczona z okna „10 ostatnich skanów" znikałaby
+  pod stertą zer po długiej awarii i przez kolejne 3 skany po naprawie źródła
+  ponowna blokada nie odpalałaby alarmu. Alarmy trafiają też do
   `docs/monitoring_data.json` → czerwony pasek na dashboardzie monitoringu
   i annotacje runa w GitHub Actions (`::error` / `::warning`).
 
