@@ -36,8 +36,11 @@ PORTAL_SOURCES = ('olx', 'otodom', 'adresowo')
 DOWN_AFTER_SCANS = 2
 # <30% typowej liczby ofert = źródło odpowiada, ale częściowo (throttling/blokada)
 DEGRADED_RATIO = 0.3
-# okno, z którego liczymy "normalną" liczbę ofert źródła
+# ile niezerowych odczytów bierzemy na "normalną" liczbę ofert źródła
 BASELINE_SCANS = 10
+# jak głęboko ich szukamy (40 skanów ≈ 20 dni przy 2 skanach/dzień) — patrz
+# komentarz w _stats_for_field: norma musi przeżyć długą awarię źródła
+BASELINE_LOOKBACK = 40
 # bez kilku udanych skanów w historii nie ma podstaw do alarmu (nowe źródło)
 MIN_BASELINE_SAMPLES = 3
 
@@ -75,9 +78,15 @@ def _stats_for_field(done: List[Dict], field: str) -> Dict:
         last_offers_at = scan.get('timestamp')
         break
 
+    # FIX 2026-08-24: normę liczymy z ostatnich BASELINE_SCANS NIEZEROWYCH
+    # odczytów szukanych w głąb BASELINE_LOOKBACK skanów — nie z okna ostatnich
+    # N skanów. Po długiej awarii (OLX: 27 pustych skanów) okno było zapchane
+    # zerami, źródło wpadało w 'unknown' i przez kolejne 3 skany po naprawie
+    # ponowna blokada NIE odpalała alarmu — czyli dokładnie wtedy, gdy jest
+    # potrzebny. Awaria dłuższa niż BASELINE_LOOKBACK nadal zeruje normę.
     before_streak = done[:len(done) - zero_scans] if zero_scans else done
-    window = [s.get(field) for s in before_streak[-BASELINE_SCANS:]]
-    non_zero = [v for v in window if v]
+    window = [s.get(field) for s in before_streak[-BASELINE_LOOKBACK:]]
+    non_zero = [v for v in window if v][-BASELINE_SCANS:]
     return {
         'zero_scans': zero_scans,
         'last_offers_at': last_offers_at,

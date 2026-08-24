@@ -137,3 +137,20 @@ def test_alarm_niesie_stan_bazy_dla_zrodla():
 
     assert alert['active_in_db'] == 57
     assert 'nieaktualne' in alert['message']
+
+
+def test_norma_przezywa_dluga_awarie_zrodla():
+    """Po powrocie źródła norma nie znika pod stertą zer — inaczej kolejna
+    blokada byłaby cicha przez kilka skanów (regresja z 2026-08-24)."""
+    scans = history(*([50, 52, 48, 51] + [0] * 12 + [64]))
+    summary = summarize_sources(scans)
+
+    assert summary['olx']['status'] == 'ok'
+    assert summary['olx']['baseline'] >= 50  # norma sprzed awarii, nie samo 64
+
+    # ponowna blokada nazajutrz — alarm ma pójść od pierwszego pustego skanu
+    scans.append(scan('2026-09-01T09:00:00+02:00', olx=0))
+    alerts = build_source_alerts(summarize_sources(scans))
+
+    assert [a['code'] for a in alerts] == ['source_down']
+    assert alerts[0]['source'] == 'olx'
