@@ -1558,5 +1558,53 @@
  "skowronkowej. nieruchomości": {
   "result": null,
   "ts": 1787591361.5629187
+ },
+ "ciepielewskiego": {
+  "result": {
+   "lat": 51.2727802,
+   "lon": 22.5064279,
+   "name": "Jana Ciepielewskiego"
+  },
+  "ts": 1787591890.3235562
+ },
+ "watykańskiej": {
+  "result": {
+   "lat": 51.228356,
+   "lon": 22.5216905,
+   "name": "Watykańska"
+  },
+  "ts": 1787591893.5351107
+ },
+ "bogdanówka": {
+  "result": {
+   "lat": 51.2686207,
+   "lon": 22.5164457,
+   "name": "Bogdanówka"
+  },
+  "ts": 1787591894.941062
+ },
+ "laury": {
+  "result": {
+   "lat": 51.2424043,
+   "lon": 22.4897579,
+   "name": "Laury"
+  },
+  "ts": 1787591896.3369334
+ },
+ "łęczyńska": {
+  "result": {
+   "lat": 51.2413602,
+   "lon": 22.587242,
+   "name": "Łęczyńska"
+  },
+  "ts": 1787591897.9654078
+ },
+ "okólnej": {
+  "result": {
+   "lat": 51.2511135,
+   "lon": 22.5874356,
+   "name": "Okólna"
+  },
+  "ts": 1787591901.134783
  }
 }
