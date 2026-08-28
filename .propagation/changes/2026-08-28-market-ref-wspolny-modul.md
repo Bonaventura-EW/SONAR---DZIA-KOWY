@@ -10,7 +10,7 @@ how: Nowy `docs/assets/market_ref.js` eksportuje `MarketRef.build(offers, global
 surface: docs/assets/market_ref.js, docs/assets/script.js, docs/assets/style.css, docs/okazje.html, docs/index.html, CHANGELOG.md
 generality: family
 propagate: yes
-commit: 7cc9a7e
+commit: 25eb7ac
 ---
 
 # Kontekst dla braci
