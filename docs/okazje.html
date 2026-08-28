@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SONAR DZIAŁKOWY — Okazje (najlepsza cena za m²)</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2">
-<link rel="stylesheet" href="assets/style.css?v=2">
+<link rel="stylesheet" href="assets/style.css?v=3">
 <style>
 /* FIX 2026-08-28: nowa zakładka „Okazje" — ranking działek o najlepszym
    stosunku ceny do metrażu (zł/m²) względem porównywalnych działek.
@@ -55,13 +55,6 @@ a.b-drop:hover{background:#16a34a;color:#fff}
 .deal .t a{color:var(--ink);text-decoration:none}.deal .t a:hover{color:var(--green-700)}
 .deal .ppm{font-size:15px;font-weight:800;color:var(--green-800)}
 .deal .ppm .ref{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-top:2px}
-.rbar{position:relative;height:8px;border-radius:999px;background:#eef2f0;overflow:visible}
-.rbar i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,#16a34a,#65a30d)}
-.rbar u{position:absolute;top:-3px;bottom:-3px;width:2px;background:#7c3aed}
-.rbar-note{position:relative;height:22px;font-size:10px;color:var(--muted)}
-.rbar-note .l{position:absolute;left:0;top:8px}
-.rbar-note .m{position:absolute;left:66.7%;transform:translateX(-50%);white-space:nowrap;text-align:center}
-.rbar-note .m::before{content:'▲';display:block;color:#7c3aed;line-height:1;font-size:8px}
 .deal .meta{color:var(--muted);line-height:1.55}
 .deal .save{font-weight:700;color:#15803d}
 .deal .warn{font-size:11px;color:#92400e;background:#fef3c7;border-radius:8px;padding:5px 8px;line-height:1.45}
@@ -210,10 +203,15 @@ table.ok-tbl td.ttl a:hover{color:var(--green-700)}
                 <li>typ + dzielnica + przedział powierzchni (min. 5 ofert),</li>
                 <li>typ + dzielnica (min. 5 ofert),</li>
                 <li>typ + przedział powierzchni (min. 8 ofert),</li>
-                <li>cały typ działki (min. 8 ofert),</li>
-                <li>przedział powierzchni, wszystkie typy (min. 8 ofert),</li>
-                <li>cały obserwowany obszar.</li>
+                <li>cały typ działki (min. 5 ofert).</li>
             </ol>
+            <p class="method">
+                Gdy nawet na to nie starcza danych (u nas: <b>działki siedliskowe</b>, dosłownie kilka
+                ogłoszeń), oferta <b>wypada z rankingu</b>, zamiast być porównywana z medianą innych
+                typów. Porównanie działki rekreacyjnej ze stawką budowlanych zrobiłoby z niej fikcyjną
+                okazję „85% poniżej rynku". Na mapie taka oferta dostaje w dymku szary znacznik
+                <b>„orientacyjnie — brak grupy porównawczej"</b> zamiast procentu.
+            </p>
             <p class="method">
                 <b>„X% poniżej ceny rynkowej"</b> = o tyle procent cena za m² tej oferty jest niższa
                 od mediany jej grupy. To <b>nie jest obniżka ceny przez sprzedającego</b> — od tego jest
@@ -242,11 +240,16 @@ table.ok-tbl td.ttl a:hover{color:var(--green-700)}
                 gdy portal go nie podaje, oferta trafia do zbiorczej grupy <b>„inna"</b>, która jest z natury
                 mieszana, więc jej mediana jest mniej wiarygodna niż mediana działek budowlanych.
                 Dane pochodzą z ostatniego skanu — patrz data w nagłówku.
+                Ten sam pasek i te same liczby zobaczysz w dymku po kliknięciu pinezki
+                na <a href="index.html" style="color:var(--green-600)">mapie</a> — z tą różnicą,
+                że mapa pokazuje też oferty <b>droższe</b> od porównywalnych (czerwony pasek),
+                a ranking z definicji tylko tańsze.
             </p>
         </div>
     </div>
 
 <script src="assets/logo.js?v=1"></script>
+<script src="assets/market_ref.js?v=1"></script>
 <script>
 const DAY = 86400000;
 const NOW = Date.now();
@@ -269,92 +272,18 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, m => ({'&':'&amp;
 const fmtZl = v => v == null ? '—' : Math.round(v).toLocaleString('pl-PL') + ' zł';
 const fmtM2 = v => v == null ? '—' : Math.round(v).toLocaleString('pl-PL') + ' zł/m²';
 const fmtArea = v => v == null ? '—' : v.toLocaleString('pl-PL', {maximumFractionDigits: 0}) + ' m²';
-const median = arr => {
-    if (!arr.length) return null;
-    const s = [...arr].sort((a, b) => a - b), m = Math.floor(s.length / 2);
-    return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
-};
+const median = arr => MarketRef.median(arr);
 
-// Przedziały powierzchni — zł/m² gruntu mocno spada z wielkością działki,
-// więc przedział jest częścią klucza grupy odniesienia (patrz sekcja metodyki).
-const AREA_BUCKETS = [
-    [0,     600,      'do 600 m²'],
-    [600,   1200,     '600–1200 m²'],
-    [1200,  2500,     '1200–2500 m²'],
-    [2500,  5000,     '2500–5000 m²'],
-    [5000,  10000,    '0,5–1 ha'],
-    [10000, Infinity, 'od 1 ha'],
-];
-const areaBucket = a => {
-    if (a == null) return null;
-    const b = AREA_BUCKETS.find(([lo, hi]) => a >= lo && a < hi);
-    return b ? b[2] : null;
-};
+// Metodyka odniesienia (grupy porównywalnych, oferty nietypowe) mieszka
+// w assets/market_ref.js — dzieli ją z paskiem w dymku na mapie, żeby ta sama
+// działka nie pokazywała tam innego procentu niż tutaj.
+const {areaBucket, plotType, median: mrMedian} = MarketRef;
 const SRC_LABELS = {olx: 'OLX', otodom: 'Otodom', adresowo: 'Adresowo'};
 const PLOT_TYPES = ['budowlana', 'inwestycyjna', 'siedliskowa', 'rolna', 'rekreacyjna', 'inna'];
-const plotType = o => o.plot_type || 'inna';
 // klucz filtra źródła: agencje mają w `source` swój slug (anma, alternatywne…)
 const srcKey = o => o.is_agency ? 'agency' : (o.source || '?');
 const srcLabel = o => o.is_agency ? (o.agency_name || 'Agencja') : (SRC_LABELS[o.source] || o.source || '?');
 const srcClass = o => o.is_agency ? 'b-agency' : ('b-' + (o.source || 'inna'));
-
-// --- oferty nietypowe: formalnie nie są zwykłą sprzedażą gruntu -------------
-// ROD-a szukamy w tytule I opisie — to najliczniejsze zniekształcenie rankingu
-// (mediana ~74 zł/m² wobec ~445 zł/m² działek budowlanych), a fraza jest
-// jednoznaczna. Reszta reguł patrzy tylko na tytuł: w opisie „udział" bywa
-// niewinny („udział w kosztach mediów”).
-const ROD_RE = /\bROD\b|rodzinn\w*\s+ogr[oó]d|ogr[oó]d(?:ek|ka|ki|y|zie|u|em)?\s+dzia[lł]kow|dzia[lł]k\w*\s+ogrodow/;
-const TITLE_RULES = [
-    [/\budzia[łl]\w*/i,                      'udział w nieruchomości'],
-    [/syndyk|licytacj|komornicz|egzekucyj/i,  'licytacja / syndyk'],
-    [/u[żz]ytkowani\w*\s+wieczyst|wieczyst\w*\s+u[żz]ytkowani/i, 'użytkowanie wieczyste (nie własność)'],
-    [/dzier[żz]aw/i,                          'dzierżawa, nie sprzedaż'],
-    [/zamieni[eę]|zamiana\s+na/i,             'zamiana, nie sprzedaż'],
-    [/miejsce\s+postojow|\bpiwnic\w*\b/i,     'to nie jest działka'],
-];
-function keywordReasons(o) {
-    const title = o.title || '';
-    const out = [];
-    if (ROD_RE.test(title + ' ' + (o.description || '')))
-        out.push('ROD / ogródek działkowy — prawo do działki, nie własność gruntu');
-    TITLE_RULES.forEach(([re, why]) => { if (re.test(title)) out.push(why); });
-    if (o.area_m2 < 100) out.push('powierzchnia poniżej 100 m² — to raczej nie jest działka');
-    return out;
-}
-
-// --- odniesienie: mediana zł/m² najwęższej grupy z wystarczającą próbką ------
-// Typ działki jest częścią KAŻDEGO klucza (poza ostatnim awaryjnym) — rekreacyjna
-// czy rolna są kilkukrotnie tańsze za m² od budowlanej, więc bez tego podziału
-// każda z nich wychodziłaby jako okazja. Przedział powierzchni z tego samego
-// powodu: zł/m² spada z wielkością gruntu.
-function buildReferences(base) {
-    const g1 = {}, g2 = {}, g3 = {}, g4 = {}, g5 = {};
-    base.forEach(o => {
-        const t = plotType(o), d = o.district, ab = areaBucket(o.area_m2);
-        if (d && ab) (g1[t + '§' + d + '§' + ab] ??= []).push(o.price_per_m2);
-        if (d)       (g2[t + '§' + d] ??= []).push(o.price_per_m2);
-        if (ab)      (g3[t + '§' + ab] ??= []).push(o.price_per_m2);
-        (g4[t] ??= []).push(o.price_per_m2);
-        if (ab)      (g5[ab] ??= []).push(o.price_per_m2);
-    });
-    const med = g => Object.fromEntries(Object.entries(g).map(([k, v]) => [k, {med: median(v), n: v.length}]));
-    return {g1: med(g1), g2: med(g2), g3: med(g3), g4: med(g4), g5: med(g5)};
-}
-function resolveRef(o, R) {
-    const t = plotType(o), d = o.district, ab = areaBucket(o.area_m2);
-    let hit;
-    if (d && ab && (hit = R.g1[t + '§' + d + '§' + ab]) && hit.n >= 5)
-        return {value: hit.med, n: hit.n, label: `${t} · ${d} · ${ab}`};
-    if (d && (hit = R.g2[t + '§' + d]) && hit.n >= 5)
-        return {value: hit.med, n: hit.n, label: `${t} · ${d}`};
-    if (ab && (hit = R.g3[t + '§' + ab]) && hit.n >= 8)
-        return {value: hit.med, n: hit.n, label: `${t} · ${ab} · cały Lublin`};
-    if ((hit = R.g4[t]) && hit.n >= 8)
-        return {value: hit.med, n: hit.n, label: `${t} · cały Lublin`};
-    if (ab && (hit = R.g5[ab]) && hit.n >= 8)
-        return {value: hit.med, n: hit.n, label: `${ab} · wszystkie typy`};
-    return {value: GLOBAL_MED, n: ALL.length, label: 'cały obszar'};
-}
 
 function priceDrop(o) {
     const ch = (o.price_changes || []).filter(c => c.new_price != null && c.old_price != null);
@@ -550,34 +479,30 @@ async function init() {
         document.getElementById('last-scan').textContent =
             (data.last_scan || data.generated_at || '—').slice(0, 16).replace('T', ' ');
 
-        ALL = (data.offers || []).filter(o => o.active && o.price_per_m2 > 0 && o.area_m2 > 0);
-        GLOBAL_MED = data.stats?.median_price_per_m2 || median(ALL.map(o => o.price_per_m2));
+        // grupy odniesienia i sygnały nietypowości liczy wspólny moduł
+        const MARKET = MarketRef.build(data.offers || [], data.stats?.median_price_per_m2);
+        ALL = MARKET.usable;
+        GLOBAL_MED = MARKET.globalMedian;
 
         ALL.forEach(o => {
-            o._oddKw = keywordReasons(o);
             o._seen = o.first_seen ? Date.parse(o.first_seen) : 0;
             o._new = o._seen > 0 && (NOW - o._seen) <= 7 * DAY;
             o._drop = priceDrop(o);
         });
 
-        // odniesienie liczymy na „zdrowych" ofertach — ROD-y i udziały zaniżyłyby mediany
-        const healthy = ALL.filter(o => !o._oddKw.length);
-        const R = buildReferences(healthy);
         CAND = ALL.map(o => {
-            o._ref = resolveRef(o, R);
-            o._ratio = o.price_per_m2 / o._ref.value;
-            o._disc = (1 - o._ratio) * 100;
-            o._save = Math.max(0, (o._ref.value - o.price_per_m2) * o.area_m2);
-            // próg odstający liczymy WZGLĘDEM GRUPY, nie mediany całego miasta:
-            // globalna mediana miesza budowlane z rekreacyjnymi, więc oflagowałaby
-            // hurtem cały tańszy typ działki
-            o._odd = o._ratio < 0.35
-                ? o._oddKw.concat('cena/m² rażąco poniżej porównywalnych — możliwy błąd lub haczyk')
-                : o._oddKw;
+            const e = MARKET.evaluate(o);
+            if (!e) return null;
+            o._ref = e.ref; o._ratio = e.ratio; o._disc = e.disc;
+            o._save = e.save; o._odd = e.odd; o._weak = e.weak;
             return o;
-        }).filter(o => o._disc > 0);   // ranking okazji = tylko oferty poniżej odniesienia
+            // ranking okazji = oferty poniżej odniesienia, ale tylko te z prawdziwą
+            // grupą porównawczą: `weak` znaczy, że grupa miesza typy działek
+            // (za mała próbka dla tego typu) i „% poniżej rynku" byłoby fikcją
+        }).filter(o => o && o._disc > 0 && !o._weak);
 
-        const budowlane = healthy.filter(o => plotType(o) === 'budowlana').map(o => o.price_per_m2);
+        const budowlane = ALL.filter(o => !MarketRef.keywordReasons(o).length
+            && plotType(o) === 'budowlana').map(o => o.price_per_m2);
         document.getElementById('kpi-med').textContent = fmtM2(median(budowlane) ?? GLOBAL_MED);
         document.getElementById('kpi-med-sub').textContent = budowlane.length
             ? `odniesienie rynkowe · ${budowlane.length} działek budowlanych`

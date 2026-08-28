@@ -161,6 +161,35 @@ body {
     text-decoration: none; font-size: 12px; font-weight: 700;
 }
 .popup-links a.secondary { background: #0284c7; }
+
+/* ===== Pasek „ta oferta vs mediana grupy" =====
+   FIX 2026-08-28: wspólny dla rankingu okazji (docs/okazje.html) i dymka
+   na mapie. Skala 0…1,5 × mediana grupy, fioletowy znacznik na 66,7% = mediana
+   porównywalnych. Liczby dowozi assets/market_ref.js. */
+.rbar { position: relative; height: 8px; border-radius: 999px; background: #eef2f0; overflow: visible; }
+.rbar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px;
+          background: linear-gradient(90deg, #16a34a, #65a30d); }
+.rbar i.above { background: linear-gradient(90deg, #f59e0b, #dc2626); }
+.rbar i.par { background: linear-gradient(90deg, #94a3b8, #64748b); }
+/* strzałka na krawędzi = oferta wykracza poza skalę (ponad 1,5 × mediany) */
+.rbar i.over::after { content: '›'; position: absolute; right: -9px; top: -6px;
+                      font-size: 15px; font-weight: 800; color: #dc2626; line-height: 1; }
+.rbar u { position: absolute; top: -3px; bottom: -3px; width: 2px; background: #7c3aed; }
+.rbar-note { position: relative; height: 22px; font-size: 10px; color: var(--muted); }
+.rbar-note .l { position: absolute; left: 0; top: 8px; }
+.rbar-note .m { position: absolute; left: 66.7%; transform: translateX(-50%); white-space: nowrap; text-align: center; }
+.rbar-note .m::before { content: '▲'; display: block; color: #7c3aed; line-height: 1; font-size: 8px; }
+
+/* blok odniesienia w dymku mapy */
+.popup-ref { margin: 8px 0 2px; border-top: 1px solid #e5e7eb; padding-top: 7px; }
+.popup-ref .pct { display: inline-block; border-radius: 999px; padding: 2px 9px;
+                  font-size: 11px; font-weight: 700; color: #fff; background: #16a34a; }
+.popup-ref .pct.above { background: #dc2626; }
+.popup-ref .pct.par { background: #64748b; }
+.popup-ref .src { display: block; font-size: 11px; color: var(--muted); margin: 4px 0 5px; line-height: 1.45; }
+.popup-ref .save { font-size: 11px; font-weight: 700; color: #15803d; }
+.popup-ref .odd { font-size: 11px; color: #92400e; background: #fef3c7;
+                  border-radius: 8px; padding: 5px 8px; line-height: 1.45; margin-top: 5px; }
 .trend-down { color: #16a34a; font-weight: 700; }
 .trend-up { color: #dc2626; font-weight: 700; }
 .badge-new { display: inline-block; background: #dc2626; color: white; border-radius: 999px; padding: 0 7px; font-size: 10px; font-weight: 700; vertical-align: middle; }

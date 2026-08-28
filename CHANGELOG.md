@@ -3,6 +3,39 @@
 ## [Niewydane]
 
 ### Dodane
+- **Pasek „ta oferta vs mediana grupy" w dymku na mapie** (`docs/assets/script.js`).
+  Ten sam obraz i te same liczby co karta w rankingu Okazji: procent względem
+  mediany porównywalnych, z czym dokładnie porównaliśmy (grupa + liczba ofert),
+  pasek na skali 0–1,5× mediany ze znacznikiem mediany oraz ostrzeżenie
+  o ofercie nietypowej. W odróżnieniu od rankingu (z definicji tylko okazje)
+  mapa pokazuje też oferty **droższe** od porównywalnych — czerwony pasek
+  i „X% powyżej ceny rynkowej", a przy skrajnościach czytelniejsze
+  „32,5× mediany porównywalnych" zamiast „−3152%".
+- Metodyka odniesienia rynkowego wyjechała do wspólnego modułu
+  **`docs/assets/market_ref.js`** (`MarketRef.build(offers) → {ref, evaluate}`),
+  z którego korzystają teraz i `okazje.html`, i mapa. Gdyby dymek liczył medianę
+  własnym kodem, ta sama działka mogłaby z czasem pokazywać na mapie inny
+  procent niż w rankingu. Ranking po refaktorze daje identyczne wyniki.
+
+### Naprawione
+- **Koniec porównywania działek między typami.** Grupa odniesienia mogła zejść
+  do poziomu „przedział powierzchni, wszystkie typy", co dotykało 20 ofert
+  (18 rekreacyjnych + 2 siedliskowe) i produkowało fikcje w rodzaju „85% poniżej
+  ceny rynkowej" dla działki rekreacyjnej porównanej z medianą zdominowaną przez
+  budowlane. W rankingu było to ukryte (te oferty i tak łapały flagę ROD),
+  ale w dymku na mapie wychodziło jako zielony badge. Dwie zmiany:
+  (a) próg poziomu „cały typ działki" obniżony z 8 na 5 ofert — rekreacyjne mają
+  tylko 6 „zdrowych" ogłoszeń (12 z 18 to ROD-y odsiane z bazy median), więc przy
+  progu 8 wpadały właśnie w mieszaną grupę; 5 to ten sam próg co dla węższych
+  grup 1–2, więc szersza grupa nie ma powodu wymagać więcej;
+  (b) grupy **bez typu w kluczu** są teraz oznaczone `weak` — wypadają z rankingu,
+  a na mapie dostają szary znacznik „orientacyjnie — brak grupy porównawczej"
+  zamiast procentu. Zostały tak 2 oferty (siedliskowe).
+  Efekt uboczny, zamierzony: licznik ofert nietypowych spadł z 58 na 46 — ROD-y
+  porównywane teraz do własnej mediany (~79 zł/m²) przestały fałszywie łapać
+  regułę „cena rażąco poniżej porównywalnych". Flagę ROD zachowują wszystkie 52.
+
+### Dodane
 - Podstrona **💎 Okazje** (`docs/okazje.html`) — ranking działek o najlepszym
   stosunku ceny do metrażu. Dla każdej aktywnej oferty liczymy medianę zł/m²
   w **najwęższej grupie porównywalnych**, w której jest dość danych, i pokazujemy,

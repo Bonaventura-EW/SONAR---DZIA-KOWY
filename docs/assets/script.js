@@ -33,6 +33,9 @@ let quantiles = [];
 let typeFilterState = {};   // plot_type -> bool
 let quantileBucketState = {};   // index kubełka ceny/m² -> bool (legenda z checkboxami)
 let agencyFilterState = {}; // agency_name -> bool
+// FIX 2026-08-28: odniesienie rynkowe (mediana zł/m² grupy porównywalnych) —
+// wspólne z rankingiem na okazje.html, liczone w assets/market_ref.js
+let market = null;
 
 init();
 
@@ -56,6 +59,9 @@ async function init() {
 
     allOffers = data.offers || [];
     quantiles = (data.stats && data.stats.per_m2_quantiles || []).filter(q => q != null);
+    market = (typeof MarketRef !== 'undefined')
+        ? MarketRef.build(allOffers, data.stats && data.stats.median_price_per_m2)
+        : null;
 
     if (data.last_scan) {
         document.getElementById('last-scan').textContent =
@@ -425,10 +431,54 @@ function popupHtml(o) {
             ${where ? '📍 ' + escapeHtml(where) + precision + '<br>' : (precision ? '📍 ' + precision.trim() + '<br>' : '')}
             🗓️ w bazie od ${o.first_seen ? new Date(o.first_seen).toLocaleDateString('pl-PL') : '—'} (${o.days_active} dni)
         </div>
+        ${refHtml(o)}
         <div class="popup-desc">${escapeHtml(o.description || '')}</div>
         <div class="popup-links">
             <a href="${o.url}" target="_blank" rel="noopener">Zobacz ogłoszenie ↗</a>${alsoAt}
         </div>`;
+}
+
+/* Pasek „ta oferta vs mediana grupy" w dymku — ten sam obraz i te same liczby
+ * co karta na okazje.html. Skala 0…1,5 × mediana grupy; znacznik na 66,7%.
+ * W przeciwieństwie do rankingu (tylko okazje) mapa pokazuje też oferty
+ * DROŻSZE od porównywalnych, więc pasek ma trzy warianty: poniżej / w cenie /
+ * powyżej mediany. */
+function refHtml(o) {
+    if (!market) return '';
+    const e = market.evaluate(o);
+    if (!e) return '';
+
+    const par = Math.abs(e.disc) < 1;          // praktycznie w medianie grupy
+    const above = e.disc < 0;
+    // e.weak = grupa odniesienia miesza typy działek (za mała próbka dla tego typu).
+    // Takiej liczby nie wolno podać jako „X% poniżej rynku" — porównanie działki
+    // rekreacyjnej z medianą budowlanych zrobiłoby z niej fałszywą okazję.
+    const kind = e.weak ? 'par' : par ? 'par' : above ? 'above' : '';
+    const label = e.weak
+        ? 'orientacyjnie — brak grupy porównawczej'
+        : par ? 'w cenie porównywalnych'
+        : above
+            ? (e.ratio > 2
+                ? `${e.ratio.toFixed(1).replace('.', ',')}× mediany porównywalnych`
+                : `${Math.round(-e.disc)}% powyżej ceny rynkowej`)
+            : `${Math.round(e.disc)}% poniżej ceny rynkowej`;
+
+    const raw = (e.ratio / 1.5) * 100;
+    const width = Math.max(2, Math.min(100, raw));
+    const over = raw > 100 ? ' over' : '';      // oferta wykracza poza skalę
+    const save = (!e.weak && !above && !par && e.save > 0)
+        ? `<div class="save">💚 ok. ${fmtPrice(e.save)} poniżej porównywalnych</div>` : '';
+    const odd = e.odd.length
+        ? `<div class="odd">⚠️ ${escapeHtml(e.odd.join(' · '))} — sprawdź ogłoszenie przed decyzją.</div>` : '';
+
+    return `<div class="popup-ref">
+        <span class="pct ${kind}">${label}</span>
+        <span class="src">mediana porównywalnych: ${fmtPrice(Math.round(e.ref.value))}/m²
+            · ${escapeHtml(e.ref.label)} (${e.ref.n} ofert)</span>
+        <div class="rbar"><i class="${kind}${over}" style="width:${width.toFixed(1)}%"></i><u style="left:66.7%"></u></div>
+        <div class="rbar-note"><span class="l">ta oferta</span><span class="m">mediana grupy</span></div>
+        ${save}${odd}
+    </div>`;
 }
 
 function escapeHtml(s) {
