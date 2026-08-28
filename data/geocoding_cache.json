@@ -357,7 +357,7 @@
  },
  "warszawskiej. malownicza": {
   "result": null,
-  "ts": 1787331871.2735243
+  "ts": 1787943590.82799
  },
  "jana kasprowicza": {
   "result": {
@@ -1189,7 +1189,7 @@
  },
  "zagajnikowa 6": {
   "result": null,
-  "ts": 1787297225.7149189
+  "ts": 1787943587.6298387
  },
  "zagajnikowa": {
   "result": {
@@ -1449,7 +1449,7 @@
  },
  "h. m. sachsów": {
   "result": null,
-  "ts": 1787331867.3234344
+  "ts": 1787943589.2209516
  },
  "stefana roweckiego": {
   "result": {
@@ -1618,5 +1618,9 @@
  "gdańska roztocze": {
   "result": null,
   "ts": 1787729383.8261702
+ },
+ "okolice raszyńskiej": {
+  "result": null,
+  "ts": 1787943593.7646897
  }
 }
