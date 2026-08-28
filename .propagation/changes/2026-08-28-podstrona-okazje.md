@@ -10,7 +10,7 @@ how: Frontend-only, czyta istniejący docs/data.json. Dla każdej aktywnej ofert
 surface: docs/okazje.html, docs/oferty.html, docs/index.html, docs/analytics.html, docs/monitoring.html, docs/zmiany.html, docs/agencje.html, CHANGELOG.md
 generality: family
 propagate: maybe
-commit:
+commit: 6d210ec
 ---
 
 # Kontekst dla braci
