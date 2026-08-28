@@ -2,6 +2,37 @@
 
 ## [Niewydane]
 
+### Dodane
+- Podstrona **💎 Okazje** (`docs/okazje.html`) — ranking działek o najlepszym
+  stosunku ceny do metrażu. Dla każdej aktywnej oferty liczymy medianę zł/m²
+  w **najwęższej grupie porównywalnych**, w której jest dość danych, i pokazujemy,
+  o ile procent oferta jest pod tą medianą (plus szacowaną oszczędność
+  = różnica zł/m² × powierzchnia). Wzór z `okazje.html` w SONAR-MIESZKANIOWY,
+  ale grupy odniesienia przeliczone na realia gruntów:
+  **typ działki i przedział powierzchni są częścią każdego klucza**
+  (u brata rolę tę pełnią miasto, liczba pokoi i rynek pierwotny/wtórny).
+  Bez typu każda działka rolna czy rekreacyjna wychodziłaby jako okazja —
+  budowlana kosztuje w Lublinie ~445 zł/m², rekreacyjna ~89 zł/m².
+  Bez przedziału powierzchni to samo robiłby rozmiar: budowlana poniżej 600 m²
+  ma medianę ~775 zł/m², ta sama budowlana 1200–2500 m² — ~355 zł/m².
+  Dzielnica jest tylko doprecyzowaniem, bo zna ją mniej niż połowa ogłoszeń.
+  Hierarchia: typ+dzielnica+powierzchnia (min. 5) → typ+dzielnica (min. 5) →
+  typ+powierzchnia (min. 8) → typ (min. 8) → powierzchnia (min. 8) → cały obszar.
+  Karty/tabela, KPI, filtry (źródło z agencjami, typ, dzielnica, cena, powierzchnia,
+  nowe, właściciel, po obniżce, z GPS), tryb „najniższa cena/m²", linki
+  📍 Mapa (`index.html#offer=`) i 💲↓ do historii ceny (`oferty.html#offer=`).
+- **Oferty nietypowe** odsiewane z rankingu (domyślnie ukryte, checkbox przywraca):
+  ROD / ogródki działkowe (kupujesz prawo do działki i altanę, nie własność gruntu),
+  udziały, licytacje i syndyk, użytkowanie wieczyste, dzierżawa, zamiana,
+  ogłoszenia niebędące działką oraz ceny poniżej 35% mediany **własnej grupy**.
+  ROD-a szukamy w tytule *i opisie* — to najliczniejsze zniekształcenie w tych
+  danych (50 z 384 aktywnych ofert, mediana ~74 zł/m²), a fraza jest jednoznaczna;
+  reszta reguł patrzy tylko na tytuł, żeby nie łapać „udziału w kosztach mediów".
+  Próg odstający liczymy **względem grupy, nie mediany całego miasta** — globalna
+  mediana miesza budowlane z rekreacyjnymi, więc oflagowałaby hurtem cały tańszy typ.
+- Link do historii ceny z podstrony Okazje: `docs/oferty.html` obsługuje teraz
+  `#offer=<id>` i otwiera wykres „cena w czasie" wybranej oferty.
+
 ### Naprawione
 - **OLX znów się skanuje** (`olx_scraper.py`). Od 2026-08-11 OLX (CloudFront/WAF)
   odrzucał każdy request biblioteki `requests` kodem **403** — niezależnie od

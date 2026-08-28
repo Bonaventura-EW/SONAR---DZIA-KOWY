@@ -66,6 +66,7 @@ button.mini:hover{border-color:var(--green-600)}
     <h1><span class="sonar-logo"></span><span>SONAR DZIAŁKOWY<span class="sub">oferty · cena w czasie</span></span></h1>
     <nav class="header-nav">
       <a href="index.html">🗺️ Mapa</a>
+      <a href="okazje.html">💎 Okazje</a>
       <a href="analytics.html">📈 Analityka</a>
       <a href="monitoring.html">📊 Monitoring</a>
       <a href="oferty.html" class="active">📋 Oferty</a>
@@ -261,6 +262,13 @@ function showChart(id){const o=OFFERS.find(x=>x.id===id);if(!o)return;
   document.getElementById('modal-body').innerHTML=`<h2 class="vtitle">📈 ${esc(o.title||'')}</h2>${offerMeta(o)}${bigChart([o],{w:600,h:320})}`;
   document.getElementById('modal').classList.add('show');}
 function closeModal(){document.getElementById('modal').classList.remove('show');}
+/* FIX 2026-08-28: wejście z linku #offer=<id> (znacznik 💲↓ na okazje.html)
+   otwiera od razu wykres ceny w czasie dla tej oferty. */
+function focusFromHash(){
+  const m=location.hash.match(/offer=([^&]+)/);if(!m)return;
+  const id=decodeURIComponent(m[1]);
+  if(OFFERS.some(o=>o.id===id))showChart(id);}
+window.addEventListener('hashchange',focusFromHash);
 document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
@@ -282,6 +290,7 @@ async function load(){
       o._delta=o._tl.length>1?(o._tl.at(-1).p-o._tl[0].p):0;return o;});
     document.getElementById('of-loading').style.display='none';
     setView('table');
+    focusFromHash();
   }catch(e){
     document.getElementById('of-loading').innerHTML='❌ Błąd ładowania data.json: '+e.message;
   }
