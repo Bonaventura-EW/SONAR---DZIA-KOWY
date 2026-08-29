@@ -1265,7 +1265,7 @@
  },
  "nadleśnej": {
   "result": null,
-  "ts": 1787383043.8068078
+  "ts": 1788007777.3164175
  },
  "siewierzan": {
   "result": {
@@ -1622,5 +1622,13 @@
  "okolice raszyńskiej": {
   "result": null,
   "ts": 1787943593.7646897
+ },
+ "raszyńska": {
+  "result": {
+   "lat": 51.2309945,
+   "lon": 22.4662316,
+   "name": "Raszyńska"
+  },
+  "ts": 1788007778.8833714
  }
 }
