@@ -981,7 +981,7 @@
  },
  "district:zadebie": {
   "result": null,
-  "ts": 1787677730.8244042
+  "ts": 1788291188.7116375
  },
  "firlejowska": {
   "result": {
@@ -1650,5 +1650,13 @@
    "name": "Aleksandra Zelwerowicza"
   },
   "ts": 1788091928.9998431
+ },
+ "kmiecą": {
+  "result": {
+   "lat": 51.2709514,
+   "lon": 22.4876013,
+   "name": "Kmieca"
+  },
+  "ts": 1788291190.1386998
  }
 }
