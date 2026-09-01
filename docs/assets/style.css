@@ -194,6 +194,24 @@ body {
 .trend-up { color: #dc2626; font-weight: 700; }
 .badge-new { display: inline-block; background: #dc2626; color: white; border-radius: 999px; padding: 0 7px; font-size: 10px; font-weight: 700; vertical-align: middle; }
 
+/* ===== Popup stosu (kilka ofert pod jednym punktem) =====
+   FIX 2026-08-31: identyczne współrzędne → jedna pinezka z liczbą, a popup
+   listuje wszystkie oferty spod punktu (wcześniej klikalna była tylko wierzchnia). */
+.popup-stack-head { font-weight: 700; font-size: 13px; margin-bottom: 8px; color: #4b5563; }
+.popup-stack-list { max-height: 300px; overflow-y: auto; }
+.popup-stack-row { padding: 7px 0; border-top: 1px solid #e5e7eb; }
+.popup-stack-row:first-child { border-top: none; }
+.stack-row-head { font-size: 13px; font-weight: 600; line-height: 1.35; }
+.stack-row-head a { color: var(--green-700); text-decoration: none; }
+.stack-row-head a:hover { text-decoration: underline; }
+.stack-row-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.stack-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+             margin-right: 5px; vertical-align: middle; border: 1px solid rgba(0,0,0,0.25); }
+.stack-inactive { color: #dc2626; font-weight: 700; }
+/* podświetlenie wiersza po wejściu z linku #offer=<id> */
+.stack-row-focus { background: #fef9c3; border-radius: 8px;
+                   box-shadow: 0 0 0 2px #facc15; }
+
 /* markery divIcon nie mogą mieć tła Leafleta */
 .pin-marker, .square-marker { background: transparent; border: none; }
 
