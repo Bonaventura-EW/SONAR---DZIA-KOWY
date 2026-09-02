@@ -103,6 +103,23 @@ def _param(ad: dict, key: str) -> Optional[str]:
     return None
 
 
+def _is_promoted(ad: dict) -> bool:
+    """Czy ogłoszenie jest PŁATNIE WYRÓŻNIONE na listingu OLX?
+
+    FIX 2026-09-01: OLX oznacza pozycję atrybucji kliknięcia polem
+    `searchReason` w `__PRERENDERED_STATE__` ('promoted' vs 'organic') — to
+    odpowiednik parametru `search_reason` doszywanego do href-a kart w bratnich
+    sonarach parsujących HTML, tyle że u nas dostępny wprost w JSON, więc nie
+    trzeba go ratować z URL-a przed jego obcięciem (patrz `url.split('?')[0]`).
+    Gdyby pole zniknęło (zmiana formatu), spadamy na booleana `isPromoted`
+    z tego samego rekordu.
+    """
+    reason = ad.get('searchReason')
+    if isinstance(reason, str):
+        return 'promoted' in reason.lower()
+    return bool(ad.get('isPromoted'))
+
+
 def normalize_ad(ad: dict) -> Optional[Dict]:
     """Normalizuje ogłoszenie OLX do wspólnego schematu SONARA DZIAŁKOWEGO."""
     url = ad.get('url') or ''
@@ -163,6 +180,7 @@ def normalize_ad(ad: dict) -> Optional[Dict]:
         'is_private_owner': not ad.get('isBusiness', False),
         'image': photos[0] if photos else None,
         'created_at': ad.get('createdTime'),
+        'promoted': _is_promoted(ad),  # płatne wyróżnienie na listingu (patrz _is_promoted)
     }
 
 
@@ -222,6 +240,7 @@ class OLXDzialkiScraper:
               f"{self.impersonate or 'requests (bez impersonacji TLS)'}...")
         offers: List[Dict] = []
         seen_ids = set()
+        attributed = 0  # kafelki niosące pole searchReason (sygnał wyróżnienia)
 
         for page in range(1, max_pages + 1):
             url = LISTING_URL if page == 1 else f"{LISTING_URL}&page={page}"
@@ -245,6 +264,8 @@ class OLXDzialkiScraper:
                 city = ((ad.get('location') or {}).get('cityNormalizedName') or '').lower()
                 if city and city != 'lublin':
                     continue
+                if ad.get('searchReason') is not None:
+                    attributed += 1
                 offer = normalize_ad(ad)
                 if not offer or offer['id'] in seen_ids:
                     continue
@@ -266,7 +287,14 @@ class OLXDzialkiScraper:
 
             time.sleep(random.uniform(self.delay_min, self.delay_max))
 
-        print(f"✅ OLX: zebrano {len(offers)} ofert\n")
+        promoted_now = sum(1 for o in offers if o.get('promoted'))
+        print(f"✅ OLX: zebrano {len(offers)} ofert "
+              f"(⭐ płatnie wyróżnione: {promoted_now})")
+        if offers and attributed == 0:
+            print("   🚨 UWAGA: żadne ogłoszenie nie miało pola searchReason — "
+                  "OLX mógł zmienić format atrybucji, detekcja wyróżnień działa "
+                  "tylko na fallbacku isPromoted")
+        print()
         return offers
 
 

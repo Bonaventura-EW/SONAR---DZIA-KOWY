@@ -57,6 +57,11 @@
             <h2>📈 Nowe oferty dziennie (ostatnie 30 dni)</h2>
             <div class="chart-wrap"><canvas id="newChart"></canvas></div>
         </div>
+
+        <div class="chart-card" id="promotedCard" style="display: none;">
+            <h2 id="promotedTitle">⭐ Płatnie wyróżnione oferty OLX (dziennie)</h2>
+            <div class="chart-wrap"><canvas id="promotedChart"></canvas></div>
+        </div>
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -204,6 +209,37 @@ async function init() {
         },
         options: { ...common, plugins: { legend: { display: false } } }
     });
+
+    // === Line: płatnie wyróżnione oferty OLX dziennie (od wdrożenia metryki) ===
+    // Dane liczy map_generator (build_promoted) z promoted_dates — dni bez skanu
+    // przychodzą jako null (luka na wykresie), nie zero. Karta jest ukryta,
+    // dopóki metryka nie zbierze pierwszego dnia z wyróżnieniem.
+    const promo = data.promoted;
+    if (promo && (promo.daily || []).length) {
+        document.getElementById('promotedCard').style.display = '';
+        if (promo.current != null) {
+            const share = promo.current_share != null ? ` (${promo.current_share}% ofert OLX)` : '';
+            document.getElementById('promotedTitle').textContent =
+                `⭐ Płatnie wyróżnione oferty OLX — teraz ${promo.current}${share}`;
+        }
+        new Chart(document.getElementById('promotedChart'), {
+            type: 'line',
+            data: {
+                labels: promo.daily.map(([d]) => new Date(d).toLocaleDateString('pl-PL', { day: '2-digit', month: '2-digit' })),
+                datasets: [{
+                    label: 'wyróżnione oferty',
+                    data: promo.daily.map(([, v]) => v),
+                    borderColor: '#eab308', backgroundColor: 'rgba(234,179,8,0.2)',
+                    spanGaps: false, tension: 0.25, fill: true, pointRadius: 2,
+                }]
+            },
+            options: {
+                ...common,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+            }
+        });
+    }
 }
 init();
 </script>

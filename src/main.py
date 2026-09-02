@@ -160,6 +160,10 @@ class SonarDzialkowy:
         if new.get('image'):
             existing['image'] = new['image']
 
+        # płatne wyróżnienie na listingu — dotyczy każdej oferty (sygnał niosą
+        # tylko oferty OLX; reszta źródeł da tu po prostu False)
+        self._track_promoted(existing, new.get('promoted', False))
+
         # coords: nie nadpisuj dokładnych przybliżonymi
         new_loc = new.get('location') or {}
         old_loc = existing.setdefault('location', {})
@@ -177,6 +181,24 @@ class SonarDzialkowy:
             existing['reactivated_at'] = now
             print(f"   🔄 REAKTYWOWANO: {existing['id']}")
 
+    def _track_promoted(self, offer: Dict, promoted: bool) -> None:
+        """Śledzi płatne wyróżnienie oferty na listingu OLX (patrz
+        olx_scraper._is_promoted). `promoted` = stan z bieżącego skanu;
+        `promoted_dates` = dni, w których widzieliśmy ofertę wyróżnioną
+        (max 1 wpis/dzień — skanujemy 2×/dzień). Tylko z tej historii da się
+        zbudować dzienny szereg „ile ofert jest płatnie wypychanych" —
+        wyróżnienie to stan chwilowy na listingu, nie da się go odtworzyć wstecz.
+        Sygnał niosą wyłącznie oferty OLX; dla pozostałych źródeł `promoted`
+        jest po prostu False.
+        """
+        offer['promoted'] = bool(promoted)
+        dates = offer.setdefault('promoted_dates', [])
+        if promoted:
+            today = datetime.now(self.tz).strftime('%Y-%m-%d')
+            if today not in dates:
+                dates.append(today)
+        offer['promoted_count'] = len(dates)
+
     def _add_new(self, new: Dict):
         now = datetime.now(self.tz).isoformat()
         price = new.pop('price')
@@ -188,6 +210,7 @@ class SonarDzialkowy:
         new['last_seen'] = now
         new['active'] = True
         new['days_active'] = 0
+        self._track_promoted(new, new.get('promoted', False))
         self.database['offers'].append(new)
 
     def _mark_inactive(self, scraped_by_source: Dict[str, List[Dict]]) -> int:
@@ -219,6 +242,9 @@ class SonarDzialkowy:
                 if offer['id'] not in scraped_ids:
                     offer['active'] = False
                     offer['deactivated_at'] = now
+                    # nie ma jej na listingu → nie jest już wyróżniona;
+                    # historia promoted_dates zostaje (buduje szereg czasowy)
+                    offer['promoted'] = False
                     deactivated += 1
             total_deactivated += deactivated
             if deactivated:

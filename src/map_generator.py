@@ -5,7 +5,7 @@ serwowany przez GitHub Pages.
 """
 
 import json
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 import pytz
@@ -13,6 +13,7 @@ import pytz
 import paths
 
 DESCRIPTION_LIMIT = 1200  # frontend pokazuje skrót, pełny opis jest pod linkiem
+TZ = pytz.timezone('Europe/Warsaw')
 
 
 def build_map_offer(offer: dict) -> dict:
@@ -51,6 +52,71 @@ def build_map_offer(offer: dict) -> dict:
         'active': offer.get('active', False),
         'days_active': offer.get('days_active', 0),
         'also_at': offer.get('also_at'),
+        'promoted': offer.get('promoted', False),  # płatne wyróżnienie na listingu OLX
+    }
+
+
+def _scan_days() -> set:
+    """Dni z ZAKOŃCZONYM skanem wg data/scan_history.json.
+
+    Dzień bez skanu (awaria Actions, blokada OLX) miałby zero wyróżnień i
+    rysowałby się jak realne załamanie metryki — takie dni oznaczamy jako lukę,
+    nie zero. Brak/uszkodzony plik = pusty zbiór (wtedy lukami są tylko dni
+    spoza dni z wyróżnieniami).
+    """
+    try:
+        with open(paths.SCAN_HISTORY_JSON, 'r', encoding='utf-8') as f:
+            history = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return set()
+    return {(scan.get('timestamp') or '')[:10]
+            for scan in history.get('scans', [])
+            if scan.get('status') == 'completed' and scan.get('timestamp')}
+
+
+def build_promoted(all_offers: list, scan_days: set) -> dict:
+    """Dzienny szereg płatnie wyróżnionych ofert OLX (płatne 'promoted').
+
+    Źródło: `promoted_dates` w offers.json (main._track_promoted, max 1/dzień).
+    To metryka STANU — ile ofert jest danego dnia wyróżnianych — więc suma po
+    dniach nie ma sensu; front pokazuje serię dzienną i bieżący udział w rynku.
+    Historia zaczyna się w dniu wdrożenia detekcji (wyróżnienia nie da się
+    odtworzyć wstecz), więc seria startuje od pierwszego dnia z danymi, nie od
+    początku bazy. Dni bez skanu = luka (None), nie zero.
+
+    Zwraca None, gdy nie ma jeszcze żadnej daty wyróżnienia (świeżo po wdrożeniu).
+    """
+    counts: dict = {}
+    for o in all_offers:
+        for pd in o.get('promoted_dates') or []:
+            key = str(pd)[:10]
+            counts[key] = counts.get(key, 0) + 1
+    if not counts:
+        return None
+
+    today = datetime.now(TZ).strftime('%Y-%m-%d')
+    start = date.fromisoformat(min(counts))
+    end = date.fromisoformat(max(today, max(counts)))
+    scanned = set(scan_days) | set(counts)  # dzień z wyróżnieniem był skanowany
+
+    daily = []
+    day = start
+    while day <= end:
+        key = day.isoformat()
+        daily.append([key, counts.get(key, 0) if key in scanned else None])
+        day += timedelta(days=1)
+
+    # udział „teraz": wyróżnione wśród AKTYWNYCH ofert OLX (tylko one to niosą)
+    olx_active = [o for o in all_offers
+                  if o.get('active') and o.get('source') == 'olx']
+    promoted_now = sum(1 for o in olx_active if o.get('promoted'))
+    current_share = (round(100 * promoted_now / len(olx_active), 1)
+                     if olx_active else None)
+    return {
+        'daily': daily,
+        'current': promoted_now,
+        'current_share': current_share,
+        'start': start.isoformat(),
     }
 
 
@@ -78,11 +144,11 @@ def generate():
         idx = min(len(values) - 1, int(round(p * (len(values) - 1))))
         return values[idx]
 
-    tz = pytz.timezone('Europe/Warsaw')
     data = {
-        'generated_at': datetime.now(tz).isoformat(),
+        'generated_at': datetime.now(TZ).isoformat(),
         'last_scan': db.get('last_scan'),
         'next_scan': db.get('next_scan'),
+        'promoted': build_promoted(all_offers, _scan_days()),
         'stats': {
             'total': len(offers),
             'active': len(active),
@@ -102,6 +168,11 @@ def generate():
         json.dump(data, f, ensure_ascii=False, separators=(',', ':'))
 
     print(f"🗺️ Wygenerowano {out} ({len(active)} aktywnych / {len(offers)} łącznie)")
+    promo = data['promoted']
+    if promo:
+        share = f" ({promo['current_share']}% ofert OLX)" if promo['current_share'] is not None else ""
+        print(f"   ⭐ Płatnie wyróżnione teraz: {promo['current']}{share}; "
+              f"historia od {promo['start']}")
 
 
 if __name__ == "__main__":

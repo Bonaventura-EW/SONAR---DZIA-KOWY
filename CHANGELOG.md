@@ -3,6 +3,15 @@
 ## [Niewydane]
 
 ### Dodane
+- **Metryka płatnie wyróżnionych ofert OLX** (propagacja z SONAR-POKOJOWY,
+  manifest `2026-08-26-promoted-listings-metric`). Scraper czyta wyróżnienie
+  z pola `searchReason` w `__PRERENDERED_STATE__` (`'promoted'`/`'organic'`, z
+  fallbackiem na `isPromoted`) — u brata sygnał szło z href-a karty HTML, u nas
+  jest wprost w JSON, więc nie trzeba go ratować przed `url.split('?')[0]`.
+  `main.py` zapisuje stan per oferta (`promoted`) i historię dni
+  (`promoted_dates`, max 1 wpis/dzień), a `map_generator` (`build_promoted`)
+  liczy z tego dzienny szereg i bieżący udział wyróżnionych w aktywnych ofertach
+  OLX. Nowy wykres w `docs/analytics.html` (dni bez skanu = luka, nie zero).
 - **Pasek „ta oferta vs mediana grupy" w dymku na mapie** (`docs/assets/script.js`).
   Ten sam obraz i te same liczby co karta w rankingu Okazji: procent względem
   mediany porównywalnych, z czym dokładnie porównaliśmy (grupa + liczba ofert),
