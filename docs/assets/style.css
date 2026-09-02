@@ -196,21 +196,45 @@ body {
 
 /* ===== Popup stosu (kilka ofert pod jednym punktem) =====
    FIX 2026-08-31: identyczne współrzędne → jedna pinezka z liczbą, a popup
-   listuje wszystkie oferty spod punktu (wcześniej klikalna była tylko wierzchnia). */
-.popup-stack-head { font-weight: 700; font-size: 13px; margin-bottom: 8px; color: #4b5563; }
+   listuje wszystkie oferty spod punktu (wcześniej klikalna była tylko wierzchnia).
+   FIX 2026-09-02: lista to teraz tylko pierwszy widok — klik w wiersz otwiera
+   w tym samym dymku PEŁNĄ kartę oferty (jak przy pojedynczej pinezce). */
+.popup-stack-head { font-weight: 700; font-size: 13px; margin-bottom: 3px; color: #4b5563; }
+.popup-stack-hint { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
 .popup-stack-list { max-height: 300px; overflow-y: auto; }
-.popup-stack-row { padding: 7px 0; border-top: 1px solid #e5e7eb; }
+.popup-stack-row { display: flex; align-items: center; gap: 2px; border-top: 1px solid #e5e7eb; }
 .popup-stack-row:first-child { border-top: none; }
-.stack-row-head { font-size: 13px; font-weight: 600; line-height: 1.35; }
-.stack-row-head a { color: var(--green-700); text-decoration: none; }
-.stack-row-head a:hover { text-decoration: underline; }
-.stack-row-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+/* wiersz jako <button>: klawiatura i czytniki ekranu widzą go jako akcję */
+.stack-row-open { flex: 1; min-width: 0; display: block; text-align: left; font: inherit;
+                  background: none; border: 0; border-radius: 8px; padding: 7px 5px; cursor: pointer; }
+.stack-row-open:hover { background: var(--lime-soft); }
+.stack-row-open:focus-visible { outline: 2px solid var(--green-600); outline-offset: -2px; }
+.stack-row-head { display: block; font-size: 13px; font-weight: 600; line-height: 1.35;
+                  color: var(--green-700); }
+.stack-row-meta { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+.stack-row-ext { flex: none; padding: 4px 6px; font-size: 14px; text-decoration: none;
+                 color: var(--muted); border-radius: 6px; }
+.stack-row-ext:hover { color: var(--green-700); background: var(--lime-soft); }
 .stack-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%;
              margin-right: 5px; vertical-align: middle; border: 1px solid rgba(0,0,0,0.25); }
 .stack-inactive { color: #dc2626; font-weight: 700; }
-/* podświetlenie wiersza po wejściu z linku #offer=<id> */
+/* podświetlenie wiersza po wejściu z linku #offer=<id> i po powrocie z karty */
 .stack-row-focus { background: #fef9c3; border-radius: 8px;
                    box-shadow: 0 0 0 2px #facc15; }
+
+/* nagłówek karty oferty otwartej ze stosu: powrót do listy + strzałki ‹ › */
+.stack-detail-head { display: flex; align-items: center; justify-content: space-between;
+                     gap: 8px; margin-bottom: 8px; padding-bottom: 6px;
+                     border-bottom: 1px solid #e5e7eb; }
+.stack-back { background: none; border: 0; padding: 0; font: inherit; font-size: 12px;
+              font-weight: 700; color: var(--green-700); cursor: pointer; text-align: left; }
+.stack-back:hover { text-decoration: underline; }
+.stack-nav { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.stack-nav button { width: 22px; height: 22px; line-height: 1; font-size: 15px; cursor: pointer;
+                    color: #4b5563; background: #f3f4f6; border: 1px solid #e5e7eb;
+                    border-radius: 6px; padding: 0; }
+.stack-nav button:hover { background: var(--lime-soft); color: var(--green-700); }
+.stack-pos { font-size: 11px; color: var(--muted); }
 
 /* markery divIcon nie mogą mieć tła Leafleta */
 .pin-marker, .square-marker { background: transparent; border: none; }
