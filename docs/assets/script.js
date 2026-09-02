@@ -119,7 +119,10 @@ function focusOfferFromHash() {
     if (o.coords) {
         map.setView([o.coords.lat, o.coords.lon], 16, { animate: true });
         const mk = markerById[o.id];
-        if (mk) setTimeout(() => mk.openPopup(), 250);
+        if (mk) setTimeout(() => {
+            mk.openPopup();
+            highlightStackRow(mk, o.id);  // no-op dla pojedynczej pinezki
+        }, 250);
     } else {
         // oferta bez GPS — rozwiń sekcję „bez lokalizacji" pod mapą
         document.getElementById('unlocalised-section').style.display = 'block';
@@ -407,6 +410,57 @@ function makeIcon(o) {
     return icon;
 }
 
+// ikona stosu — ten sam kształt co pojedyncza pinezka reprezentanta, ale zamiast
+// środkowego kółka/× ma liczbę ofert w środku. Kolor = kolor reprezentanta
+// (najtańsza pozycja). Obwódka czerwona, gdy w grupie jest jakaś nowa oferta.
+function makeStackIcon(rep, count, anyNew) {
+    const color = colorFor(rep);
+    const approx = isApprox(rep);
+    const stroke = anyNew ? '#ff0000' : 'white';
+    const strokeW = anyNew ? 3 : 2;
+    const key = 'stack' + (approx ? 's' : 'p') + color + count + (anyNew ? 1 : 0);
+    const cached = _iconCache.get(key);
+    if (cached) return cached;
+
+    const numFont = count > 9 ? 14 : 16;
+    let icon;
+    if (approx) {
+        const s = 34;
+        const num = `<text x="17" y="17" text-anchor="middle" dominant-baseline="central" font-size="${numFont}" font-weight="800" fill="white" font-family="-apple-system, sans-serif" style="paint-order: stroke; stroke: rgba(0,0,0,0.55); stroke-width: 3px;">${count}</text>`;
+        icon = L.divIcon({
+            className: 'square-marker',
+            html: `<div style="position:relative;width:${s}px;height:${s}px;">
+                <svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
+                    <rect x="3" y="3" width="${s - 6}" height="${s - 6}"
+                          fill="${color}" fill-opacity="0.9"
+                          stroke="${stroke}" stroke-width="${strokeW}" stroke-dasharray="4 3"/>
+                    ${num}
+                </svg>
+            </div>`,
+            iconSize: [s, s],
+            iconAnchor: [s / 2, s / 2],
+            popupAnchor: [0, -s / 2],
+        });
+    } else {
+        const num = `<text x="20" y="18" text-anchor="middle" dominant-baseline="central" font-size="${numFont}" font-weight="800" fill="white" font-family="-apple-system, sans-serif" style="paint-order: stroke; stroke: rgba(0,0,0,0.55); stroke-width: 3px;">${count}</text>`;
+        icon = L.divIcon({
+            className: 'pin-marker',
+            html: `<div style="position:relative;width:40px;height:50px;">
+                <svg width="40" height="50" viewBox="0 0 40 50">
+                    <path d="M20 0 C9 0 0 9 0 20 C0 35 20 50 20 50 C20 50 40 35 40 20 C40 9 31 0 20 0 Z"
+                          fill="${color}" stroke="${stroke}" stroke-width="${strokeW}"/>
+                    ${num}
+                </svg>
+            </div>`,
+            iconSize: [40, 50],
+            iconAnchor: [20, 50],
+            popupAnchor: [0, -50],
+        });
+    }
+    _iconCache.set(key, icon);
+    return icon;
+}
+
 function popupHtml(o) {
     const newBadge = isNew(o) ? ' <span class="badge-new">NOWA</span>' : '';
     const trend = o.price_trend === 'down'
@@ -486,27 +540,116 @@ function escapeHtml(s) {
         ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+// treść popupu przychodzi z zewnętrznych serwisów — przepuszczaj href tylko dla
+// schematów http(s), żeby nie wstrzyknąć javascript:/data: przez pole url
+function safeUrl(u) {
+    if (typeof u !== 'string') return '#';
+    return /^https?:\/\//i.test(u.trim()) ? escapeHtml(u) : '#';
+}
+
+// popup stosu — nagłówek z liczbą + przewijalna, płaska lista ofert spod punktu
+// (posortowana od najtańszej). Każdy wiersz jest samodzielny: pełny link do
+// ogłoszenia + `data-offer-id` dla fokusu z linku #offer=<id>. Bez przeładowań
+// popupu i bez addEventListener na wierszach — linki działają natywnie.
+function stackPopupHtml(group) {
+    const sorted = [...group].sort((a, b) => repRank(a) - repRank(b));
+    return `<div class="popup-stack">
+        <div class="popup-stack-head">📍 ${group.length} ofert w tym punkcie</div>
+        <div class="popup-stack-list">${sorted.map(stackRowHtml).join('')}</div>
+    </div>`;
+}
+
+function stackRowHtml(o) {
+    const dot = `<span class="stack-dot" style="background:${colorFor(o)}"></span>`;
+    const newBadge = isNew(o) ? ' <span class="badge-new">NOWA</span>' : '';
+    const trend = o.price_trend === 'down' ? ' <span class="trend-down">↓</span>'
+        : o.price_trend === 'up' ? ' <span class="trend-up">↑</span>' : '';
+    const status = o.active ? '' : ' <span class="stack-inactive">⏸</span>';
+    const src = o.is_agency ? '🏢 ' + escapeHtml(o.agency_name || 'agencja') : o.source.toUpperCase();
+    const perM2 = o.price_per_m2 ? fmtPrice(o.price_per_m2) + '/m²' : '—';
+    return `<div class="popup-stack-row" data-offer-id="${escapeHtml(o.id)}">
+        <div class="stack-row-head">${dot}<a href="${safeUrl(o.url)}" target="_blank" rel="noopener">${escapeHtml(o.title)}</a>${newBadge}${status}</div>
+        <div class="stack-row-meta">${fmtPrice(o.price)}${trend} • ${fmtArea(o.area_m2)} • ${perM2} • ${o.plot_type || 'inna'} • ${src}</div>
+    </div>`;
+}
+
+// po otwarciu popupu stosu z linku #offer=<id> — przewiń do właściwego wiersza
+// i podświetl go (popup Leafletu powstaje dopiero przy otwarciu, więc czytamy
+// jego DOM tu, po openPopup)
+function highlightStackRow(marker, id) {
+    const popup = marker.getPopup && marker.getPopup();
+    const node = popup && popup.getElement && popup.getElement();
+    if (!node) return;
+    node.querySelectorAll('.popup-stack-row').forEach(row => {
+        if (row.dataset.offerId === id) {
+            row.scrollIntoView({ block: 'nearest' });
+            row.classList.add('stack-row-focus');
+        }
+    });
+}
+
 function render() {
     markersLayer.clearLayers();
     markerById = {};
     const visible = allOffers.filter(passesFilters);
     const located = visible.filter(o => o.coords);
 
+    // FIX 2026-08-31: grupuj oferty o identycznych współrzędnych w jeden „stos".
+    // Bez tego pinezki leżą jedna na drugiej i klikalna jest tylko wierzchnia —
+    // a CLAUDE.md pkt. 6 gwarantuje takie kolizje (Otodom wstawia centroid
+    // dzielnicy, Adresowo centroid miasta, gdy ogłoszenie nie ma dokładnego
+    // punktu), więc kilkanaście ofert potrafi wylądować na tym samym `lat/lon`.
+    const groups = new Map();
     located.forEach(o => {
-        const marker = L.marker([o.coords.lat, o.coords.lon], {
-            icon: makeIcon(o),
-            title: `${o.title || ''} — ${fmtPrice(o.price)}`,  // tooltip per marker (ikona memoizowana)
-            // dokładne pinezki nad kwadratami, nieaktywne pod aktywnymi
-            zIndexOffset: (isApprox(o) ? 0 : 200) + (o.active ? 100 : 0),
-        });
-        marker.bindPopup(() => popupHtml(o), { maxWidth: 330 });
-        markersLayer.addLayer(marker);
-        markerById[o.id] = marker;  // do fokusu z linku #offer=<id>
+        const key = o.coords.lat.toFixed(6) + ',' + o.coords.lon.toFixed(6);
+        let g = groups.get(key);
+        if (!g) { g = []; groups.set(key, g); }
+        g.push(o);
     });
+    groups.forEach(g => (g.length === 1 ? addSingleMarker(g[0]) : addStackMarker(g)));
 
     renderStats(visible);
     renderUnlocalised(visible.filter(o => !o.coords));
     renderCounts();
+}
+
+// pojedyncza oferta pod danym punktem — stara ścieżka (jedna pinezka, jeden popup)
+function addSingleMarker(o) {
+    const marker = L.marker([o.coords.lat, o.coords.lon], {
+        icon: makeIcon(o),
+        title: `${o.title || ''} — ${fmtPrice(o.price)}`,  // tooltip per marker (ikona memoizowana)
+        // dokładne pinezki nad kwadratami, nieaktywne pod aktywnymi
+        zIndexOffset: (isApprox(o) ? 0 : 200) + (o.active ? 100 : 0),
+    });
+    marker.bindPopup(() => popupHtml(o), { maxWidth: 330 });
+    markersLayer.addLayer(marker);
+    markerById[o.id] = marker;  // do fokusu z linku #offer=<id>
+}
+
+// kilka ofert pod jednym punktem — jedna pinezka z liczbą, popup z płaską listą.
+// Reprezentant (najtańsza pozycja wg zł/m²) nadaje stosowi kształt i kolor;
+// KAŻDE id z grupy wskazuje na ten sam marker, więc fokus z linku #offer=<id>
+// nadal otwiera właściwy stos (a highlightStackRow przewija do właściwego wiersza).
+function addStackMarker(group) {
+    const rep = group.reduce((a, b) => (repRank(b) < repRank(a) ? b : a));
+    const anyNew = group.some(isNew);
+    const marker = L.marker([rep.coords.lat, rep.coords.lon], {
+        icon: makeStackIcon(rep, group.length, anyNew),
+        title: `${group.length} ofert w tym punkcie`,
+        // stos zawsze nad pojedynczymi pinezkami, żeby liczba była widoczna
+        zIndexOffset: (isApprox(rep) ? 0 : 200) + 300,
+    });
+    marker.bindPopup(() => stackPopupHtml(group), { maxWidth: 330 });
+    markersLayer.addLayer(marker);
+    group.forEach(o => { markerById[o.id] = marker; });
+}
+
+// „najtańszość" pozycji do wyboru reprezentanta i sortowania listy stosu:
+// najpierw zł/m², w braku — cena, w braku — na koniec listy
+function repRank(o) {
+    if (o.price_per_m2 != null) return o.price_per_m2;
+    if (o.price != null) return o.price;
+    return Infinity;
 }
 
 function renderStats(visible) {
