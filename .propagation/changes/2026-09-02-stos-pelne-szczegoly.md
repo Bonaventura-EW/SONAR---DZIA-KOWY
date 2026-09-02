@@ -10,7 +10,7 @@ how: Marker stosu trzyma stan widoku (`_detailId`, `_focusId`) i posortowaną gr
 surface: docs/assets/script.js, docs/assets/style.css, docs/index.html, docs/*.html (bump ?v=4), CHANGELOG.md
 generality: family
 propagate: yes
-commit: a08467c
+commit: c482c3c
 ---
 
 # Kontekst dla braci
