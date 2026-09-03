@@ -46,6 +46,15 @@ RELIABLE_START = date(2026, 6, 12)
 OUTFLOW_ARTIFACT_THRESHOLD = 60
 REACT_ARTIFACT_THRESHOLD = 60
 
+# „Mrugnięcie" pipeline'u: oferta znika z listingu i wraca w ciągu tylu dni.
+# To NIE jest ruch rynkowy, tylko częściowy scrape (ochrona z main._mark_inactive
+# łapie tylko katastrofy — przy 30% progu scraper agencji, który zwrócił 229 ofert
+# zamiast 265, spokojnie zdezaktywował 23 żywe oferty 06.07.2026, a następny skan
+# je wskrzesił) albo chwilowe schowanie oferty przez portal. W bazie 66% par
+# „zniknęła → wróciła" domyka się w ≤3 dni; bez tego filtru rekordy odpływu (27)
+# i reaktywacji (26) na wykresach to były dwie strony tego samego zacięcia.
+FLAP_MAX_DAYS = 3
+
 
 def _day_ms(d: date) -> int:
     """Epoch (ms) dla południa danego dnia — punkt ląduje w środku dnia na osi."""
@@ -80,6 +89,36 @@ def collect_dates(offer, list_field, scalar_field):
     return sorted(out)
 
 
+def life_events(offer):
+    """(deaktywacje, reaktywacje, ile par odsiano) — zdarzenia życia oferty
+    po odfiltrowaniu „mrugnięć" pipeline'u (patrz FLAP_MAX_DAYS).
+
+    Każdą deaktywację parujemy z najbliższym późniejszym powrotem. Para krótsza
+    niż FLAP_MAX_DAYS wypada Z OBU serii naraz — inaczej wykres odpływu i wykres
+    reaktywacji pokazywałyby dwa „rekordy rynkowe" będące jednym zacięciem
+    scrapera. Powrót domykający deaktywację, która ZOSTAJE, też zostaje.
+    """
+    deactivations = collect_dates(offer, 'deactivation_dates', 'deactivated_at')
+    reactivations = collect_dates(offer, 'reactivation_dates', 'reactivated_at')
+
+    drop_d, drop_r, matched = set(), set(), set()
+    for i, gone in enumerate(deactivations):
+        back = next((j for j, r in enumerate(reactivations)
+                     if j not in matched and r >= gone), None)
+        if back is None:
+            continue
+        matched.add(back)
+        if (reactivations[back] - gone).days <= FLAP_MAX_DAYS:
+            drop_d.add(i)
+            drop_r.add(back)
+
+    return (
+        [d for i, d in enumerate(deactivations) if i not in drop_d],
+        [r for j, r in enumerate(reactivations) if j not in drop_r],
+        len(drop_d),
+    )
+
+
 def build_spans(offers):
     """[(offer, [(start, end), ...]), ...] — PRZEDZIAŁY życia każdej oferty.
 
@@ -109,9 +148,9 @@ def build_spans(offers):
         if final_end < start:
             final_end = start
 
-        deactivations = [d for d in collect_dates(o, 'deactivation_dates', 'deactivated_at')
-                         if start <= d <= final_end]
-        reactivations = collect_dates(o, 'reactivation_dates', 'reactivated_at')
+        gone, back, _ = life_events(o)
+        deactivations = [d for d in gone if start <= d <= final_end]
+        reactivations = back
 
         intervals = []
         cursor = start
@@ -254,7 +293,7 @@ def build_outflow(offers, series=None):
 
     dep = {}
     for o in offers:
-        gone = collect_dates(o, 'deactivation_dates', 'deactivated_at')
+        gone, _, _ = life_events(o)
         if not gone and not o.get('active') and o.get('last_seen'):
             try:
                 gone = [_d(o['last_seen'])]
@@ -294,7 +333,7 @@ def build_inflow(offers, series=None):
                     new[d] = new.get(d, 0) + 1
             except (ValueError, TypeError):
                 pass
-        for d in collect_dates(o, 'reactivation_dates', 'reactivated_at'):
+        for d in life_events(o)[1]:
             if d >= start:
                 react[d] = react.get(d, 0) + 1
 
@@ -336,7 +375,7 @@ def build_bands(offers, series=None):
 
     first_reactivation = []
     for offer, intervals in spans:
-        dates = collect_dates(offer, 'reactivation_dates', 'reactivated_at')
+        dates = life_events(offer)[1]
         first_reactivation.append((intervals, dates[0] if dates else None))
 
     measured = {ms: value for ms, value in (series or [])}
@@ -419,6 +458,56 @@ def daily_source_counts(base_dir=None) -> dict:
     return out
 
 
+def blind_source_days(base_dir=None) -> dict:
+    """{dzień: [źródła, które NIE ODPOWIEDZIAŁY ani razu tego dnia]}.
+
+    Zero zebranych ofert we WSZYSTKICH skanach dnia to blokada portalu, nie
+    pusty rynek. Ochrona z `main._mark_inactive` nie pozwala wtedy zdezaktywować
+    ofert tego źródła (Indeks trzyma ostatni znany stan), ale nikt nie broni
+    wykresom NAPŁYWU: dzień z zablokowanym OLX rysował „0 nowych ofert" jak
+    fakt rynkowy. W tej bazie OLX milczał 12 dni z rzędu (12–23.08.2026).
+
+    Źródło, którego dany skan w ogóle nie raportował (starsze wpisy nie mają
+    `scraped_adresowo`), jest NIEZNANE, nie ślepe — i tu nie trafia.
+    """
+    out = {}
+    for day, counts in daily_source_counts(base_dir).items():
+        blind = sorted(source for source, value in counts.items() if value == 0)
+        if blind:
+            out[day] = blind
+    return out
+
+
+def blind_ranges(base_dir=None) -> list:
+    """Ciągłe odcinki ślepoty źródła — [{source, from, to, days}] w ms.
+
+    Front zakreskowuje je na wykresach przepływów: bez tego dołek w napływie
+    czyta się jak ochłodzenie rynku, a to była blokada portalu.
+    """
+    by_source = {}
+    for day, sources in blind_source_days(base_dir).items():
+        for source in sources:
+            by_source.setdefault(source, []).append(day)
+
+    ranges = []
+    for source, days in by_source.items():
+        days.sort()
+        start = prev = days[0]
+        for day in days[1:] + [None]:
+            if day is not None and (day - prev).days == 1:
+                prev = day
+                continue
+            ranges.append({
+                'source': source,
+                'from': _day_ms(start) - DAY_MS // 2,
+                'to': _day_ms(prev) + DAY_MS // 2,
+                'days': (prev - start).days + 1,
+            })
+            if day is not None:
+                start = prev = day
+    return sorted(ranges, key=lambda r: r['from'])
+
+
 def olx_active_by_day(base_dir=None) -> dict:
     """{dzień: ile ofert OLX było aktywnych} — mianownik udziału wyróżnień.
 
@@ -492,7 +581,12 @@ def build_promoted(offers, series, scan_days=None, base_dir=None):
     # zerowe wyróżnianie.
     recorded = {day for day, value in index_history.daily_series(base_dir=base_dir) if value}
     scanned = recorded | set(scan_days or set()) | _scanned_days(offers) | set(counts)
-    missing = {d for d in days if d not in scanned}
+    # Dzień ze ŚLEPYM OLX też jest luką, choć skan się odbył i inne źródła
+    # odpowiedziały: wyróżnienie potrafi zgłosić wyłącznie listing OLX, więc
+    # zero z takiego dnia byłoby zmyślone (patrz blind_source_days).
+    blind_olx = {day for day, sources in blind_source_days(base_dir).items()
+                 if 'olx' in sources}
+    missing = {d for d in days if d not in scanned or d in blind_olx}
 
     metric = _flow_metric(counts, days, exclude=missing)
 
@@ -621,6 +715,13 @@ def generate(base_dir=None) -> bool:
         'inflow': build_inflow(offers, series),
         'bands': build_bands(offers, series),
         'promoted': build_promoted(offers, series, load_scan_days(base_dir), base_dir),
+        # odcinki, w których źródło nie odpowiadało — front je zakreskowuje
+        'blind_ranges': blind_ranges(base_dir),
+        # ile par „zniknęła i zaraz wróciła" odsialiśmy jako zacięcie scrapera
+        'flapping': {
+            'pairs': sum(life_events(o)[2] for o in offers),
+            'max_days': FLAP_MAX_DAYS,
+        },
     }
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -637,6 +738,12 @@ def generate(base_dir=None) -> bool:
           f"rekord={of.get('max_day')} ({of.get('max_label')})")
     print(f"   ↗️ nowe: łącznie={inf.get('total')}, śr={inf.get('rate')}/dzień, "
           f"rekord={inf.get('max_day')} ({inf.get('max_label')})")
+    print(f"   🧹 odsiane mrugnięcia pipeline'u (powrót ≤{FLAP_MAX_DAYS} dni): "
+          f"{data['flapping']['pairs']} par")
+    for r in data['blind_ranges']:
+        first = datetime.fromtimestamp(r['from'] / 1000).date()
+        print(f"   🚫 {r['source']}: bez odpowiedzi przez {r['days']} dni "
+              f"(od {first.strftime('%d.%m')})")
     pr = data['promoted']
     if pr:
         print(f"   ⭐ wyróżnione: teraz={pr.get('current')} "

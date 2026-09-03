@@ -66,6 +66,30 @@
         return String(value).replace('.', ',');
     }
 
+    var SOURCE_NAMES = { olx: 'OLX', otodom: 'Otodom', adresowo: 'Adresowo', agencies: 'agencje' };
+
+    /**
+     * Zakreskowane pasy dni, w których źródło nie odpowiadało ani razu.
+     * Bez nich dołek w napływie czyta się jak ochłodzenie rynku, a to była
+     * blokada portalu — i tak samo płaski odcinek Indeksu, który w tym czasie
+     * trzyma ostatni znany stan zamiast pomiaru.
+     */
+    function blindAnnotations(ranges, withLabel) {
+        return (ranges || []).map(function (r) {
+            var name = SOURCE_NAMES[r.source] || r.source;
+            return {
+                x: r.from, x2: r.to,
+                fillColor: '#94a3b8', opacity: 0.18, borderColor: '#94a3b8',
+                label: !withLabel ? {} : {
+                    text: name + ' bez odpowiedzi (' + r.days + ' dni)',
+                    orientation: 'horizontal', position: 'top',
+                    textAnchor: 'start', offsetX: 6, offsetY: -2,
+                    style: { background: '#e2e8f0', color: '#334155', fontSize: '11px' }
+                }
+            };
+        });
+    }
+
     function fail(id, message) {
         var el = document.getElementById(id);
         if (el) el.innerHTML = '<div class="chart-loading">' + message + '</div>';
@@ -81,8 +105,9 @@
     }
 
     /** Wykres przepływu: seria dzienna (ostra linia) + średnia 7 dni (gładka). */
-    function flowOptions(metric, dailyName, colors) {
+    function flowOptions(metric, dailyName, colors, blind) {
         return {
+            annotations: { xaxis: blindAnnotations(blind, true) },
             chart: baseChart('line', 320),
             series: [
                 { name: dailyName, data: metric.daily },
@@ -215,6 +240,9 @@
                 // 'front' — inaczej wypełnienie pola zamalowuje etykietę MIN,
                 // która leży nisko, dokładnie w obszarze serii.
                 position: 'front',
+                // bez etykiety: na Indeksie pas mówi „te dni to ostatni znany
+                // stan, nie pomiar", a podpisy zderzałyby się z MAX/MIN
+                xaxis: blindAnnotations(d.blind_ranges, false),
                 yaxis: yAnnotations,
                 points: [
                     { x: d.max_ts, y: mx, marker: { size: 5, fillColor: RED, strokeColor: '#fff', strokeWidth: 1 } },
@@ -239,6 +267,7 @@
                 ],
                 colors: [GREEN, '#f97316'],
                 stroke: { curve: 'straight', width: 1.5 },
+                annotations: { xaxis: blindAnnotations(d.blind_ranges, false) },
                 // Stos rysuje się OD ZERA, więc oś nie może być przycięta do
                 // okolic Indeksu jak w trybie sumy — dolne pasmo (dziś ~400)
                 // schowałoby się pod dolną krawędzią i zostałby sam recykling.
@@ -247,7 +276,6 @@
                     labels: { style: { colors: MUTED }, formatter: function (v) { return Math.round(v); } }
                 },
                 fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.7, opacityTo: 0.3, stops: [0, 100] } },
-                annotations: {},
                 legend: { labels: { colors: MUTED }, markers: { radius: 12 }, itemMargin: { horizontal: 10 } },
                 tooltip: {
                     shared: true, x: { format: 'dd.MM.yyyy' },
@@ -395,7 +423,7 @@
         if (of && of.daily && of.daily.length) {
             setHTML('outLabel', flowSummary(of, 'Znika średnio', '',
                 'Pomarańczowa = wygładzony trend (7 dni).'));
-            mount('outflowChart', flowOptions(of, 'Znikło danego dnia', [RED, '#f59e0b']));
+            mount('outflowChart', flowOptions(of, 'Znikło danego dnia', [RED, '#f59e0b'], d.blind_ranges));
         } else {
             fail('outflowChart', 'Brak danych o odpływie.');
         }
@@ -408,14 +436,16 @@
                 'pojawień na rynku (świeże + wskrzeszone)', ''));
             setHTML('reactLabel', flowSummary(inf.react, 'Wraca średnio', '',
                 'Wstecz zaniżone — patrz opis pod wykresem.'));
-            mount('newFlowChart', flowOptions(inf.new, 'Nowe danego dnia', [GREEN, '#86efac']));
-            mount('allFlowChart', flowOptions(inf.new_react, 'Pojawiło się danego dnia', ['#0284c7', '#7dd3fc']));
-            mount('reactFlowChart', flowOptions(inf.react, 'Reaktywacje danego dnia', ['#0d9488', '#5eead4']));
+            mount('newFlowChart', flowOptions(inf.new, 'Nowe danego dnia', [GREEN, '#86efac'], d.blind_ranges));
+            mount('allFlowChart', flowOptions(inf.new_react, 'Pojawiło się danego dnia', ['#0284c7', '#7dd3fc'], d.blind_ranges));
+            mount('reactFlowChart', flowOptions(inf.react, 'Reaktywacje danego dnia', ['#0d9488', '#5eead4'], d.blind_ranges));
         } else {
             ['newFlowChart', 'allFlowChart', 'reactFlowChart'].forEach(function (id) {
                 fail(id, 'Brak danych o napływie.');
             });
         }
+
+        if (d.flapping && d.flapping.pairs != null) setText('flapCount', d.flapping.pairs);
 
         var pr = d.promoted;
         if (pr && pr.daily && pr.daily.length) {

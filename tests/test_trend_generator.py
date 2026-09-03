@@ -125,14 +125,89 @@ def test_build_series_awaryjnie_rekonstruuje_bez_historii(repo):
 
 
 def test_przerwa_w_zyciu_oferty_nie_liczy_sie_jako_zywa():
+    # przerwa dłuższa niż FLAP_MAX_DAYS — realne zniknięcie, nie zacięcie scrapera
     offer = {'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
-             'last_seen': '2026-06-16T08:00:00+02:00', 'active': True,
-             'deactivation_dates': ['2026-06-13'], 'reactivation_dates': ['2026-06-15']}
+             'last_seen': '2026-06-20T08:00:00+02:00', 'active': True,
+             'deactivation_dates': ['2026-06-13'], 'reactivation_dates': ['2026-06-19']}
     (_, intervals), = tg.build_spans([offer])[0]
 
     assert tg._alive(intervals, date(2026, 6, 12)) is True
-    assert tg._alive(intervals, date(2026, 6, 14)) is False   # w środku przerwy
-    assert tg._alive(intervals, date(2026, 6, 16)) is True
+    assert tg._alive(intervals, date(2026, 6, 16)) is False   # w środku przerwy
+    assert tg._alive(intervals, date(2026, 6, 20)) is True
+
+
+def test_mrugniecie_pipelinu_wypada_z_obu_serii():
+    """Zniknęła i wróciła w 3 dni = częściowy scrape, nie ruch na rynku.
+
+    Regresja z realnych danych: 06.07.2026 scraper agencji oddał 229 ofert
+    zamiast ~265, przez co 23 żywe oferty zdezaktywowano, a następny skan je
+    wskrzesił — i wykresy pokazywały „rekord odpływu 27" oraz „rekord
+    reaktywacji 26" jako fakty rynkowe.
+    """
+    flap = {'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
+            'last_seen': '2026-06-20T08:00:00+02:00', 'active': True,
+            'deactivation_dates': ['2026-06-14'], 'reactivation_dates': ['2026-06-16']}
+    real = {'id': 'b', 'first_seen': '2026-06-12T08:00:00+02:00',
+            'last_seen': '2026-06-20T08:00:00+02:00', 'active': True,
+            'deactivation_dates': ['2026-06-14'], 'reactivation_dates': ['2026-06-19']}
+
+    assert tg.life_events(flap) == ([], [], 1)                       # obie strony pary znikają
+    assert tg.life_events(real) == ([date(2026, 6, 14)], [date(2026, 6, 19)], 0)
+
+    days = tg._daily_range(date(2026, 6, 12), date(2026, 6, 20))
+    series = [[tg._day_ms(d), 2] for d in days]
+    assert sum(v for _, v in tg.build_outflow([flap, real], series)['daily']) == 1
+    assert sum(v for _, v in tg.build_inflow([flap, real], series)['react']['daily']) == 1
+
+
+def test_mrugniecie_nie_dzieli_zycia_oferty_na_kawalki():
+    """Skoro powrót w 3 dni to zacięcie scrapera, oferta w tym czasie żyła —
+    inaczej pasmo „recykling" liczyłoby zacięcia jako recykling rynkowy."""
+    flap = {'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
+            'last_seen': '2026-06-20T08:00:00+02:00', 'active': True,
+            'deactivation_dates': ['2026-06-14'], 'reactivation_dates': ['2026-06-16']}
+    (_, intervals), = tg.build_spans([flap])[0]
+
+    assert tg._alive(intervals, date(2026, 6, 15)) is True
+    series = [[tg._day_ms(d), 1] for d in tg._daily_range(date(2026, 6, 12), date(2026, 6, 20))]
+    assert all(v == 0 for _, v in tg.build_bands([flap], series)['react'])
+
+
+def test_slepe_zrodlo_to_luka_w_wyroznieniach_nie_zero(repo):
+    """Dzień, w którym OLX nie oddał ANI JEDNEJ oferty, nie może rysować
+    „0 wyróżnionych" — skan się odbył, ale nie było czego zliczyć."""
+    _write_scan_history(repo, [
+        {'timestamp': '2026-06-12T08:40:00+02:00', 'status': 'completed',
+         'active': 100, 'scraped_olx': 20},
+        {'timestamp': '2026-06-13T08:40:00+02:00', 'status': 'completed',
+         'active': 100, 'scraped_olx': 0},     # blokada OLX
+        {'timestamp': '2026-06-13T18:40:00+02:00', 'status': 'completed',
+         'active': 100, 'scraped_olx': 0},
+        {'timestamp': '2026-06-14T08:40:00+02:00', 'status': 'completed',
+         'active': 100, 'scraped_olx': 20},
+    ])
+    offers = [{'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
+               'last_seen': '2026-06-14T08:00:00+02:00', 'active': True,
+               'promoted_dates': ['2026-06-12', '2026-06-14']}]
+    series = [[_ms(2026, 6, d), 100] for d in (12, 13, 14)]
+
+    assert tg.blind_source_days(repo) == {date(2026, 6, 13): ['olx']}
+    promoted = tg.build_promoted(offers, series, tg.load_scan_days(repo), repo)
+    assert [v for _, v in promoted['daily']] == [1, None, 1]
+
+    (rng,) = tg.blind_ranges(repo)
+    assert rng['source'] == 'olx' and rng['days'] == 1
+    assert rng['from'] < _ms(2026, 6, 13) < rng['to']
+
+
+def test_zrodlo_nieraportowane_nie_jest_slepe(repo):
+    """Starsze wpisy scan_history nie mają pola `scraped_adresowo` — brak pola
+    znaczy „nie wiemy", nie „zero ofert"."""
+    _write_scan_history(repo, [
+        {'timestamp': '2026-06-12T08:40:00+02:00', 'status': 'completed',
+         'active': 100, 'scraped_olx': 20},
+    ])
+    assert tg.blind_source_days(repo) == {}
 
 
 def test_build_outflow_liczy_dzienny_odplyw_i_srednia():
@@ -156,19 +231,21 @@ def test_build_outflow_liczy_dzienny_odplyw_i_srednia():
 
 
 def test_build_inflow_rozdziela_nowe_od_reaktywacji():
-    series = [[_ms(2026, 6, 12), 1], [_ms(2026, 6, 13), 2], [_ms(2026, 6, 14), 2]]
+    days = [12, 13, 14, 15, 16, 17, 18, 19]
+    series = [[_ms(2026, 6, d), 2] for d in days]
     offers = [
+        # powrót po 6 dniach — realna reaktywacja, nie mrugnięcie pipeline'u
         {'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
-         'last_seen': '2026-06-14T08:00:00+02:00', 'active': True,
-         'deactivation_dates': ['2026-06-13'], 'reactivation_dates': ['2026-06-14']},
+         'last_seen': '2026-06-19T08:00:00+02:00', 'active': True,
+         'deactivation_dates': ['2026-06-13'], 'reactivation_dates': ['2026-06-19']},
         {'id': 'b', 'first_seen': '2026-06-13T08:00:00+02:00',
-         'last_seen': '2026-06-14T08:00:00+02:00', 'active': True},
+         'last_seen': '2026-06-19T08:00:00+02:00', 'active': True},
     ]
     inflow = tg.build_inflow(offers, series)
 
-    assert [v for _, v in inflow['new']['daily']] == [1, 1, 0]
-    assert [v for _, v in inflow['react']['daily']] == [0, 0, 1]
-    assert [v for _, v in inflow['new_react']['daily']] == [1, 1, 1]
+    assert [v for _, v in inflow['new']['daily']] == [1, 1, 0, 0, 0, 0, 0, 0]
+    assert [v for _, v in inflow['react']['daily']] == [0, 0, 0, 0, 0, 0, 0, 1]
+    assert [v for _, v in inflow['new_react']['daily']] == [1, 1, 0, 0, 0, 0, 0, 1]
 
 
 def test_dzien_artefakt_reaktywacji_jest_luka_nie_pikiem(monkeypatch):
