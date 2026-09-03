@@ -3,6 +3,35 @@
 ## [Niewydane]
 
 ### Dodane
+- **Indeks podaży i wykresy ruchu na rynku** w `docs/analytics.html`
+  (odpowiednik `trend.html` z SONAR-POKOJOWY). Sześć wykresów ApexCharts nad
+  dotychczasową analityką: dzienna liczba aktywnych ofert z liniami MAX/MIN
+  i zmianami 1D/1M/6M/1Y (z przełącznikiem na pasma świeże/recykling), odpływ
+  ofert, nowe oferty, napływ całkowity, reaktywacje oraz płatne wyróżnienia OLX
+  z udziałem w rynku na drugiej osi. Każdy wykres ma dzienną serię, średnią
+  kroczącą z 7 dni, zoom/pan/eksport i podpis „skąd dane" mówiący wprost, gdzie
+  szereg jest zaniżony. Dane liczy nowy `src/trend_generator.py`
+  → `docs/trend_data.json` (19 KB), odpalany w `scanner.yml` po `map_generator`.
+  Zastąpiły dwie stare karty Chart.js: „Nowe oferty dziennie (30 dni)"
+  i „Płatnie wyróżnione oferty OLX" — nowe wersje mają pełną historię
+  (84 dni od 12.06.2026), średnią kroczącą i luki w dniach bez skanu.
+- **`data/index_history.json` — mierzony dzienny stan bazy** (`src/index_history.py`).
+  Źródło prawdy Indeksu podaży: po każdym skanie zapisujemy, ile ofert ma
+  `active: true` (wartość dnia = maksimum z odczytów, więc skan częściowy nie
+  rysuje się jak załamanie rynku; dzień bez skanu = brak wpisu i luka na
+  wykresie). Osobny plik, bo `scan_history.json` przycinamy do 200 skanów
+  (≈100 dni) — wykres z niego skracałby się z każdym skanem. Historia
+  10.06–03.09.2026 odtworzona z `scan_history.json`
+  (`backfill_from_scan_history`, wpisy z `backfilled: true`). Zapisujemy też
+  `active_dedup` (tyle pinezek jest na mapie) — Indeks rysujemy z liczby
+  surowej, bo tylko ją da się odtworzyć wstecz.
+- **Historia dat deaktywacji i reaktywacji per oferta** (`main._record_event`):
+  obok dotychczasowych `deactivated_at` / `reactivated_at` (ostatnie zdarzenie)
+  dochodzą listy `deactivation_dates` / `reactivation_dates` (max 1 wpis/dzień).
+  Bez nich oferta, która znikała i wracała kilka razy, zostawiała jeden ślad
+  i wykresy odpływu oraz reaktywacji były wstecz zaniżone; od teraz szereg
+  domyka się sam z każdym skanem (stara historia pozostaje zaniżona i jest tak
+  opisana pod wykresami).
 - **Metryka płatnie wyróżnionych ofert OLX** (propagacja z SONAR-POKOJOWY,
   manifest `2026-08-26-promoted-listings-metric`). Scraper czyta wyróżnienie
   z pola `searchReason` w `__PRERENDERED_STATE__` (`'promoted'`/`'organic'`, z

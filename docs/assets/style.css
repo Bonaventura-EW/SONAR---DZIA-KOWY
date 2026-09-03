@@ -286,3 +286,50 @@ table.scan-table tr:hover td { background: var(--lime-soft); }
 .alert-banner.warning { border-color: #fcd34d; background: #fffbeb; color: #78350f; }
 .alert-banner .alert-icon { font-size: 18px; line-height: 1.2; }
 .alert-banner strong { display: block; margin-bottom: 2px; }
+
+/* ===== Indeks podaży i ruch na rynku (analytics.html + assets/trend.js) ===== */
+.trend-section .chart-card { padding: 18px 18px 10px; }
+.card-sub { color: var(--muted); font-size: 13px; margin: -4px 0 10px; }
+.deltas {
+    display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 10px;
+    font-size: 13px; font-variant-numeric: tabular-nums;
+}
+.deltas b { color: var(--ink); font-weight: 700; margin-right: 4px; }
+.deltas .pos { color: var(--green-600); }
+.deltas .neg { color: #dc2626; }
+.deltas .na { color: var(--muted); }
+
+.idx-toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.idx-btn {
+    background: var(--lime-soft); color: var(--green-800); border: 1px solid var(--line);
+    border-radius: 10px; padding: 7px 14px; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: inherit; transition: 0.15s;
+}
+.idx-btn:hover { background: #e2f5cf; }
+.idx-btn.on { background: var(--green-700); color: #fff; border-color: var(--green-700); }
+
+.idx-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+.idx-legend:empty { margin: 0; }
+.idx-legend .ci { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink); }
+.idx-legend .ci.muted { color: var(--muted); }
+.idx-legend .dot { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+
+/* Wysokość zamiast .chart-wrap: ApexCharts sam skaluje SVG do szerokości
+   kontenera, więc pozycjonowanie jak przy canvasach Chart.js nie jest potrzebne. */
+.apex-wrap { min-height: 440px; }
+.apex-wrap-sm { min-height: 320px; }
+.chart-loading { padding: 48px 0; text-align: center; color: var(--muted); font-size: 13px; }
+
+.chart-foot {
+    color: var(--muted); font-size: 12px; line-height: 1.6;
+    margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line);
+}
+.chart-foot strong { color: var(--green-700); }
+.chart-foot code {
+    background: var(--lime-soft); color: var(--green-800);
+    padding: 1px 5px; border-radius: 4px; font-size: 11px;
+}
+
+/* Tooltip ApexCharts na jasnym motywie */
+.apexcharts-tooltip { border: 1px solid var(--line) !important; box-shadow: 0 4px 14px rgba(15, 31, 21, 0.12) !important; }
+.apexcharts-tooltip-title { background: var(--lime-soft) !important; border-bottom: 1px solid var(--line) !important; }

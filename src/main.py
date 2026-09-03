@@ -14,6 +14,7 @@ from typing import Dict, List
 
 import pytz
 
+import index_history
 import paths
 from olx_scraper import OLXDzialkiScraper
 from otodom_scraper import OtodomDzialkiScraper
@@ -178,8 +179,25 @@ class SonarDzialkowy:
 
         if not existing.get('active', True):
             existing['active'] = True
-            existing['reactivated_at'] = now
+            self._record_event(existing, 'reactivation_dates', 'reactivated_at', now)
             print(f"   🔄 REAKTYWOWANO: {existing['id']}")
+
+    @staticmethod
+    def _record_event(offer: Dict, list_field: str, scalar_field: str, now: str) -> None:
+        """Zapisuje zdarzenie życia oferty: pełny znacznik w polu pojedynczym
+        (ostatnie zdarzenie, zgodność wstecz) + DZIEŃ w liście historii.
+
+        FIX 2026-09-03: samo `deactivated_at`/`reactivated_at` trzymało tylko
+        OSTATNIE zdarzenie — oferta, która znikała trzy razy, zostawiała jeden
+        ślad, więc wykresy odpływu i reaktywacji na docs/analytics.html były
+        wstecz zaniżone. Listy (max 1 wpis/dzień, skanujemy 2×) domykają szereg
+        czasowy w miarę kolejnych skanów.
+        """
+        offer[scalar_field] = now
+        dates = offer.setdefault(list_field, [])
+        day = now[:10]
+        if day not in dates:
+            dates.append(day)
 
     def _track_promoted(self, offer: Dict, promoted: bool) -> None:
         """Śledzi płatne wyróżnienie oferty na listingu OLX (patrz
@@ -241,7 +259,8 @@ class SonarDzialkowy:
             for offer in active_in_db:
                 if offer['id'] not in scraped_ids:
                     offer['active'] = False
-                    offer['deactivated_at'] = now
+                    self._record_event(offer, 'deactivation_dates',
+                                       'deactivated_at', now)
                     # nie ma jej na listingu → nie jest już wyróżniona;
                     # historia promoted_dates zostaje (buduje szereg czasowy)
                     offer['promoted'] = False
@@ -504,6 +523,13 @@ class SonarDzialkowy:
 
         # 6. Statystyki
         active = sum(1 for o in self.database['offers'] if o.get('active'))
+        # tyle pinezek widać na mapie: bez ofert wskazujących duplikatem na
+        # inną AKTYWNĄ ofertę (ta sama działka wystawiona w kilku źródłach)
+        active_ids = {o['id'] for o in self.database['offers'] if o.get('active')}
+        active_dedup = sum(1 for o in self.database['offers']
+                           if o.get('active')
+                           and not (o.get('duplicate_of')
+                                    and o['duplicate_of'] in active_ids))
         with_coords = sum(1 for o in self.database['offers']
                           if o.get('active') and (o.get('location') or {}).get('coords'))
         duration = time.time() - start
@@ -523,6 +549,11 @@ class SonarDzialkowy:
             'active': active,
             'total_in_db': len(self.database['offers']),
         })
+
+        # Dzienny stan bazy → data/index_history.json (źródło prawdy Indeksu
+        # podaży na docs/analytics.html). scan_history trzyma tylko ostatnie
+        # 200 skanów, więc wykres z niego skracałby się z każdym skanem.
+        index_history.record(active, active_dedup, now.isoformat())
 
         print("\n" + "=" * 60)
         print("📊 PODSUMOWANIE SCANU")
