@@ -119,7 +119,7 @@
 
             <div class="chart-card" id="promotedCard">
                 <h2>⭐ Promowane ogłoszenia — płatne wyróżnienia na listingu</h2>
-                <div class="card-sub" id="promoLabel">Dzienna liczba wyróżnionych ofert + udział w rynku</div>
+                <div class="card-sub" id="promoLabel">Dzienna liczba wyróżnionych ofert + udział wśród ofert OLX</div>
                 <div id="promotedChart" class="apex-wrap apex-wrap-sm"><div class="chart-loading">Ładowanie danych…</div></div>
                 <p class="chart-foot">
                     <strong>Skąd dane:</strong> OLX oznacza kafelki płatnie wyróżnione parametrem
@@ -127,7 +127,9 @@
                     scraper czyta go przy każdym przejściu listingu i zapisuje dzień w <code>promoted_dates</code>
                     oferty (max 1 wpis/dzień, choć skanujemy 2×). Żółta linia to liczba wyróżnionych ofert
                     danego dnia, jasna to średnia krocząca z 7 dni, fioletowa (prawa oś, domyślnie ukryta —
-                    włącz ją kliknięciem w legendę) to ich udział w liczbie wszystkich aktywnych ofert.
+                    włącz ją kliknięciem w legendę) to ich udział wśród <strong>aktywnych ofert OLX</strong>
+                    (mianownik z <code>active_olx</code>, wstecz z <code>scraped_olx</code>) — wyróżnić może się
+                    tylko oferta OLX, więc dzielenie przez cały Indeks (6 źródeł) zaniżałoby udział kilkukrotnie.
                     <strong>Historia zaczyna się w dniu wdrożenia</strong> (<span id="promoSince">—</span>):
                     wyróżnienie to stan chwilowy na listingu, nie ślad w ofercie, więc nie da się go odtworzyć
                     wstecz. Dni bez skanu rysują się jako luka i nie wchodzą do średniej.

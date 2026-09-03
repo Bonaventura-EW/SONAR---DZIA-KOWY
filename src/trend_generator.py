@@ -368,27 +368,76 @@ def load_scan_days(base_dir=None) -> set:
     więc starsze dni dobierają index_history i `_scanned_days`.
     Brak/uszkodzony plik = pusty zbiór.
     """
+    return set(daily_source_counts(base_dir))
+
+
+# Pole w `scan_history.json` z liczbą ofert zebranych z danego źródła.
+# Agencje (ANMA, Pasjonaci, Alternatywne, IdsHome) mają jeden wspólny licznik.
+SOURCE_SCAN_FIELDS = {
+    'olx': 'scraped_olx',
+    'otodom': 'scraped_otodom',
+    'adresowo': 'scraped_adresowo',
+}
+AGENCY_SCAN_FIELD = 'scraped_agencies'
+
+
+def daily_source_counts(base_dir=None) -> dict:
+    """{dzień: {źródło: NAJWYŻSZA liczba zebranych ofert tego dnia}}.
+
+    Ta sama konwencja co Indeks (maksimum z odczytów dnia): skan częściowy nie
+    może zaniżyć obrazu dnia, w którym drugi skan poszedł normalnie. Służy do
+    (a) mianownika udziału wyróżnień, (b) wykrywania dni ze ślepym źródłem.
+    """
     path = (Path(paths.SCAN_HISTORY_JSON) if base_dir is None
             else Path(base_dir) / 'data' / 'scan_history.json')
-    days = set()
     try:
         with open(path, 'r', encoding='utf-8') as f:
             history = json.load(f)
     except (OSError, json.JSONDecodeError):
-        return days
+        return {}
     scans = history.get('scans', []) if isinstance(history, dict) else (history or [])
+
+    out = {}
     for scan in scans or []:
-        # starsze wpisy nie mają pola `status` — patrz index_history.backfill
         if scan.get('status') not in (None, 'completed', 'warning'):
             continue
         ts = scan.get('timestamp')
         if not ts:
             continue
         try:
-            days.add(_d(ts))
+            day = _d(ts)
         except (ValueError, TypeError):
             continue
-    return days
+        bucket = out.setdefault(day, {})
+        for source, field in SOURCE_SCAN_FIELDS.items():
+            value = scan.get(field)
+            if value is not None:
+                bucket[source] = max(bucket.get(source, 0), value)
+        value = scan.get(AGENCY_SCAN_FIELD)
+        if value is not None:
+            bucket['agencies'] = max(bucket.get('agencies', 0), value)
+    return out
+
+
+def olx_active_by_day(base_dir=None) -> dict:
+    """{dzień: ile ofert OLX było aktywnych} — mianownik udziału wyróżnień.
+
+    Wyróżnienie na listingu potrafi mieć TYLKO oferta OLX, więc dzielenie ich
+    liczby przez cały Indeks (6 źródeł, z czego OLX to ~13%) zaniżałoby udział
+    kilkukrotnie — i przeczyłoby liczbie, którą na tej samej stronie podaje
+    `map_generator.build_promoted`.
+
+    Źródła, w kolejności zaufania:
+      1. `active_olx` z index_history (mierzone, zapisywane od 2026-09-04),
+      2. `scraped_olx` z scan_history — ile ofert widział listing OLX tego dnia
+         (dobra przybliżona miara historyczna; scan_history trzyma 200 skanów).
+    """
+    measured = index_history.daily_field('active_olx', base_dir=base_dir)
+    out = {day: counts['olx']
+           for day, counts in daily_source_counts(base_dir).items()
+           if counts.get('olx')}
+    out.update(measured)  # pomiar bije przybliżenie
+    return out
 
 
 def _scanned_days(offers):
@@ -416,8 +465,9 @@ def build_promoted(offers, series, scan_days=None, base_dir=None):
     Historia zaczyna się w dniu wdrożenia detekcji — wyróżnienia NIE DA SIĘ
     odtworzyć wstecz (to stan chwilowy na listingu, nie ślad w ofercie).
 
-    Druga seria to udział wyróżnionych w rynku (% aktywnych ofert danego dnia),
-    liczony na tym samym mianowniku co Indeks.
+    Druga seria to udział wyróżnionych wśród AKTYWNYCH OFERT OLX danego dnia
+    (patrz `olx_active_by_day`) — nie wśród całego Indeksu, bo wyróżnić może się
+    tylko oferta OLX. Dzień bez znanego mianownika zostaje luką.
     """
     counts = {}
     for o in offers:
@@ -446,21 +496,20 @@ def build_promoted(offers, series, scan_days=None, base_dir=None):
 
     metric = _flow_metric(counts, days, exclude=missing)
 
-    active_by_ms = {ms: val for ms, val in (series or []) if val}
+    olx_active = olx_active_by_day(base_dir)
     share = []
     for d in days:
-        ms = _day_ms(d)
-        active = active_by_ms.get(ms)
+        active = olx_active.get(d)
         if d in missing or not active:
-            share.append([ms, None])
+            share.append([_day_ms(d), None])
         else:
-            share.append([ms, round(100 * counts.get(d, 0) / active, 1)])
+            share.append([_day_ms(d), round(100 * counts.get(d, 0) / active, 1)])
 
     last_day = next((d for d in reversed(days) if d not in missing), None)
     current = counts.get(last_day, 0) if last_day else None
     current_share = None
     if last_day:
-        active = active_by_ms.get(_day_ms(last_day))
+        active = olx_active.get(last_day)
         if active:
             current_share = round(100 * counts.get(last_day, 0) / active, 1)
 

@@ -328,12 +328,12 @@
                 // jest proporcjonalny do liczby wyróżnień, więc na starcie tylko
                 // dubluje kształt tamtej linii. Ma sens dopiero przy porównaniu
                 // okresów o różnej wielkości rynku.
-                events: { mounted: function (ctx) { ctx.hideSeries('Udział w rynku'); } }
+                events: { mounted: function (ctx) { ctx.hideSeries('Udział wśród ofert OLX'); } }
             }),
             series: [
                 { name: 'Wyróżnione danego dnia', data: pr.daily },
                 { name: 'Średnia 7 dni', data: pr.avg },
-                { name: 'Udział w rynku', data: pr.share }
+                { name: 'Udział wśród ofert OLX', data: pr.share }
             ],
             colors: ['#eab308', '#fde047', '#7c3aed'],
             stroke: { curve: ['straight', 'smooth', 'smooth'], width: [2, 3, 2], dashArray: [0, 0, 5] },
@@ -359,12 +359,12 @@
                 },
                 { seriesName: 'Wyróżnione danego dnia', show: false },
                 {
-                    seriesName: 'Udział w rynku', opposite: true, min: spanShare.min, max: spanShare.max, tickAmount: 4,
+                    seriesName: 'Udział wśród ofert OLX', opposite: true, min: spanShare.min, max: spanShare.max, tickAmount: 4,
                     labels: {
                         style: { colors: MUTED },
                         formatter: function (v) { return pl(Math.round(v * 10) / 10) + '%'; }
                     },
-                    title: { text: '% rynku', style: { color: MUTED, fontWeight: 500 } }
+                    title: { text: '% ofert OLX', style: { color: MUTED, fontWeight: 500 } }
                 }
             ],
             legend: { labels: { colors: MUTED }, markers: { radius: 12 }, itemMargin: { horizontal: 10 } },
@@ -373,7 +373,7 @@
                 y: [
                     { formatter: function (v) { return v == null ? '—' : (v + ' ofert'); } },
                     { formatter: function (v) { return v == null ? '—' : (pl(v) + ' ofert'); } },
-                    { formatter: function (v) { return v == null ? '—' : (pl(v) + '% rynku'); } }
+                    { formatter: function (v) { return v == null ? '—' : (pl(v) + '% ofert OLX'); } }
                 ]
             }
         });
@@ -421,7 +421,7 @@
         if (pr && pr.daily && pr.daily.length) {
             setHTML('promoLabel',
                 'Teraz <b>' + (pr.current == null ? '—' : pr.current) + '</b> wyróżnionych' +
-                (pr.current_share == null ? '' : ' (<b>' + pl(pr.current_share) + '%</b> rynku)') +
+                (pr.current_share == null ? '' : ' (<b>' + pl(pr.current_share) + '%</b> ofert OLX)') +
                 ', ' + flowSummary(pr, 'średnio', '', ''));
             setText('promoSince', pr.start_label || '—');
             renderPromoted(pr);

@@ -530,6 +530,8 @@ class SonarDzialkowy:
                            if o.get('active')
                            and not (o.get('duplicate_of')
                                     and o['duplicate_of'] in active_ids))
+        active_olx = sum(1 for o in self.database['offers']
+                         if o.get('active') and o.get('source') == 'olx')
         with_coords = sum(1 for o in self.database['offers']
                           if o.get('active') and (o.get('location') or {}).get('coords'))
         duration = time.time() - start
@@ -553,7 +555,13 @@ class SonarDzialkowy:
         # Dzienny stan bazy → data/index_history.json (źródło prawdy Indeksu
         # podaży na docs/analytics.html). scan_history trzyma tylko ostatnie
         # 200 skanów, więc wykres z niego skracałby się z każdym skanem.
-        index_history.record(active, active_dedup, now.isoformat())
+        index_history.record(active, now.isoformat(), extra={
+            'active_dedup': active_dedup,
+            # mianownik udziału płatnych wyróżnień — sygnał niosą TYLKO oferty
+            # OLX, więc dzielenie przez całą bazę (6 źródeł) zaniżałoby go
+            # kilkukrotnie (dziś 60 ofert OLX wobec 475 w bazie)
+            'active_olx': active_olx,
+        })
 
         print("\n" + "=" * 60)
         print("📊 PODSUMOWANIE SCANU")

@@ -42,12 +42,15 @@ def _write_scan_history(repo, scans):
 
 def test_record_bierze_maksimum_z_dnia(repo):
     """Skan częściowy (blokada portalu) nie może obniżyć zapisanego stanu dnia."""
-    index_history.record(480, 380, '2026-06-12T08:40:00+02:00', base_dir=repo)
-    index_history.record(300, 240, '2026-06-12T18:40:00+02:00', base_dir=repo)
+    index_history.record(480, '2026-06-12T08:40:00+02:00', base_dir=repo,
+                        extra={'active_dedup': 380, 'active_olx': 60})
+    index_history.record(300, '2026-06-12T18:40:00+02:00', base_dir=repo,
+                        extra={'active_dedup': 240, 'active_olx': 30})
 
     days = index_history.load(base_dir=repo)['days']
     assert days['2026-06-12']['active'] == 480
     assert days['2026-06-12']['active_dedup'] == 380
+    assert days['2026-06-12']['active_olx'] == 60  # liczniki z tego samego, pełnego skanu
     assert days['2026-06-12']['scans'] == 2  # oba odczyty policzone
 
 
@@ -228,6 +231,41 @@ def test_count_dedup_active_chowa_duplikaty_aktywnej_oferty():
     assert tg.count_dedup_active(offers) == 2
 
 
+def test_udzial_wyroznien_liczony_do_ofert_OLX_nie_calej_bazy(repo):
+    """Wyróżnić może się tylko oferta OLX — mianownik musi być OLX-owy.
+
+    Regresja: mianownikiem był cały Indeks (6 źródeł), przez co udział wychodził
+    kilkukrotnie za niski i przeczył liczbie z map_generator.build_promoted.
+    """
+    _write_scan_history(repo, [
+        {'timestamp': '2026-06-12T08:40:00+02:00', 'status': 'completed',
+         'active': 100, 'scraped_olx': 20, 'scraped_otodom': 80},
+    ])
+    index_history.record(100, '2026-06-12T08:40:00+02:00', base_dir=repo,
+                         extra={'active_olx': 20})
+    offers = [{'id': str(i), 'first_seen': '2026-06-12T08:00:00+02:00',
+               'last_seen': '2026-06-12T08:00:00+02:00', 'active': True,
+               'promoted_dates': ['2026-06-12']} for i in range(5)]
+    series = [[_ms(2026, 6, 12), 100]]
+
+    promoted = tg.build_promoted(offers, series, tg.load_scan_days(repo), repo)
+
+    assert promoted['current'] == 5
+    assert promoted['current_share'] == 25.0     # 5 z 20 ofert OLX, nie 5 ze 100
+    assert promoted['share'][0][1] == 25.0
+
+
+def test_udzial_wyroznien_bez_znanego_mianownika_to_luka(repo):
+    (repo / 'data' / 'scan_history.json').write_text('{"scans": []}', encoding='utf-8')
+    offers = [{'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
+               'last_seen': '2026-06-12T08:00:00+02:00', 'active': True,
+               'promoted_dates': ['2026-06-12']}]
+    promoted = tg.build_promoted(offers, [[_ms(2026, 6, 12), 100]], set(), repo)
+
+    assert promoted['share'][0][1] is None       # zero byłoby zmyślone
+    assert promoted['current_share'] is None
+
+
 def test_generate_zapisuje_komplet_serii(repo):
     (repo / 'data' / 'offers.json').write_text(json.dumps({'offers': [
         {'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
@@ -238,8 +276,10 @@ def test_generate_zapisuje_komplet_serii(repo):
         {'timestamp': '2026-06-12T08:40:00+02:00', 'status': 'completed', 'active': 1},
         {'timestamp': '2026-06-13T08:40:00+02:00', 'status': 'completed', 'active': 1},
     ])
-    index_history.record(1, 1, '2026-06-12T08:40:00+02:00', base_dir=repo)
-    index_history.record(1, 1, '2026-06-13T08:40:00+02:00', base_dir=repo)
+    index_history.record(1, '2026-06-12T08:40:00+02:00', base_dir=repo,
+                        extra={'active_dedup': 1, 'active_olx': 1})
+    index_history.record(1, '2026-06-13T08:40:00+02:00', base_dir=repo,
+                        extra={'active_dedup': 1, 'active_olx': 1})
 
     assert tg.generate(base_dir=repo) is True
 
