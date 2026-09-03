@@ -10,7 +10,7 @@ how: (1) life_events paruje deaktywacje z powrotami i wyrzuca pary domknięte w 
 surface: src/trend_generator.py, src/index_history.py, src/main.py, docs/analytics.html, docs/assets/trend.js, tests/test_trend_generator.py
 generality: family
 propagate: yes
-commit:
+commit: c1cea35057302bda0f3c071092b194887b92f7ed
 ---
 
 # Kontekst dla brata-ewaluatora
