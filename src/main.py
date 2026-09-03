@@ -372,6 +372,9 @@ class SonarDzialkowy:
                   f"— na mapie zostaje oferta z najlepszą lokalizacją")
 
     def _cleanup_old(self, max_age_days: int = 548):
+        # UWAGA: usunięte oferty znikają też z wykresów przepływów na
+        # docs/analytics.html — one liczą się z tej bazy, nie z osobnej historii
+        # (Indeks jest odporny, bo czyta data/index_history.json). Patrz TODO.md.
         cutoff = datetime.now(self.tz) - timedelta(days=max_age_days)
         before = len(self.database['offers'])
         self.database['offers'] = [

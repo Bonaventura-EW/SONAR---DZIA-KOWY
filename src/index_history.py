@@ -169,7 +169,7 @@ def backfill_from_scan_history(base_dir=None) -> int:
         return 0
     scans = history.get('scans', []) if isinstance(history, dict) else (history or [])
 
-    best = {}
+    best, seen = {}, {}
     for scan in scans:
         # starsze wpisy (czerwiec 2026) nie mają pola `status` — brak statusu
         # przy zapisanym `active` znaczy „skan doszedł do końca"
@@ -182,6 +182,7 @@ def backfill_from_scan_history(base_dir=None) -> int:
             day = datetime.fromisoformat(ts).date().isoformat()
         except (ValueError, TypeError):
             continue
+        seen[day] = seen.get(day, 0) + 1
         if active > best.get(day, (0, ''))[0]:
             best[day] = (active, ts)
 
@@ -190,7 +191,7 @@ def backfill_from_scan_history(base_dir=None) -> int:
     for day, (active, ts) in best.items():
         if day in data['days']:
             continue
-        data['days'][day] = {'active': active, 'scans': 1, 'ts': ts,
+        data['days'][day] = {'active': active, 'scans': seen[day], 'ts': ts,
                              'backfilled': True}
         added += 1
     if added:

@@ -22,7 +22,7 @@ patrz `collect_dates`).
 """
 
 import json
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import pytz
@@ -41,14 +41,13 @@ DAY_MS = 86_400_000
 # Od 12.06 Indeks i przepływy opisują już rynek, nie rozpęd scrapera.
 RELIABLE_START = date(2026, 6, 12)
 
-# Dzień z liczbą deaktywacji / reaktywacji powyżej progu traktujemy jako artefakt
-# pipeline'u (częściowy scrape przepuszczony przez ochronę z main._mark_inactive:
-# hurtowa deaktywacja, a po niej hurtowy powrót), nie ruch rynkowy. Taki dzień
-# rysuje się jako luka i nie wchodzi do średniej ani statystyk. Przy rynku ~480
-# ofert i typowym ruchu ~5/dzień próg 60 (≈12% rynku w jedną dobę) nic dziś nie
-# tnie — rekordy to 27 i 26 — i zostaje jako tania asekuracja na przyszłość.
-OUTFLOW_ARTIFACT_THRESHOLD = 60
-REACT_ARTIFACT_THRESHOLD = 60
+# Dzień, w którym liczba deaktywacji albo reaktywacji przekracza ten UŁAMEK
+# Indeksu z tego dnia, traktujemy jako artefakt pipeline'u (hurtowa deaktywacja
+# po częściowym scrape, hurtowy powrót nazajutrz), nie ruch rynkowy — rysuje się
+# jako luka i nie wchodzi do średniej ani statystyk. Próg jest WZGLĘDNY, bo
+# sztywne „60 zdarzeń" znaczy co innego przy rynku 480 ofert (12%) niż przy 2000
+# (3%). Dziś nic nie tnie — od tego jest filtr mrugnięć (FLAP_MAX_DAYS), a to
+# zostaje jako asekuracja na zdarzenia, których tamten nie złapie.
 
 # „Mrugnięcie" pipeline'u: oferta znika z listingu i wraca w ciągu tylu dni.
 # To NIE jest ruch rynkowy, tylko częściowy scrape (ochrona z main._mark_inactive
@@ -57,6 +56,8 @@ REACT_ARTIFACT_THRESHOLD = 60
 # je wskrzesił) albo chwilowe schowanie oferty przez portal. W bazie 66% par
 # „zniknęła → wróciła" domyka się w ≤3 dni; bez tego filtru rekordy odpływu (27)
 # i reaktywacji (26) na wykresach to były dwie strony tego samego zacięcia.
+ARTIFACT_SHARE_OF_INDEX = 0.12
+
 FLAP_MAX_DAYS = 3
 
 # Ile skanów w pełnym dniu (scanner.yml: 8:37 i 18:37). Dzień z mniejszą liczbą
@@ -65,8 +66,16 @@ SCANS_PER_DAY = 2
 
 
 def _day_ms(d: date) -> int:
-    """Epoch (ms) dla południa danego dnia — punkt ląduje w środku dnia na osi."""
-    return int(datetime(d.year, d.month, d.day, 12, 0).timestamp() * 1000)
+    """Epoch (ms) dla POŁUDNIA UTC danego dnia.
+
+    Strefa jest przybita na sztywno, nie brana z procesu: skan chodzi na
+    Actions (UTC), ale regeneracja z laptopa (CEST) przesuwałaby wszystkie
+    punkty o 2 h. Południe UTC jest bezpieczne dla każdego widza — front rysuje
+    oś w jego czasie lokalnym, a 12:00 UTC to ten sam dzień w każdej strefie
+    (od UTC-12 do UTC+14).
+    """
+    return int(datetime(d.year, d.month, d.day, 12, 0,
+                        tzinfo=timezone.utc).timestamp() * 1000)
 
 
 def _d(iso_string: str) -> date:
@@ -244,7 +253,7 @@ def _axis(offers, series=None):
     return _daily_range(max(RELIABLE_START, min(starts)), today), today
 
 
-def _flow_metric(counts, days, exclude=None, provisional=None):
+def _flow_metric(counts, days, exclude=None, uncounted=None):
     """Standardowy blok: szereg dzienny + średnia krocząca 7 dni + statystyki.
 
     counts:      dict {date: liczba zdarzeń tego dnia}
@@ -252,16 +261,16 @@ def _flow_metric(counts, days, exclude=None, provisional=None):
     exclude:     zbiór dni-artefaktów. Taki dzień rysuje się jako LUKA
                  (daily=None), nie wchodzi do średniej kroczącej ani do
                  statystyk — żeby nierynkowy pik nie zniekształcał trendu.
-    provisional: DZIŚ, jeśli dzień jeszcze się nie skończył (patrz
-                 `provisional_day`). Słupek zostaje na wykresie — to prawdziwa
-                 liczba zdarzeń do tej pory — ale nie wchodzi do średniej
-                 kroczącej ani do statystyk. Inaczej pół dnia (0 nowych ofert
-                 o 9 rano) ciągnęłoby trend w dół i podmieniało rekordy;
-                 dokładnie ten błąd sprawiał, że prawy koniec wykresu zawsze
-                 opadał.
+    uncounted:   dni POKAZYWANE, ale nieliczone — słupek zostaje (to prawdziwe
+                 zdarzenia), lecz nie wchodzi do średniej kroczącej ani do
+                 statystyk, bo nie opisuje jednej normalnej doby. Trafiają tu:
+                 dzień jeszcze nieskończony (pół dnia zaniżało trend i
+                 podmieniało rekordy — to przez to prawy koniec zawsze opadał)
+                 oraz dzień powrotu zablokowanego źródła, w którym baza dostaje
+                 zaległości z całej blokady naraz.
     """
     exclude = exclude or set()
-    skip = set(exclude) | ({provisional} if provisional else set())
+    skip = set(exclude) | set(uncounted or set())
 
     daily = [[_day_ms(d), None if d in exclude else counts.get(d, 0)] for d in days]
 
@@ -307,7 +316,19 @@ def provisional_day(series, base_dir=None):
     return last if entry.get('scans', 0) < SCANS_PER_DAY else None
 
 
-def build_outflow(offers, series=None, provisional=None):
+def _artifact_days(counts, series):
+    """Dni, w których liczba zdarzeń przekracza ARTIFACT_SHARE_OF_INDEX Indeksu.
+
+    Bez Indeksu na dany dzień (luka bez skanu) nie mamy do czego przyrównać —
+    taki dzień zostawiamy w spokoju.
+    """
+    index = {datetime.fromtimestamp(ms / 1000, tz=timezone.utc).date(): value
+             for ms, value in (series or []) if value}
+    return {day for day, value in counts.items()
+            if index.get(day) and value > index[day] * ARTIFACT_SHARE_OF_INDEX}
+
+
+def build_outflow(offers, series=None, uncounted=None):
     """Dzienny odpływ ofert (ile zniknęło z listingów) + średnia krocząca 7 dni.
 
     Zniknięcie bierzemy z `deactivation_dates` (zapisywane od 2026-09-03) i ze
@@ -335,11 +356,11 @@ def build_outflow(offers, series=None, provisional=None):
             if d >= start:
                 dep[d] = dep.get(d, 0) + 1
 
-    artifacts = {d for d, v in dep.items() if v > OUTFLOW_ARTIFACT_THRESHOLD}
-    return _flow_metric(dep, days, exclude=artifacts, provisional=provisional)
+    return _flow_metric(dep, days, exclude=_artifact_days(dep, series),
+                        uncounted=uncounted)
 
 
-def build_inflow(offers, series=None, provisional=None):
+def build_inflow(offers, series=None, uncounted=None):
     """Dzienny NAPŁYW ofert — trzy powiązane metryki (każda jak odpływ):
 
     - `new`       : nowe oferty (`first_seen` = ten dzień), BEZ reaktywacji.
@@ -371,16 +392,16 @@ def build_inflow(offers, series=None, provisional=None):
 
     combined = {d: new.get(d, 0) + react.get(d, 0) for d in set(new) | set(react)}
 
-    # Dni-artefakty (patrz REACT_ARTIFACT_THRESHOLD) wycinamy z serii reaktywacji
+    # Dni-artefakty (patrz ARTIFACT_SHARE_OF_INDEX) wycinamy z serii reaktywacji
     # ORAZ z napływu całkowitego — składnik reaktywacji jest wtedy nierzetelny.
     # Nowe oferty zostają nietknięte: ta seria nie ma jak się zepsuć hurtem.
-    unreliable = {d for d, v in react.items() if v > REACT_ARTIFACT_THRESHOLD}
+    unreliable = _artifact_days(react, series)
 
     return {
-        'new': _flow_metric(new, days, provisional=provisional),
-        'react': _flow_metric(react, days, exclude=unreliable, provisional=provisional),
+        'new': _flow_metric(new, days, uncounted=uncounted),
+        'react': _flow_metric(react, days, exclude=unreliable, uncounted=uncounted),
         'new_react': _flow_metric(combined, days, exclude=unreliable,
-                                  provisional=provisional),
+                                  uncounted=uncounted),
     }
 
 
@@ -511,6 +532,27 @@ def blind_source_days(base_dir=None) -> dict:
     return out
 
 
+def recovery_days(base_dir=None) -> dict:
+    """{dzień: [źródła, które właśnie wróciły]} — pierwszy dzień PO ślepocie.
+
+    Wszystko, co źródło uzbierało przez całą blokadę, ląduje w bazie jednego
+    dnia: 24.08.2026, w dniu powrotu OLX po 12 dniach milczenia, wpadło 15
+    „nowych" ofert OLX i 7 powrotów — to zaległości z dwunastu dni, nie skok
+    rynku. Taki dzień zostaje na wykresie (to prawdziwe zdarzenia), ale nie
+    wchodzi do średniej ani do rekordu, bo nie opisuje jednej doby.
+    """
+    blind = blind_source_days(base_dir)
+    scanned = set(daily_source_counts(base_dir))
+    out = {}
+    for day, sources in blind.items():
+        after = day + timedelta(days=1)
+        if after in scanned:
+            back = [src for src in sources if src not in blind.get(after, [])]
+            if back:
+                out.setdefault(after, []).extend(back)
+    return {day: sorted(set(sources)) for day, sources in out.items()}
+
+
 def blind_ranges(base_dir=None) -> list:
     """Ciągłe odcinki ślepoty źródła — [{source, from, to, days}] w ms.
 
@@ -533,7 +575,10 @@ def blind_ranges(base_dir=None) -> list:
             ranges.append({
                 'source': source,
                 'from': _day_ms(start) - DAY_MS // 2,
-                'to': _day_ms(prev) + DAY_MS // 2,
+                # +1 dzień: w dniu powrotu źródło zrzuca do bazy zaległości
+                # z całej blokady, więc pik tuż za pasem należy do tej samej
+                # historii (patrz recovery_days)
+                'to': _day_ms(prev) + DAY_MS // 2 + DAY_MS,
                 'days': (prev - start).days + 1,
             })
             if day is not None:
@@ -576,7 +621,7 @@ def _scanned_days(offers):
     return days
 
 
-def build_promoted(offers, series, scan_days=None, base_dir=None, provisional=None):
+def build_promoted(offers, series, scan_days=None, base_dir=None, uncounted=None):
     """Dzienna liczba ofert PROMOWANYCH (płatne wyróżnienie na listingu OLX).
 
     Źródło: `promoted_dates` w offers.json — dni, w których scraper zobaczył
@@ -621,7 +666,7 @@ def build_promoted(offers, series, scan_days=None, base_dir=None, provisional=No
                  if 'olx' in sources}
     missing = {d for d in days if d not in scanned or d in blind_olx}
 
-    metric = _flow_metric(counts, days, exclude=missing, provisional=provisional)
+    metric = _flow_metric(counts, days, exclude=missing, uncounted=uncounted)
 
     olx_active = olx_active_by_day(base_dir)
     share = []
@@ -667,16 +712,25 @@ def count_dedup_active(offers) -> int:
                and not (o.get('duplicate_of') and o['duplicate_of'] in active_ids))
 
 
-def _value_at_or_before(series, target_ms):
-    """Ostatni ZMIERZONY odczyt nie później niż target_ms. Dni bez skanu (None)
-    przeskakujemy — inaczej awaria Actions kasowałaby porównanie."""
+# O ile dni wstecz wolno sięgnąć, gdy w docelowym dniu nie było skanu.
+# Bez tego limitu dłuższa awaria Actions dawała „zmianę 1M" liczoną do dnia
+# sprzed pięciu tygodni — z etykietą 1M i bez słowa ostrzeżenia.
+DELTA_TOLERANCE_DAYS = 3
+
+
+def _value_at_or_before(series, target_ms, tolerance_days=DELTA_TOLERANCE_DAYS):
+    """Ostatni ZMIERZONY odczyt nie później niż target_ms, ale nie starszy niż
+    `tolerance_days`. Dni bez skanu (None) przeskakujemy — krótka awaria Actions
+    nie kasuje porównania, dłuższa daje `None` zamiast cichego przekłamania."""
     best = None
     for ms, val in series:
         if ms > target_ms:
             break
         if val is not None:
-            best = val
-    return best
+            best = (ms, val)
+    if best is None or target_ms - best[0] > tolerance_days * DAY_MS:
+        return None
+    return best[1]
 
 
 def compute_deltas(series):
@@ -715,8 +769,13 @@ def generate(base_dir=None) -> bool:
     index_source = ('measured' if index_history.daily_series(base_dir=base_dir)
                     else 'reconstructed')
 
-    # dziś może jeszcze urosnąć — nie liczymy go do średnich i rekordów
+    # Dni pokazywane, ale nieliczone do średnich i rekordów: dzisiejszy (może
+    # jeszcze urosnąć) i dzień powrotu zablokowanego źródła (dostaje zaległości
+    # z całej blokady naraz).
     provisional = provisional_day(series, base_dir)
+    uncounted = set(recovery_days(base_dir))
+    if provisional:
+        uncounted.add(provisional)
 
     values = [val for _, val in measured]
     current = values[-1]
@@ -748,13 +807,16 @@ def generate(base_dir=None) -> bool:
         # dzień jeszcze nietrwały: front oznacza go na wykresach, a średnie
         # i rekordy już go nie widzą
         'provisional_ms': _day_ms(provisional) if provisional else None,
+        # front rysuje na nich pusty znacznik: „to prawdziwe zdarzenia, ale nie
+        # jedna normalna doba" (dzień w toku + dni nadrabiania zaległości)
+        'uncounted_ms': sorted(_day_ms(d) for d in uncounted),
         'deltas': compute_deltas(series),
         'series': series,
-        'outflow': build_outflow(offers, series, provisional),
-        'inflow': build_inflow(offers, series, provisional),
+        'outflow': build_outflow(offers, series, uncounted),
+        'inflow': build_inflow(offers, series, uncounted),
         'bands': build_bands(offers, series),
         'promoted': build_promoted(offers, series, load_scan_days(base_dir),
-                                   base_dir, provisional),
+                                   base_dir, uncounted),
         # odcinki, w których źródło nie odpowiadało — front je zakreskowuje
         'blind_ranges': blind_ranges(base_dir),
         # ile par „zniknęła i zaraz wróciła" odsialiśmy jako zacięcie scrapera
@@ -781,7 +843,7 @@ def generate(base_dir=None) -> bool:
     print(f"   🧹 odsiane mrugnięcia pipeline'u (powrót ≤{FLAP_MAX_DAYS} dni): "
           f"{data['flapping']['pairs']} par")
     for r in data['blind_ranges']:
-        first = datetime.fromtimestamp(r['from'] / 1000).date()
+        first = datetime.fromtimestamp(r['from'] / 1000, tz=timezone.utc).date()
         print(f"   🚫 {r['source']}: bez odpowiedzi przez {r['days']} dni "
               f"(od {first.strftime('%d.%m')})")
     pr = data['promoted']

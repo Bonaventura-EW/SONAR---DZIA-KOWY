@@ -79,6 +79,7 @@ def test_backfill_nie_nadpisuje_dni_z_zywego_skanu(repo):
     added = index_history.backfill_from_scan_history(base_dir=repo)
 
     days = index_history.load(base_dir=repo)['days']
+    assert days['2026-06-13']['scans'] == 2   # dzień miał dwa skany, nie jeden
     assert added == 2                       # 13.06 i 15.06; 12.06 już był, 14.06 failed
     assert days['2026-06-12']['active'] == 480   # żywy zapis nietknięty
     assert days['2026-06-13']['active'] == 475   # maksimum z dnia
@@ -155,7 +156,7 @@ def test_mrugniecie_pipelinu_wypada_z_obu_serii():
     assert tg.life_events(real) == ([date(2026, 6, 14)], [date(2026, 6, 19)], 0)
 
     days = tg._daily_range(date(2026, 6, 12), date(2026, 6, 20))
-    series = [[tg._day_ms(d), 2] for d in days]
+    series = [[tg._day_ms(d), 100] for d in days]   # rynek 100 ofert: pojedyncze
     assert sum(v for _, v in tg.build_outflow([flap, real], series)['daily']) == 1
     assert sum(v for _, v in tg.build_inflow([flap, real], series)['react']['daily']) == 1
 
@@ -171,6 +172,36 @@ def test_mrugniecie_nie_dzieli_zycia_oferty_na_kawalki():
     assert tg._alive(intervals, date(2026, 6, 15)) is True
     series = [[tg._day_ms(d), 1] for d in tg._daily_range(date(2026, 6, 12), date(2026, 6, 20))]
     assert all(v == 0 for _, v in tg.build_bands([flap], series)['react'])
+
+
+def test_dzien_powrotu_zrodla_nie_ustanawia_rekordu(repo):
+    """Po blokadzie źródło zrzuca do bazy zaległości z wielu dni naraz.
+
+    Regresja z danych: 24.08.2026, w dniu powrotu OLX po 12 dniach milczenia,
+    wpadło 15 „nowych" ofert OLX — i to był rekord napływu na wykresie, choć
+    to dorobek dwunastu dni. Słupek zostaje, ale nie liczy się do średniej
+    ani do rekordu.
+    """
+    _write_scan_history(repo, [
+        {'timestamp': '2026-06-12T08:40:00+02:00', 'status': 'completed', 'scraped_olx': 20},
+        {'timestamp': '2026-06-13T08:40:00+02:00', 'status': 'completed', 'scraped_olx': 0},
+        {'timestamp': '2026-06-14T08:40:00+02:00', 'status': 'completed', 'scraped_olx': 0},
+        {'timestamp': '2026-06-15T08:40:00+02:00', 'status': 'completed', 'scraped_olx': 20},
+    ])
+
+    assert tg.recovery_days(repo) == {date(2026, 6, 15): ['olx']}
+
+    days = tg._daily_range(date(2026, 6, 12), date(2026, 6, 15))
+    counts = {date(2026, 6, 12): 3, date(2026, 6, 15): 40}
+    metric = tg._flow_metric(counts, days, uncounted=set(tg.recovery_days(repo)))
+
+    assert metric['daily'][-1][1] == 40      # słupek zostaje
+    assert metric['max_day'] == 3            # ale rekordem jest zwykły dzień
+    assert metric['total'] == 3
+
+    (rng,) = tg.blind_ranges(repo)
+    assert rng['days'] == 2                   # ślepota to 13-14.06
+    assert rng['to'] > _ms(2026, 6, 15)       # pas obejmuje też dzień nadrabiania
 
 
 def test_slepe_zrodlo_to_luka_w_wyroznieniach_nie_zero(repo):
@@ -198,6 +229,7 @@ def test_slepe_zrodlo_to_luka_w_wyroznieniach_nie_zero(repo):
     (rng,) = tg.blind_ranges(repo)
     assert rng['source'] == 'olx' and rng['days'] == 1
     assert rng['from'] < _ms(2026, 6, 13) < rng['to']
+    assert rng['to'] > _ms(2026, 6, 14)   # pas obejmuje dzień nadrabiania zaległości
 
 
 def test_zrodlo_nieraportowane_nie_jest_slepe(repo):
@@ -211,7 +243,7 @@ def test_zrodlo_nieraportowane_nie_jest_slepe(repo):
 
 
 def test_build_outflow_liczy_dzienny_odplyw_i_srednia():
-    series = [[_ms(2026, 6, 12), 3], [_ms(2026, 6, 13), 2], [_ms(2026, 6, 14), 2]]
+    series = [[_ms(2026, 6, 12), 100], [_ms(2026, 6, 13), 100], [_ms(2026, 6, 14), 100]]
     offers = [
         {'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
          'last_seen': '2026-06-13T08:00:00+02:00', 'active': False,
@@ -232,7 +264,7 @@ def test_build_outflow_liczy_dzienny_odplyw_i_srednia():
 
 def test_build_inflow_rozdziela_nowe_od_reaktywacji():
     days = [12, 13, 14, 15, 16, 17, 18, 19]
-    series = [[_ms(2026, 6, d), 2] for d in days]
+    series = [[_ms(2026, 6, d), 100] for d in days]
     offers = [
         # powrót po 6 dniach — realna reaktywacja, nie mrugnięcie pipeline'u
         {'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
@@ -248,15 +280,18 @@ def test_build_inflow_rozdziela_nowe_od_reaktywacji():
     assert [v for _, v in inflow['new_react']['daily']] == [1, 1, 0, 0, 0, 0, 0, 1]
 
 
-def test_dzien_artefakt_reaktywacji_jest_luka_nie_pikiem(monkeypatch):
-    """Hurtowy powrót po częściowym scrape'ie to artefakt pipeline'u, nie rynek."""
-    monkeypatch.setattr(tg, 'REACT_ARTIFACT_THRESHOLD', 2)
-    series = [[_ms(2026, 6, 12), 3], [_ms(2026, 6, 13), 3]]
+def test_dzien_artefakt_reaktywacji_jest_luka_nie_pikiem():
+    """Hurtowy powrót po częściowym scrape'ie to artefakt pipeline'u, nie rynek.
+
+    Próg jest względny: 20 powrotów przy rynku 100 ofert (20% w dobę) to
+    zacięcie, te same 20 przy rynku 1000 byłoby normalnym dniem.
+    """
+    series = [[_ms(2026, 6, 12), 100], [_ms(2026, 6, 13), 100]]
     offers = [
         {'id': str(i), 'first_seen': '2026-06-12T08:00:00+02:00',
          'last_seen': '2026-06-13T08:00:00+02:00', 'active': True,
          'reactivation_dates': ['2026-06-13']}
-        for i in range(3)
+        for i in range(20)
     ]
     react = tg.build_inflow(offers, series)['react']
 
@@ -302,7 +337,7 @@ def test_dzien_w_toku_nie_wchodzi_do_sredniej_ani_rekordu(repo):
 
     counts = {d: 10 for d in days[:-1]}
     counts[today] = 1                      # dopiero poranny skan
-    metric = tg._flow_metric(counts, days, provisional=today)
+    metric = tg._flow_metric(counts, days, uncounted={today})
 
     assert metric['daily'][-1][1] == 1     # słupek zostaje — to prawdziwa liczba
     assert metric['avg'][-1][1] == 10.0    # ale średnia liczy tylko dni zamknięte
@@ -330,6 +365,33 @@ def test_compute_deltas_pomija_dni_bez_skanu():
     assert deltas['1D'] == -10   # 13.06 to luka → porównanie do 12.06
     assert deltas['1M'] is None  # brak tak starej historii
     assert deltas['1Y'] is None
+
+
+def test_prog_artefaktu_jest_wzgledny_do_wielkosci_rynku():
+    """12% rynku w jedną dobę to zacięcie, nie ruch — ale „12%" znaczy co innego
+    przy 100 ofertach niż przy 1000, więc próg nie może być sztywną liczbą."""
+    days = tg._daily_range(date(2026, 6, 12), date(2026, 6, 13))
+    maly = [[tg._day_ms(d), 100] for d in days]
+    duzy = [[tg._day_ms(d), 1000] for d in days]
+    counts = {days[1]: 50}
+
+    assert tg._artifact_days(counts, maly) == {days[1]}   # 50% rynku → artefakt
+    assert tg._artifact_days(counts, duzy) == set()       # 5% rynku → normalny dzień
+
+
+def test_delta_nie_siega_po_wartosc_sprzed_dlugiej_awarii():
+    """Porównanie „1M" ma dotyczyć dnia sprzed miesiąca, a nie ostatniego dnia
+    ze skanem sprzed pięciu tygodni."""
+    swiezy = [[tg._day_ms(date(2026, 6, 10)), 400], [tg._day_ms(date(2026, 6, 12)), 410]]
+    assert tg._value_at_or_before(swiezy, tg._day_ms(date(2026, 6, 12))) == 410
+    assert tg._value_at_or_before(swiezy, tg._day_ms(date(2026, 6, 11))) == 400  # 1 dzień wstecz
+    assert tg._value_at_or_before(swiezy, tg._day_ms(date(2026, 6, 20))) is None  # 10 dni → za stare
+
+
+def test_day_ms_nie_zalezy_od_strefy_procesu():
+    """Punkty mają lądować w to samo miejsce niezależnie od tego, czy plik
+    powstał na Actions (UTC), czy na laptopie (CEST)."""
+    assert tg._day_ms(date(2026, 6, 12)) == 1781265600000  # 12.06.2026 12:00 UTC
 
 
 def test_count_dedup_active_chowa_duplikaty_aktywnej_oferty():

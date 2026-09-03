@@ -81,7 +81,7 @@
                 x: r.from, x2: r.to,
                 fillColor: '#94a3b8', opacity: 0.18, borderColor: '#94a3b8',
                 label: !withLabel ? {} : {
-                    text: name + ' bez odpowiedzi (' + r.days + ' dni)',
+                    text: name + ' bez odpowiedzi (' + r.days + ' dni) + nadrabianie',
                     orientation: 'horizontal', position: 'top',
                     textAnchor: 'start', offsetX: 6, offsetY: -2,
                     style: { background: '#e2e8f0', color: '#334155', fontSize: '11px' }
@@ -105,20 +105,23 @@
     }
 
     /**
-     * Pusty w środku znacznik na dniu, który jeszcze trwa — słupek pokazuje
-     * zdarzenia DO TEJ PORY i może tylko urosnąć. Średnia krocząca i rekordy
-     * już go nie widzą (odsiewa je generator), ale na samej linii byłby
-     * nieodróżnialny od zamkniętego dnia i czytałby się jak spadek.
+     * Puste w środku znaczniki na dniach, które NIE OPISUJĄ jednej normalnej
+     * doby: dzień jeszcze trwający (słupek może urosnąć) i dzień powrotu
+     * zablokowanego źródła (dostaje zaległości z całej blokady naraz).
+     * Średnia krocząca i rekordy już ich nie widzą — odsiewa je generator —
+     * ale na samej linii byłyby nieodróżnialne od zwykłego dnia.
      */
-    function provisionalMarker(metric, provisionalMs, color) {
-        if (!provisionalMs) return [];
-        var index = -1;
+    function uncountedMarkers(metric, uncountedMs, color) {
+        var wanted = {};
+        (uncountedMs || []).forEach(function (ms) { wanted[ms] = true; });
+        var out = [];
         for (var i = 0; i < metric.daily.length; i++) {
-            if (metric.daily[i][0] === provisionalMs) { index = i; break; }
+            if (wanted[metric.daily[i][0]]) {
+                out.push({ seriesIndex: 0, dataPointIndex: i, size: 5,
+                           fillColor: '#fff', strokeColor: color, strokeWidth: 2 });
+            }
         }
-        if (index < 0) return [];
-        return [{ seriesIndex: 0, dataPointIndex: index, size: 5,
-                  fillColor: '#fff', strokeColor: color, strokeWidth: 2 }];
+        return out;
     }
 
     function provisionalNote(provisionalMs) {
@@ -129,7 +132,7 @@
     }
 
     /** Wykres przepływu: seria dzienna (ostra linia) + średnia 7 dni (gładka). */
-    function flowOptions(metric, dailyName, colors, blind, provisionalMs) {
+    function flowOptions(metric, dailyName, colors, blind, uncountedMs) {
         return {
             annotations: { xaxis: blindAnnotations(blind, true) },
             chart: baseChart('line', 320),
@@ -141,7 +144,7 @@
             stroke: { curve: ['straight', 'smooth'], width: [2, 3] },
             dataLabels: { enabled: false },
             markers: { size: 0, hover: { size: 5 },
-                       discrete: provisionalMarker(metric, provisionalMs, colors[0]) },
+                       discrete: uncountedMarkers(metric, uncountedMs, colors[0]) },
             grid: GRID_OPTS,
             xaxis: TIME_AXIS,
             yaxis: {
@@ -440,6 +443,7 @@
 
     function init(d) {
         var prov = d.provisional_ms || null;
+        var unc = d.uncounted_ms || (prov ? [prov] : []);
         if (d.title) setText('trendTitle', '📉 Indeks podaży — ' + d.title);
         setText('trendLastLabel', d.last_label || '—');
         setText('trendCurVal', d.current == null ? '—' : d.current);
@@ -453,7 +457,7 @@
             setHTML('outLabel', flowSummary(of, 'Znika średnio', '',
                 'Pomarańczowa = wygładzony trend (7 dni).') + provisionalNote(prov));
             mount('outflowChart', flowOptions(of, 'Znikło danego dnia', [RED, '#f59e0b'],
-                                              d.blind_ranges, prov));
+                                              d.blind_ranges, unc));
         } else {
             fail('outflowChart', 'Brak danych o odpływie.');
         }
@@ -467,11 +471,11 @@
             setHTML('reactLabel', flowSummary(inf.react, 'Wraca średnio', '',
                 'Wstecz zaniżone — patrz opis pod wykresem.'));
             mount('newFlowChart', flowOptions(inf.new, 'Nowe danego dnia',
-                                              [GREEN, '#86efac'], d.blind_ranges, prov));
+                                              [GREEN, '#86efac'], d.blind_ranges, unc));
             mount('allFlowChart', flowOptions(inf.new_react, 'Pojawiło się danego dnia',
-                                              ['#0284c7', '#7dd3fc'], d.blind_ranges, prov));
+                                              ['#0284c7', '#7dd3fc'], d.blind_ranges, unc));
             mount('reactFlowChart', flowOptions(inf.react, 'Reaktywacje danego dnia',
-                                                ['#0d9488', '#5eead4'], d.blind_ranges, prov));
+                                                ['#0d9488', '#5eead4'], d.blind_ranges, unc));
         } else {
             ['newFlowChart', 'allFlowChart', 'reactFlowChart'].forEach(function (id) {
                 fail(id, 'Brak danych o napływie.');
