@@ -120,8 +120,9 @@ function focusOfferFromHash() {
         map.setView([o.coords.lat, o.coords.lon], 16, { animate: true });
         const mk = markerById[o.id];
         if (mk) setTimeout(() => {
+            // stos: otwórz od razu pełną kartę wskazanej oferty, nie samą listę
+            if (mk._stack) { mk._detailId = o.id; mk._focusId = o.id; }
             mk.openPopup();
-            highlightStackRow(mk, o.id);  // no-op dla pojedynczej pinezki
         }, 250);
     } else {
         // oferta bez GPS — rozwiń sekcję „bez lokalizacji" pod mapą
@@ -547,19 +548,36 @@ function safeUrl(u) {
     return /^https?:\/\//i.test(u.trim()) ? escapeHtml(u) : '#';
 }
 
-// popup stosu — nagłówek z liczbą + przewijalna, płaska lista ofert spod punktu
-// (posortowana od najtańszej). Każdy wiersz jest samodzielny: pełny link do
-// ogłoszenia + `data-offer-id` dla fokusu z linku #offer=<id>. Bez przeładowań
-// popupu i bez addEventListener na wierszach — linki działają natywnie.
-function stackPopupHtml(group) {
-    const sorted = [...group].sort((a, b) => repRank(a) - repRank(b));
+// popup stosu — DWA widoki w jednym dymku (FIX 2026-09-02):
+//  1) LISTA — nagłówek z liczbą + przewijalne wiersze ofert spod punktu,
+//  2) SZCZEGÓŁY — pełna karta oferty, dokładnie ta sama co przy pojedynczej
+//     pinezce (zdjęcie, trend ceny, pasek odniesienia rynkowego, opis, link),
+//     z powrotem do listy i strzałkami ‹ › między ofertami stosu.
+// Wcześniej stos kończył się na płaskiej liście i pełnych danych nie dało się
+// z mapy odczytać. Widok trzymamy na markerze (`_detailId`), a treść dymka jest
+// funkcją, więc przełączenie to samo `popup.update()` — bez zamykania popupu
+// i bez przeładowania mapy.
+
+let openStack = null;   // marker stosu z otwartym dymkiem (dla inline onclick)
+
+function stackPopupContent(marker) {
+    const group = marker._stack;
+    const detail = marker._detailId && group.find(o => o.id === marker._detailId);
+    return detail ? stackDetailHtml(group, detail) : stackListHtml(group, marker._focusId);
+}
+
+// widok 1: lista ofert spod punktu (posortowana od najtańszej wg zł/m²)
+function stackListHtml(group, focusId) {
     return `<div class="popup-stack">
-        <div class="popup-stack-head">📍 ${group.length} ofert w tym punkcie</div>
-        <div class="popup-stack-list">${sorted.map(stackRowHtml).join('')}</div>
+        <div class="popup-stack-head">📍 ${group.length} ${plOffers(group.length)} w tym punkcie</div>
+        <div class="popup-stack-hint">Kliknij ofertę, aby zobaczyć pełne szczegóły.</div>
+        <div class="popup-stack-list">${group.map(o => stackRowHtml(o, o.id === focusId)).join('')}</div>
     </div>`;
 }
 
-function stackRowHtml(o) {
+// wiersz listy: przycisk (otwiera szczegóły w tym samym dymku) + „↗" prosto do
+// ogłoszenia, żeby jednym kliknięciem dało się jak dawniej wyjść na portal
+function stackRowHtml(o, focused) {
     const dot = `<span class="stack-dot" style="background:${colorFor(o)}"></span>`;
     const newBadge = isNew(o) ? ' <span class="badge-new">NOWA</span>' : '';
     const trend = o.price_trend === 'down' ? ' <span class="trend-down">↓</span>'
@@ -567,25 +585,83 @@ function stackRowHtml(o) {
     const status = o.active ? '' : ' <span class="stack-inactive">⏸</span>';
     const src = o.is_agency ? '🏢 ' + escapeHtml(o.agency_name || 'agencja') : o.source.toUpperCase();
     const perM2 = o.price_per_m2 ? fmtPrice(o.price_per_m2) + '/m²' : '—';
-    return `<div class="popup-stack-row" data-offer-id="${escapeHtml(o.id)}">
-        <div class="stack-row-head">${dot}<a href="${safeUrl(o.url)}" target="_blank" rel="noopener">${escapeHtml(o.title)}</a>${newBadge}${status}</div>
-        <div class="stack-row-meta">${fmtPrice(o.price)}${trend} • ${fmtArea(o.area_m2)} • ${perM2} • ${o.plot_type || 'inna'} • ${src}</div>
+    return `<div class="popup-stack-row${focused ? ' stack-row-focus' : ''}" data-offer-id="${escapeHtml(o.id)}">
+        <button type="button" class="stack-row-open" onclick="stackShowDetail(event, ${jsArg(o.id)})">
+            <span class="stack-row-head">${dot}${escapeHtml(o.title)}${newBadge}${status}</span>
+            <span class="stack-row-meta">${fmtPrice(o.price)}${trend} • ${fmtArea(o.area_m2)} • ${perM2} • ${escapeHtml(o.plot_type || 'inna')} • ${src}</span>
+        </button>
+        <a class="stack-row-ext" href="${safeUrl(o.url)}" target="_blank" rel="noopener"
+           title="Otwórz ogłoszenie w nowej karcie">↗</a>
     </div>`;
 }
 
-// po otwarciu popupu stosu z linku #offer=<id> — przewiń do właściwego wiersza
-// i podświetl go (popup Leafletu powstaje dopiero przy otwarciu, więc czytamy
-// jego DOM tu, po openPopup)
-function highlightStackRow(marker, id) {
-    const popup = marker.getPopup && marker.getPopup();
+// widok 2: pełna karta oferty ze stosu (ta sama treść co popupHtml pojedynczej
+// pinezki) + pasek nawigacji: powrót do listy i skok do sąsiedniej oferty
+function stackDetailHtml(group, o) {
+    const i = group.indexOf(o);
+    const prev = group[(i - 1 + group.length) % group.length];
+    const next = group[(i + 1) % group.length];
+    const nav = group.length > 1 ? `<span class="stack-nav">
+            <button type="button" title="Poprzednia oferta w tym punkcie"
+                    onclick="stackShowDetail(event, ${jsArg(prev.id)})">‹</button>
+            <span class="stack-pos">${i + 1} / ${group.length}</span>
+            <button type="button" title="Następna oferta w tym punkcie"
+                    onclick="stackShowDetail(event, ${jsArg(next.id)})">›</button>
+        </span>` : '';
+    return `<div class="popup-stack-detail">
+        <div class="stack-detail-head">
+            <button type="button" class="stack-back" onclick="stackShowList(event)">← ${group.length} ${plOffers(group.length)} w tym punkcie</button>
+            ${nav}
+        </div>
+        ${popupHtml(o)}
+    </div>`;
+}
+
+// argument dla inline onclick: JSON (cudzysłowy) + encje HTML — id ofert mają
+// dwukropek i myślniki (olx:CID3-ID123), więc nie wolno ich wklejać surowo
+function jsArg(s) {
+    return escapeHtml(JSON.stringify(String(s)));
+}
+
+// przełączniki widoku dymka stosu (wołane z onclick w wierszach i nagłówku).
+// PUŁAPKA: kliknięcie MUSI zatrzymać się na przycisku. Przerysowanie dymka
+// usuwa kliknięty węzeł z DOM, więc bąbelkujące dalej zdarzenie dociera do
+// kontenera mapy bez rodzica — Leaflet uznaje je za klik w mapę i (domyślne
+// `closePopupOnClick`) zamyka właśnie otwarty dymek.
+function stackShowDetail(ev, id) {
+    if (ev) ev.stopPropagation();
+    const mk = openStack;
+    if (!mk || !mk._stack) return;
+    mk._detailId = id;
+    mk._focusId = id;          // po powrocie lista podświetli tę ofertę
+    stackRefresh(mk);
+}
+
+function stackShowList(ev) {
+    if (ev) ev.stopPropagation();
+    const mk = openStack;
+    if (!mk || !mk._stack) return;
+    mk._detailId = null;
+    stackRefresh(mk);
+    // przewiń listę do ostatnio oglądanej oferty (podświetlonej)
+    const popup = mk.getPopup();
     const node = popup && popup.getElement && popup.getElement();
-    if (!node) return;
-    node.querySelectorAll('.popup-stack-row').forEach(row => {
-        if (row.dataset.offerId === id) {
-            row.scrollIntoView({ block: 'nearest' });
-            row.classList.add('stack-row-focus');
-        }
-    });
+    const row = node && node.querySelector('.stack-row-focus');
+    if (row) row.scrollIntoView({ block: 'nearest' });
+}
+
+// treść dymka jest funkcją, więc update() renderuje aktualny widok w miejscu
+function stackRefresh(marker) {
+    const popup = marker.getPopup();
+    if (popup) popup.update();
+}
+
+// polska odmiana po liczebniku: 1 oferta / 2–4 oferty / 5+ ofert
+function plOffers(n) {
+    const t = n % 10, h = n % 100;
+    if (n === 1) return 'oferta';
+    if (t >= 2 && t <= 4 && (h < 12 || h > 14)) return 'oferty';
+    return 'ofert';
 }
 
 function render() {
@@ -626,22 +702,32 @@ function addSingleMarker(o) {
     markerById[o.id] = marker;  // do fokusu z linku #offer=<id>
 }
 
-// kilka ofert pod jednym punktem — jedna pinezka z liczbą, popup z płaską listą.
+// kilka ofert pod jednym punktem — jedna pinezka z liczbą, a w dymku lista
+// z przejściem do PEŁNEJ karty każdej oferty (stackPopupContent).
 // Reprezentant (najtańsza pozycja wg zł/m²) nadaje stosowi kształt i kolor;
 // KAŻDE id z grupy wskazuje na ten sam marker, więc fokus z linku #offer=<id>
-// nadal otwiera właściwy stos (a highlightStackRow przewija do właściwego wiersza).
+// nadal otwiera właściwy stos — i od razu na karcie wskazanej oferty.
 function addStackMarker(group) {
-    const rep = group.reduce((a, b) => (repRank(b) < repRank(a) ? b : a));
-    const anyNew = group.some(isNew);
+    const sorted = [...group].sort((a, b) => repRank(a) - repRank(b));
+    const rep = sorted[0];
+    const anyNew = sorted.some(isNew);
     const marker = L.marker([rep.coords.lat, rep.coords.lon], {
-        icon: makeStackIcon(rep, group.length, anyNew),
-        title: `${group.length} ofert w tym punkcie`,
+        icon: makeStackIcon(rep, sorted.length, anyNew),
+        title: `${sorted.length} ${plOffers(sorted.length)} w tym punkcie`,
         // stos zawsze nad pojedynczymi pinezkami, żeby liczba była widoczna
         zIndexOffset: (isApprox(rep) ? 0 : 200) + 300,
     });
-    marker.bindPopup(() => stackPopupHtml(group), { maxWidth: 330 });
+    marker._stack = sorted;    // kolejność listy = kolejność strzałek ‹ ›
+    marker._detailId = null;   // null → widok listy, id → karta tej oferty
+    marker._focusId = null;    // oferta podświetlona na liście po powrocie
+    marker.bindPopup(() => stackPopupContent(marker), { maxWidth: 330 });
+    marker.on('popupopen', () => { openStack = marker; });
+    marker.on('popupclose', () => {
+        if (openStack === marker) openStack = null;
+        marker._detailId = null;   // następne otwarcie zaczyna od listy
+    });
     markersLayer.addLayer(marker);
-    group.forEach(o => { markerById[o.id] = marker; });
+    sorted.forEach(o => { markerById[o.id] = marker; });
 }
 
 // „najtańszość" pozycji do wyboru reprezentanta i sortowania listy stosu:

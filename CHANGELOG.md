@@ -27,6 +27,21 @@
   procent niż w rankingu. Ranking po refaktorze daje identyczne wyniki.
 
 ### Naprawione
+- **Pinezka z liczbą nie gubi już szczegółów ofert** (`docs/assets/script.js`,
+  `style.css`). Po zgrupowaniu ofert o identycznych współrzędnych w „stosy"
+  dymek takiego punktu pokazywał wyłącznie płaską listę (tytuł, cena, metraż) —
+  zdjęcie, trend ceny, pasek „ta oferta vs mediana grupy", opis i data w bazie
+  były z mapy nieosiągalne, choć pojedyncze pinezki dawały je od jednego
+  kliknięcia. Dotyczyło to 137 punktów z 733 ofert (największy stos: 23).
+  Dymek stosu ma teraz dwa widoki: listę i **pełną kartę oferty** — dokładnie tę
+  samą, którą renderuje pojedyncza pinezka (`popupHtml`). Klik w wiersz otwiera
+  kartę, a nagłówek karty wraca do listy (z podświetleniem oglądanej pozycji)
+  i przeskakuje strzałkami ‹ › między ofertami spod punktu. Wiersz listy ma też
+  „↗" prosto do ogłoszenia, więc dawne jedno kliknięcie na portal zostaje.
+  Widok trzymamy na markerze, a treść dymka jest funkcją — przełączenie to samo
+  `popup.update()`, bez zamykania dymka i bez przerysowania mapy. Wejście
+  z linku `#offer=<id>` otwiera od razu kartę wskazanej oferty, nie listę.
+  Przy okazji odmiana liczebnika: „2 **oferty** w tym punkcie" zamiast „2 ofert".
 - **Koniec porównywania działek między typami.** Grupa odniesienia mogła zejść
   do poziomu „przedział powierzchni, wszystkie typy", co dotykało 20 ofert
   (18 rekreacyjnych + 2 siedliskowe) i produkowało fikcje w rodzaju „85% poniżej
