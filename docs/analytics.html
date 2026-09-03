@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SONAR DZIAŁKOWY — Analityka rynku</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2">
-    <link rel="stylesheet" href="assets/style.css?v=4">
+    <link rel="stylesheet" href="assets/style.css?v=5">
 </head>
 <body class="page-body">
     <header class="header">
@@ -33,6 +33,108 @@
             <div class="kpi-card"><h3>Mediana powierzchni</h3><div class="kpi-value" id="kpi-median-area">—</div><div class="kpi-sub" id="kpi-private">od właściciela: —</div></div>
         </div>
 
+        <section class="trend-section">
+            <div class="chart-card">
+                <h2 id="trendTitle">📉 Indeks podaży — Lublin, działki na sprzedaż</h2>
+                <div class="card-sub"><span id="trendLastLabel">—</span> (<span id="trendCurVal">—</span> ofert w bazie)</div>
+                <div class="deltas" id="trendDeltas"></div>
+                <div class="idx-toolbar">
+                    <button id="idxSum" class="idx-btn on" type="button">📈 Suma aktywnych</button>
+                    <button id="idxSplit" class="idx-btn" type="button">🔀 Rozbij — nowe / recykling</button>
+                </div>
+                <div class="idx-legend" id="idxLegend"></div>
+                <div id="trendChart" class="apex-wrap"><div class="chart-loading">Ładowanie danych…</div></div>
+                <p class="chart-foot">
+                    <strong>Skąd dane:</strong> zapisany stan bazy po każdym skanie — ile ofert ma
+                    <code>active: true</code> (<code>data/index_history.json</code>). Mierzone, nie odtwarzane:
+                    wartość dnia to WYŻSZY z dwóch dziennych odczytów, więc skan częściowy (blokada portalu)
+                    nie rysuje się jak załamanie rynku, a dzień bez skanu zostaje luką. To liczba ofert
+                    <strong>przed deduplikacją źródeł</strong> — ta sama działka wystawiona równocześnie na
+                    OLX, Otodom i u agencji liczy się tu tyle razy, ile razy wisi w sieci (dziś
+                    <span id="trendDedupNote">—</span>). Historia od 12.06.2026; dwa pierwsze dni bazy
+                    (10–11.06) to napełnianie scrapera, nie rynek, więc ich nie pokazujemy.
+                    Przełącznik <strong>Rozbij</strong> dzieli tę samą liczbę na pasma: oferty świeże i
+                    „recykling" (takie, które kiedyś już zniknęły i wróciły). Udział pasm liczymy
+                    z odtworzonych przedziałów życia ofert, więc recykling jest <em>zaniżony</em>.
+                    Zmiany 6M/1Y pojawią się, gdy uzbieramy dłuższą historię.
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <h2>📉 Odpływ ofert — ile znika z rynku</h2>
+                <div class="card-sub" id="outLabel">Dzienny odpływ + średnia 7-dniowa</div>
+                <div id="outflowChart" class="apex-wrap apex-wrap-sm"><div class="chart-loading">Ładowanie danych…</div></div>
+                <p class="chart-foot">
+                    <strong>Skąd dane:</strong> dla każdego dnia liczba ofert, które tego dnia wypadły
+                    z listingów (<code>deactivation_dates</code>). Czerwona linia to dzienny odpływ,
+                    pomarańczowa to średnia krocząca z 7 dni — wygładza dzienny szum.
+                    <strong>Historia jest zaniżona</strong>: pełną listę dat zapisujemy dopiero od 03.09.2026,
+                    a starsze oferty zostawiły tylko <code>deactivated_at</code>, czyli <em>wyłącznie ostatnie</em>
+                    zniknięcie — oferta, która umarła i wróciła, nie ma śladu po pierwszej śmierci.
+                    Widać to w bilansie: napływ minus odpływ nie schodzi się ze zmianą Indeksu, a różnica
+                    to mniej więcej liczba niezapisanych powrotów. Szereg domyka się sam z każdym skanem.
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <h2>🆕 Nowe oferty — ile pojawia się na rynku</h2>
+                <div class="card-sub" id="newLabel">Dzienny napływ nowych ofert (bez reaktywacji) + średnia 7-dniowa</div>
+                <div id="newFlowChart" class="apex-wrap apex-wrap-sm"><div class="chart-loading">Ładowanie danych…</div></div>
+                <p class="chart-foot">
+                    <strong>Skąd dane:</strong> dla każdego dnia liczba ofert, które tego dnia pojawiły się
+                    po raz pierwszy (<code>first_seen</code> = ten dzień) — <strong>bez</strong> reaktywacji.
+                    Zielona linia to dzienny napływ świeżych ogłoszeń, jasna to średnia krocząca z 7 dni.
+                    Ta seria trzyma się realiów na całej długości: pierwsze pojawienie się oferty zapisujemy
+                    od początku istnienia bazy i żaden późniejszy skan już go nie zmienia.
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <h2>🔀 Napływ całkowity — nowe + reaktywacje</h2>
+                <div class="card-sub" id="allLabel">Wszystkie pojawienia się na rynku (świeże + wskrzeszone) + średnia 7-dniowa</div>
+                <div id="allFlowChart" class="apex-wrap apex-wrap-sm"><div class="chart-loading">Ładowanie danych…</div></div>
+                <p class="chart-foot">
+                    <strong>Skąd dane:</strong> suma nowych ofert (<code>first_seen</code>) i reaktywacji
+                    (<code>reactivation_dates</code>) danego dnia — łączny „dopływ" ofert na rynek.
+                    Składnik reaktywacji jest wstecz zaniżony z tego samego powodu co odpływ, więc lewa
+                    część wykresu jest bliższa samym nowym ofertom niż realnemu dopływowi.
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <h2>♻️ Reaktywacje — oferty wracające na rynek</h2>
+                <div class="card-sub" id="reactLabel">Dzienne reaktywacje + średnia 7-dniowa</div>
+                <div id="reactFlowChart" class="apex-wrap apex-wrap-sm"><div class="chart-loading">Ładowanie danych…</div></div>
+                <p class="chart-foot">
+                    <strong>Skąd dane:</strong> dla każdego dnia liczba ofert, które tego dnia wróciły
+                    na rynek po wcześniejszym zniknięciu. Powrót zdarza się, gdy sprzedający odświeża
+                    wygasłe ogłoszenie albo gdy portal na chwilę schował ofertę z listingu.
+                    <strong>Wstecz zaniżone</strong>: do 03.09.2026 zapisywaliśmy tylko ostatni powrót
+                    każdej oferty (<code>reactivated_at</code>), więc oferta, która wracała kilka razy,
+                    widnieje tu raz. Dzień z liczbą powrotów powyżej 60 (≈12% rynku w dobę) uznajemy
+                    za artefakt pipeline'u, nie sygnał rynkowy — rysuje się jako luka i nie wchodzi
+                    do średniej. Dziś ten próg nic nie tnie (rekord to 26).
+                </p>
+            </div>
+
+            <div class="chart-card" id="promotedCard">
+                <h2>⭐ Promowane ogłoszenia — płatne wyróżnienia na listingu</h2>
+                <div class="card-sub" id="promoLabel">Dzienna liczba wyróżnionych ofert + udział w rynku</div>
+                <div id="promotedChart" class="apex-wrap apex-wrap-sm"><div class="chart-loading">Ładowanie danych…</div></div>
+                <p class="chart-foot">
+                    <strong>Skąd dane:</strong> OLX oznacza kafelki płatnie wyróżnione parametrem
+                    <code>search_reason=search|promoted</code> (organiczne: <code>search|organic</code>) —
+                    scraper czyta go przy każdym przejściu listingu i zapisuje dzień w <code>promoted_dates</code>
+                    oferty (max 1 wpis/dzień, choć skanujemy 2×). Żółta linia to liczba wyróżnionych ofert
+                    danego dnia, jasna to średnia krocząca z 7 dni, fioletowa (prawa oś, domyślnie ukryta —
+                    włącz ją kliknięciem w legendę) to ich udział w liczbie wszystkich aktywnych ofert.
+                    <strong>Historia zaczyna się w dniu wdrożenia</strong> (<span id="promoSince">—</span>):
+                    wyróżnienie to stan chwilowy na listingu, nie ślad w ofercie, więc nie da się go odtworzyć
+                    wstecz. Dni bez skanu rysują się jako luka i nie wchodzą do średniej.
+                </p>
+            </div>
+        </section>
+
         <div class="chart-card">
             <h2>🎯 Rozkład ceny za m² (histogram, aktywne)</h2>
             <div class="chart-wrap"><canvas id="perM2Hist"></canvas></div>
@@ -53,19 +155,12 @@
             <div class="chart-wrap"><canvas id="districtChart"></canvas></div>
         </div>
 
-        <div class="chart-card">
-            <h2>📈 Nowe oferty dziennie (ostatnie 30 dni)</h2>
-            <div class="chart-wrap"><canvas id="newChart"></canvas></div>
-        </div>
-
-        <div class="chart-card" id="promotedCard" style="display: none;">
-            <h2 id="promotedTitle">⭐ Płatnie wyróżnione oferty OLX (dziennie)</h2>
-            <div class="chart-wrap"><canvas id="promotedChart"></canvas></div>
-        </div>
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1/dist/apexcharts.min.js"></script>
 <script src="assets/logo.js?v=1"></script>
+<script src="assets/trend.js?v=1"></script>
 <script>
 const PALETTE = ['#15803d', '#84cc16', '#eab308', '#f97316', '#dc2626', '#0284c7', '#7c3aed', '#64748b'];
 // stałe kolory typów — wspólne z checkboxami i legendą na mapie (script.js)
@@ -191,55 +286,6 @@ async function init() {
         options: { ...common, indexAxis: 'y', plugins: { legend: { display: false } } }
     });
 
-    // === Line: nowe oferty dziennie (30 dni) ===
-    const days = {};
-    for (let i = 29; i >= 0; i--) {
-        const d = new Date(Date.now() - i * 86400000);
-        days[d.toISOString().slice(0, 10)] = 0;
-    }
-    (data.offers || []).forEach(o => {
-        const key = (o.first_seen || '').slice(0, 10);
-        if (key in days) days[key]++;
-    });
-    new Chart(document.getElementById('newChart'), {
-        type: 'bar',
-        data: {
-            labels: Object.keys(days).map(d => new Date(d).toLocaleDateString('pl-PL', { day: '2-digit', month: '2-digit' })),
-            datasets: [{ label: 'nowe oferty', data: Object.values(days), backgroundColor: '#16a34a' }]
-        },
-        options: { ...common, plugins: { legend: { display: false } } }
-    });
-
-    // === Line: płatnie wyróżnione oferty OLX dziennie (od wdrożenia metryki) ===
-    // Dane liczy map_generator (build_promoted) z promoted_dates — dni bez skanu
-    // przychodzą jako null (luka na wykresie), nie zero. Karta jest ukryta,
-    // dopóki metryka nie zbierze pierwszego dnia z wyróżnieniem.
-    const promo = data.promoted;
-    if (promo && (promo.daily || []).length) {
-        document.getElementById('promotedCard').style.display = '';
-        if (promo.current != null) {
-            const share = promo.current_share != null ? ` (${promo.current_share}% ofert OLX)` : '';
-            document.getElementById('promotedTitle').textContent =
-                `⭐ Płatnie wyróżnione oferty OLX — teraz ${promo.current}${share}`;
-        }
-        new Chart(document.getElementById('promotedChart'), {
-            type: 'line',
-            data: {
-                labels: promo.daily.map(([d]) => new Date(d).toLocaleDateString('pl-PL', { day: '2-digit', month: '2-digit' })),
-                datasets: [{
-                    label: 'wyróżnione oferty',
-                    data: promo.daily.map(([, v]) => v),
-                    borderColor: '#eab308', backgroundColor: 'rgba(234,179,8,0.2)',
-                    spanGaps: false, tension: 0.25, fill: true, pointRadius: 2,
-                }]
-            },
-            options: {
-                ...common,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
-            }
-        });
-    }
 }
 init();
 </script>
