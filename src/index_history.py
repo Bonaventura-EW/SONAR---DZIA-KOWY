@@ -74,13 +74,18 @@ def save(data: dict, base_dir=None) -> None:
     os.replace(tmp, path)
 
 
-def record(active: int, active_dedup: int = None,
-           timestamp: str = None, base_dir=None) -> dict:
+def record(active: int, timestamp: str = None, base_dir=None,
+           extra: dict = None) -> dict:
     """Dopisuje wynik skanu do dnia wynikającego z `timestamp`.
 
     Wartość dnia to maksimum z odczytów — skan częściowy nigdy nie obniży już
     zapisanej liczby. `scans` liczy wszystkie odczyty dnia (także niższe), żeby
     dało się poznać dzień z jednym skanem zamiast dwóch.
+
+    `extra` to dodatkowe liczniki tego samego odczytu (`active_dedup`,
+    `active_olx`, ...) — zapisujemy je RAZEM z nowym maksimum, żeby wszystkie
+    liczby w dniu pochodziły z jednego, najpełniejszego skanu. Inaczej udział
+    wyróżnień mieszałby licznik z pełnego skanu z mianownikiem z ubogiego.
     """
     if active is None:
         return {}
@@ -96,8 +101,9 @@ def record(active: int, active_dedup: int = None,
     if active > entry.get('active', 0):
         entry['active'] = active
         entry['ts'] = ts
-        if active_dedup is not None:
-            entry['active_dedup'] = active_dedup
+        for key, value in (extra or {}).items():
+            if value is not None:
+                entry[key] = value
     # dzień dotknięty przez żywy skan przestaje być odtworzony z historii skanów
     entry.pop('backfilled', None)
     data['days'][day] = entry
@@ -127,6 +133,25 @@ def daily_series(start: date = None, base_dir=None):
     return out
 
 
+def daily_field(field: str, base_dir=None) -> dict:
+    """{date: wartość} dla dowolnego licznika dnia (np. `active_olx`).
+
+    Dni bez tego pola (zapisane przed jego wdrożeniem albo odtworzone
+    z scan_history) po prostu nie trafiają do wyniku — wołający decyduje,
+    czym je uzupełnić.
+    """
+    out = {}
+    for key, entry in load(base_dir)['days'].items():
+        value = (entry or {}).get(field)
+        if value is None:
+            continue
+        try:
+            out[date.fromisoformat(key)] = value
+        except (ValueError, TypeError):
+            continue
+    return out
+
+
 def backfill_from_scan_history(base_dir=None) -> int:
     """Uzupełnia brakujące dni z `data/scan_history.json` (max `active` z dnia).
 
@@ -144,7 +169,7 @@ def backfill_from_scan_history(base_dir=None) -> int:
         return 0
     scans = history.get('scans', []) if isinstance(history, dict) else (history or [])
 
-    best = {}
+    best, seen = {}, {}
     for scan in scans:
         # starsze wpisy (czerwiec 2026) nie mają pola `status` — brak statusu
         # przy zapisanym `active` znaczy „skan doszedł do końca"
@@ -157,6 +182,7 @@ def backfill_from_scan_history(base_dir=None) -> int:
             day = datetime.fromisoformat(ts).date().isoformat()
         except (ValueError, TypeError):
             continue
+        seen[day] = seen.get(day, 0) + 1
         if active > best.get(day, (0, ''))[0]:
             best[day] = (active, ts)
 
@@ -165,7 +191,7 @@ def backfill_from_scan_history(base_dir=None) -> int:
     for day, (active, ts) in best.items():
         if day in data['days']:
             continue
-        data['days'][day] = {'active': active, 'scans': 1, 'ts': ts,
+        data['days'][day] = {'active': active, 'scans': seen[day], 'ts': ts,
                              'backfilled': True}
         added += 1
     if added:

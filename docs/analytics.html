@@ -53,8 +53,12 @@
                     OLX, Otodom i u agencji liczy się tu tyle razy, ile razy wisi w sieci (dziś
                     <span id="trendDedupNote">—</span>). Historia od 12.06.2026; dwa pierwsze dni bazy
                     (10–11.06) to napełnianie scrapera, nie rynek, więc ich nie pokazujemy.
+                    Zakreskowane pasy to dni, w których jakieś źródło nie odpowiedziało ani razu —
+                    Indeks trzyma wtedy ostatni znany stan (ochrona nie pozwala zdezaktywować ofert
+                    zablokowanego portalu), więc to w tym oknie nie pomiar, tylko pamięć.
                     Przełącznik <strong>Rozbij</strong> dzieli tę samą liczbę na pasma: oferty świeże i
-                    „recykling" (takie, które kiedyś już zniknęły i wróciły). Udział pasm liczymy
+                    „recykling" (takie, które kiedyś już zniknęły i wróciły — na dłużej niż 3 dni,
+                    bo krótsze powroty odsiewamy jako zacięcia scrapera). Udział pasm liczymy
                     z odtworzonych przedziałów życia ofert, więc recykling jest <em>zaniżony</em>.
                     Zmiany 6M/1Y pojawią się, gdy uzbieramy dłuższą historię.
                 </p>
@@ -68,11 +72,17 @@
                     <strong>Skąd dane:</strong> dla każdego dnia liczba ofert, które tego dnia wypadły
                     z listingów (<code>deactivation_dates</code>). Czerwona linia to dzienny odpływ,
                     pomarańczowa to średnia krocząca z 7 dni — wygładza dzienny szum.
-                    <strong>Historia jest zaniżona</strong>: pełną listę dat zapisujemy dopiero od 03.09.2026,
-                    a starsze oferty zostawiły tylko <code>deactivated_at</code>, czyli <em>wyłącznie ostatnie</em>
-                    zniknięcie — oferta, która umarła i wróciła, nie ma śladu po pierwszej śmierci.
-                    Widać to w bilansie: napływ minus odpływ nie schodzi się ze zmianą Indeksu, a różnica
-                    to mniej więcej liczba niezapisanych powrotów. Szereg domyka się sam z każdym skanem.
+                    <strong>Odsiewamy „mrugnięcia" pipeline'u</strong>: para „zniknęła → wróciła"
+                    domknięta w 3 dni wypada z tego wykresu i z reaktywacji naraz. Częściowy scrape
+                    (portal oddał 90% listingu — za mało, by ochrona z <code>_mark_inactive</code>
+                    zareagowała) potrafi zdezaktywować kilkadziesiąt żywych ofert, które następny skan
+                    wskrzesza; bez filtru rekordy na obu wykresach były dwiema stronami jednego zacięcia.
+                    Zakreskowane pasy to dni, w których źródło nie odpowiedziało ani razu — jego ofert
+                    nikt wtedy nie mógł zdjąć z listingu, więc odpływ jest w tym oknie zaniżony.
+                    <strong>Historia i tak jest niepełna</strong>: pełną listę dat zapisujemy dopiero
+                    od 03.09.2026, a starsze oferty zostawiły tylko <code>deactivated_at</code>, czyli
+                    <em>wyłącznie ostatnie</em> zniknięcie. Dlatego napływ minus odpływ nie schodzi się
+                    ze zmianą Indeksu. Szereg domyka się sam z każdym skanem.
                 </p>
             </div>
 
@@ -84,8 +94,14 @@
                     <strong>Skąd dane:</strong> dla każdego dnia liczba ofert, które tego dnia pojawiły się
                     po raz pierwszy (<code>first_seen</code> = ten dzień) — <strong>bez</strong> reaktywacji.
                     Zielona linia to dzienny napływ świeżych ogłoszeń, jasna to średnia krocząca z 7 dni.
-                    Ta seria trzyma się realiów na całej długości: pierwsze pojawienie się oferty zapisujemy
-                    od początku istnienia bazy i żaden późniejszy skan już go nie zmienia.
+                    Pierwsze pojawienie się oferty zapisujemy od początku istnienia bazy i żaden późniejszy
+                    skan już go nie zmienia — ale <strong>zeskanować trzeba było mieć co</strong>:
+                    zakreskowane pasy to dni, w których źródło nie odpowiedziało ani razu (OLX milczał
+                    12 dni w sierpniu). Dołek w takim oknie to blokada portalu, nie ochłodzenie rynku,
+                    a <strong>pik zaraz za nim to nadrabianie zaległości</strong>: w dniu powrotu OLX
+                    wpadło do bazy 15 ofert uzbieranych przez dwanaście dni. Taki punkt (pusty w środku
+                    znacznik) zostaje na wykresie, ale nie liczy się do średniej ani do rekordu — jak
+                    dzień, który jeszcze trwa.
                 </p>
             </div>
 
@@ -109,17 +125,19 @@
                     <strong>Skąd dane:</strong> dla każdego dnia liczba ofert, które tego dnia wróciły
                     na rynek po wcześniejszym zniknięciu. Powrót zdarza się, gdy sprzedający odświeża
                     wygasłe ogłoszenie albo gdy portal na chwilę schował ofertę z listingu.
-                    <strong>Wstecz zaniżone</strong>: do 03.09.2026 zapisywaliśmy tylko ostatni powrót
-                    każdej oferty (<code>reactivated_at</code>), więc oferta, która wracała kilka razy,
-                    widnieje tu raz. Dzień z liczbą powrotów powyżej 60 (≈12% rynku w dobę) uznajemy
-                    za artefakt pipeline'u, nie sygnał rynkowy — rysuje się jako luka i nie wchodzi
-                    do średniej. Dziś ten próg nic nie tnie (rekord to 26).
+                    <strong>Powroty w ciągu 3 dni tu nie wchodzą</strong> — razem z odpowiadającą im
+                    dezaktywacją idą do kosza jako zacięcie scrapera (w tej bazie <span id="flapCount">—</span>
+                    takich par). Działka wycofana ze sprzedaży nie wraca po dwóch dniach; wraca oferta,
+                    której portal na chwilę nie pokazał albo którą częściowy scrape uznał za martwą.
+                    <strong>Reszta i tak jest wstecz zaniżona</strong>: do 03.09.2026 zapisywaliśmy tylko
+                    ostatni powrót każdej oferty (<code>reactivated_at</code>), więc oferta, która wracała
+                    kilka razy, widnieje tu raz.
                 </p>
             </div>
 
             <div class="chart-card" id="promotedCard">
                 <h2>⭐ Promowane ogłoszenia — płatne wyróżnienia na listingu</h2>
-                <div class="card-sub" id="promoLabel">Dzienna liczba wyróżnionych ofert + udział w rynku</div>
+                <div class="card-sub" id="promoLabel">Dzienna liczba wyróżnionych ofert + udział wśród ofert OLX</div>
                 <div id="promotedChart" class="apex-wrap apex-wrap-sm"><div class="chart-loading">Ładowanie danych…</div></div>
                 <p class="chart-foot">
                     <strong>Skąd dane:</strong> OLX oznacza kafelki płatnie wyróżnione parametrem
@@ -127,7 +145,9 @@
                     scraper czyta go przy każdym przejściu listingu i zapisuje dzień w <code>promoted_dates</code>
                     oferty (max 1 wpis/dzień, choć skanujemy 2×). Żółta linia to liczba wyróżnionych ofert
                     danego dnia, jasna to średnia krocząca z 7 dni, fioletowa (prawa oś, domyślnie ukryta —
-                    włącz ją kliknięciem w legendę) to ich udział w liczbie wszystkich aktywnych ofert.
+                    włącz ją kliknięciem w legendę) to ich udział wśród <strong>aktywnych ofert OLX</strong>
+                    (mianownik z <code>active_olx</code>, wstecz z <code>scraped_olx</code>) — wyróżnić może się
+                    tylko oferta OLX, więc dzielenie przez cały Indeks (6 źródeł) zaniżałoby udział kilkukrotnie.
                     <strong>Historia zaczyna się w dniu wdrożenia</strong> (<span id="promoSince">—</span>):
                     wyróżnienie to stan chwilowy na listingu, nie ślad w ofercie, więc nie da się go odtworzyć
                     wstecz. Dni bez skanu rysują się jako luka i nie wchodzą do średniej.

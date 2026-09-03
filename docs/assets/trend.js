@@ -66,6 +66,30 @@
         return String(value).replace('.', ',');
     }
 
+    var SOURCE_NAMES = { olx: 'OLX', otodom: 'Otodom', adresowo: 'Adresowo', agencies: 'agencje' };
+
+    /**
+     * Zakreskowane pasy dni, w których źródło nie odpowiadało ani razu.
+     * Bez nich dołek w napływie czyta się jak ochłodzenie rynku, a to była
+     * blokada portalu — i tak samo płaski odcinek Indeksu, który w tym czasie
+     * trzyma ostatni znany stan zamiast pomiaru.
+     */
+    function blindAnnotations(ranges, withLabel) {
+        return (ranges || []).map(function (r) {
+            var name = SOURCE_NAMES[r.source] || r.source;
+            return {
+                x: r.from, x2: r.to,
+                fillColor: '#94a3b8', opacity: 0.18, borderColor: '#94a3b8',
+                label: !withLabel ? {} : {
+                    text: name + ' bez odpowiedzi (' + r.days + ' dni) + nadrabianie',
+                    orientation: 'horizontal', position: 'top',
+                    textAnchor: 'start', offsetX: 6, offsetY: -2,
+                    style: { background: '#e2e8f0', color: '#334155', fontSize: '11px' }
+                }
+            };
+        });
+    }
+
     function fail(id, message) {
         var el = document.getElementById(id);
         if (el) el.innerHTML = '<div class="chart-loading">' + message + '</div>';
@@ -80,9 +104,37 @@
         return chart;
     }
 
+    /**
+     * Puste w środku znaczniki na dniach, które NIE OPISUJĄ jednej normalnej
+     * doby: dzień jeszcze trwający (słupek może urosnąć) i dzień powrotu
+     * zablokowanego źródła (dostaje zaległości z całej blokady naraz).
+     * Średnia krocząca i rekordy już ich nie widzą — odsiewa je generator —
+     * ale na samej linii byłyby nieodróżnialne od zwykłego dnia.
+     */
+    function uncountedMarkers(metric, uncountedMs, color) {
+        var wanted = {};
+        (uncountedMs || []).forEach(function (ms) { wanted[ms] = true; });
+        var out = [];
+        for (var i = 0; i < metric.daily.length; i++) {
+            if (wanted[metric.daily[i][0]]) {
+                out.push({ seriesIndex: 0, dataPointIndex: i, size: 5,
+                           fillColor: '#fff', strokeColor: color, strokeWidth: 2 });
+            }
+        }
+        return out;
+    }
+
+    function provisionalNote(provisionalMs) {
+        return provisionalMs
+            ? ' <span class="prov">Dziś dzień w toku — ostatni punkt jeszcze urośnie'
+              + ' i nie wchodzi do średniej ani do rekordu.</span>'
+            : '';
+    }
+
     /** Wykres przepływu: seria dzienna (ostra linia) + średnia 7 dni (gładka). */
-    function flowOptions(metric, dailyName, colors) {
+    function flowOptions(metric, dailyName, colors, blind, uncountedMs) {
         return {
+            annotations: { xaxis: blindAnnotations(blind, true) },
             chart: baseChart('line', 320),
             series: [
                 { name: dailyName, data: metric.daily },
@@ -91,7 +143,8 @@
             colors: colors,
             stroke: { curve: ['straight', 'smooth'], width: [2, 3] },
             dataLabels: { enabled: false },
-            markers: { size: 0, hover: { size: 5 } },
+            markers: { size: 0, hover: { size: 5 },
+                       discrete: uncountedMarkers(metric, uncountedMs, colors[0]) },
             grid: GRID_OPTS,
             xaxis: TIME_AXIS,
             yaxis: {
@@ -122,8 +175,11 @@
         if (el) el.innerHTML = html;
     }
 
-    function renderDeltas(deltas) {
+    function renderDeltas(deltas, provisionalMs) {
         var order = ['1D', '1M', '6M', '1Y'];
+        var note = provisionalMs
+            ? '<span class="prov">dziś dzień w toku — porównanie do wczoraj jeszcze się zmieni</span>'
+            : '';
         setHTML('trendDeltas', order.map(function (label) {
             var v = (deltas || {})[label];
             if (v === null || v === undefined) {
@@ -132,7 +188,7 @@
             var cls = v > 0 ? 'pos' : (v < 0 ? 'neg' : 'na');
             return '<span><b>' + label + ':</b><span class="' + cls + '">' +
                    (v > 0 ? '+' : '') + v + '</span></span>';
-        }).join(''));
+        }).join('') + note);
     }
 
     /** Indeks: pole aktywnych ofert + linie MAX/MIN, z przełącznikiem na pasma. */
@@ -215,6 +271,9 @@
                 // 'front' — inaczej wypełnienie pola zamalowuje etykietę MIN,
                 // która leży nisko, dokładnie w obszarze serii.
                 position: 'front',
+                // bez etykiety: na Indeksie pas mówi „te dni to ostatni znany
+                // stan, nie pomiar", a podpisy zderzałyby się z MAX/MIN
+                xaxis: blindAnnotations(d.blind_ranges, false),
                 yaxis: yAnnotations,
                 points: [
                     { x: d.max_ts, y: mx, marker: { size: 5, fillColor: RED, strokeColor: '#fff', strokeWidth: 1 } },
@@ -239,6 +298,7 @@
                 ],
                 colors: [GREEN, '#f97316'],
                 stroke: { curve: 'straight', width: 1.5 },
+                annotations: { xaxis: blindAnnotations(d.blind_ranges, false) },
                 // Stos rysuje się OD ZERA, więc oś nie może być przycięta do
                 // okolic Indeksu jak w trybie sumy — dolne pasmo (dziś ~400)
                 // schowałoby się pod dolną krawędzią i zostałby sam recykling.
@@ -247,7 +307,6 @@
                     labels: { style: { colors: MUTED }, formatter: function (v) { return Math.round(v); } }
                 },
                 fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.7, opacityTo: 0.3, stops: [0, 100] } },
-                annotations: {},
                 legend: { labels: { colors: MUTED }, markers: { radius: 12 }, itemMargin: { horizontal: 10 } },
                 tooltip: {
                     shared: true, x: { format: 'dd.MM.yyyy' },
@@ -328,12 +387,12 @@
                 // jest proporcjonalny do liczby wyróżnień, więc na starcie tylko
                 // dubluje kształt tamtej linii. Ma sens dopiero przy porównaniu
                 // okresów o różnej wielkości rynku.
-                events: { mounted: function (ctx) { ctx.hideSeries('Udział w rynku'); } }
+                events: { mounted: function (ctx) { ctx.hideSeries('Udział wśród ofert OLX'); } }
             }),
             series: [
                 { name: 'Wyróżnione danego dnia', data: pr.daily },
                 { name: 'Średnia 7 dni', data: pr.avg },
-                { name: 'Udział w rynku', data: pr.share }
+                { name: 'Udział wśród ofert OLX', data: pr.share }
             ],
             colors: ['#eab308', '#fde047', '#7c3aed'],
             stroke: { curve: ['straight', 'smooth', 'smooth'], width: [2, 3, 2], dashArray: [0, 0, 5] },
@@ -359,12 +418,12 @@
                 },
                 { seriesName: 'Wyróżnione danego dnia', show: false },
                 {
-                    seriesName: 'Udział w rynku', opposite: true, min: spanShare.min, max: spanShare.max, tickAmount: 4,
+                    seriesName: 'Udział wśród ofert OLX', opposite: true, min: spanShare.min, max: spanShare.max, tickAmount: 4,
                     labels: {
                         style: { colors: MUTED },
                         formatter: function (v) { return pl(Math.round(v * 10) / 10) + '%'; }
                     },
-                    title: { text: '% rynku', style: { color: MUTED, fontWeight: 500 } }
+                    title: { text: '% ofert OLX', style: { color: MUTED, fontWeight: 500 } }
                 }
             ],
             legend: { labels: { colors: MUTED }, markers: { radius: 12 }, itemMargin: { horizontal: 10 } },
@@ -373,7 +432,7 @@
                 y: [
                     { formatter: function (v) { return v == null ? '—' : (v + ' ofert'); } },
                     { formatter: function (v) { return v == null ? '—' : (pl(v) + ' ofert'); } },
-                    { formatter: function (v) { return v == null ? '—' : (pl(v) + '% rynku'); } }
+                    { formatter: function (v) { return v == null ? '—' : (pl(v) + '% ofert OLX'); } }
                 ]
             }
         });
@@ -383,19 +442,22 @@
                      'reactFlowChart', 'promotedChart'];
 
     function init(d) {
+        var prov = d.provisional_ms || null;
+        var unc = d.uncounted_ms || (prov ? [prov] : []);
         if (d.title) setText('trendTitle', '📉 Indeks podaży — ' + d.title);
         setText('trendLastLabel', d.last_label || '—');
         setText('trendCurVal', d.current == null ? '—' : d.current);
         setText('trendDedupNote', d.current_dedup == null ? '—'
             : (d.current + ' ofert w bazie → ' + d.current_dedup + ' pinezek na mapie'));
-        renderDeltas(d.deltas);
+        renderDeltas(d.deltas, prov);
         renderIndex(d);
 
         var of = d.outflow;
         if (of && of.daily && of.daily.length) {
             setHTML('outLabel', flowSummary(of, 'Znika średnio', '',
-                'Pomarańczowa = wygładzony trend (7 dni).'));
-            mount('outflowChart', flowOptions(of, 'Znikło danego dnia', [RED, '#f59e0b']));
+                'Pomarańczowa = wygładzony trend (7 dni).') + provisionalNote(prov));
+            mount('outflowChart', flowOptions(of, 'Znikło danego dnia', [RED, '#f59e0b'],
+                                              d.blind_ranges, unc));
         } else {
             fail('outflowChart', 'Brak danych o odpływie.');
         }
@@ -403,25 +465,30 @@
         var inf = d.inflow;
         if (inf && inf.new && inf.new.daily && inf.new.daily.length) {
             setHTML('newLabel', flowSummary(inf.new, 'Pojawia się średnio', '',
-                'Zielona = nowe, jasna = trend 7 dni.'));
+                'Zielona = nowe, jasna = trend 7 dni.') + provisionalNote(prov));
             setHTML('allLabel', flowSummary(inf.new_react, 'Średnio',
                 'pojawień na rynku (świeże + wskrzeszone)', ''));
             setHTML('reactLabel', flowSummary(inf.react, 'Wraca średnio', '',
                 'Wstecz zaniżone — patrz opis pod wykresem.'));
-            mount('newFlowChart', flowOptions(inf.new, 'Nowe danego dnia', [GREEN, '#86efac']));
-            mount('allFlowChart', flowOptions(inf.new_react, 'Pojawiło się danego dnia', ['#0284c7', '#7dd3fc']));
-            mount('reactFlowChart', flowOptions(inf.react, 'Reaktywacje danego dnia', ['#0d9488', '#5eead4']));
+            mount('newFlowChart', flowOptions(inf.new, 'Nowe danego dnia',
+                                              [GREEN, '#86efac'], d.blind_ranges, unc));
+            mount('allFlowChart', flowOptions(inf.new_react, 'Pojawiło się danego dnia',
+                                              ['#0284c7', '#7dd3fc'], d.blind_ranges, unc));
+            mount('reactFlowChart', flowOptions(inf.react, 'Reaktywacje danego dnia',
+                                                ['#0d9488', '#5eead4'], d.blind_ranges, unc));
         } else {
             ['newFlowChart', 'allFlowChart', 'reactFlowChart'].forEach(function (id) {
                 fail(id, 'Brak danych o napływie.');
             });
         }
 
+        if (d.flapping && d.flapping.pairs != null) setText('flapCount', d.flapping.pairs);
+
         var pr = d.promoted;
         if (pr && pr.daily && pr.daily.length) {
             setHTML('promoLabel',
                 'Teraz <b>' + (pr.current == null ? '—' : pr.current) + '</b> wyróżnionych' +
-                (pr.current_share == null ? '' : ' (<b>' + pl(pr.current_share) + '%</b> rynku)') +
+                (pr.current_share == null ? '' : ' (<b>' + pl(pr.current_share) + '%</b> ofert OLX)') +
                 ', ' + flowSummary(pr, 'średnio', '', ''));
             setText('promoSince', pr.start_label || '—');
             renderPromoted(pr);

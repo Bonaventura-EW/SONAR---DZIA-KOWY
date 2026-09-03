@@ -5,7 +5,16 @@ przenoś do `CHANGELOG.md`.
 
 ## Do zrobienia
 
-(pusto — dopisuj kolejne pomysły tutaj)
+- [ ] **Przepływy przestaną przepisywać własną historię.** Indeks czyta
+  mierzony `data/index_history.json` i stary punkt już się nie zmienia, ale
+  wykresy odpływu / nowych ofert / reaktywacji liczą się z BIEŻĄCEGO
+  `data/offers.json`. Gdy `main._cleanup_old` (548 dni) zacznie kasować
+  najstarsze oferty — pierwsze pod koniec 2027 — lewy skraj tych wykresów
+  zacznie się kurczyć z każdym skanem. Lekarstwo: dopisywać dzienne sumy
+  zdarzeń do `index_history` (obok `active`) i czytać je tak jak Indeks,
+  z rekonstrukcją jako źródłem awaryjnym. Uwaga: filtr mrugnięć
+  (`trend_generator.FLAP_MAX_DAYS`) działa na parach zdarzeń jednej oferty,
+  więc zapisywać trzeba liczby JUŻ po odsiewie albo same pary.
 
 ## Zrobione
 

@@ -2,6 +2,45 @@
 
 ## [Niewydane]
 
+### Naprawione (audyt wykresów rynku, 2026-09-03)
+
+Przegląd logiki sekcji „Indeks podaży" pod kątem dziur wykazał, że wykresy
+przepływów pokazywały jako fakty rynkowe to, co robił nasz własny pipeline.
+Wszystkie rekordy widoczne na stronie przed poprawką były zdarzeniami
+technicznymi.
+
+- **Udział wyróżnień liczony do ofert OLX, nie do całej bazy.** Wyróżnić może
+  się tylko oferta OLX, a mianownikiem był cały Indeks (6 źródeł) — wychodziło
+  0,4% zamiast 3,3% i przeczyło liczbie z `map_generator.build_promoted`.
+  Mianownik bierzemy z `active_olx` w `index_history` (mierzony), wstecz
+  z `scraped_olx` w `scan_history`; dzień bez znanego mianownika = luka.
+- **Odsiew „mrugnięć" pipeline'u** (`trend_generator.life_events`). Para
+  „zniknęła → wróciła" domknięta w ≤3 dni wypada z odpływu, z reaktywacji
+  i z rekonstrukcji życia oferty naraz. Powód: 06.07.2026 scraper agencji oddał
+  229 ofert zamiast ~265 (za mało, by ochrona z `_mark_inactive` przy progu 30%
+  zareagowała), 23 żywe oferty zdezaktywowano, a następny skan je wskrzesił —
+  strona pokazywała to jako „rekord odpływu 27" i „rekord reaktywacji 26".
+  W bazie 66% par domyka się w ≤3 dni; odsiano 74 pary. Odpływ 454 → 376,
+  reaktywacje 177 → 104, pasmo recyklingu 77 → 22.
+- **Ślepe źródło rysuje lukę, nie zero.** OLX nie oddał ani jednej oferty przez
+  12 dni (12–23.08.2026), a wykres napływu pokazywał w tym oknie dołek jak
+  ochłodzenie rynku. `blind_source_days` / `blind_ranges` wykrywają takie dni;
+  wykres wyróżnień robi w nich lukę, a pozostałe wykresy i Indeks dostają
+  zakreskowany pas z podpisem, które źródło i ile dni milczało.
+- **Dzień powrotu źródła nie ustanawia rekordu.** W dniu, gdy OLX odpowiedział,
+  do bazy wpadły zaległości z dwunastu dni (15 „nowych" ofert) — to był rekord
+  napływu. Teraz taki dzień (jak dzień jeszcze trwający) zostaje na wykresie,
+  ale nie wchodzi do średniej ani do statystyk.
+- **Dzień w toku nie zaniża trendu.** Do wieczornego skanu „dziś" to pół dnia;
+  0 nowych ofert o poranku ciągnęło średnią 7-dniową w dół, przez co prawy
+  koniec każdego wykresu zawsze opadał. `provisional_day` rozpoznaje taki dzień
+  po liczbie odczytów w `index_history`; front oznacza go pustym znacznikiem.
+- Progi artefaktów są **względne** (12% Indeksu z danego dnia), `_day_ms`
+  przybija południe UTC zamiast strefy procesu, porównania 1D/1M/6M/1Y nie
+  sięgają dalej niż 3 dni za docelowy dzień (po dłuższej awarii Actions
+  pokazywały różnicę do dnia sprzed pięciu tygodni jako „1M"), backfill
+  `index_history` zapisuje realną liczbę skanów dnia, `.gitignore` łapie `*.tmp`.
+
 ### Dodane
 - **Indeks podaży i wykresy ruchu na rynku** w `docs/analytics.html`
   (odpowiednik `trend.html` z SONAR-POKOJOWY). Sześć wykresów ApexCharts nad

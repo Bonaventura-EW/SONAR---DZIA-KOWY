@@ -5,3 +5,5 @@ __pycache__/
 venv/
 *.log
 /tmp/
+# przerwany zapis atomowy (index_history.save) — nie commitować
+*.tmp
