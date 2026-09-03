@@ -10,7 +10,7 @@ how: Port trend.html z SONAR-POKOJOWY na dane tego repo. Nowy src/index_history.
 surface: src/index_history.py, src/trend_generator.py, src/main.py, src/paths.py, docs/analytics.html, docs/assets/trend.js, docs/assets/style.css, .github/workflows/scanner.yml, tests/test_trend_generator.py
 generality: family
 propagate: yes
-commit:
+commit: 8fcbdab13adb839a53c204e65e60a1e21e5f9116
 ---
 
 # Kontekst dla brata-ewaluatora
