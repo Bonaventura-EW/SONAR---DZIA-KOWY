@@ -13,7 +13,7 @@ Wzorowane na trend.html z SONAR-POKOJOWY (patrz .propagation/changes).
 """
 
 import json
-from datetime import date
+from datetime import datetime, date, timedelta
 
 import pytest
 
@@ -287,6 +287,40 @@ def test_pasma_pusta_dla_dnia_bez_skanu():
     bands = tg.build_bands(offers, series)
 
     assert bands['new'][1][1] is None and bands['react'][1][1] is None
+
+
+def test_dzien_w_toku_nie_wchodzi_do_sredniej_ani_rekordu(repo):
+    """Pół dnia to nie spadek. Dopóki dziś nie zamknie wszystkich skanów,
+    słupek zostaje na wykresie, ale średnia krocząca i rekordy go nie widzą —
+    inaczej prawy koniec każdego wykresu zawsze opadał."""
+    today = datetime.now(tg.TZ).date()
+    days = tg._daily_range(today - timedelta(days=3), today)
+    series = [[tg._day_ms(d), 100] for d in days]
+    index_history.record(100, datetime.now(tg.TZ).isoformat(), base_dir=repo)  # 1 z 2 skanów
+
+    assert tg.provisional_day(series, repo) == today
+
+    counts = {d: 10 for d in days[:-1]}
+    counts[today] = 1                      # dopiero poranny skan
+    metric = tg._flow_metric(counts, days, provisional=today)
+
+    assert metric['daily'][-1][1] == 1     # słupek zostaje — to prawdziwa liczba
+    assert metric['avg'][-1][1] == 10.0    # ale średnia liczy tylko dni zamknięte
+    assert metric['max_day'] == 10 and metric['total'] == 30
+
+
+def test_dzien_zamkniety_nie_jest_prowizoryczny(repo):
+    today = datetime.now(tg.TZ).date()
+    series = [[tg._day_ms(today), 100]]
+    for _ in range(tg.SCANS_PER_DAY):
+        index_history.record(100, datetime.now(tg.TZ).isoformat(), base_dir=repo)
+
+    assert tg.provisional_day(series, repo) is None
+
+
+def test_wczorajszy_koniec_serii_nie_jest_prowizoryczny(repo):
+    wczoraj = datetime.now(tg.TZ).date() - timedelta(days=1)
+    assert tg.provisional_day([[tg._day_ms(wczoraj), 100]], repo) is None
 
 
 def test_compute_deltas_pomija_dni_bez_skanu():

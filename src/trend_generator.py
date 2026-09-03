@@ -25,10 +25,14 @@ import json
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
+import pytz
+
 import index_history
 import paths
 
 TITLE = "Lublin – działki na sprzedaż"
+# strefa scannera: „dziś" liczymy tak samo jak main.py stemplujący zdarzenia
+TZ = pytz.timezone('Europe/Warsaw')
 UNIT = "ofert"
 DAY_MS = 86_400_000
 
@@ -54,6 +58,10 @@ REACT_ARTIFACT_THRESHOLD = 60
 # „zniknęła → wróciła" domyka się w ≤3 dni; bez tego filtru rekordy odpływu (27)
 # i reaktywacji (26) na wykresach to były dwie strony tego samego zacięcia.
 FLAP_MAX_DAYS = 3
+
+# Ile skanów w pełnym dniu (scanner.yml: 8:37 i 18:37). Dzień z mniejszą liczbą
+# odczytów, jeśli to DZISIAJ, jest jeszcze w toku — jego słupek może tylko urosnąć.
+SCANS_PER_DAY = 2
 
 
 def _day_ms(d: date) -> int:
@@ -236,28 +244,36 @@ def _axis(offers, series=None):
     return _daily_range(max(RELIABLE_START, min(starts)), today), today
 
 
-def _flow_metric(counts, days, exclude=None):
+def _flow_metric(counts, days, exclude=None, provisional=None):
     """Standardowy blok: szereg dzienny + średnia krocząca 7 dni + statystyki.
 
-    counts:  dict {date: liczba zdarzeń tego dnia}
-    days:    uporządkowana lista kolejnych dni (oś czasu)
-    exclude: zbiór dni-artefaktów. Taki dzień rysuje się jako LUKA (daily=None),
-             nie wchodzi do średniej kroczącej ani do statystyk (total/rate/
-             rekord) — żeby nierynkowy pik nie zniekształcał trendu.
+    counts:      dict {date: liczba zdarzeń tego dnia}
+    days:        uporządkowana lista kolejnych dni (oś czasu)
+    exclude:     zbiór dni-artefaktów. Taki dzień rysuje się jako LUKA
+                 (daily=None), nie wchodzi do średniej kroczącej ani do
+                 statystyk — żeby nierynkowy pik nie zniekształcał trendu.
+    provisional: DZIŚ, jeśli dzień jeszcze się nie skończył (patrz
+                 `provisional_day`). Słupek zostaje na wykresie — to prawdziwa
+                 liczba zdarzeń do tej pory — ale nie wchodzi do średniej
+                 kroczącej ani do statystyk. Inaczej pół dnia (0 nowych ofert
+                 o 9 rano) ciągnęłoby trend w dół i podmieniało rekordy;
+                 dokładnie ten błąd sprawiał, że prawy koniec wykresu zawsze
+                 opadał.
     """
     exclude = exclude or set()
+    skip = set(exclude) | ({provisional} if provisional else set())
 
     daily = [[_day_ms(d), None if d in exclude else counts.get(d, 0)] for d in days]
 
-    # średnia krocząca 7 dni licząca tylko dni „zdrowe" w oknie
+    # średnia krocząca 7 dni licząca tylko dni „zdrowe" i ZAMKNIĘTE w oknie
     avg = []
     for i, d in enumerate(days):
         window = [counts.get(days[j], 0)
                   for j in range(max(0, i - 6), i + 1)
-                  if days[j] not in exclude]
+                  if days[j] not in skip]
         avg.append([_day_ms(d), round(sum(window) / len(window), 1) if window else None])
 
-    clean = [(d, counts.get(d, 0)) for d in days if d not in exclude]
+    clean = [(d, counts.get(d, 0)) for d in days if d not in skip]
     total = sum(v for _, v in clean)
     ndays = len(clean)
     mx = max((v for _, v in clean), default=0)
@@ -275,7 +291,23 @@ def _flow_metric(counts, days, exclude=None):
     }
 
 
-def build_outflow(offers, series=None):
+def provisional_day(series, base_dir=None):
+    """Ostatni dzień serii, JEŚLI jeszcze trwa — inaczej None.
+
+    „Trwa" = to dzisiaj (czas warszawski, w którym pracuje scanner) i nie
+    odbyły się jeszcze wszystkie dzienne skany. Po wieczornym skanie dzień jest
+    zamknięty, bo dane zmieniają się wyłącznie podczas skanu.
+    """
+    if not series:
+        return None
+    last = datetime.fromtimestamp(series[-1][0] / 1000).date()
+    if last != datetime.now(TZ).date():
+        return None
+    entry = index_history.load(base_dir)['days'].get(last.isoformat()) or {}
+    return last if entry.get('scans', 0) < SCANS_PER_DAY else None
+
+
+def build_outflow(offers, series=None, provisional=None):
     """Dzienny odpływ ofert (ile zniknęło z listingów) + średnia krocząca 7 dni.
 
     Zniknięcie bierzemy z `deactivation_dates` (zapisywane od 2026-09-03) i ze
@@ -304,10 +336,10 @@ def build_outflow(offers, series=None):
                 dep[d] = dep.get(d, 0) + 1
 
     artifacts = {d for d, v in dep.items() if v > OUTFLOW_ARTIFACT_THRESHOLD}
-    return _flow_metric(dep, days, exclude=artifacts)
+    return _flow_metric(dep, days, exclude=artifacts, provisional=provisional)
 
 
-def build_inflow(offers, series=None):
+def build_inflow(offers, series=None, provisional=None):
     """Dzienny NAPŁYW ofert — trzy powiązane metryki (każda jak odpływ):
 
     - `new`       : nowe oferty (`first_seen` = ten dzień), BEZ reaktywacji.
@@ -345,9 +377,10 @@ def build_inflow(offers, series=None):
     unreliable = {d for d, v in react.items() if v > REACT_ARTIFACT_THRESHOLD}
 
     return {
-        'new': _flow_metric(new, days),
-        'react': _flow_metric(react, days, exclude=unreliable),
-        'new_react': _flow_metric(combined, days, exclude=unreliable),
+        'new': _flow_metric(new, days, provisional=provisional),
+        'react': _flow_metric(react, days, exclude=unreliable, provisional=provisional),
+        'new_react': _flow_metric(combined, days, exclude=unreliable,
+                                  provisional=provisional),
     }
 
 
@@ -543,7 +576,7 @@ def _scanned_days(offers):
     return days
 
 
-def build_promoted(offers, series, scan_days=None, base_dir=None):
+def build_promoted(offers, series, scan_days=None, base_dir=None, provisional=None):
     """Dzienna liczba ofert PROMOWANYCH (płatne wyróżnienie na listingu OLX).
 
     Źródło: `promoted_dates` w offers.json — dni, w których scraper zobaczył
@@ -588,7 +621,7 @@ def build_promoted(offers, series, scan_days=None, base_dir=None):
                  if 'olx' in sources}
     missing = {d for d in days if d not in scanned or d in blind_olx}
 
-    metric = _flow_metric(counts, days, exclude=missing)
+    metric = _flow_metric(counts, days, exclude=missing, provisional=provisional)
 
     olx_active = olx_active_by_day(base_dir)
     share = []
@@ -682,6 +715,9 @@ def generate(base_dir=None) -> bool:
     index_source = ('measured' if index_history.daily_series(base_dir=base_dir)
                     else 'reconstructed')
 
+    # dziś może jeszcze urosnąć — nie liczymy go do średnich i rekordów
+    provisional = provisional_day(series, base_dir)
+
     values = [val for _, val in measured]
     current = values[-1]
     mx, mn = max(values), min(values)
@@ -709,12 +745,16 @@ def generate(base_dir=None) -> bool:
         'last_label': last_day.strftime('%d.%m.%Y'),
         'points': len(series),
         'measured_points': len(measured),
+        # dzień jeszcze nietrwały: front oznacza go na wykresach, a średnie
+        # i rekordy już go nie widzą
+        'provisional_ms': _day_ms(provisional) if provisional else None,
         'deltas': compute_deltas(series),
         'series': series,
-        'outflow': build_outflow(offers, series),
-        'inflow': build_inflow(offers, series),
+        'outflow': build_outflow(offers, series, provisional),
+        'inflow': build_inflow(offers, series, provisional),
         'bands': build_bands(offers, series),
-        'promoted': build_promoted(offers, series, load_scan_days(base_dir), base_dir),
+        'promoted': build_promoted(offers, series, load_scan_days(base_dir),
+                                   base_dir, provisional),
         # odcinki, w których źródło nie odpowiadało — front je zakreskowuje
         'blind_ranges': blind_ranges(base_dir),
         # ile par „zniknęła i zaraz wróciła" odsialiśmy jako zacięcie scrapera

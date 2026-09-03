@@ -333,3 +333,7 @@ table.scan-table tr:hover td { background: var(--lime-soft); }
 /* Tooltip ApexCharts na jasnym motywie */
 .apexcharts-tooltip { border: 1px solid var(--line) !important; box-shadow: 0 4px 14px rgba(15, 31, 21, 0.12) !important; }
 .apexcharts-tooltip-title { background: var(--lime-soft) !important; border-bottom: 1px solid var(--line) !important; }
+
+/* dopisek o dniu, który jeszcze trwa (assets/trend.js) */
+.prov { color: var(--muted); font-style: italic; }
+.deltas .prov { font-style: normal; }
