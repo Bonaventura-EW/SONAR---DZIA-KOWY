@@ -981,7 +981,7 @@
  },
  "district:zadebie": {
   "result": null,
-  "ts": 1788291188.7116375
+  "ts": 1788896058.7549548
  },
  "firlejowska": {
   "result": {
@@ -1674,5 +1674,17 @@
    "name": "Willowa"
   },
   "ts": 1788693576.721126
+ },
+ "sielankowa": {
+  "result": {
+   "lat": 51.251358,
+   "lon": 22.5199859,
+   "name": "Sielankowa"
+  },
+  "ts": 1788896060.365106
+ },
+ "nadleśna": {
+  "result": null,
+  "ts": 1788896061.968554
  }
 }
