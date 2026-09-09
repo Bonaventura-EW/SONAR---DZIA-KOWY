@@ -42,6 +42,6 @@ categories: {}
 
 # Reguły destylowane z Twoich decyzji — dopisuje je skill `distill-policy`
 # przez PR, który zatwierdzasz. Ręcznie też możesz.
-learned_rules: []
-  #  - "Nie propaguj niczego, co rusza moduł auth (dotąd 0/6 przyjętych)."
-  #  - "Zmiany typu css-refactor przyjmowane w 11/12 → kandydat do awansu na 'draft'."
+learned_rules:
+  - "Propozycje wskazujące na już istniejące, ale niewykorzystane dane/kod w tym repo (np. pola w bazie, nieużywane funkcje) są tanie we wdrożeniu i dotąd zawsze akceptowane (5/5 decyzji: issue#13 – price_per_m2/district; issue#18 – reactivation_dates/deactivation_dates/promoted_dates x3; issue#20 – build_spans/life_events)."
+  - "Propozycje bugfix/css-refactor poparte dowodem zweryfikowanym wprost w naszym kodzie (nie tylko opisanym w manifeście źródłowym) są dotąd zawsze akceptowane (4/4 decyzji: issue#14 – zmierzone stosy do 23 ofert; issue#19 – zmierzona duplikacja 7 stron; issue#20 – własny komentarz w trend_generator.py; issue#22 – potwierdzone w olx/otodom/adresowo_scraper.py i main.py)."
