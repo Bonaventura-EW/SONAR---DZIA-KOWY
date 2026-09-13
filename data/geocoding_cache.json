@@ -385,7 +385,7 @@
  },
  "brzegowa": {
   "result": null,
-  "ts": 1788719847.7020288
+  "ts": 1789325780.2333727
  },
  "mełgiewska": {
   "result": {
@@ -609,7 +609,7 @@
  },
  "kasprowicza. dojazd": {
   "result": null,
-  "ts": 1788719848.965684
+  "ts": 1789325781.6400254
  },
  "południowej": {
   "result": {
@@ -1217,19 +1217,19 @@
  },
  "bohaterów września powierzchnia": {
   "result": null,
-  "ts": 1788719850.3852506
+  "ts": 1789325783.3083487
  },
  "mpzp": {
   "result": null,
-  "ts": 1788719851.8493469
+  "ts": 1789325784.585432
  },
  "bohaterów września. nieruchomość": {
   "result": null,
-  "ts": 1788719853.1131914
+  "ts": 1789325786.2090926
  },
  "plan": {
   "result": null,
-  "ts": 1788719854.6832197
+  "ts": 1789325787.8759954
  },
  "feliksa strojnowskiego": {
   "result": {
@@ -1694,5 +1694,21 @@
    "name": "Dłotlice"
   },
   "ts": 1789238623.0181181
+ },
+ "figowej": {
+  "result": {
+   "lat": 51.2683028,
+   "lon": 22.5986891,
+   "name": "Figowa"
+  },
+  "ts": 1789325790.4922585
+ },
+ "figowa": {
+  "result": {
+   "lat": 51.2683028,
+   "lon": 22.5986891,
+   "name": "Figowa"
+  },
+  "ts": 1789325792.124355
  }
 }
