@@ -621,15 +621,15 @@
  },
  "woda": {
   "result": null,
-  "ts": 1788867810.7628334
+  "ts": 1789473877.0354903
  },
  "kanalizacja": {
   "result": null,
-  "ts": 1788867812.015948
+  "ts": 1789473878.4743404
  },
  "dodatkowe": {
   "result": null,
-  "ts": 1788867814.8556828
+  "ts": 1789473881.3327699
  },
  "laury. prezentowana": {
   "result": null,
@@ -849,7 +849,7 @@
  },
  "mełgiewskiej. na": {
   "result": null,
-  "ts": 1788867809.3581932
+  "ts": 1789473875.5499413
  },
  "stary gaj": {
   "result": {
@@ -1145,11 +1145,11 @@
  },
  "prąd": {
   "result": null,
-  "ts": 1788867813.4792812
+  "ts": 1789473879.9284453
  },
  "strumykowej. prezentowana": {
   "result": null,
-  "ts": 1788867816.1341286
+  "ts": 1789473882.7628868
  },
  "gospodarcza": {
   "result": {
@@ -1549,15 +1549,15 @@
  },
  "skowronkowa. powierzchnia": {
   "result": null,
-  "ts": 1788867817.5572991
+  "ts": 1789473884.1971624
  },
  "skowronkowa. liczba": {
   "result": null,
-  "ts": 1788867818.933371
+  "ts": 1789473885.666973
  },
  "skowronkowej. nieruchomości": {
   "result": null,
-  "ts": 1788867820.2918723
+  "ts": 1789473886.9089892
  },
  "ciepielewskiego": {
   "result": {
@@ -1710,5 +1710,13 @@
    "name": "Figowa"
   },
   "ts": 1789325792.124355
+ },
+ "tarninowa": {
+  "result": {
+   "lat": 51.2356124,
+   "lon": 22.4696367,
+   "name": "Tarninowa"
+  },
+  "ts": 1789473888.3159487
  }
 }
