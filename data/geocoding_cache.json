@@ -1722,5 +1722,13 @@
  "mełgiewska. powierzchnia": {
   "result": null,
   "ts": 1789587690.6746707
+ },
+ "dłotlice 9": {
+  "result": {
+   "lat": 51.2798671,
+   "lon": 22.5694651,
+   "name": "Dłotlice"
+  },
+  "ts": 1789732006.0286825
  }
 }
