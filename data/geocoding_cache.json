@@ -357,7 +357,7 @@
  },
  "warszawskiej. malownicza": {
   "result": null,
-  "ts": 1789154195.8085325
+  "ts": 1789817385.7857878
  },
  "jana kasprowicza": {
   "result": {
@@ -1189,7 +1189,7 @@
  },
  "zagajnikowa 6": {
   "result": null,
-  "ts": 1789154192.9485428
+  "ts": 1789817383.2519841
  },
  "zagajnikowa": {
   "result": {
@@ -1449,7 +1449,7 @@
  },
  "h. m. sachsów": {
   "result": null,
-  "ts": 1789154194.5936031
+  "ts": 1789817384.5357985
  },
  "stefana roweckiego": {
   "result": {
@@ -1738,5 +1738,13 @@
    "name": "Henryka i Mieczysławy Sachsów"
   },
   "ts": 1789758650.2089038
+ },
+ "henryka i mieczysławy sachsów": {
+  "result": {
+   "lat": 51.1989851,
+   "lon": 22.6037957,
+   "name": "Henryka i Mieczysławy Sachsów"
+  },
+  "ts": 1789817387.4104927
  }
 }
