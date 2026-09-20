@@ -385,7 +385,7 @@
  },
  "brzegowa": {
   "result": null,
-  "ts": 1789325780.2333727
+  "ts": 1789930951.531455
  },
  "mełgiewska": {
   "result": {
@@ -609,7 +609,7 @@
  },
  "kasprowicza. dojazd": {
   "result": null,
-  "ts": 1789325781.6400254
+  "ts": 1789930953.0471098
  },
  "południowej": {
   "result": {
@@ -1217,19 +1217,19 @@
  },
  "bohaterów września powierzchnia": {
   "result": null,
-  "ts": 1789325783.3083487
+  "ts": 1789930954.9240005
  },
  "mpzp": {
   "result": null,
-  "ts": 1789325784.585432
+  "ts": 1789930956.4676945
  },
  "bohaterów września. nieruchomość": {
   "result": null,
-  "ts": 1789325786.2090926
+  "ts": 1789930957.7565105
  },
  "plan": {
   "result": null,
-  "ts": 1789325787.8759954
+  "ts": 1789930959.6481247
  },
  "feliksa strojnowskiego": {
   "result": {
@@ -1746,5 +1746,13 @@
    "name": "Henryka i Mieczysławy Sachsów"
   },
   "ts": 1789817387.4104927
+ },
+ "letniskowej": {
+  "result": {
+   "lat": 51.1887901,
+   "lon": 22.5120564,
+   "name": "Letniskowa"
+  },
+  "ts": 1789930962.4212928
  }
 }
