@@ -621,15 +621,15 @@
  },
  "woda": {
   "result": null,
-  "ts": 1789473877.0354903
+  "ts": 1790106765.6654592
  },
  "kanalizacja": {
   "result": null,
-  "ts": 1789473878.4743404
+  "ts": 1790106767.1157932
  },
  "dodatkowe": {
   "result": null,
-  "ts": 1789473881.3327699
+  "ts": 1790106770.0390298
  },
  "laury. prezentowana": {
   "result": null,
@@ -849,7 +849,7 @@
  },
  "mełgiewskiej. na": {
   "result": null,
-  "ts": 1789473875.5499413
+  "ts": 1790106762.6314776
  },
  "stary gaj": {
   "result": {
@@ -981,7 +981,7 @@
  },
  "district:zadebie": {
   "result": null,
-  "ts": 1789501760.968371
+  "ts": 1790106764.1195092
  },
  "firlejowska": {
   "result": {
@@ -1145,11 +1145,11 @@
  },
  "prąd": {
   "result": null,
-  "ts": 1789473879.9284453
+  "ts": 1790106768.5935955
  },
  "strumykowej. prezentowana": {
   "result": null,
-  "ts": 1789473882.7628868
+  "ts": 1790106771.291379
  },
  "gospodarcza": {
   "result": {
@@ -1549,15 +1549,15 @@
  },
  "skowronkowa. powierzchnia": {
   "result": null,
-  "ts": 1789473884.1971624
+  "ts": 1790106772.5630083
  },
  "skowronkowa. liczba": {
   "result": null,
-  "ts": 1789473885.666973
+  "ts": 1790106774.0131881
  },
  "skowronkowej. nieruchomości": {
   "result": null,
-  "ts": 1789473886.9089892
+  "ts": 1790106775.4583104
  },
  "ciepielewskiego": {
   "result": {
@@ -1685,7 +1685,7 @@
  },
  "nadleśna": {
   "result": null,
-  "ts": 1789501762.3499644
+  "ts": 1790106776.917016
  },
  "dłotlice": {
   "result": {
@@ -1754,5 +1754,13 @@
    "name": "Letniskowa"
   },
   "ts": 1789930962.4212928
+ },
+ "biskupie": {
+  "result": {
+   "lat": 51.2474783,
+   "lon": 22.6606554,
+   "name": "Biskupie"
+  },
+  "ts": 1790106761.2341435
  }
 }
