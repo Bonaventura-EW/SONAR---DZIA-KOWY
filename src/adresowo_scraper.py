@@ -6,11 +6,16 @@ Adresowo to portal ogłoszeniowy (jak OLX/Otodom, nie agencja):
 - karty: cena, powierzchnia, snippet opisu, znacznik „bez pośredników"
 - strona szczegółów (TYLKO dla nowych ofert): współrzędne GPS, pełny opis,
   ulica w tytule, typ działki
+
+Budżet ofert z nieprecyzyjnym markerem wraca do pobierania mimo bycia
+"znanym" — main.py::_apply_rotation usuwa je z `known_offers`, żeby nie
+zamrozić title/description/coords na zawsze.
 """
 
 import re
 import time
 import random
+from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
 import requests
@@ -126,6 +131,11 @@ class AdresowoScraper:
         html = self._fetch(offer['url'])
         if not html:
             return offer
+        # FIX 2026-09-22: realne pobranie strony szczegółów — odróżnia to od
+        # danych skopiowanych z known_offers (patrz scrape()), żeby rotacja
+        # w main.py::_apply_rotation wiedziała, które oferty naprawdę
+        # czytaliśmy ostatnio, a nie tylko przepisaliśmy z cache.
+        offer['details_fetched_at'] = datetime.now(timezone.utc).isoformat()
         soup = BeautifulSoup(html, 'lxml')
 
         m = _COORDS_RE.search(html)
@@ -204,6 +214,7 @@ class AdresowoScraper:
                 offer['title'] = known.get('title') or offer['title']
                 offer['plot_type'] = known.get('plot_type') or offer['plot_type']
                 offer['image'] = known.get('image') or offer['image']
+                offer['details_fetched_at'] = known.get('details_fetched_at')
             else:
                 to_fetch.append(offer)
 
