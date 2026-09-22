@@ -7,7 +7,9 @@ Zasila sekcję „Indeks podaży i ruch na rynku" w docs/analytics.html:
                 pasma świeże / recykling,
   * odpływ    — ile ofert znika z listingów danego dnia,
   * napływ    — nowe / reaktywacje / suma,
-  * promowane — płatne wyróżnienia OLX + ich udział w rynku.
+  * promowane — płatne wyróżnienia OLX + ich udział w rynku,
+  * zmiany cen — ile ofert dziennie tanieje / drożeje (częstotliwość, nie
+                skala złotówkowa) — patrz `build_price_changes`.
 
 Indeks czytamy z data/index_history.json — MIERZONEGO stanu bazy po każdym
 skanie (patrz src/index_history.py), nie z rekonstrukcji wstecznej. Różnica jest
@@ -454,6 +456,50 @@ def build_bands(offers, series=None):
     return {'new': new_series, 'react': react_series}
 
 
+def build_price_changes(offers, series=None, uncounted=None):
+    """Dzienna CZĘSTOTLIWOŚĆ zmian cen — dwa osobne szeregi: ile ofert danego
+    dnia potaniało i ile podrożało.
+
+    Źródło: `price.price_changes` (main._update_existing dopisuje wpis
+    `{old_price, new_price, changed_at, trend}` przy KAŻDEJ zmianie ceny —
+    pole istnieje od pierwszego skanu, historia jest kompletna, bez
+    zaniżenia wstecz jak przy odpływie/napływie).
+
+    Liczymy ZDARZENIA, nie oferty: dwie obniżki jednej oferty w jednym dniu to
+    dwa punkty. To świadoma różnica wobec odpływu (tam dedup po (oferta, dzień)
+    jest konieczny, bo jedna oferta to jeden marker na mapie) — tu `price_changes`
+    to już lista zdarzeń i pytamy „ile było obniżek", nie „ile ofert potaniało".
+
+    Podwyżki i obniżki rysujemy jako DWA osobne wykresy (patrz trend.js) —
+    podwyżek jest zwykle znacznie mniej, na wspólnej skali leżałyby płasko
+    przy zerze.
+    """
+    days, _ = _axis(offers, series)
+    if not days:
+        return None
+    start = days[0]
+
+    down, up = {}, {}
+    for o in offers:
+        for change in ((o.get('price') or {}).get('price_changes') or []):
+            changed_at = change.get('changed_at')
+            if not changed_at:
+                continue
+            try:
+                d = _d(changed_at)
+            except (ValueError, TypeError):
+                continue
+            if d < start:
+                continue
+            bucket = down if change.get('trend') == 'down' else up
+            bucket[d] = bucket.get(d, 0) + 1
+
+    return {
+        'down': _flow_metric(down, days, uncounted=uncounted),
+        'up': _flow_metric(up, days, uncounted=uncounted),
+    }
+
+
 def load_scan_days(base_dir=None) -> set:
     """Dni z ZAKOŃCZONYM skanem wg data/scan_history.json.
 
@@ -697,6 +743,19 @@ def build_promoted(offers, series, scan_days=None, base_dir=None, uncounted=None
     return metric
 
 
+def count_active(offers) -> int:
+    """Ile ofert ma `active: true` PRAWDZIWIE TERAZ — stan po OSTATNIM skanie,
+    nie maksimum doby jak `index_history` (patrz `record()`: `active_dedup`
+    zamraża się razem z odczytem, który miał najwyższe `active`, więc na
+    dzień z dwoma skanami może zostać z PIERWSZEGO, nie z bieżącego).
+
+    Służy do `provisional_now`: dzień w toku ma na wykresie pokazywać tę samą
+    liczbę, którą reszta serwisu widzi TERAZ, a nie szczyt wcześniejszego,
+    częściowego skanu tego dnia.
+    """
+    return sum(1 for o in offers if o.get('active'))
+
+
 def count_dedup_active(offers) -> int:
     """Ile aktywnych ofert widać na mapie — bez tych, które wskazują duplikatem
     na inną AKTYWNĄ ofertę (ta sama działka wystawiona w kilku źródłach).
@@ -807,6 +866,11 @@ def generate(base_dir=None) -> bool:
         # dzień jeszcze nietrwały: front oznacza go na wykresach, a średnie
         # i rekordy już go nie widzą
         'provisional_ms': _day_ms(provisional) if provisional else None,
+        # stan PO OSTATNIM skanie (nie szczyt doby jak `current`/`series`) —
+        # front podmienia nim ostatni punkt Indeksu na dzień w toku, żeby
+        # pusty marker odpowiadał na „ile jest ofert dzisiaj" tą samą liczbą
+        # co reszta serwisu, a nie zamrożonym maksimum wcześniejszego skanu
+        'provisional_now': count_active(offers) if provisional else None,
         # front rysuje na nich pusty znacznik: „to prawdziwe zdarzenia, ale nie
         # jedna normalna doba" (dzień w toku + dni nadrabiania zaległości)
         'uncounted_ms': sorted(_day_ms(d) for d in uncounted),
@@ -817,6 +881,7 @@ def generate(base_dir=None) -> bool:
         'bands': build_bands(offers, series),
         'promoted': build_promoted(offers, series, load_scan_days(base_dir),
                                    base_dir, uncounted),
+        'price_changes': build_price_changes(offers, series, uncounted),
         # odcinki, w których źródło nie odpowiadało — front je zakreskowuje
         'blind_ranges': blind_ranges(base_dir),
         # ile par „zniknęła i zaraz wróciła" odsialiśmy jako zacięcie scrapera
@@ -842,6 +907,10 @@ def generate(base_dir=None) -> bool:
           f"rekord={inf.get('max_day')} ({inf.get('max_label')})")
     print(f"   🧹 odsiane mrugnięcia pipeline'u (powrót ≤{FLAP_MAX_DAYS} dni): "
           f"{data['flapping']['pairs']} par")
+    pc = data['price_changes'] or {}
+    down, up = pc.get('down') or {}, pc.get('up') or {}
+    print(f"   💲↓ obniżki: łącznie={down.get('total')}, śr={down.get('rate')}/dzień")
+    print(f"   💲↑ podwyżki: łącznie={up.get('total')}, śr={up.get('rate')}/dzień")
     for r in data['blind_ranges']:
         first = datetime.fromtimestamp(r['from'] / 1000, tz=timezone.utc).date()
         print(f"   🚫 {r['source']}: bez odpowiedzi przez {r['days']} dni "
