@@ -35,6 +35,11 @@ never_touch:
 # MODELE: decyzje = Sonnet (claude-sonnet-5), programowanie = Opus (claude-opus-4-8).
 default_autonomy: ask
 
+# 2026-09-22 distill-policy: bugfix ma 7 rozstrzygniętych wpisów (1 modified
+# + 6 accepted), 100% w kierunku "buduj", 0 odrzuceń bezpieczeństwa — TUŻ
+# pod progiem awansu (≥8). Feature ma 6 rozstrzygnięć (100% accepted) — za
+# mało danych. css-refactor ma 1 rozstrzygnięcie — za mało danych. Żadna
+# kategoria nie awansuje w tym przebiegu. Zobacz PR dla scorecardu.
 categories: {}
   # css-refactor:   draft
   # a11y-fix:       draft
@@ -43,5 +48,5 @@ categories: {}
 # Reguły destylowane z Twoich decyzji — dopisuje je skill `distill-policy`
 # przez PR, który zatwierdzasz. Ręcznie też możesz.
 learned_rules:
-  - "Propozycje wskazujące na już istniejące, ale niewykorzystane dane/kod w tym repo (np. pola w bazie, nieużywane funkcje) są tanie we wdrożeniu i dotąd zawsze akceptowane (5/5 decyzji: issue#13 – price_per_m2/district; issue#18 – reactivation_dates/deactivation_dates/promoted_dates x3; issue#20 – build_spans/life_events)."
-  - "Propozycje bugfix/css-refactor poparte dowodem zweryfikowanym wprost w naszym kodzie (nie tylko opisanym w manifeście źródłowym) są dotąd zawsze akceptowane (4/4 decyzji: issue#14 – zmierzone stosy do 23 ofert; issue#19 – zmierzona duplikacja 7 stron; issue#20 – własny komentarz w trend_generator.py; issue#22 – potwierdzone w olx/otodom/adresowo_scraper.py i main.py)."
+  - "Propozycje wskazujące na już istniejące, ale niewykorzystane dane/kod w tym repo (np. pola w bazie, nieużywane funkcje) są tanie we wdrożeniu i dotąd zawsze akceptowane (6/6 decyzji: issue#13 – price_per_m2/district; issue#18 – reactivation_dates/deactivation_dates/promoted_dates x3; issue#20 – build_spans/life_events; issue#27 – price_changes już gotowe w main.py)."
+  - "Propozycje bugfix/css-refactor poparte dowodem zweryfikowanym wprost w naszym kodzie (nie tylko opisanym w manifeście źródłowym) są dotąd zawsze akceptowane (7/7 decyzji: issue#14 – zmierzone stosy do 23 ofert; issue#19 – zmierzona duplikacja 7 stron; issue#20 – własny komentarz w trend_generator.py; issue#22 – potwierdzone w olx/otodom/adresowo_scraper.py i main.py; issue#24 – zweryfikowany wzorzec w otodom_scraper.py/adresowo_scraper.py; issue#25 – scoped naprawa atrybucji odpływu; issue#26 – identyczny kod filtrów neu/gone co Sprzedaz-mieszkan#23). Kategoria bugfix najbliższa progu awansu w repo (7/8)."
