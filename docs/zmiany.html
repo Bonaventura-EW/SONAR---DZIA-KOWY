@@ -36,6 +36,9 @@
 .zm-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
 .zm-col.gone .zm-card:before{background:#dc2626}
 .zm-col.new  .zm-card:before{background:#16a34a}
+.zm-card.ephemeral{background:#f6f7f6;opacity:.72}
+.zm-card.ephemeral:before{background:linear-gradient(#16a34a 50%,#dc2626 50%)}
+.b-ephemeral{background:#e2e8f0;color:#475569}
 .zm-thumb{width:84px;height:84px;flex:0 0 auto;border-radius:9px;object-fit:cover;background:#eef3ee}
 .zm-thumb.ph{display:flex;align-items:center;justify-content:center;font-size:26px;color:#b9c7b9}
 .zm-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
@@ -110,8 +113,8 @@
     <div id="zm-content" style="display:none">
       <div class="zm-kpis">
         <div class="zm-kpi"><h3>Zniknęło z rynku</h3><div class="v v-gone" id="k-gone">—</div><div class="s">w wybranym oknie</div></div>
-        <div class="zm-kpi"><h3>Nowych ofert</h3><div class="v v-new" id="k-new">—</div><div class="s">w wybranym oknie</div></div>
-        <div class="zm-kpi"><h3>Bilans netto</h3><div class="v" id="k-net">—</div><div class="s">nowe − zniknięte</div></div>
+        <div class="zm-kpi"><h3>Nowych ofert</h3><div class="v v-new" id="k-new">—</div><div class="s" id="k-new-sub">w wybranym oknie</div></div>
+        <div class="zm-kpi"><h3>Bilans netto</h3><div class="v" id="k-net">—</div><div class="s">zmiana liczby ofert na rynku</div></div>
         <div class="zm-kpi"><h3>Mediana cena/m² — nowe</h3><div class="v" id="k-ppm-new" style="font-size:19px">—</div><div class="s">w nowych ofertach</div></div>
         <div class="zm-kpi"><h3>Śr. czas życia</h3><div class="v" id="k-life" style="font-size:19px">—</div><div class="s">zniknięte oferty</div></div>
       </div>
@@ -159,26 +162,30 @@ function trendTxt(o){
   return ` <span class="trend-${down?'down':'up'}">${down?'▼':'▲'} było ${PLN(o.previous_price)}</span>`;
 }
 
-/* karta oferty (kind: 'new' | 'gone') */
+/* karta oferty (kind: 'new' | 'gone') — ephemeryda: urodzona i zamknięta w tym samym oknie */
 function card(o,kind){
+  const ephemeral=kind==='new'&&!o.active;
   const img=o.image?`<img class="zm-thumb" src="${esc(o.image)}" loading="lazy" alt="">`
                     :`<div class="zm-thumb ph">🌳</div>`;
   const where=[o.street,o.district].filter(Boolean).join(', ');
   const newBadge=kind==='new'?'<span class="badge b-new">NOWA</span>':'';
+  const ephemeralBadge=ephemeral?'<span class="badge b-ephemeral">już zniknęła</span>':'';
   const privBadge=o.is_private_owner?'<span class="badge b-priv">właściciel</span>':'';
-  const when=kind==='new'
-    ? `🆕 dodano <b>${relDate(o.first_seen)}</b>`
-    : `⏸ zniknęła <b>${relDate(o.last_seen)}</b>${o.days_active!=null?` · była <b>${o.days_active} dni</b>`:''}`;
+  const when=ephemeral
+    ? `🆕 <b>${relDate(o.first_seen)}</b> → ⏸ <b>${relDate(o.last_seen)}</b>${o.days_active!=null?` · była <b>${o.days_active} dni</b>`:''}`
+    : kind==='new'
+      ? `🆕 dodano <b>${relDate(o.first_seen)}</b>`
+      : `⏸ zniknęła <b>${relDate(o.last_seen)}</b>${o.days_active!=null?` · była <b>${o.days_active} dni</b>`:''}`;
   const hasGps=!!o.coords;
   const pin=hasGps
     ? `<a class="zm-btn pin" href="index.html#offer=${encodeURIComponent(o.id)}" title="Pokaż na mapie">📍 Mapa</a>`
     : `<span class="zm-btn pin off" title="Brak współrzędnych GPS">📍 bez GPS</span>`;
   const also=o.also_at?`<a class="zm-btn go" href="${esc(o.also_at)}" target="_blank" rel="noopener">↗ druga oferta</a>`:'';
-  return `<article class="zm-card">
+  return `<article class="zm-card${ephemeral?' ephemeral':''}">
     ${img}
     <div class="zm-body">
       <div class="zm-t"><a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.title||'(bez tytułu)')}</a></div>
-      <div class="zm-badges">${srcBadge(o)}<span class="badge b-type">${esc(o.plot_type||'inna')}</span>${newBadge}${privBadge}</div>
+      <div class="zm-badges">${srcBadge(o)}<span class="badge b-type">${esc(o.plot_type||'inna')}</span>${newBadge}${ephemeralBadge}${privBadge}</div>
       <div class="zm-price">${PLN(o.price)} <span class="pm">· ${PERM2(o.price_per_m2)}</span>${trendTxt(o)}</div>
       <div class="zm-meta">📐 ${AREA(o.area_m2)}${where?` · 📍 ${esc(where)}`:''}</div>
       <div class="zm-foot">
@@ -221,8 +228,12 @@ function render(){
   const sortKey=document.getElementById('sort').value;
   const base=OFFERS.filter(passesCommon);
 
+  // FIX 2026-09-22 (propagacja z SONAR-POKOJOWY): "nowe" liczone tym samym
+  // filtrem co "zniknięte" (wg first_seen, niezależnie od dzisiejszego stanu),
+  // inaczej bilans miał wbudowany minus rosnący z długością okna — patrz
+  // .propagation/changes/2026-09-12-window-balance-symmetry.md u brata.
   let gone=base.filter(o=>!o.active&&inWindow(o.last_seen,win));
-  let neu =base.filter(o=> o.active&&inWindow(o.first_seen,win));
+  let neu =base.filter(o=>inWindow(o.first_seen,win));
 
   const sf=sortFn(sortKey);
   if(sf){gone.sort(sf);neu.sort(sf);}
@@ -244,6 +255,10 @@ function render(){
   // KPI
   document.getElementById('k-gone').textContent=gone.length;
   document.getElementById('k-new').textContent=neu.length;
+  const ephemeralCount=neu.filter(o=>!o.active).length;
+  document.getElementById('k-new-sub').textContent=ephemeralCount
+    ? `w wybranym oknie · w tym ${ephemeralCount} już zniknęło`
+    : 'w wybranym oknie';
   const net=neu.length-gone.length;
   const ke=document.getElementById('k-net');
   ke.textContent=(net>0?'+':'')+net;
