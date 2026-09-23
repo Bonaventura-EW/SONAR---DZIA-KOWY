@@ -73,7 +73,38 @@ technicznymi.
   pokazywały różnicę do dnia sprzed pięciu tygodni jako „1M"), backfill
   `index_history` zapisuje realną liczbę skanów dnia, `.gitignore` łapie `*.tmp`.
 
+### Naprawione (atrybucja odpływu, 2026-09-22, propagacja z Sprzedaz-mieszkan)
+
+Audyt z 2026-09-03 domknął tylko połowę problemu z dniem powrotu zablokowanego
+źródła: `recovery_days` maskował ten dzień w statystykach, ale wykres odpływu
+nadal rysował w nim wizualny pik — tylko ukryty przed średnią i rekordem, nie
+naprawiony u źródła.
+
+- **Odpływ liczy się od last_seen+1, nie od dnia potwierdzenia dezaktywacji.**
+  `build_outflow` brał datę z `deactivation_dates` — dzień, w którym
+  `main._mark_inactive` FAKTYCZNIE zauważył brak oferty. Przy blokadzie portalu
+  ta data spóźnia się o całą blokadę, więc cała zaległość wpadała do bazy
+  jednym dniem powrotu (regresja: 12 dni ciszy OLX → 231 ofert jednego dnia,
+  trzykrotność normy). Teraz ostatnie, wciąż otwarte zdarzenie oferty bierze
+  datę last_seen+1 — pierwszy dzień, którego już nie widzieliśmy — a dni bez
+  ani jednego skanu źródła (`blind_source_days`) są maskowane jak luka, żeby
+  rozłożona zaległość nie rysowała się jako realny odpływ w dniach ślepoty.
+  Wcześniejsze, już zamknięte powrotem przerwy życia oferty zostają przy dacie
+  z `deactivation_dates` — nie mamy zapisanego last_seen sprzed nich.
+
 ### Dodane
+- **Dwa szeregi częstotliwości zmian cen** (propagacja z SONAR-POKOJOWY,
+  manifest `2026-09-15-price-change-series`, issue #27): ile ofert dziennie
+  tanieje i ile drożeje, osobne wykresy w `docs/analytics.html`
+  (`trend_generator.build_price_changes`). Źródło to `price.price_changes`
+  (zapisywane w `main.py` przy każdej zmianie ceny, kompletne od pierwszego
+  skanu) — liczymy ZDARZENIA, nie oferty: dwie obniżki tej samej oferty w
+  jednym dniu to dwa punkty. Prostsze niż u brata, bo tu nie ma wersjonowania
+  ofert (`versions[]`), więc historia nie jest rozbita na dwa źródła.
+  Przy okazji: dzień w toku na Indeksie pokazywał zamrożone maksimum
+  wcześniejszego skanu dnia (`index_history.record` zamraża `active_dedup`
+  razem z odczytem o najwyższym `active`, nie z bieżącym) — `provisional_now`
+  liczy stan bazy TERAZ, żeby pusty marker mówił to samo, co reszta serwisu.
 - **Indeks podaży i wykresy ruchu na rynku** w `docs/analytics.html`
   (odpowiednik `trend.html` z SONAR-POKOJOWY). Sześć wykresów ApexCharts nad
   dotychczasową analityką: dzienna liczba aktywnych ofert z liniami MAX/MIN

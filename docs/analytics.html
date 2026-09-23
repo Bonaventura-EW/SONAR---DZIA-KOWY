@@ -135,6 +135,31 @@
                 </p>
             </div>
 
+            <div class="chart-card">
+                <h2>💲↓ Obniżki cen — ile ofert dziennie tanieje</h2>
+                <div class="card-sub" id="priceDropLabel">Dzienna liczba obniżek + średnia 7-dniowa</div>
+                <div id="priceDropChart" class="apex-wrap apex-wrap-sm"><div class="chart-loading">Ładowanie danych…</div></div>
+                <p class="chart-foot">
+                    <strong>Skąd dane:</strong> dla każdego dnia liczba ZMIAN ceny na niższą
+                    (<code>price.price_changes</code>, zapisywane przy każdej zmianie ceny od
+                    pierwszego skanu). Liczymy <strong>zdarzenia, nie oferty</strong> — dwie
+                    obniżki tej samej oferty w jednym dniu to dwa punkty, bo pytanie brzmi
+                    „ile było obniżek", nie „ile ofert potaniało". To częstotliwość, nie skala
+                    złotówkowa — im wyższy wykres, tym częściej sprzedający obniżają ceny.
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <h2>💲↑ Podwyżki cen — ile ofert dziennie drożeje</h2>
+                <div class="card-sub" id="priceRiseLabel">Dzienna liczba podwyżek + średnia 7-dniowa</div>
+                <div id="priceRiseChart" class="apex-wrap apex-wrap-sm"><div class="chart-loading">Ładowanie danych…</div></div>
+                <p class="chart-foot">
+                    <strong>Skąd dane:</strong> ten sam licznik zdarzeń co obniżki, tylko dla zmian
+                    ceny na wyższą. Osobny wykres, bo podwyżek jest zwykle wyraźnie mniej niż
+                    obniżek — na wspólnej skali z tamtym wykresem leżałyby płasko przy zerze.
+                </p>
+            </div>
+
             <div class="chart-card" id="promotedCard">
                 <h2>⭐ Promowane ogłoszenia — płatne wyróżnienia na listingu</h2>
                 <div class="card-sub" id="promoLabel">Dzienna liczba wyróżnionych ofert + udział wśród ofert OLX</div>

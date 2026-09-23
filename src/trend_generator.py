@@ -7,7 +7,9 @@ Zasila sekcję „Indeks podaży i ruch na rynku" w docs/analytics.html:
                 pasma świeże / recykling,
   * odpływ    — ile ofert znika z listingów danego dnia,
   * napływ    — nowe / reaktywacje / suma,
-  * promowane — płatne wyróżnienia OLX + ich udział w rynku.
+  * promowane — płatne wyróżnienia OLX + ich udział w rynku,
+  * zmiany cen — ile ofert dziennie tanieje / drożeje (częstotliwość, nie
+                skala złotówkowa) — patrz `build_price_changes`.
 
 Indeks czytamy z data/index_history.json — MIERZONEGO stanu bazy po każdym
 skanie (patrz src/index_history.py), nie z rekonstrukcji wstecznej. Różnica jest
@@ -328,16 +330,23 @@ def _artifact_days(counts, series):
             if index.get(day) and value > index[day] * ARTIFACT_SHARE_OF_INDEX}
 
 
-def build_outflow(offers, series=None, uncounted=None):
+def build_outflow(offers, series=None, uncounted=None, base_dir=None):
     """Dzienny odpływ ofert (ile zniknęło z listingów) + średnia krocząca 7 dni.
 
-    Zniknięcie bierzemy z `deactivation_dates` (zapisywane od 2026-09-03) i ze
-    starego `deactivated_at`, a gdy oferta nie ma żadnego z nich, a jest
-    nieaktywna — z `last_seen`. Historia jest ZANIŻONA: stare pole trzyma tylko
-    OSTATNIE zniknięcie, więc oferta, która umarła i wróciła, nie zostawiła
-    śladu po pierwszej śmierci. Widać to w bilansie: napływ − odpływ nie schodzi
-    się z przyrostem Indeksu, a różnica to mniej więcej liczba niezapisanych
-    reaktywacji. Szereg domyka się sam w miarę kolejnych skanów.
+    Zniknięcie bierzemy z `deactivation_dates`/`deactivated_at`, ale dla
+    OSTATNIEGO (wciąż otwartego) zdarzenia oferty podmieniamy datę na
+    last_seen+1 — pierwszy dzień, którego już nie widzieliśmy. `deactivation_dates`
+    to dzień, w którym pipeline POTWIERDZIŁ zniknięcie (main._mark_inactive), a
+    przy blokadzie portalu (ochrona z tej samej funkcji, patrz CLAUDE.md pkt.4)
+    potwierdzenie przychodzi dopiero w dniu powrotu źródła — z zaległością całej
+    blokady naraz (regresja z audytu 2026-09-03: 12 dni ciszy OLX, 231 ofert w
+    jednym dniu). last_seen+1 rozkłada tę zaległość na dni, w których oferty
+    realnie zniknęły. Wcześniejsze, już zamknięte powrotem przerwy zostają przy
+    dacie z `deactivation_dates` — nie mamy zapisanego last_seen sprzed nich.
+
+    Dni bez ani jednego skanu źródła (`blind_source_days`) maskujemy jako brak
+    pomiaru: inaczej zaległość rozłożona po last_seen+1 wciąż rysowałaby się
+    jako realny odpływ w dniach, w których nic nie wiedzieliśmy o tym źródle.
     """
     days, _ = _axis(offers, series)
     if not days:
@@ -347,16 +356,18 @@ def build_outflow(offers, series=None, uncounted=None):
     dep = {}
     for o in offers:
         gone, _, _ = life_events(o)
-        if not gone and not o.get('active') and o.get('last_seen'):
+        if not o.get('active') and o.get('last_seen'):
             try:
-                gone = [_d(o['last_seen'])]
+                real_gone = _d(o['last_seen']) + timedelta(days=1)
+                gone = (gone[:-1] if gone else []) + [real_gone]
             except (ValueError, TypeError):
-                gone = []
+                pass
         for d in gone:
             if d >= start:
                 dep[d] = dep.get(d, 0) + 1
 
-    return _flow_metric(dep, days, exclude=_artifact_days(dep, series),
+    blind = set(blind_source_days(base_dir))
+    return _flow_metric(dep, days, exclude=_artifact_days(dep, series) | blind,
                         uncounted=uncounted)
 
 
@@ -452,6 +463,50 @@ def build_bands(offers, series=None):
         new_series.append([ms, index_value - scaled])
         react_series.append([ms, scaled])
     return {'new': new_series, 'react': react_series}
+
+
+def build_price_changes(offers, series=None, uncounted=None):
+    """Dzienna CZĘSTOTLIWOŚĆ zmian cen — dwa osobne szeregi: ile ofert danego
+    dnia potaniało i ile podrożało.
+
+    Źródło: `price.price_changes` (main._update_existing dopisuje wpis
+    `{old_price, new_price, changed_at, trend}` przy KAŻDEJ zmianie ceny —
+    pole istnieje od pierwszego skanu, historia jest kompletna, bez
+    zaniżenia wstecz jak przy odpływie/napływie).
+
+    Liczymy ZDARZENIA, nie oferty: dwie obniżki jednej oferty w jednym dniu to
+    dwa punkty. To świadoma różnica wobec odpływu (tam dedup po (oferta, dzień)
+    jest konieczny, bo jedna oferta to jeden marker na mapie) — tu `price_changes`
+    to już lista zdarzeń i pytamy „ile było obniżek", nie „ile ofert potaniało".
+
+    Podwyżki i obniżki rysujemy jako DWA osobne wykresy (patrz trend.js) —
+    podwyżek jest zwykle znacznie mniej, na wspólnej skali leżałyby płasko
+    przy zerze.
+    """
+    days, _ = _axis(offers, series)
+    if not days:
+        return None
+    start = days[0]
+
+    down, up = {}, {}
+    for o in offers:
+        for change in ((o.get('price') or {}).get('price_changes') or []):
+            changed_at = change.get('changed_at')
+            if not changed_at:
+                continue
+            try:
+                d = _d(changed_at)
+            except (ValueError, TypeError):
+                continue
+            if d < start:
+                continue
+            bucket = down if change.get('trend') == 'down' else up
+            bucket[d] = bucket.get(d, 0) + 1
+
+    return {
+        'down': _flow_metric(down, days, uncounted=uncounted),
+        'up': _flow_metric(up, days, uncounted=uncounted),
+    }
 
 
 def load_scan_days(base_dir=None) -> set:
@@ -697,6 +752,19 @@ def build_promoted(offers, series, scan_days=None, base_dir=None, uncounted=None
     return metric
 
 
+def count_active(offers) -> int:
+    """Ile ofert ma `active: true` PRAWDZIWIE TERAZ — stan po OSTATNIM skanie,
+    nie maksimum doby jak `index_history` (patrz `record()`: `active_dedup`
+    zamraża się razem z odczytem, który miał najwyższe `active`, więc na
+    dzień z dwoma skanami może zostać z PIERWSZEGO, nie z bieżącego).
+
+    Służy do `provisional_now`: dzień w toku ma na wykresie pokazywać tę samą
+    liczbę, którą reszta serwisu widzi TERAZ, a nie szczyt wcześniejszego,
+    częściowego skanu tego dnia.
+    """
+    return sum(1 for o in offers if o.get('active'))
+
+
 def count_dedup_active(offers) -> int:
     """Ile aktywnych ofert widać na mapie — bez tych, które wskazują duplikatem
     na inną AKTYWNĄ ofertę (ta sama działka wystawiona w kilku źródłach).
@@ -807,16 +875,22 @@ def generate(base_dir=None) -> bool:
         # dzień jeszcze nietrwały: front oznacza go na wykresach, a średnie
         # i rekordy już go nie widzą
         'provisional_ms': _day_ms(provisional) if provisional else None,
+        # stan PO OSTATNIM skanie (nie szczyt doby jak `current`/`series`) —
+        # front podmienia nim ostatni punkt Indeksu na dzień w toku, żeby
+        # pusty marker odpowiadał na „ile jest ofert dzisiaj" tą samą liczbą
+        # co reszta serwisu, a nie zamrożonym maksimum wcześniejszego skanu
+        'provisional_now': count_active(offers) if provisional else None,
         # front rysuje na nich pusty znacznik: „to prawdziwe zdarzenia, ale nie
         # jedna normalna doba" (dzień w toku + dni nadrabiania zaległości)
         'uncounted_ms': sorted(_day_ms(d) for d in uncounted),
         'deltas': compute_deltas(series),
         'series': series,
-        'outflow': build_outflow(offers, series, uncounted),
+        'outflow': build_outflow(offers, series, uncounted, base_dir),
         'inflow': build_inflow(offers, series, uncounted),
         'bands': build_bands(offers, series),
         'promoted': build_promoted(offers, series, load_scan_days(base_dir),
                                    base_dir, uncounted),
+        'price_changes': build_price_changes(offers, series, uncounted),
         # odcinki, w których źródło nie odpowiadało — front je zakreskowuje
         'blind_ranges': blind_ranges(base_dir),
         # ile par „zniknęła i zaraz wróciła" odsialiśmy jako zacięcie scrapera
@@ -842,6 +916,10 @@ def generate(base_dir=None) -> bool:
           f"rekord={inf.get('max_day')} ({inf.get('max_label')})")
     print(f"   🧹 odsiane mrugnięcia pipeline'u (powrót ≤{FLAP_MAX_DAYS} dni): "
           f"{data['flapping']['pairs']} par")
+    pc = data['price_changes'] or {}
+    down, up = pc.get('down') or {}, pc.get('up') or {}
+    print(f"   💲↓ obniżki: łącznie={down.get('total')}, śr={down.get('rate')}/dzień")
+    print(f"   💲↑ podwyżki: łącznie={up.get('total')}, śr={up.get('rate')}/dzień")
     for r in data['blind_ranges']:
         first = datetime.fromtimestamp(r['from'] / 1000, tz=timezone.utc).date()
         print(f"   🚫 {r['source']}: bez odpowiedzi przez {r['days']} dni "

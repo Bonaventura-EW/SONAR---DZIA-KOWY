@@ -1,9 +1,10 @@
 /**
  * Sekcja „Indeks podaży i ruch na rynku" na docs/analytics.html.
  *
- * Czyta docs/trend_data.json (src/trend_generator.py) i rysuje sześć wykresów
+ * Czyta docs/trend_data.json (src/trend_generator.py) i rysuje osiem wykresów
  * ApexCharts: Indeks aktywnych ofert (z rozbiciem na pasma świeże/recykling),
- * odpływ, nowe oferty, napływ całkowity, reaktywacje i płatne wyróżnienia OLX.
+ * odpływ, nowe oferty, napływ całkowity, reaktywacje, obniżki/podwyżki cen
+ * i płatne wyróżnienia OLX.
  *
  * Wzorowane na trend.html z SONAR-POKOJOWY; paleta i tło dostosowane do
  * jasnego motywu tego serwisu (assets/style.css).
@@ -199,6 +200,19 @@
             return;
         }
         var cur = d.current, mx = d.max, mn = d.min, unit = d.unit || 'ofert';
+
+        // Dzień w toku: ostatni punkt zamrożony jest na szczycie WCZEŚNIEJSZEGO
+        // odczytu dnia (patrz index_history.record — `active_dedup` zamraża się
+        // razem z odczytem o najwyższym `active`, nie z bieżącym). Podmieniamy
+        // go stanem PO OSTATNIM skanie, żeby pusty marker odpowiadał na „ile
+        // jest ofert dzisiaj" tą samą liczbą, którą widać w reszcie serwisu.
+        if (d.provisional_ms != null && d.provisional_now != null) {
+            var lastIdx = series.length - 1;
+            if (series[lastIdx][0] === d.provisional_ms) {
+                series = series.slice(0, lastIdx).concat([[d.provisional_ms, d.provisional_now]]);
+                cur = d.provisional_now;
+            }
+        }
         var range = (mx - mn) || 1;
 
         // Etykiety MAX/MIN/„teraz" potrafią się nakładać, gdy bieżąca wartość
@@ -439,16 +453,19 @@
     }
 
     var CHART_IDS = ['trendChart', 'outflowChart', 'newFlowChart', 'allFlowChart',
-                     'reactFlowChart', 'promotedChart'];
+                     'reactFlowChart', 'priceDropChart', 'priceRiseChart', 'promotedChart'];
 
     function init(d) {
         var prov = d.provisional_ms || null;
         var unc = d.uncounted_ms || (prov ? [prov] : []);
+        // dzień w toku: pokazujemy stan po ostatnim skanie (patrz renderIndex),
+        // nie zamrożone maksimum wcześniejszego odczytu tego samego dnia
+        var curNow = (prov != null && d.provisional_now != null) ? d.provisional_now : d.current;
         if (d.title) setText('trendTitle', '📉 Indeks podaży — ' + d.title);
         setText('trendLastLabel', d.last_label || '—');
-        setText('trendCurVal', d.current == null ? '—' : d.current);
+        setText('trendCurVal', curNow == null ? '—' : curNow);
         setText('trendDedupNote', d.current_dedup == null ? '—'
-            : (d.current + ' ofert w bazie → ' + d.current_dedup + ' pinezek na mapie'));
+            : (curNow + ' ofert w bazie → ' + d.current_dedup + ' pinezek na mapie'));
         renderDeltas(d.deltas, prov);
         renderIndex(d);
 
@@ -483,6 +500,21 @@
         }
 
         if (d.flapping && d.flapping.pairs != null) setText('flapCount', d.flapping.pairs);
+
+        var pc = d.price_changes;
+        if (pc && pc.down && pc.down.daily && pc.down.daily.length) {
+            setHTML('priceDropLabel', flowSummary(pc.down, 'Tanieje średnio', '',
+                'Jasna = wygładzony trend (7 dni).') + provisionalNote(prov));
+            setHTML('priceRiseLabel', flowSummary(pc.up, 'Drożeje średnio', '', ''));
+            mount('priceDropChart', flowOptions(pc.down, 'Obniżek danego dnia',
+                                                [GREEN, '#86efac'], d.blind_ranges, unc));
+            mount('priceRiseChart', flowOptions(pc.up, 'Podwyżek danego dnia',
+                                                [RED, '#f59e0b'], d.blind_ranges, unc));
+        } else {
+            ['priceDropChart', 'priceRiseChart'].forEach(function (id) {
+                fail(id, 'Brak danych o zmianach cen.');
+            });
+        }
 
         var pr = d.promoted;
         if (pr && pr.daily && pr.daily.length) {
