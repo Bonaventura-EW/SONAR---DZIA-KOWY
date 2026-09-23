@@ -42,6 +42,18 @@ technicznymi.
   `index_history` zapisuje realną liczbę skanów dnia, `.gitignore` łapie `*.tmp`.
 
 ### Dodane
+- **Dwa szeregi częstotliwości zmian cen** (propagacja z SONAR-POKOJOWY,
+  manifest `2026-09-15-price-change-series`, issue #27): ile ofert dziennie
+  tanieje i ile drożeje, osobne wykresy w `docs/analytics.html`
+  (`trend_generator.build_price_changes`). Źródło to `price.price_changes`
+  (zapisywane w `main.py` przy każdej zmianie ceny, kompletne od pierwszego
+  skanu) — liczymy ZDARZENIA, nie oferty: dwie obniżki tej samej oferty w
+  jednym dniu to dwa punkty. Prostsze niż u brata, bo tu nie ma wersjonowania
+  ofert (`versions[]`), więc historia nie jest rozbita na dwa źródła.
+  Przy okazji: dzień w toku na Indeksie pokazywał zamrożone maksimum
+  wcześniejszego skanu dnia (`index_history.record` zamraża `active_dedup`
+  razem z odczytem o najwyższym `active`, nie z bieżącym) — `provisional_now`
+  liczy stan bazy TERAZ, żeby pusty marker mówił to samo, co reszta serwisu.
 - **Indeks podaży i wykresy ruchu na rynku** w `docs/analytics.html`
   (odpowiednik `trend.html` z SONAR-POKOJOWY). Sześć wykresów ApexCharts nad
   dotychczasową analityką: dzienna liczba aktywnych ofert z liniami MAX/MIN
