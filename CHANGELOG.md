@@ -2,6 +2,38 @@
 
 ## [Niewydane]
 
+### Naprawione (rotacja doprecyzowania adresu, 2026-09-22)
+
+Propagacja z SONAR-POKOJOWY (manifest `2026-09-07-address-precision-upgrade`):
+`known_offers` w `otodom_scraper.py` / `adresowo_scraper.py` zamraża
+title/description/coords na zawsze po pierwszym pobraniu strony szczegółów —
+dla Otodom dotyczy każdej oferty z coords, dla Adresowo każdej znanej oferty
+(nawet bez coords). Jeśli ogłoszeniodawca doprecyzuje adres (np. dopisze numer
+budynku, albo przesunie pinezkę Otodom z centroidu dzielnicy na konkretny
+punkt) TYDZIEŃ po wystawieniu, a cena/tytuł się nie zmienią — `location_refiner.py`
+nigdy tego nie zobaczy, bo czyta tylko zamrożony tekst z bazy. Wzorzec
+zweryfikowany we własnym kodzie (nie tylko opisany u brata): 2026-09-22 baza
+miała ~20 aktywnych ofert Otodom i ~31 Adresowo z markerem `approx`/bez GPS.
+
+- **`details_fetched_at`** na każdej ofercie Otodom/Adresowo odróżnia realne
+  pobranie strony szczegółów od danych skopiowanych z `known_offers` — bez
+  tego nie dało się wiedzieć, które oferty naprawdę czytaliśmy ostatnio.
+- **Rotacja** (`main._apply_rotation`): budżet 10 ofert/skan/źródło,
+  najdawniej czytane najpierw, tylko wśród ofert z markerem `approx` albo bez
+  coords, z co najmniej 3-dniowym odstępem od ostatniego realnego pobrania.
+  Wybrane oferty znikają z indeksu `known_offers`, co wymusza w scraperze
+  pełne ponowne pobranie strony szczegółów (ten sam mechanizm co dla nowych
+  ofert — bez zmian w logice `scrape()` poza przeniesieniem znacznika).
+  Dotyczy TYLKO Otodom/Adresowo — OLX nigdy nie dociąga strony szczegółów.
+  Budżety nie są zmierzone na żywym ruchu (brat ostrzega, że jego szacunek
+  sprzed wdrożenia mylił się 12×) — do przeliczenia po pierwszych realnych
+  skanach, jeśli narzut na czas skanu okaże się zbyt duży.
+- W przeciwieństwie do brata nie było potrzeby osobnej klasy zmiany
+  „doprecyzowanie" ani ochrony historii cen przed resetem — nasz kod nie ma
+  mechanizmu kasowania historii cen przy zmianie adresu, a hierarchia
+  precyzji coords (`exact > street > approx`, `_update_existing`) już
+  wcześniej pilnowała, żeby świeższe dane nigdy nie obniżały precyzji.
+
 ### Naprawione (audyt wykresów rynku, 2026-09-03)
 
 Przegląd logiki sekcji „Indeks podaży" pod kątem dziur wykazał, że wykresy

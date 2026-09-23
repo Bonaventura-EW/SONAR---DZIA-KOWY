@@ -8,12 +8,16 @@ Otodom (Next.js) osadza w HTML pełny stan JSON (`__NEXT_DATA__`):
 
 Strategia: listing dla wszystkich ofert + strona szczegółów tylko dla NOWYCH
 ofert (znane mają już coords w bazie — patrz `known_offers` w `scrape()`).
+Budżet ofert z nieprecyzyjnym markerem wraca do pobierania mimo bycia
+"znanym" — main.py::_apply_rotation usuwa je z `known_offers`, żeby nie
+zamrozić title/description/coords na zawsze.
 """
 
 import json
 import re
 import time
 import random
+from datetime import datetime, timezone
 from typing import Dict, List, Optional
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -185,6 +189,12 @@ class OtodomDzialkiScraper:
         if not data:
             return offer
 
+        # FIX 2026-09-22: realne pobranie strony szczegółów — odróżnia to od
+        # danych skopiowanych z known_offers (patrz scrape()), żeby rotacja
+        # w main.py::_apply_rotation wiedziała, które oferty naprawdę czytaliśmy
+        # ostatnio, a nie tylko przepisaliśmy z cache.
+        offer['details_fetched_at'] = datetime.now(timezone.utc).isoformat()
+
         ad = ((data.get('props') or {}).get('pageProps') or {}).get('ad') or {}
         location = ad.get('location') or {}
 
@@ -236,6 +246,7 @@ class OtodomDzialkiScraper:
                 offer['plot_type'] = known.get('plot_type') or offer['plot_type']
                 if known.get('description'):
                     offer['description'] = known['description']
+                offer['details_fetched_at'] = known.get('details_fetched_at')
             else:
                 to_fetch.append(offer)
 

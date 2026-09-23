@@ -31,6 +31,27 @@ MAX_PRICE_CHANGE_PERCENT = 70
 # wcześniejszej liczby aktywnych ofert tego źródła, inaczej pomijamy dezaktywację
 MIN_SCRAPE_RATIO = 0.3
 
+# FIX 2026-09-22 (propagacja z SONAR-POKOJOWY, manifest
+# 2026-09-07-address-precision-upgrade): `known_offers` w otodom_scraper.py /
+# adresowo_scraper.py zamraża title/description/coords na zawsze po pierwszym
+# pobraniu — jeśli ogłoszeniodawca doprecyzuje adres (np. dopisze numer domu)
+# TYDZIEŃ po wystawieniu, a cena/tytuł się nie zmienią, nigdy tego nie
+# zobaczymy (refiner w location_refiner.py czyta tylko tekst z bazy). Rotacja
+# wymusza ponowne pobranie strony szczegółów dla budżetu najdawniej czytanych
+# ofert z nieprecyzyjnym markerem (coords_precision 'approx' albo brak coords)
+# — patrz `_apply_rotation`. Dotyczy TYLKO Otodom/Adresowo (mają
+# fetch_details; OLX nigdy nie dociąga strony szczegółów).
+# Budżety: 2026-09-22 mieliśmy ~20 ofert Otodom + ~31 Adresowo z nieprecyzyjnym
+# markerem; 10/źródło/skan daje pełny obieg w 1-2 dni przy 2 skanach/dzień.
+# Osobne budżety, bo Otodom pobiera wielowątkowo a Adresowo sekwencyjnie —
+# inny koszt na rekord. Koszt per skan NIE był mierzony na żywym ruchu
+# (środowisko bez dostępu do sieci przy pisaniu tej zmiany) — brat ostrzega,
+# że jego szacunek sprzed wdrożenia mylił się 12x, więc zmierz to na
+# prawdziwym skanie i przelicz budżety, jeśli okażą się zbyt kosztowne.
+ROTATION_BUDGET_OTODOM = 10
+ROTATION_BUDGET_ADRESOWO = 10
+ROTATION_MIN_AGE_DAYS = 3
+
 
 class SonarDzialkowy:
     def __init__(self, data_file: str = paths.OFFERS_JSON,
@@ -66,6 +87,8 @@ class SonarDzialkowy:
 
         Uwaga: oferty BEZ coords też są "znane" (centroid miasta został im
         celowo usunięty) — bez tego scraper refetchowałby je co skan.
+        `_apply_rotation` usuwa z indeksu budżet najdawniej czytanych ofert
+        z nieprecyzyjnym markerem, żeby wymusić ich ponowne pobranie.
         """
         known = {}
         for offer in self.database['offers']:
@@ -80,8 +103,9 @@ class SonarDzialkowy:
                 'title': offer.get('title'),
                 'plot_type': offer.get('plot_type'),
                 'image': offer.get('image'),
+                'details_fetched_at': offer.get('details_fetched_at'),
             }
-        return known
+        return self._apply_rotation(known, ROTATION_BUDGET_ADRESOWO)
 
     def _known_agency_offers(self, source: str) -> Dict:
         """Indeks znanych ofert agencji — scraper pomija strony szczegółów."""
@@ -97,7 +121,10 @@ class SonarDzialkowy:
         return known
 
     def _known_otodom_offers(self) -> Dict:
-        """Indeks znanych ofert Otodom — pozwala scraperowi pominąć strony szczegółów."""
+        """Indeks znanych ofert Otodom — pozwala scraperowi pominąć strony
+        szczegółów. `_apply_rotation` usuwa z indeksu budżet najdawniej
+        czytanych ofert z nieprecyzyjnym markerem, żeby wymusić ich ponowne
+        pobranie (patrz ROTATION_BUDGET_OTODOM)."""
         known = {}
         for offer in self.database['offers']:
             if offer.get('source') != 'otodom':
@@ -109,7 +136,38 @@ class SonarDzialkowy:
                     'coords_precision': loc.get('coords_precision'),
                     'plot_type': offer.get('plot_type'),
                     'description': offer.get('description'),
+                    'details_fetched_at': offer.get('details_fetched_at'),
                 }
+        return self._apply_rotation(known, ROTATION_BUDGET_OTODOM)
+
+    def _apply_rotation(self, known: Dict, budget: int) -> Dict:
+        """Usuwa z `known` do `budget` najdawniej pobranych ofert z
+        nieprecyzyjnym markerem (coords_precision 'approx' albo brak coords).
+
+        Brak wpisu w `known` = scraper traktuje ofertę jak nową i pobiera
+        stronę szczegółów od nowa (patrz otodom_scraper.scrape /
+        adresowo_scraper.scrape) — to jedyny sposób, żeby "znana" oferta
+        odzyskała świeży title/description/coords. Wybór: najdawniej
+        pobrane najpierw, z co najmniej ROTATION_MIN_AGE_DAYS od ostatniego
+        realnego pobrania (żeby nie odświeżać w kółko oferty, której marker
+        stał się approx dopiero w bieżącym skanie).
+        """
+        now = datetime.now(self.tz)
+        candidates = []
+        for offer_id, info in known.items():
+            if info.get('coords_precision') in ('exact', 'street'):
+                continue
+            raw_ts = info.get('details_fetched_at')
+            try:
+                age_days = (now - datetime.fromisoformat(raw_ts)).total_seconds() / 86400
+            except (TypeError, ValueError):
+                age_days = float('inf')  # brak znacznika = potraktuj jako najstarsze
+            if age_days < ROTATION_MIN_AGE_DAYS:
+                continue
+            candidates.append((-age_days, offer_id))
+        candidates.sort()
+        for _, offer_id in candidates[:budget]:
+            del known[offer_id]
         return known
 
     def _find_existing(self, offer_id: str):
@@ -160,6 +218,11 @@ class SonarDzialkowy:
             existing['description'] = new['description']
         if new.get('image'):
             existing['image'] = new['image']
+        # znacznik realnego pobrania strony szczegółów (Otodom/Adresowo) —
+        # napędza rotację w _apply_rotation; źródła bez fetch_details (OLX,
+        # agencje) nigdy go nie ustawiają, więc `new` go tu nie ma
+        if new.get('details_fetched_at'):
+            existing['details_fetched_at'] = new['details_fetched_at']
 
         # płatne wyróżnienie na listingu — dotyczy każdej oferty (sygnał niosą
         # tylko oferty OLX; reszta źródeł da tu po prostu False)
