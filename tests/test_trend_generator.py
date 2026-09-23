@@ -7,6 +7,8 @@ Pokrywa bez ruszania sieci i bez dotykania prawdziwej bazy:
   trend_generator.build_outflow    → dzienny odpływ + średnia 7 dni
   trend_generator.build_inflow     → nowe / reaktywacje / suma
   trend_generator.build_bands      → suma pasm == Indeks
+  trend_generator.build_price_changes → obniżki/podwyżki cen, zdarzenia nie oferty
+  trend_generator.count_active     → stan po OSTATNIM skanie (provisional_now)
   trend_generator.compute_deltas   → 1D/1M, brak danych → None
 
 Wzorowane na trend.html z SONAR-POKOJOWY (patrz .propagation/changes).
@@ -465,6 +467,81 @@ def test_udzial_wyroznien_bez_znanego_mianownika_to_luka(repo):
 
     assert promoted['share'][0][1] is None       # zero byłoby zmyślone
     assert promoted['current_share'] is None
+
+
+def test_build_price_changes_liczy_zdarzenia_nie_oferty():
+    """Dwie obniżki tej samej oferty w jednym dniu to DWA punkty — pytamy
+    „ile było obniżek", nie „ile ofert potaniało" (`price_changes` to już
+    lista zdarzeń, dedup po ofercie nie jest tu potrzebny)."""
+    series = [[_ms(2026, 6, 12), 100], [_ms(2026, 6, 13), 100]]
+    offer = {'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
+             'last_seen': '2026-06-13T08:00:00+02:00', 'active': True,
+             'price': {'price_changes': [
+                 {'old_price': 100000, 'new_price': 95000,
+                  'changed_at': '2026-06-12T08:00:00+02:00', 'trend': 'down'},
+                 {'old_price': 95000, 'new_price': 90000,
+                  'changed_at': '2026-06-12T18:00:00+02:00', 'trend': 'down'},
+             ]}}
+    changes = tg.build_price_changes([offer], series)
+
+    assert [v for _, v in changes['down']['daily']] == [2, 0]
+    assert changes['down']['total'] == 2
+
+
+def test_build_price_changes_dzieli_obnizki_od_podwyzek():
+    series = [[_ms(2026, 6, 12), 100]]
+    offers = [
+        {'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
+         'last_seen': '2026-06-12T08:00:00+02:00', 'active': True,
+         'price': {'price_changes': [
+             {'old_price': 100000, 'new_price': 95000,
+              'changed_at': '2026-06-12T08:00:00+02:00', 'trend': 'down'},
+         ]}},
+        {'id': 'b', 'first_seen': '2026-06-12T08:00:00+02:00',
+         'last_seen': '2026-06-12T08:00:00+02:00', 'active': True,
+         'price': {'price_changes': [
+             {'old_price': 90000, 'new_price': 95000,
+              'changed_at': '2026-06-12T08:00:00+02:00', 'trend': 'up'},
+         ]}},
+    ]
+    changes = tg.build_price_changes(offers, series)
+
+    assert changes['down']['total'] == 1
+    assert changes['up']['total'] == 1
+
+
+def test_build_price_changes_bez_ofert_bez_zmian_zwraca_none():
+    series = [[_ms(2026, 6, 12), 100]]
+    offers = [{'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
+               'last_seen': '2026-06-12T08:00:00+02:00', 'active': True}]
+    changes = tg.build_price_changes(offers, series)
+
+    assert changes['down']['total'] == 0 and changes['up']['total'] == 0
+
+
+def test_count_active_liczy_stan_po_ostatnim_skanie():
+    offers = [{'active': True}, {'active': True}, {'active': False}]
+    assert tg.count_active(offers) == 2
+
+
+def test_generate_prowizoryczny_dzien_niesie_stan_po_ostatnim_skanie(repo):
+    """`provisional_now` ma pokazywać żywy stan bazy (dziś), nie szczyt
+    zamrożony w index_history przez wcześniejszy, częściowy skan dnia."""
+    today = datetime.now(tg.TZ).date()
+    (repo / 'data' / 'offers.json').write_text(json.dumps({'offers': [
+        {'id': 'a', 'first_seen': (today - timedelta(days=1)).isoformat() + 'T08:00:00+02:00',
+         'last_seen': today.isoformat() + 'T08:00:00+02:00', 'active': True},
+        {'id': 'b', 'first_seen': (today - timedelta(days=1)).isoformat() + 'T08:00:00+02:00',
+         'last_seen': today.isoformat() + 'T08:00:00+02:00', 'active': False},
+    ]}), encoding='utf-8')
+    # jedyny (poranny) skan dziś zapisał active=5 — wyższe niż bieżący stan bazy (1)
+    index_history.record(5, datetime.now(tg.TZ).isoformat(), base_dir=repo)
+
+    tg.generate(base_dir=repo)
+
+    data = json.loads((repo / 'docs' / 'trend_data.json').read_text(encoding='utf-8'))
+    assert data['provisional_ms'] is not None
+    assert data['provisional_now'] == 1     # stan bazy TERAZ, nie zamrożone 5
 
 
 def test_generate_zapisuje_komplet_serii(repo):
