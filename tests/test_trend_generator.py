@@ -245,12 +245,15 @@ def test_zrodlo_nieraportowane_nie_jest_slepe(repo):
 
 
 def test_build_outflow_liczy_dzienny_odplyw_i_srednia():
+    """Odpływ trafia w last_seen+1 (pierwszy dzień, którego już nie widzieliśmy),
+    nie w dzień zapisanej daty deaktywacji — patrz
+    test_odplyw_liczony_od_last_seen_nie_od_dnia_potwierdzenia."""
     series = [[_ms(2026, 6, 12), 100], [_ms(2026, 6, 13), 100], [_ms(2026, 6, 14), 100]]
     offers = [
         {'id': 'a', 'first_seen': '2026-06-12T08:00:00+02:00',
          'last_seen': '2026-06-13T08:00:00+02:00', 'active': False,
          'deactivated_at': '2026-06-13T20:00:00+02:00'},
-        # oferta bez zapisanej daty deaktywacji → odpływ z last_seen
+        # oferta bez zapisanej daty deaktywacji → odpływ z last_seen+1
         {'id': 'b', 'first_seen': '2026-06-12T08:00:00+02:00',
          'last_seen': '2026-06-13T08:00:00+02:00', 'active': False},
         {'id': 'c', 'first_seen': '2026-06-12T08:00:00+02:00',
@@ -258,10 +261,35 @@ def test_build_outflow_liczy_dzienny_odplyw_i_srednia():
     ]
     out = tg.build_outflow(offers, series)
 
-    assert [v for _, v in out['daily']] == [0, 2, 0]
+    assert [v for _, v in out['daily']] == [0, 0, 2]
     assert out['total'] == 2
-    assert out['max_day'] == 2 and out['max_label'] == '13.06'
-    assert [v for _, v in out['avg']] == [0.0, 1.0, round(2 / 3, 1)]
+    assert out['max_day'] == 2 and out['max_label'] == '14.06'
+    assert [v for _, v in out['avg']] == [0.0, 0.0, round(2 / 3, 1)]
+
+
+def test_odplyw_liczony_od_last_seen_nie_od_dnia_potwierdzenia(repo):
+    """Regresja z audytu 2026-09-03: blokada OLX 13-14.06, pipeline potwierdza
+    zniknięcie dopiero 15.06 (dzień powrotu, z zaległością całej blokady naraz).
+    Odpływ ma trafić w dzień realnego zniknięcia (last_seen+1 = 13.06), a ten
+    dzień, będąc ślepy, ma się rysować jako luka — nie jako pik w dniu powrotu."""
+    _write_scan_history(repo, [
+        {'timestamp': '2026-06-12T08:40:00+02:00', 'status': 'completed', 'scraped_olx': 20},
+        {'timestamp': '2026-06-13T08:40:00+02:00', 'status': 'completed', 'scraped_olx': 0},
+        {'timestamp': '2026-06-14T08:40:00+02:00', 'status': 'completed', 'scraped_olx': 0},
+        {'timestamp': '2026-06-15T08:40:00+02:00', 'status': 'completed', 'scraped_olx': 20},
+    ])
+    offer = {'id': 'olx:1', 'first_seen': '2026-06-01T08:00:00+02:00',
+             'last_seen': '2026-06-12T08:00:00+02:00', 'active': False,
+             'deactivation_dates': ['2026-06-15']}
+    days = tg._daily_range(date(2026, 6, 12), date(2026, 6, 15))
+    series = [[tg._day_ms(d), 50] for d in days]
+
+    out = tg.build_outflow([offer], series, base_dir=repo)
+    daily = dict(zip(days, (v for _, v in out['daily'])))
+
+    assert daily[date(2026, 6, 13)] is None    # dzień ślepy → luka, nie zdarzenie
+    assert daily[date(2026, 6, 15)] == 0       # dzień powrotu bez sztucznego piku
+    assert out['total'] == 0                   # jedyne zdarzenie wpadło w zamaskowany dzień
 
 
 def test_build_inflow_rozdziela_nowe_od_reaktywacji():

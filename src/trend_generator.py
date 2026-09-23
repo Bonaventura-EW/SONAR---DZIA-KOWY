@@ -330,16 +330,23 @@ def _artifact_days(counts, series):
             if index.get(day) and value > index[day] * ARTIFACT_SHARE_OF_INDEX}
 
 
-def build_outflow(offers, series=None, uncounted=None):
+def build_outflow(offers, series=None, uncounted=None, base_dir=None):
     """Dzienny odpływ ofert (ile zniknęło z listingów) + średnia krocząca 7 dni.
 
-    Zniknięcie bierzemy z `deactivation_dates` (zapisywane od 2026-09-03) i ze
-    starego `deactivated_at`, a gdy oferta nie ma żadnego z nich, a jest
-    nieaktywna — z `last_seen`. Historia jest ZANIŻONA: stare pole trzyma tylko
-    OSTATNIE zniknięcie, więc oferta, która umarła i wróciła, nie zostawiła
-    śladu po pierwszej śmierci. Widać to w bilansie: napływ − odpływ nie schodzi
-    się z przyrostem Indeksu, a różnica to mniej więcej liczba niezapisanych
-    reaktywacji. Szereg domyka się sam w miarę kolejnych skanów.
+    Zniknięcie bierzemy z `deactivation_dates`/`deactivated_at`, ale dla
+    OSTATNIEGO (wciąż otwartego) zdarzenia oferty podmieniamy datę na
+    last_seen+1 — pierwszy dzień, którego już nie widzieliśmy. `deactivation_dates`
+    to dzień, w którym pipeline POTWIERDZIŁ zniknięcie (main._mark_inactive), a
+    przy blokadzie portalu (ochrona z tej samej funkcji, patrz CLAUDE.md pkt.4)
+    potwierdzenie przychodzi dopiero w dniu powrotu źródła — z zaległością całej
+    blokady naraz (regresja z audytu 2026-09-03: 12 dni ciszy OLX, 231 ofert w
+    jednym dniu). last_seen+1 rozkłada tę zaległość na dni, w których oferty
+    realnie zniknęły. Wcześniejsze, już zamknięte powrotem przerwy zostają przy
+    dacie z `deactivation_dates` — nie mamy zapisanego last_seen sprzed nich.
+
+    Dni bez ani jednego skanu źródła (`blind_source_days`) maskujemy jako brak
+    pomiaru: inaczej zaległość rozłożona po last_seen+1 wciąż rysowałaby się
+    jako realny odpływ w dniach, w których nic nie wiedzieliśmy o tym źródle.
     """
     days, _ = _axis(offers, series)
     if not days:
@@ -349,16 +356,18 @@ def build_outflow(offers, series=None, uncounted=None):
     dep = {}
     for o in offers:
         gone, _, _ = life_events(o)
-        if not gone and not o.get('active') and o.get('last_seen'):
+        if not o.get('active') and o.get('last_seen'):
             try:
-                gone = [_d(o['last_seen'])]
+                real_gone = _d(o['last_seen']) + timedelta(days=1)
+                gone = (gone[:-1] if gone else []) + [real_gone]
             except (ValueError, TypeError):
-                gone = []
+                pass
         for d in gone:
             if d >= start:
                 dep[d] = dep.get(d, 0) + 1
 
-    return _flow_metric(dep, days, exclude=_artifact_days(dep, series),
+    blind = set(blind_source_days(base_dir))
+    return _flow_metric(dep, days, exclude=_artifact_days(dep, series) | blind,
                         uncounted=uncounted)
 
 
@@ -876,7 +885,7 @@ def generate(base_dir=None) -> bool:
         'uncounted_ms': sorted(_day_ms(d) for d in uncounted),
         'deltas': compute_deltas(series),
         'series': series,
-        'outflow': build_outflow(offers, series, uncounted),
+        'outflow': build_outflow(offers, series, uncounted, base_dir),
         'inflow': build_inflow(offers, series, uncounted),
         'bands': build_bands(offers, series),
         'promoted': build_promoted(offers, series, load_scan_days(base_dir),
