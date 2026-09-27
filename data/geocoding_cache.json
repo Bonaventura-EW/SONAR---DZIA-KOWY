@@ -1806,5 +1806,17 @@
    "name": "Inżynierska"
   },
   "ts": 1790450517.8881884
+ },
+ "przechodniej": {
+  "result": null,
+  "ts": 1790511907.7708197
+ },
+ "przechodnia": {
+  "result": {
+   "lat": 51.2472273,
+   "lon": 22.5644127,
+   "name": "Przechodnia"
+  },
+  "ts": 1790511909.3724158
  }
 }
