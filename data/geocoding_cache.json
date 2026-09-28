@@ -385,7 +385,7 @@
  },
  "brzegowa": {
   "result": null,
-  "ts": 1789930951.531455
+  "ts": 1790605551.4706023
  },
  "mełgiewska": {
   "result": {
@@ -1217,19 +1217,19 @@
  },
  "bohaterów września powierzchnia": {
   "result": null,
-  "ts": 1789930954.9240005
+  "ts": 1790605553.055495
  },
  "mpzp": {
   "result": null,
-  "ts": 1789930956.4676945
+  "ts": 1790605554.639789
  },
  "bohaterów września. nieruchomość": {
   "result": null,
-  "ts": 1789930957.7565105
+  "ts": 1790605555.9557672
  },
  "plan": {
   "result": null,
-  "ts": 1789930959.6481247
+  "ts": 1790605557.7088065
  },
  "feliksa strojnowskiego": {
   "result": {
@@ -1818,5 +1818,21 @@
    "name": "Przechodnia"
   },
   "ts": 1790511909.3724158
+ },
+ "józefa franczaka": {
+  "result": {
+   "lat": 51.2193687,
+   "lon": 22.6243763,
+   "name": "Józefa Franczaka \"Lalka\""
+  },
+  "ts": 1790605559.003019
+ },
+ "józefa franczaka \"lalka\"": {
+  "result": {
+   "lat": 51.2184167,
+   "lon": 22.6267069,
+   "name": "Józefa Franczaka \"Lalka\""
+  },
+  "ts": 1790605560.854325
  }
 }
