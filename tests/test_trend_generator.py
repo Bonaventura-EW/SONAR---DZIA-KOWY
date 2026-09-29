@@ -234,6 +234,71 @@ def test_slepe_zrodlo_to_luka_w_wyroznieniach_nie_zero(repo):
     assert rng['to'] > _ms(2026, 6, 14)   # pas obejmuje dzień nadrabiania zaległości
 
 
+def test_gap_days_lapie_dziure_z_jednym_skanem_ale_nie_zdrowa_dobe(repo):
+    """Regresja z realnych danych: 27-28.08.2026 miały po jednym skanie (opóźniony
+    cron) z przerwą ~20h — powinny trafić do maski. Sąsiednie dni z dwoma
+    skanami (przerwa nocna ~14-16h, normalna dla kadencji 2x/dzień) NIE mogą
+    zostać złapane, inaczej próg ucinałby zdrowe doby co noc."""
+    _write_scan_history(repo, [
+        {'timestamp': '2026-08-25T08:37:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-25T18:37:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-26T08:37:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-26T18:37:00+02:00', 'status': 'completed'},
+        # 27-28.08: po jednym skanie, kolejny dopiero wieczorem 29.08 (~20h przerwy)
+        {'timestamp': '2026-08-27T19:52:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-28T20:59:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-29T08:37:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-29T18:37:00+02:00', 'status': 'completed'},
+    ])
+
+    assert tg.gap_days(repo) == {date(2026, 8, 27), date(2026, 8, 28)}
+
+
+def test_gap_days_ignoruje_pierwszy_i_ostatni_dzien_dziennika(repo):
+    """Bez sąsiada z drugiej strony (start/koniec dziennika, doba w toku) nie
+    da się osądzić przerwy — taki dzień zostaje poza oceną, nie w masce."""
+    _write_scan_history(repo, [
+        {'timestamp': '2026-06-12T08:37:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-06-13T08:37:00+02:00', 'status': 'completed'},
+    ])
+    assert tg.gap_days(repo) == set()
+
+
+def test_gap_days_pusty_bez_wystarczajacej_historii(repo):
+    _write_scan_history(repo, [
+        {'timestamp': '2026-06-12T08:37:00+02:00', 'status': 'completed'},
+    ])
+    assert tg.gap_days(repo) == set()
+
+    (repo / 'data' / 'scan_history.json').unlink()
+    assert tg.gap_days(repo) == set()   # brak pliku danych → nie wywraca się
+
+
+def test_dzien_z_dziura_w_obserwacji_nie_ustanawia_rekordu(repo):
+    """Dzień z jednym skanem zamiast dwóch (opóźniony cron) wchodzi do
+    `uncounted` w generate() — słupek zostaje, ale nie liczy się do średniej
+    ani rekordu, tak jak dzień powrotu zablokowanego źródła."""
+    _write_scan_history(repo, [
+        {'timestamp': '2026-08-25T08:37:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-25T18:37:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-26T08:37:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-26T18:37:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-27T19:52:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-28T20:59:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-29T08:37:00+02:00', 'status': 'completed'},
+        {'timestamp': '2026-08-29T18:37:00+02:00', 'status': 'completed'},
+    ])
+    days = tg._daily_range(date(2026, 8, 25), date(2026, 8, 29))
+    series = [[tg._day_ms(d), 100] for d in days]
+    counts = {d: 5 for d in days}
+    counts[date(2026, 8, 27)] = 40  # oferty z opóźnionego skanu, nie rekord rynku
+
+    metric = tg._flow_metric(counts, days, uncounted=tg.gap_days(repo))
+
+    assert dict(zip(days, (v for _, v in metric['daily'])))[date(2026, 8, 27)] == 40
+    assert metric['max_day'] == 5   # 40 nie wchodzi do rekordu
+
+
 def test_zrodlo_nieraportowane_nie_jest_slepe(repo):
     """Starsze wpisy scan_history nie mają pola `scraped_adresowo` — brak pola
     znaczy „nie wiemy", nie „zero ofert"."""
