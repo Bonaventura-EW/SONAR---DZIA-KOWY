@@ -51,6 +51,10 @@ def build_map_offer(offer: dict) -> dict:
         'last_seen': offer.get('last_seen'),
         'active': offer.get('active', False),
         'days_active': offer.get('days_active', 0),
+        # FIX 2026-09-29: czy oferta kiedykolwiek wracała po zniknięciu z listingu
+        # (main.py::_record_event zapisuje reactivation_dates przy reaktywacji) —
+        # napędza checkboxy „Nowe"/„Reaktywowane" w docs/assets/script.js.
+        'reactivated': bool(offer.get('reactivation_dates')),
         'also_at': offer.get('also_at'),
         'promoted': offer.get('promoted', False),  # płatne wyróżnienie na listingu OLX
         # data ostatniego podbicia na listingu OLX (main._track_refresh) —

@@ -114,6 +114,7 @@ function focusOfferFromHash() {
     const typeCb = document.querySelector(`#type-filters input[data-type="${type}"]`);
     if (typeCb) typeCb.checked = true;
     if (colorMode() === 'price') quantileBucketState[quantileIndex(o)] = true;
+    document.getElementById(o.reactivated ? 'origin-reactivated' : 'origin-new').checked = true;
     document.getElementById('time-filter').value = 'all';
     render();
 
@@ -275,7 +276,8 @@ function buildLegend() {
 
 function bindFilterEvents() {
     ['src-olx', 'src-otodom', 'src-adresowo', 'layer-active', 'layer-active-approx',
-     'layer-inactive', 'layer-inactive-approx', 'only-new', 'only-private']
+     'layer-inactive', 'layer-inactive-approx', 'only-new', 'only-private',
+     'origin-new', 'origin-reactivated']
         .forEach(id => document.getElementById(id).addEventListener('change', render));
     document.getElementById('time-filter').addEventListener('change', render);
     document.querySelectorAll('input[name="color-mode"]').forEach(r =>
@@ -315,6 +317,12 @@ function passesFilters(o) {
 
     if (document.getElementById('only-new').checked && !isNew(o)) return false;
     if (document.getElementById('only-private').checked && !o.is_private_owner) return false;
+
+    // pochodzenie: nowa (nigdy nie wróciła po zniknięciu z listingu) vs
+    // reaktywowana — podział rozłączny, więc odznaczenie obu celowo chowa
+    // wszystko (inaczej niż reszta legendy niżej, gdzie brak zaznaczenia = OR)
+    const originId = o.reactivated ? 'origin-reactivated' : 'origin-new';
+    if (!document.getElementById(originId).checked) return false;
 
     if (!typeFilterState[o.plot_type || 'inna']) return false;
 
@@ -780,6 +788,8 @@ function renderCounts() {
     document.getElementById('count-inactive-approx').textContent = `(${c(o => !o.active && isApprox(o))})`;
     document.getElementById('count-new').textContent = `(${c(o => o.active && isNew(o))})`;
     document.getElementById('count-private').textContent = `(${c(o => o.active && o.is_private_owner)})`;
+    document.getElementById('count-origin-new').textContent = `(${c(o => o.active && !o.reactivated)})`;
+    document.getElementById('count-origin-reactivated').textContent = `(${c(o => o.active && o.reactivated)})`;
 }
 
 function renderUnlocalised(offers) {
