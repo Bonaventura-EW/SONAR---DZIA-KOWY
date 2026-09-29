@@ -181,6 +181,14 @@ def normalize_ad(ad: dict) -> Optional[Dict]:
         'image': photos[0] if photos else None,
         'created_at': ad.get('createdTime'),
         'promoted': _is_promoted(ad),  # płatne wyróżnienie na listingu (patrz _is_promoted)
+        # FIX 2026-09-29 (propagacja z SONAR-POKOJOWY, manifest
+        # 2026-09-07-refresh-from-listing-card): data ostatniego odświeżenia
+        # (podbicia) ogłoszenia. U brata trzeba to parsować z tekstu karty HTML
+        # ("Odświeżono dzisiaj o HH:MM" / "Odświeżono dnia D miesiąca"); u nas
+        # OLX niesie gotowy, precyzyjny znacznik ISO wprost w polu
+        # `lastRefreshTime` __PRERENDERED_STATE__ — bez rozróżniania dokładnej
+        # godziny od samej daty. Pokrycie 100% (nie tylko oferty firmowe).
+        'last_refresh_time': ad.get('lastRefreshTime'),
     }
 
 
