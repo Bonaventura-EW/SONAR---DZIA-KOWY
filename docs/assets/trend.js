@@ -91,6 +91,33 @@
         });
     }
 
+    /**
+     * Naprzemienne, subtelne pasy tła co drugi miesiąc (marka przy 7% opacity)
+     * na wykresie Indeksu — najdłuższa seria na stronie, najtrudniej z samych
+     * podpisów osi rozeznać "w którym to było miesiącu". Parzystość liczona od
+     * KALENDARZA (sty/mar/maj…), nie od pierwszego miesiąca serii, i przycięta
+     * do faktycznego zakresu danych (`Math.max`/`Math.min`).
+     */
+    function monthBandsXaxis(daily) {
+        if (!daily || !daily.length) return [];
+        var domainMin = daily[0][0], domainMax = daily[daily.length - 1][0];
+        var bands = [];
+        var cur = new Date(domainMin);
+        cur.setDate(1); cur.setHours(0, 0, 0, 0);
+        while (cur.getTime() <= domainMax) {
+            var next = new Date(cur.getFullYear(), cur.getMonth() + 1, 1);
+            if (cur.getMonth() % 2 === 1) {
+                bands.push({
+                    x: Math.max(cur.getTime(), domainMin),
+                    x2: Math.min(next.getTime(), domainMax),
+                    fillColor: GREEN, opacity: 0.07, borderColor: 'transparent'
+                });
+            }
+            cur = next;
+        }
+        return bands;
+    }
+
     function fail(id, message) {
         var el = document.getElementById(id);
         if (el) el.innerHTML = '<div class="chart-loading">' + message + '</div>';
@@ -287,7 +314,7 @@
                 position: 'front',
                 // bez etykiety: na Indeksie pas mówi „te dni to ostatni znany
                 // stan, nie pomiar", a podpisy zderzałyby się z MAX/MIN
-                xaxis: blindAnnotations(d.blind_ranges, false),
+                xaxis: monthBandsXaxis(series).concat(blindAnnotations(d.blind_ranges, false)),
                 yaxis: yAnnotations,
                 points: [
                     { x: d.max_ts, y: mx, marker: { size: 5, fillColor: RED, strokeColor: '#fff', strokeWidth: 1 } },
@@ -312,7 +339,7 @@
                 ],
                 colors: [GREEN, '#f97316'],
                 stroke: { curve: 'straight', width: 1.5 },
-                annotations: { xaxis: blindAnnotations(d.blind_ranges, false) },
+                annotations: { xaxis: monthBandsXaxis(series).concat(blindAnnotations(d.blind_ranges, false)) },
                 // Stos rysuje się OD ZERA, więc oś nie może być przycięta do
                 // okolic Indeksu jak w trybie sumy — dolne pasmo (dziś ~400)
                 // schowałoby się pod dolną krawędzią i zostałby sam recykling.
