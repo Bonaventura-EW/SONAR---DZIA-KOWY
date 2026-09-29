@@ -53,6 +53,9 @@ def build_map_offer(offer: dict) -> dict:
         'days_active': offer.get('days_active', 0),
         'also_at': offer.get('also_at'),
         'promoted': offer.get('promoted', False),  # płatne wyróżnienie na listingu OLX
+        # data ostatniego podbicia na listingu OLX (main._track_refresh) —
+        # front liczy z niej okno „odświeżona w 24h" (patrz script.js::isRecentlyRefreshed)
+        'last_refresh_time': offer.get('last_refresh_time'),
     }
 
 

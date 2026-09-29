@@ -10,6 +10,7 @@
 
 const LUBLIN_CENTER = [51.2465, 22.5684];
 const NEW_OFFER_DAYS = 7;
+const REFRESH_BADGE_HOURS = 24;  // okno „odświeżona" — patrz isRecentlyRefreshed
 // kolory kwantyli ceny za m²: tani (zielony) → drogi (fioletowy), 10 stopni (decyle)
 const QUANTILE_COLORS = ['#15803d', '#4ca11e', '#84cc16', '#c4d62b', '#eab308',
                          '#f59e0b', '#f97316', '#ef4444', '#db2777', '#7c3aed'];
@@ -143,6 +144,14 @@ function fmtArea(v) {
 function isNew(offer) {
     if (!offer.first_seen) return false;
     return (Date.now() - new Date(offer.first_seen).getTime()) < NEW_OFFER_DAYS * 86400000;
+}
+
+// FIX 2026-09-29 (propagacja z SONAR-POKOJOWY, manifest
+// 2026-09-07-refresh-from-listing-card): sygnał niosą tylko oferty OLX
+// (main._track_refresh) — dla pozostałych źródeł last_refresh_time jest null.
+function isRecentlyRefreshed(offer) {
+    if (!offer.last_refresh_time) return false;
+    return (Date.now() - new Date(offer.last_refresh_time).getTime()) < REFRESH_BADGE_HOURS * 3600000;
 }
 
 function isApprox(offer) {
@@ -327,6 +336,16 @@ function passesFilters(o) {
 
 /* ===== Ikony markerów (kształty z SONAR-POKOJOWY) ===== */
 
+// FIX 2026-09-29 (propagacja z SONAR-POKOJOWY, manifest
+// 2026-09-07-refresh-from-listing-card): brat trzyma dwa niezależne rogi
+// pinezki, bo u niego 63% podbitych ofert miało JEDNOCZEŚNIE badge zmiany
+// ceny — przy jednym rogu z priorytetem sygnał ginąłby w większości
+// przypadków. Zmierzone na żywym skanie u nas (2026-09-29, 61 aktywnych
+// ofert OLX): tylko 3 odświeżone w oknie 24h, z czego 2 pokrywały się z NOWA
+// i 0 z aktywną zmianą ceny — populacje w praktyce rozłączne (działki
+// sprzedają się wolniej niż pokoje/mieszkania, sygnał jest rzadszy). Jeden
+// róg z priorytetem wystarcza; gdyby przyszłe skany pokazały wyższe
+// współwystępowanie, przenieść na dwa rogi jak u brata.
 function badgesHtml(o) {
     const hasPriceChange = o.previous_price && o.price_trend;
     let html = '';
@@ -335,6 +354,8 @@ function badgesHtml(o) {
         html += `<div style="position:absolute;top:-8px;right:-8px;background:${down ? '#28a745' : '#dc3545'};color:white;border-radius:10px;min-width:28px;height:20px;font-size:11px;font-weight:bold;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.3);padding:0 4px;border:2px solid white;">💲${down ? '↓' : '↑'}</div>`;
     } else if (isNew(o)) {
         html += `<div style="position:absolute;top:-5px;right:-5px;background:#ff0000;color:white;border-radius:50%;width:16px;height:16px;font-size:10px;font-weight:bold;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,0.3);">N</div>`;
+    } else if (isRecentlyRefreshed(o)) {
+        html += `<div style="position:absolute;top:-5px;right:-5px;background:#0ea5e9;color:white;border-radius:50%;width:16px;height:16px;font-size:10px;font-weight:bold;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,0.3);">↑</div>`;
     }
     return html;
 }
@@ -343,6 +364,7 @@ function badgesHtml(o) {
 function badgeType(o) {
     if (o.previous_price && o.price_trend) return o.price_trend === 'down' ? 'd' : 'u';
     if (isNew(o)) return 'n';
+    if (isRecentlyRefreshed(o)) return 'r';
     return '';
 }
 
@@ -476,8 +498,10 @@ function popupHtml(o) {
     const alsoAt = o.also_at
         ? `<a class="secondary" href="${o.also_at}" target="_blank" rel="noopener">Druga oferta ↗</a>` : '';
     const status = o.active ? '' : '<div style="color:#dc2626;font-weight:700;font-size:12px;">⏸ OFERTA NIEAKTYWNA</div>';
+    const refreshLine = isRecentlyRefreshed(o)
+        ? '<div style="color:#0ea5e9;font-weight:700;font-size:12px;">↑ odświeżona (podbita) w ciągu 24h</div>' : '';
     return `
-        ${img}${status}
+        ${img}${status}${refreshLine}
         <div class="popup-title">${escapeHtml(o.title)}${newBadge}</div>
         <div class="popup-price">${fmtPrice(o.price)}${trend}</div>
         <div class="popup-meta">

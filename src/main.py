@@ -10,7 +10,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import pytz
 
@@ -227,6 +227,8 @@ class SonarDzialkowy:
         # płatne wyróżnienie na listingu — dotyczy każdej oferty (sygnał niosą
         # tylko oferty OLX; reszta źródeł da tu po prostu False)
         self._track_promoted(existing, new.get('promoted', False))
+        # data ostatniego odświeżenia (podbicia) — sygnał niosą tylko oferty OLX
+        self._track_refresh(existing, new.get('last_refresh_time'))
 
         # coords: nie nadpisuj dokładnych przybliżonymi
         new_loc = new.get('location') or {}
@@ -280,6 +282,37 @@ class SonarDzialkowy:
                 dates.append(today)
         offer['promoted_count'] = len(dates)
 
+    @staticmethod
+    def _track_refresh(offer: Dict, new_refresh_time: Optional[str]) -> None:
+        """Śledzi datę ostatniego odświeżenia (podbicia) oferty na listingu OLX.
+
+        FIX 2026-09-29 (propagacja z SONAR-POKOJOWY, manifest
+        2026-09-07-refresh-from-listing-card): OLX niesie precyzyjny znacznik
+        ISO wprost w JSON-ie (`olx_scraper.normalize_ad::last_refresh_time`) —
+        w odróżnieniu od brata parsującego kartę HTML nie musimy rozróżniać
+        „dokładnej godziny" od „samej daty" ani chronić dokładnego pomiaru
+        przed nadpisaniem przybliżeniem (ta reguła u nas jest zbędna, bo
+        zawsze mamy pełną precyzję). `refresh_dates` = dni, w których
+        zauważyliśmy NOWE odświeżenie (max 1 wpis/dzień, wzorem
+        `promoted_dates`) — buduje szereg czasowy podbić. Sygnał niosą
+        wyłącznie oferty OLX; dla pozostałych źródeł `new_refresh_time` jest
+        po prostu None.
+
+        Przy pierwszym skanie oferty znacznik zwykle pokrywa się z chwilą
+        wystawienia ogłoszenia — pierwszy wpis w `refresh_dates` to backfill
+        (jedno zdarzenie „na wejściu"), nie pomiar historii sprzed wdrożenia.
+        """
+        if not new_refresh_time:
+            return
+        if new_refresh_time == offer.get('last_refresh_time'):
+            return  # brak nowego odświeżenia od ostatniego skanu
+        offer['last_refresh_time'] = new_refresh_time
+        dates = offer.setdefault('refresh_dates', [])
+        day = new_refresh_time[:10]
+        if day not in dates:
+            dates.append(day)
+        offer['refresh_count'] = len(dates)
+
     def _add_new(self, new: Dict):
         now = datetime.now(self.tz).isoformat()
         price = new.pop('price')
@@ -292,6 +325,7 @@ class SonarDzialkowy:
         new['active'] = True
         new['days_active'] = 0
         self._track_promoted(new, new.get('promoted', False))
+        self._track_refresh(new, new.get('last_refresh_time'))
         self.database['offers'].append(new)
 
     def _mark_inactive(self, scraped_by_source: Dict[str, List[Dict]]) -> int:

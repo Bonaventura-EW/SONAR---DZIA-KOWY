@@ -2,6 +2,37 @@
 
 ## [Niewydane]
 
+### Dodane (data odświeżenia oferty OLX, 2026-09-29, propagacja z SONAR-POKOJOWY)
+
+Propagacja z SONAR-POKOJOWY (manifest `2026-09-07-refresh-from-listing-card`,
+issue #21): oferty OLX dostały drugi (obok `promoted`) sygnał aktywności
+ogłoszeniodawcy — datę ostatniego odświeżenia (podbicia) na listingu. U brata
+trzeba to parsować z tekstu karty HTML i rozróżniać "dokładną godzinę" od
+"samej daty"; zweryfikowane na żywym skanie (2026-09-29), że OLX niesie gotowy
+precyzyjny znacznik ISO wprost w polu `lastRefreshTime` __PRERENDERED_STATE__
+— ten sam JSON, który `olx_scraper.py` i tak już pobiera — z pokryciem 100%
+aktywnych ofert (nie tylko firmowych). Dzięki temu implementacja jest prostsza
+niż u brata: nie ma dwóch precyzji do rozróżniania, więc nie ma też reguły
+"nie nadpisuj dokładnego przybliżeniem".
+
+- **`olx_scraper.normalize_ad`**: nowe pole `last_refresh_time`.
+- **`main._track_refresh`**: historia `refresh_dates` (max 1 wpis/dzień, wzorem
+  `_track_promoted`/`promoted_dates`) + `last_refresh_time` (najświeższy
+  znacznik) + `refresh_count`. Przy pierwszym skanie oferty pierwszy wpis to
+  backfill (jedno zdarzenie „na wejściu”), nie pomiar historii sprzed wdrożenia.
+- **Mapa**: badge „↑” (odświeżona w ciągu 24h) w prawym górnym rogu pinezki,
+  z priorytetem: zmiana ceny > NOWA > odświeżona. U brata te sygnały
+  współwystępowały na tyle często (63% podbitych ofert miało jednocześnie
+  zmianę ceny), że dostał osobny, drugi róg — zmierzone na żywym skanie u nas
+  (61 aktywnych ofert OLX) pokazało tylko 3 odświeżone w oknie 24h i 0
+  pokrywających się ze zmianą ceny, więc jeden róg z priorytetem wystarcza.
+  Do przeliczenia, gdyby kolejne skany pokazały wyższe współwystępowanie.
+- Świadomie NIE dodano agregatu do `map_generator.py` (analogicznego do
+  `build_promoted`) ani wpięcia do `docs/agencje.html` — sam manifest brata
+  ostrzega, że założenie „ktoś to zagreguje” się u niego nie sprawdziło (żaden
+  wykres poza widokiem firmowym nie czytał historii odświeżeń). Dane (`refresh_dates`,
+  `refresh_count`) są już w bazie, gdyby przyszła potrzeba wykresu.
+
 ### Naprawione (rotacja doprecyzowania adresu, 2026-09-22)
 
 Propagacja z SONAR-POKOJOWY (manifest `2026-09-07-address-precision-upgrade`):
