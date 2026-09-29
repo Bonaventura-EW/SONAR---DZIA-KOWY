@@ -66,6 +66,24 @@ FLAP_MAX_DAYS = 3
 # odczytów, jeśli to DZISIAJ, jest jeszcze w toku — jego słupek może tylko urosnąć.
 SCANS_PER_DAY = 2
 
+# FIX 2026-09-29 (propagacja z SONAR-MIESZKANIOWY, issue#35): dzień ZAMKNIĘTY
+# z mniej niż SCANS_PER_DAY skanami (opóźniony cron, krótka blokada) nie był
+# w żaden sposób oznaczany — `provisional_day` sprawdza liczbę skanów
+# WYŁĄCZNIE dla dzisiejszego dnia, więc dzień już zamknięty cicho wchodził do
+# napływu/odpływu jak normalna doba. `gap_days` łapie to retrospektywnie po
+# CIĄGŁOŚCI obserwacji: dzień bez przerwy dłuższej niż MAX_SCAN_GAP_HOURS jest
+# pełny, nawet z jednym skanem, jeśli sąsiednie skany go bracketują z bliska.
+#
+# Próg dobrany na WŁASNYM data/scan_history.json (21.06–29.09), nie skopiowany
+# od brata — jego kadencja 3×/dzień ma inny rozkład przerw niż nasza 2×/dzień.
+# U nas zdrowa doba z dwoma skanami (8:37/18:37) ma przerwę nocną 9,5–16,4 h
+# (91 próbek) — to samo już blisko doby brata z AWARIĄ, bo dzielimy dobę na
+# pół tyle razy. Dni z jednym skanem miały 12,6–21,0 h; złapane są tylko te
+# powyżej zdrowego zakresu (19,9 i 21,0 h — 27–28.08.2026), łagodniejsze
+# przesunięcia crona świadomie zostają nieoznaczone, bo niższy próg zacząłby
+# ucinać normalne doby.
+MAX_SCAN_GAP_HOURS = 17
+
 
 def _day_ms(d: date) -> int:
     """Epoch (ms) dla POŁUDNIA UTC danego dnia.
@@ -641,6 +659,78 @@ def blind_ranges(base_dir=None) -> list:
     return sorted(ranges, key=lambda r: r['from'])
 
 
+def load_scan_times(base_dir=None) -> list:
+    """Posortowane znaczniki czasu (lokalne, naiwne) zakończonych skanów.
+
+    Te same skany co `daily_source_counts` (status None/completed/warning),
+    ale surowe chwile, nie dzienne sumy — `gap_days` sprawdza na nich
+    ciągłość obserwacji w obrębie doby, nie tylko liczbę przebiegów.
+    """
+    path = (Path(paths.SCAN_HISTORY_JSON) if base_dir is None
+            else Path(base_dir) / 'data' / 'scan_history.json')
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            history = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return []
+    scans = history.get('scans', []) if isinstance(history, dict) else (history or [])
+
+    times = []
+    for scan in scans or []:
+        if scan.get('status') not in (None, 'completed', 'warning'):
+            continue
+        ts = scan.get('timestamp')
+        if not ts:
+            continue
+        try:
+            times.append(datetime.fromisoformat(ts).replace(tzinfo=None))
+        except (ValueError, TypeError):
+            continue
+    return sorted(times)
+
+
+def _day_is_covered(day, times):
+    """True/False = pokryta/dziurawa, None = nie da się ocenić (brak skanu
+    przed albo po dobie — pierwszy dzień dziennika albo doba wciąż w toku).
+
+    Łańcuch: ostatni skan PRZED dobą → skany W dobie → pierwszy skan PO niej;
+    każdą przerwę przycinamy do granic doby (skan 23:45 dnia D i 10:52 dnia
+    D+1 liczy się D+1 na 10,9 h, a D tylko na 15 min). Jedna przerwa dłuższa
+    niż MAX_SCAN_GAP_HOURS wystarczy, żeby doba wypadła jako niepokryta,
+    niezależnie od tego, ile skanów padło poza nią.
+    """
+    day_start = datetime.combine(day, datetime.min.time())
+    day_end = day_start + timedelta(days=1)
+    before = [t for t in times if t < day_start]
+    after = [t for t in times if t >= day_end]
+    if not before or not after:
+        return None
+    chain = [before[-1]] + [t for t in times if day_start <= t < day_end] + [after[0]]
+    limit = timedelta(hours=MAX_SCAN_GAP_HOURS)
+    return all(min(b, day_end) - max(a, day_start) <= limit
+               for a, b in zip(chain, chain[1:]))
+
+
+def gap_days(base_dir=None) -> set:
+    """Dni ZAMKNIĘTE, których ciągłość obserwacji przerwała dziura dłuższa niż
+    MAX_SCAN_GAP_HOURS — realny ubytek pokrycia (opóźniony cron, krótka
+    blokada), nie tylko dzień z mniej niż SCANS_PER_DAY skanami (patrz
+    komentarz przy tej stałej). Pierwszy i ostatni dzień dziennika
+    (`_day_is_covered` zwraca dla nich `None`) zostają poza oceną — bez
+    sąsiada z drugiej strony nie da się osądzić przerwy.
+
+    Wynik idzie do `uncounted` w `generate()`: słupek zostaje (to prawdziwe
+    zdarzenia), ale dzień nie wchodzi do średniej kroczącej ani do rekordu
+    (patrz `_flow_metric`).
+    """
+    times = load_scan_times(base_dir)
+    if len(times) < 2:
+        return set()
+    span = _daily_range(times[0].date() + timedelta(days=1),
+                        times[-1].date() - timedelta(days=1))
+    return {d for d in span if _day_is_covered(d, times) is False}
+
+
 def olx_active_by_day(base_dir=None) -> dict:
     """{dzień: ile ofert OLX było aktywnych} — mianownik udziału wyróżnień.
 
@@ -838,10 +928,12 @@ def generate(base_dir=None) -> bool:
                     else 'reconstructed')
 
     # Dni pokazywane, ale nieliczone do średnich i rekordów: dzisiejszy (może
-    # jeszcze urosnąć) i dzień powrotu zablokowanego źródła (dostaje zaległości
-    # z całej blokady naraz).
+    # jeszcze urosnąć), dzień powrotu zablokowanego źródła (dostaje zaległości
+    # z całej blokady naraz) i dzień z dziurą w obserwacji > MAX_SCAN_GAP_HOURS
+    # (opóźniony cron — patrz `gap_days`).
     provisional = provisional_day(series, base_dir)
-    uncounted = set(recovery_days(base_dir))
+    scan_gaps = gap_days(base_dir)
+    uncounted = set(recovery_days(base_dir)) | scan_gaps
     if provisional:
         uncounted.add(provisional)
 
@@ -924,6 +1016,8 @@ def generate(base_dir=None) -> bool:
         first = datetime.fromtimestamp(r['from'] / 1000, tz=timezone.utc).date()
         print(f"   🚫 {r['source']}: bez odpowiedzi przez {r['days']} dni "
               f"(od {first.strftime('%d.%m')})")
+    for d in sorted(scan_gaps):
+        print(f"   ⏳ dziura w obserwacji > {MAX_SCAN_GAP_HOURS}h: {d.strftime('%d.%m')}")
     pr = data['promoted']
     if pr:
         print(f"   ⭐ wyróżnione: teraz={pr.get('current')} "

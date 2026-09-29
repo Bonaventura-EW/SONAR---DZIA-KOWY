@@ -2,6 +2,36 @@
 
 ## [Niewydane]
 
+### Naprawione (maska niepełnych dni po ciągłości skanów, 2026-09-29)
+
+Propagacja z SONAR-MIESZKANIOWY (manifest `2026-09-27-scan-gap-coverage`,
+issue propagacji #35): dzień ZAMKNIĘTY z mniej niż `SCANS_PER_DAY` skanami
+(opóźniony cron, krótka blokada) nie był w żaden sposób oznaczany —
+`provisional_day` sprawdzał liczbę skanów wyłącznie dla dzisiejszego dnia, więc
+dzień już zamknięty cicho wchodził do napływu/odpływu jak normalna doba.
+Zweryfikowane we własnych danych: 27–28.08.2026 mają po jednym skanie zamiast
+dwóch (przesunięty cron), z przerwą ~20 h między obserwacjami.
+
+- **`trend_generator.gap_days`** (nowa funkcja, nie port istniejącej — u brata
+  jest to bugfix istniejącej maski, u nas takiej maski wcześniej nie było):
+  dzień, w którym łańcuch skanów (ostatni przed dobą → skany w dobie →
+  pierwszy po niej) ma przerwę dłuższą niż `MAX_SCAN_GAP_HOURS`, trafia do
+  `uncounted` w `generate()` — słupek zostaje na wykresie (to prawdziwe
+  zdarzenia), ale nie wchodzi do średniej kroczącej ani do rekordu, tak jak
+  dzień powrotu zablokowanego źródła (`recovery_days`).
+- **`MAX_SCAN_GAP_HOURS = 17`** dobrany na WŁASNYM `data/scan_history.json`
+  (21.06–29.09), nie skopiowany od brata: nasza kadencja 2×/dzień ma zdrową
+  dobę z przerwą nocną 9,5–16,4 h (91 próbek) — to samo już blisko doby brata
+  z AWARIĄ, bo dzielimy dobę na pół tyle razy. Próg łapie tylko dni z
+  przerwą nad tym zakresem (19,9 i 21,0 h w dniach z jednym skanem);
+  łagodniejsze przesunięcia crona świadomie zostają nieoznaczone, bo niższy
+  próg zacząłby ucinać normalne doby.
+- W przeciwieństwie do brata (`ScanCounts`/`_scan_coverage`, maska wpływa też
+  na rekonstrukcję Indeksu) u nas Indeks jest MIERZONY, nie rekonstruowany
+  z odcinków życia — maska dotyczy tylko `build_outflow`/`build_inflow`
+  (i przez wspólny `uncounted` też `build_promoted`/`build_price_changes`),
+  nie samej linii Indeksu.
+
 ### Dodane (data odświeżenia oferty OLX, 2026-09-29, propagacja z SONAR-POKOJOWY)
 
 Propagacja z SONAR-POKOJOWY (manifest `2026-09-07-refresh-from-listing-card`,
