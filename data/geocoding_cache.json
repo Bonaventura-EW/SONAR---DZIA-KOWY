@@ -1842,5 +1842,25 @@
    "name": "Trześniowska"
   },
   "ts": 1790801943.96678
+ },
+ "pszczela": {
+  "result": {
+   "lat": 51.1765585,
+   "lon": 22.5055507,
+   "name": "Pszczela"
+  },
+  "ts": 1790974649.8566089
+ },
+ "pszczela. powierzchnia": {
+  "result": null,
+  "ts": 1790974651.0556405
+ },
+ "pszczelej": {
+  "result": {
+   "lat": 51.1765585,
+   "lon": 22.5055507,
+   "name": "Pszczela"
+  },
+  "ts": 1790974653.8337183
  }
 }
