@@ -385,7 +385,7 @@
  },
  "brzegowa": {
   "result": null,
-  "ts": 1790605551.4706023
+  "ts": 1791240862.765366
  },
  "mełgiewska": {
   "result": {
@@ -1217,19 +1217,19 @@
  },
  "bohaterów września powierzchnia": {
   "result": null,
-  "ts": 1790605553.055495
+  "ts": 1791240864.2801092
  },
  "mpzp": {
   "result": null,
-  "ts": 1790605554.639789
+  "ts": 1791240865.569504
  },
  "bohaterów września. nieruchomość": {
   "result": null,
-  "ts": 1790605555.9557672
+  "ts": 1791240866.8419344
  },
  "plan": {
   "result": null,
-  "ts": 1790605557.7088065
+  "ts": 1791240868.2530074
  },
  "feliksa strojnowskiego": {
   "result": {
@@ -1862,5 +1862,13 @@
    "name": "Pszczela"
   },
   "ts": 1790974653.8337183
+ },
+ "nagietkowej": {
+  "result": {
+   "lat": 51.2713335,
+   "lon": 22.5893712,
+   "name": "Nagietkowa"
+  },
+  "ts": 1791240871.1291218
  }
 }
