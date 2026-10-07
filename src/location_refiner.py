@@ -66,7 +66,12 @@ def nominative_variants(street: str) -> List[str]:
     """Warianty mianownika dla nazwy w dopełniaczu: Wyżynnej→Wyżynna,
     Krężnickiej→Krężnicka, Zemborzyckiej→Zemborzycka."""
     variants = [street]
-    last = street.split()[-1]
+    # FIX 2026-10-07: pusta/biała nazwa (np. pole street == 'ul.') → IndexError
+    # wywracał cały skan; zwracamy oryginał bez wariantów
+    words = street.split()
+    if not words:
+        return variants
+    last = words[-1]
     prefix = street[: len(street) - len(last)]
     if last.endswith('iej') and len(last) > 4:
         variants.append(prefix + last[:-3] + 'a')
@@ -176,7 +181,9 @@ class StreetGeocoder:
 
     def geocode_street(self, street: str) -> Optional[Dict]:
         """Geokoduje ulicę (z wariantami odmiany). Zwraca {'lat','lon','name'} lub None."""
-        key = street.lower()
+        key = street.strip().lower()
+        if not key:
+            return None
         if key in self.cache:
             entry = self.cache[key]
             if entry.get('result'):
@@ -205,7 +212,10 @@ def refine_offer_location(offer: Dict, geocoder: StreetGeocoder) -> bool:
     # kandydaci: jawne pole street (Otodom) + ekstrakcja z tytułu i opisu
     candidates = []
     if loc.get('street'):
-        candidates.append(re.sub(r'^(ul|al)\.\s*', '', loc['street']))
+        # FIX 2026-10-07: samo 'ul.' (Otodom bez nazwy ulicy) dawało pustego kandydata
+        street = re.sub(r'^(ul|al)\.\s*', '', loc['street']).strip()
+        if len(street) >= 3:
+            candidates.append(street)
     text = (offer.get('title') or '') + '\n' + (offer.get('description') or '')
     candidates.extend(c for c in extract_street_candidates(text) if c not in candidates)
 

@@ -588,8 +588,13 @@ class SonarDzialkowy:
             if geocoder.live_requests >= MAX_LIVE_GEOCODES:
                 print(f"   ⚠️ Limit {MAX_LIVE_GEOCODES} geokodowań osiągnięty — reszta w kolejnym skanie")
                 break
-            if refine_offer_location(offer, geocoder):
-                refined_count += 1
+            # FIX 2026-10-07: błąd doprecyzowania jednej oferty nie może wywrócić
+            # całego skanu (IndexError na 'ul.' → 4 skany bez zapisu bazy)
+            try:
+                if refine_offer_location(offer, geocoder):
+                    refined_count += 1
+            except Exception as e:
+                print(f"   ⚠️ Refiner pominął {offer.get('id')}: {type(e).__name__}: {e}")
         geocoder.save_cache()
         if refined_count:
             print(f"   ✅ Doprecyzowano {refined_count} ofert (approx → ulica)")

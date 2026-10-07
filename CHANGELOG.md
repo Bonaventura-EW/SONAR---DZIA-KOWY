@@ -2,6 +2,20 @@
 
 ## [Niewydane]
 
+### Naprawione (refiner wywracał skan na pustej nazwie ulicy, 2026-10-07)
+
+4 z ostatnich 8 skanów (04.10 14:49, 05.10 17:13, 06.10 15:34, 06.10 23:12)
+kończyło się `list index out of range` — workflow był zielony (`|| echo`), ale
+`main.py` nie zapisywał bazy, więc nowe oferty, zmiany cen i dezaktywacje z tych
+skanów przepadały. Przyczyna: oferta z polem `street == "ul."` (bez nazwy) →
+po odcięciu prefiksu pusty kandydat → `nominative_variants('')` →
+`''.split()[-1]` → `IndexError` w `location_refiner`.
+
+- `nominative_variants` / `geocode_street` odporne na pustą nazwę.
+- `refine_offer_location` pomija kandydata z pola `street` krótszego niż 3 znaki.
+- `main.py`: błąd doprecyzowania pojedynczej oferty jest logowany i pomijany,
+  zamiast przerywać cały skan.
+
 ### Naprawione (maska niepełnych dni po ciągłości skanów, 2026-09-29)
 
 Propagacja z SONAR-MIESZKANIOWY (manifest `2026-09-27-scan-gap-coverage`,
