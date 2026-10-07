@@ -98,3 +98,27 @@ def test_stop_words_block_city_as_street():
     # 'Lublinie'/'Lublin' nie mogą być kandydatem na ulicę
     assert extract_street_candidates("Działka przy ul. Lublinie atrakcyjna") == []
     assert extract_street_candidates("ulica Lublin bez sensu") == []
+
+
+def test_nominative_variants_empty():
+    # FIX 2026-10-07: pusta nazwa wywracała skan (IndexError)
+    assert nominative_variants('') == ['']
+    assert nominative_variants('   ') == ['   ']
+
+
+def test_refine_bare_ul_street_field():
+    # Otodom potrafi zwrócić street == 'ul.' bez nazwy — nie może wywrócić skanu
+    offer = {
+        'title': 'Działka ul. Krężnickiej',
+        'description': '',
+        'location': {'coords': {'lat': 51.25, 'lon': 22.57},
+                     'coords_precision': 'approx', 'street': 'ul. '},
+    }
+    assert refine_offer_location(offer, FakeGeocoder()) is True
+    assert offer['location']['coords_precision'] == 'street'
+
+
+def test_geocoder_empty_street(tmp_path):
+    g = StreetGeocoder(cache_file=str(tmp_path / 'cache.json'))
+    assert g.geocode_street('  ') is None
+    assert g.live_requests == 0
