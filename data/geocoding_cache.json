@@ -621,15 +621,15 @@
  },
  "woda": {
   "result": null,
-  "ts": 1791381120.6639826
+  "ts": 1792009165.4234178
  },
  "kanalizacja": {
   "result": null,
-  "ts": 1791381121.9049826
+  "ts": 1792009166.691017
  },
  "dodatkowe": {
   "result": null,
-  "ts": 1791381124.8048666
+  "ts": 1792009169.632631
  },
  "laury. prezentowana": {
   "result": null,
@@ -849,7 +849,7 @@
  },
  "mełgiewskiej. na": {
   "result": null,
-  "ts": 1791381117.7391567
+  "ts": 1792009162.454065
  },
  "stary gaj": {
   "result": {
@@ -981,7 +981,7 @@
  },
  "district:zadebie": {
   "result": null,
-  "ts": 1791381119.1886284
+  "ts": 1792009163.7575252
  },
  "firlejowska": {
   "result": {
@@ -1145,11 +1145,11 @@
  },
  "prąd": {
   "result": null,
-  "ts": 1791381123.3880944
+  "ts": 1792009168.0376263
  },
  "strumykowej. prezentowana": {
   "result": null,
-  "ts": 1791381126.2317734
+  "ts": 1792009171.2708857
  },
  "gospodarcza": {
   "result": {
@@ -1265,7 +1265,7 @@
  },
  "nadleśnej": {
   "result": null,
-  "ts": 1791381129.0440114
+  "ts": 1792009174.697688
  },
  "siewierzan": {
   "result": {
@@ -1549,15 +1549,15 @@
  },
  "skowronkowa. powierzchnia": {
   "result": null,
-  "ts": 1791381130.4745421
+  "ts": 1792009175.8982494
  },
  "skowronkowa. liczba": {
   "result": null,
-  "ts": 1791381131.8427763
+  "ts": 1792009177.096072
  },
  "skowronkowej. nieruchomości": {
   "result": null,
-  "ts": 1791381133.2498121
+  "ts": 1792009178.3595366
  },
  "ciepielewskiego": {
   "result": {
@@ -1870,5 +1870,13 @@
    "name": "Nagietkowa"
   },
   "ts": 1791240871.1291218
+ },
+ "szaserów": {
+  "result": {
+   "lat": 51.2335531,
+   "lon": 22.5049978,
+   "name": "Szaserów"
+  },
+  "ts": 1792009179.6218116
  }
 }
