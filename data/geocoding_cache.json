@@ -1773,7 +1773,7 @@
  },
  "czerniawy": {
   "result": null,
-  "ts": 1791494949.2413695
+  "ts": 1792151564.793271
  },
  "lipskiej": {
   "result": {
@@ -1878,5 +1878,17 @@
    "name": "Szaserów"
   },
   "ts": 1792009179.6218116
+ },
+ "sławinkowskiej. położenie": {
+  "result": null,
+  "ts": 1792151566.362148
+ },
+ "zbożowej": {
+  "result": {
+   "lat": 51.2760205,
+   "lon": 22.5069844,
+   "name": "Zbożowa"
+  },
+  "ts": 1792151569.535079
  }
 }
