@@ -1898,5 +1898,13 @@
    "name": "Bolesława Prusa"
   },
   "ts": 1792179710.761691
+ },
+ "gnieźnieńska": {
+  "result": {
+   "lat": 51.2515424,
+   "lon": 22.4915348,
+   "name": "Gnieźnieńska"
+  },
+  "ts": 1792349629.845922
  }
 }
