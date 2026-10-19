@@ -1906,5 +1906,21 @@
    "name": "Gnieźnieńska"
   },
   "ts": 1792349629.845922
+ },
+ "sławin": {
+  "result": {
+   "lat": 51.2579808,
+   "lon": 22.4978052,
+   "name": "Sławin"
+  },
+  "ts": 1792418065.3780649
+ },
+ "sławinkowskiej. codzienne": {
+  "result": null,
+  "ts": 1792418066.6897373
+ },
+ "zbożowej. położenie": {
+  "result": null,
+  "ts": 1792418068.0452528
  }
 }
