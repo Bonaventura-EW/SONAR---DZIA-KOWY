@@ -1922,5 +1922,13 @@
  "zbożowej. położenie": {
   "result": null,
   "ts": 1792418068.0452528
+ },
+ "nasutowskiej": {
+  "result": {
+   "lat": 51.2808069,
+   "lon": 22.5717634,
+   "name": "Nasutowska"
+  },
+  "ts": 1792444441.2536616
  }
 }
