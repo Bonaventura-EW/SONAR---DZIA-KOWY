@@ -1938,5 +1938,17 @@
    "name": "Nasutowska"
   },
   "ts": 1792497955.3384986
+ },
+ "przyjacielska. powierzchnia": {
+  "result": null,
+  "ts": 1792526848.123199
+ },
+ "przyjacielska": {
+  "result": {
+   "lat": 51.2500845,
+   "lon": 22.5091353,
+   "name": "Przyjacielska"
+  },
+  "ts": 1792526849.604463
  }
 }
