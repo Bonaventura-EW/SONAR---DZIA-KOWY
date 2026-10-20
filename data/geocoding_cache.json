@@ -1217,19 +1217,19 @@
  },
  "bohaterów września powierzchnia": {
   "result": null,
-  "ts": 1791846748.4243972
+  "ts": 1792497956.697967
  },
  "mpzp": {
   "result": null,
-  "ts": 1791846750.0413022
+  "ts": 1792497958.1499119
  },
  "bohaterów września. nieruchomość": {
   "result": null,
-  "ts": 1791846751.6855845
+  "ts": 1792497959.5961988
  },
  "plan": {
   "result": null,
-  "ts": 1791846753.4367318
+  "ts": 1792497961.749871
  },
  "feliksa strojnowskiego": {
   "result": {
@@ -1930,5 +1930,13 @@
    "name": "Nasutowska"
   },
   "ts": 1792444441.2536616
+ },
+ "nasutowska": {
+  "result": {
+   "lat": 51.2808069,
+   "lon": 22.5717634,
+   "name": "Nasutowska"
+  },
+  "ts": 1792497955.3384986
  }
 }
