@@ -1966,5 +1966,13 @@
    "name": "Kukułcza"
   },
   "ts": 1792785879.3926182
+ },
+ "szymonowica": {
+  "result": {
+   "lat": 51.1979391,
+   "lon": 22.5876291,
+   "name": "Szymona Szymonowica"
+  },
+  "ts": 1792955681.7054856
  }
 }
