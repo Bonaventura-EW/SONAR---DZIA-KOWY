@@ -1217,19 +1217,19 @@
  },
  "bohaterów września powierzchnia": {
   "result": null,
-  "ts": 1792497956.697967
+  "ts": 1793104718.3997488
  },
  "mpzp": {
   "result": null,
-  "ts": 1792497958.1499119
+  "ts": 1793104719.8550296
  },
  "bohaterów września. nieruchomość": {
   "result": null,
-  "ts": 1792497959.5961988
+  "ts": 1793104721.282219
  },
  "plan": {
   "result": null,
-  "ts": 1792497961.749871
+  "ts": 1793104722.7222571
  },
  "feliksa strojnowskiego": {
   "result": {
@@ -1982,5 +1982,13 @@
    "name": "Szymona Szymonowica"
   },
   "ts": 1793021434.7606325
+ },
+ "władysława kunickiego": {
+  "result": {
+   "lat": 51.2171802,
+   "lon": 22.5801076,
+   "name": "Władysława Kunickiego"
+  },
+  "ts": 1793104724.0603821
  }
 }
