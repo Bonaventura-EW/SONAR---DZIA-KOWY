@@ -2010,5 +2010,13 @@
  "starowiejskiej": {
   "result": null,
   "ts": 1793451694.825454
+ },
+ "wodnej": {
+  "result": {
+   "lat": 51.2630794,
+   "lon": 22.4982709,
+   "name": "Wodna"
+  },
+  "ts": 1793890597.2396252
  }
 }
