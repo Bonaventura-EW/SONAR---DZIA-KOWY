@@ -981,7 +981,7 @@
  },
  "district:zadebie": {
   "result": null,
-  "ts": 1794058242.0564442
+  "ts": 1794664005.4704251
  },
  "firlejowska": {
   "result": {
@@ -2034,5 +2034,13 @@
  "lisiej. to": {
   "result": null,
   "ts": 1794497667.5918221
+ },
+ "janowskiej": {
+  "result": {
+   "lat": 51.2120412,
+   "lon": 22.532489,
+   "name": "Janowska"
+  },
+  "ts": 1794664008.2288089
  }
 }
