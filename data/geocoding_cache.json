@@ -357,7 +357,7 @@
  },
  "warszawskiej. malownicza": {
   "result": null,
-  "ts": 1794083337.0998764
+  "ts": 1794689700.301679
  },
  "jana kasprowicza": {
   "result": {
@@ -2042,5 +2042,13 @@
    "name": "Janowska"
   },
   "ts": 1794664008.2288089
+ },
+ "janowska": {
+  "result": {
+   "lat": 51.2120412,
+   "lon": 22.532489,
+   "name": "Janowska"
+  },
+  "ts": 1794689701.66337
  }
 }
