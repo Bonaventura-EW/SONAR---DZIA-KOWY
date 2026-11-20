@@ -609,7 +609,7 @@
  },
  "kasprowicza. dojazd": {
   "result": null,
-  "ts": 1789930953.0471098
+  "ts": 1795189506.5417051
  },
  "południowej": {
   "result": {
@@ -2050,5 +2050,53 @@
    "name": "Janowska"
   },
   "ts": 1794689701.66337
+ },
+ "zorza, głuska": {
+  "result": null,
+  "ts": 1795189507.6967158
+ },
+ "nasturcjowej. powierzchnia": {
+  "result": null,
+  "ts": 1795189508.9008768
+ },
+ "nasturcjowa. powierzchnia": {
+  "result": null,
+  "ts": 1795189510.1070566
+ },
+ "nasturcjowej. nieruchomość": {
+  "result": null,
+  "ts": 1795189511.6576734
+ },
+ "łubinowa": {
+  "result": {
+   "lat": 51.2657148,
+   "lon": 22.5807015,
+   "name": "Łubinowa"
+  },
+  "ts": 1795189512.9471412
+ },
+ "gołębia": {
+  "result": {
+   "lat": 51.2194193,
+   "lon": 22.4799118,
+   "name": "Gołębia"
+  },
+  "ts": 1795189514.1311066
+ },
+ "lisia": {
+  "result": {
+   "lat": 51.2234285,
+   "lon": 22.4785892,
+   "name": "Lisia"
+  },
+  "ts": 1795189515.7049677
+ },
+ "bohaterów września": {
+  "result": {
+   "lat": 51.2821579,
+   "lon": 22.5260766,
+   "name": "Bohaterów Września"
+  },
+  "ts": 1795189517.2706435
  }
 }
