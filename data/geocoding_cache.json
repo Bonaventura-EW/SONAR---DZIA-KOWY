@@ -2098,5 +2098,13 @@
    "name": "Bohaterów Września"
   },
   "ts": 1795189517.2706435
+ },
+ "piekarska": {
+  "result": {
+   "lat": 51.2254185,
+   "lon": 22.5487025,
+   "name": "Piekarska"
+  },
+  "ts": 1795384790.9916067
  }
 }
