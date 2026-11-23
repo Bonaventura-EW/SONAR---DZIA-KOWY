@@ -357,7 +357,7 @@
  },
  "warszawskiej. malownicza": {
   "result": null,
-  "ts": 1794689700.301679
+  "ts": 1795459405.204016
  },
  "jana kasprowicza": {
   "result": {
@@ -2106,5 +2106,21 @@
    "name": "Piekarska"
   },
   "ts": 1795384790.9916067
+ },
+ "leszka": {
+  "result": {
+   "lat": 51.2498627,
+   "lon": 22.4883232,
+   "name": "Leszka"
+  },
+  "ts": 1795459402.3622003
+ },
+ "leszka 5": {
+  "result": {
+   "lat": 51.2498627,
+   "lon": 22.4883232,
+   "name": "Leszka"
+  },
+  "ts": 1795459403.775145
  }
 }
